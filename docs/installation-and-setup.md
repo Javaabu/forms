@@ -49,35 +49,56 @@ return [
     */
 
     'frameworks' => [
-
         'bootstrap-5' => [
             'icon-prefix' => 'fa',
-            'date-icon' => 'calendar',
-            'datetime-icon' => 'calendar',
-            'time-icon' => 'clock',
-            'date-clear-icon' => 'close',
+            'date-icon' => 'fa-calendar',
+            'datetime-icon' => 'fa-calendar',
+            'time-icon' => 'fa-clock',
+            'date-clear-icon' => 'fa-close',
             'date-clear-btn-class' => 'btn btn-outline-secondary btn-date-clear disable-w-input',
-            'file-download-icon' => 'arrow-to-bottom',
-            'file-upload-icon' => 'arrow-to-top',
-            'file-clear-icon' => 'close',
-            'image-icon' => 'image',
+            'file-download-icon' => 'fa-arrow-to-bottom',
+            'file-upload-icon' => 'fa-arrow-to-top',
+            'file-clear-icon' => 'fa-close',
+            'image-icon' => 'fa-image',
         ],
 
         'material-admin-26' => [
             'icon-prefix' => 'zmdi',
-            'date-icon' => 'calendar',
-            'datetime-icon' => 'calendar',
-            'time-icon' => 'clock',
-            'date-clear-icon' => 'close',
+            'date-icon' => 'zmdi-calendar',
+            'datetime-icon' => 'zmdi-calendar',
+            'time-icon' => 'zmdi-clock',
+            'date-clear-icon' => 'zmdi-close',
             'date-clear-btn-class' => 'text-body btn-date-clear disable-w-input',
-            'file-download-icon' => 'open-in-new',
-            'file-upload-icon' => 'upload',
-            'file-clear-icon' => 'close',
-            'image-icon' => 'image',
+            'file-download-icon' => 'zmdi-open-in-new',
+            'file-upload-icon' => 'zmdi-upload',
+            'file-clear-icon' => 'zmdi-close',
+            'image-icon' => 'zmdi-image',
         ]
-
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Scripts Stack
+    |--------------------------------------------------------------------------
+    |
+    | The name of the stack to push scripts
+    |
+    */
+
+    'scripts_stack' => 'scripts',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Google Maps API Key
+    |--------------------------------------------------------------------------
+    |
+    | API key to use for map inputs
+    |
+    */
+
+    'map_api_key' => env('MAP_API_KEY'),
 ];
+
 
 ```
 
