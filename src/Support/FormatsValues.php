@@ -30,7 +30,7 @@ trait FormatsValues
     {
         if (is_bool($this->value)) {
             return $this->value ? trans('forms::strings.yes') : trans('forms::strings.no');
-        } elseif (empty($this->value)) {
+        } elseif (empty($this->value) && (! is_numeric($this->value))) {
             return trans('forms::strings.blank');
         }
 

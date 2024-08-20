@@ -30,7 +30,7 @@
             @elseif($value && $wysiwyg)
                 {!! $value !!}
             @else
-                {{ $value ?: trans('forms::strings.blank') }}
+                {{ empty($value) && (! is_numeric($value)) ? trans('forms::strings.blank') : $value }}
             @endif
         @endif
     </dd>

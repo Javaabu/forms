@@ -1,4 +1,4 @@
-<tr id="{{ $getRowId() }}">
+<tr id="{{ $getRowId() }}" {{ $attributes->merge([]) }}>
     @if(empty($noCheckbox))
         <td class="td-checkbox">
             <div class="checkbox">

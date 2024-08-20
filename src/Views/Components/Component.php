@@ -46,7 +46,7 @@ abstract class Component extends BaseComponent
     {
         $icon_prefix = $this->frameworkConfig('icon-prefix');
 
-        return "$icon_prefix $icon_prefix-$icon";
+        return "$icon_prefix $icon";
     }
 
     public function frameworkConfig(string $config, $default = null)
