@@ -7,7 +7,6 @@
 
 Laravel Blade components for form elements. Package inspired from [protonemedia/laravel-form-components](https://github.com/protonemedia/laravel-form-components)
 
-
 ## Documentation
 
 You'll find the documentation on [https://docs.javaabu.com/docs/forms](https://docs.javaabu.com/docs/forms).
