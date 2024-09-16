@@ -34,6 +34,7 @@ class Select extends Component
     public string $idField;
     public bool $showLabel;
     public string $syncFieldName;
+    public bool $isAjax;
 
     /**
      * Create a new component instance.
@@ -56,6 +57,7 @@ class Select extends Component
         bool    $inline = false,
         bool   $floating = false,
         bool   $isSelect2 = false,
+        bool   $isAjax = false,
         public bool $disabled = false,
         public bool $excludeSyncField = false,
         string $syncFieldName = '',
@@ -65,12 +67,12 @@ class Select extends Component
     ) {
         parent::__construct($framework);
 
+        $this->isAjax = $isAjax;
         $this->name = $name;
         $this->label = $label;
         $this->nameField = $nameField;
         $this->idField = $idField;
         $this->isSelect2 = $isSelect2;
-        $this->options = $options instanceof BuilderContract ? $this->getOptionsFromQueryBuilder($options) : $options;
         $this->relation = $relation;
         $this->showPlaceholder = $showPlaceholder;
         $this->placeholder = $placeholder ?: ($showPlaceholder ? ($label ?: $this->generateLabelByName()) : '');
@@ -107,6 +109,8 @@ class Select extends Component
         $this->floating = $floating;
         $this->required = $required;
         $this->inline = $inline;
+
+        $this->options = $options instanceof BuilderContract ? $this->getOptionsFromQueryBuilder($options) : $options;
     }
 
     public function getOptionsFromQueryBuilder(BuilderContract $query): array
@@ -117,8 +121,13 @@ class Select extends Component
         $id_field = $this->idField ?: ($model instanceof Model && $model->getKeyName() ? $model->getKeyName() : 'id');
         $is_accessor = false;
 
-        if ($model instanceof Model) {
+        // load only selected
+        if ($this->isAjax) {
+            $selected_keys = $this->selectedKey instanceof Arrayable ? $this->selectedKey->toArray() : Arr::wrap($this->selectedKey);
+            $query->whereIn($id_field, $selected_keys);
+        }
 
+        if ($model instanceof Model) {
             $is_accessor = $model->hasAttributeMutator($name_field) ||
                            $model->hasGetMutator($name_field) ||
 

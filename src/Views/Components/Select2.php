@@ -4,7 +4,6 @@ namespace Javaabu\Forms\Views\Components;
 
 class Select2 extends Select
 {
-    public bool $isAjax;
     public bool $tags;
     public bool $allowClear;
     public bool $isFirst;
@@ -77,6 +76,7 @@ class Select2 extends Select
             inline: $inline,
             floating: $floating,
             isSelect2: true,
+            isAjax: $isAjax,
             disabled: $disabled,
             excludeSyncField: $excludeSyncField,
             syncFieldName: $syncFieldName,
@@ -85,7 +85,6 @@ class Select2 extends Select
             framework: $framework
         );
 
-        $this->isAjax = $isAjax;
         $this->isFirst = $isFirst;
         $this->child = $child;
         $this->ajaxChild = $ajaxChild;
