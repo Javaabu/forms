@@ -4,6 +4,10 @@
 ]) !!}
      data-parent="#{{ $parent }}">
     <div class="accordion__content">
-        {{ $slot }}
+        @if($content)
+            {!! nl2br(e($content)) !!}
+        @else
+            {{ $slot }}
+        @endif
     </div>
 </div>

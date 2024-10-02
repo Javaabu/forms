@@ -10,7 +10,7 @@ You can use the `accordion` component to render JavaScript accordion. The `accor
 @php
 $items = [
     'collapseOne' => ['show' => true, 'id' => 'item-1'],
-    'collapseTwo' => ['title' => 'Accordion Item #2', 'id' => 'item-2']
+    'collapseTwo' => ['title' => 'Accordion Item #2', 'id' => 'item-2', 'content' => 'Second item Body']
 ]
 @endphp
 
@@ -22,16 +22,13 @@ $items = [
     <x-slot:collapse-one>
         <strong>First item Body</strong>
     </x-slot:collapse-one>
-
-    <x-slot:collapse-two>
-        <strong>Second item Body</strong>
-    </x-slot:collapse-two>
 </x-forms::accordion>
 ```
 
 The accordion items support the following values:
 - `'show'` - Whether to have the item open or not.
 - `'title'` - Title for the item
+- `'content'` - Content for the item
 - `'id''` - The css id for the item
 
 If your items array is not associative, the slots name for each item will be `item-{index}`.
@@ -81,5 +78,6 @@ The `accordion.item` component supports the following attributes.
 - `name` - (Required) Name of the item. This will be used for the collpase id.
 - `parent` - (Required) CSS id of the parent accordion.
 - `title` - Title for the item. Title can be passed through the `header` slot as well if HTML content is needed in the title.
+- `content` - Content for the item. Content can be passed through the main slot as well if HTML content is needed.
 - `show` - Whether to have the item open or not
 - `framework` - Which css framework to use.

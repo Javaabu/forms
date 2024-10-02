@@ -1,7 +1,7 @@
 @php
     $items = [
         'collapseOne' => ['show' => true, 'id' => 'item-1'],
-        'collapseTwo' => ['title' => 'Accordion Item #2', 'id' => 'item-2']
+        'collapseTwo' => ['title' => 'Accordion Item #2', 'id' => 'item-2', 'content' => 'Second item Body']
     ]
 @endphp
 
@@ -13,9 +13,5 @@
     <x-slot:collapse-one>
         <strong>First item Body</strong>
     </x-slot:collapse-one>
-
-    <x-slot:collapse-two>
-        <strong>Second item Body</strong>
-    </x-slot:collapse-two>
 </x-forms::accordion>
 

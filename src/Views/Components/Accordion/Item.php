@@ -17,6 +17,7 @@ class Item extends Component
         public string $name,
         public string $parent,
         public string $title = '',
+        public string $content = '',
         public bool $show = false,
         string $framework = ''
     ) {

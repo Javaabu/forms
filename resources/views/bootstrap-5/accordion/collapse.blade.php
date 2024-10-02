@@ -5,6 +5,10 @@
 ]) !!}
      data-bs-parent="#{{ $parent }}">
     <div class="accordion-body">
-        {{ $slot }}
+        @if($content)
+            {!! nl2br(e($content)) !!}
+        @else
+            {{ $slot }}
+        @endif
     </div>
 </div>

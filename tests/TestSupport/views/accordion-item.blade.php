@@ -6,7 +6,6 @@
     <strong>First item Body</strong>
 </x-forms::accordion.item>
 
-<x-forms::accordion.item id="item-2" name="collapseTwo" parent="accordionExample" :show="false" title="Accordion Item #2">
-    <strong>Second item Body</strong>
+<x-forms::accordion.item id="item-2" name="collapseTwo" parent="accordionExample" :show="false" title="Accordion Item #2" content="Second item Body">
 </x-forms::accordion.item>
 

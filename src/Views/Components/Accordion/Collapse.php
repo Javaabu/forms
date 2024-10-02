@@ -15,6 +15,7 @@ class Collapse extends Component
      */
     public function __construct(
         public string $parent,
+        public string $content = '',
         public bool $show = false,
         string $framework = ''
     ) {

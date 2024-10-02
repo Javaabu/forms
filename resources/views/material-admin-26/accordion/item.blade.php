@@ -16,6 +16,10 @@
         :id="$name"
         :show="$show"
     >
-        {{ $slot }}
+        @if($content)
+            {!! nl2br(e($content)) !!}
+        @else
+            {{ $slot }}
+        @endif
     </x-forms::accordion.collapse>
 </div>

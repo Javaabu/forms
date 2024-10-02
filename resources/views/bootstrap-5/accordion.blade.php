@@ -6,24 +6,26 @@
             $title_slot = $slot_name . 'Header';
         @endphp
 
-        @isset(${$slot_name})
-            <x-forms::accordion.item
-                :framework="$framework"
-                :id="$item['id'] ?? null"
-                :name="$collapse_id"
-                :parent="$id"
-                :title="$item['title'] ?? ''"
-                :show="! empty($item['show'])"
-            >
-                @isset(${$title_slot})
-                    <x-slot:header>
-                        {{ ${$title_slot} }}
-                    </x-slot:header>
-                @endisset
+        <x-forms::accordion.item
+            :framework="$framework"
+            :id="$item['id'] ?? null"
+            :name="$collapse_id"
+            :parent="$id"
+            :title="$item['title'] ?? ''"
+            :show="! empty($item['show'])"
+        >
+            @isset(${$title_slot})
+                <x-slot:header>
+                    {{ ${$title_slot} }}
+                </x-slot:header>
+            @endisset
 
+            @isset(${$slot_name})
                 {{ ${$slot_name} }}
-            </x-forms::accordion.item>
-        @endisset
+            @else
+                {!! nl2br(e($item['content'] ?? '')) !!}
+            @endisset
+        </x-forms::accordion.item>
     @endforeach
 
     {{ $slot }}
