@@ -16,11 +16,11 @@ class NavTabs extends Component
      * @return void
      */
     public function __construct(
-        array|Collection $tabs = [],
-        string $framework = ''
+        array|Collection $accordion = [],
+        string           $framework = ''
     ) {
         parent::__construct($framework);
 
-        $this->tabs = $tabs;
+        $this->tabs = $accordion;
     }
 }

@@ -12,7 +12,7 @@ abstract class Component extends BaseComponent
      *
      * @var string
      */
-    private $id;
+    protected $id;
 
     /**
      * Framework used for this component
