@@ -18,13 +18,13 @@ class Tabs extends Component
      * @return void
      */
     public function __construct(
-        array|Collection $accordion = [],
+        array|Collection $tabs = [],
         string           $active = '',
         string           $framework = ''
     ) {
         parent::__construct($framework);
 
-        $this->tabs = is_array($accordion) ? collect($accordion) : $accordion;
+        $this->tabs = is_array($tabs) ? collect($tabs) : $tabs;
 
         if (! $active) {
             $active = $this->tabs->first()['name'] ?? '';
