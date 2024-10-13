@@ -27,6 +27,7 @@ class Row extends Component
         $model = null,
         string $modelId = '',
         bool $noCheckbox = false,
+        public bool $disableCheckbox = false,
         string $framework = '',
     ) {
         parent::__construct($framework);
