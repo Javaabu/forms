@@ -28,7 +28,9 @@ trait FormatsValues
 
     public function formatValue()
     {
-        if (is_bool($this->value)) {
+        if ($this->value instanceof BackedEnum) {
+            return $this->getEnumLabel();
+        } elseif (is_bool($this->value)) {
             return $this->value ? trans('forms::strings.yes') : trans('forms::strings.no');
         } elseif (empty($this->value) && (! is_numeric($this->value))) {
             return trans('forms::strings.blank');
