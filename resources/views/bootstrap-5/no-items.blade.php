@@ -9,9 +9,13 @@
                         {{ __('Let\'s create some new :model_type.', ['model_type' => $modelType ?? __('items') ]) }}
                     </p>
                     @can('create', $model)
-                        <a href="{{ $createAction ?? '#' }}" class="btn btn-lg btn-primary btn-icon-text btn-raised">
-                            <i class="zmdi zmdi-plus"></i> {{ __('Create New') }}
-                        </a>
+                        @if($slot->isNotEmpty())
+                            {{ $slot }}
+                        @else
+                            <a href="{{ $createAction ?? '#' }}" class="btn btn-lg btn-primary btn-icon-text btn-raised">
+                                <i class="zmdi zmdi-plus"></i> {{ __('Create New') }}
+                            </a>
+                        @endif
                     @endcan
                 </div>
             </div>
