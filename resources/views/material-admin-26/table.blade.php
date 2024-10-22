@@ -21,6 +21,7 @@
         @endif
         <table class="table dataTable mt-0 {{ $table_class ?? '' }}{{ $striped ? ' table-striped' : '' }}" data-form-sortable="#{{ $filter_id ?? 'filter' }}">
             <thead class="thead-default">
+            {{ $beforeHeaders ?? '' }}
             <tr>
                 @if(empty($noCheckbox))
                     <th class="td-checkbox">
@@ -32,6 +33,7 @@
                 @endif
                 {{ $headers ?? '' }}
             </tr>
+            {{ $afterHeaders ?? '' }}
             </thead>
 
             @if(empty($tbodyOpen))
