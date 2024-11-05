@@ -23,6 +23,7 @@ class Label extends Component
         bool $inline = false,
         bool $floating = false,
         string $inlineLabelClass = '',
+        public bool $blankLabel = false,
         string $framework = ''
     ) {
         parent::__construct($framework);
@@ -36,5 +37,14 @@ class Label extends Component
         $this->floating = $floating;
 
         $this->inlineLabelClass = $inlineLabelClass ?: $this->frameworkConfig('inline-label-class');
+    }
+
+    public function label(): string
+    {
+        if ($this->blankLabel) {
+            return '';
+        }
+
+        return parent::label();
     }
 }

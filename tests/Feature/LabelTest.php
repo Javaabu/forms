@@ -15,6 +15,33 @@ class LabelTest extends TestCase
     }
 
     /** @test */
+    public function it_can_generate_bootstrap_5_blank_form_group()
+    {
+        $this->setFrameworkBootstrap5();
+        $this->registerTestRoute('form-group-blank');
+
+        $this->visit('/form-group-blank')
+            ->seeElement('div.mb-4')
+            ->within('div.mb-4', function () {
+                $this->seeElement('span')
+                    ->seeInElement('span', 'Test')
+                    ->seeElement('label.form-label')
+                    ->seeInElement('label.form-label', '');
+            });
+    }
+
+    /** @test */
+    public function it_can_generate_bootstrap_5_blank_label()
+    {
+        $this->setFrameworkBootstrap5();
+        $this->registerTestRoute('label-blank');
+
+        $page = $this->visit('/label-blank')
+            ->seeElementCount('label', 1)
+            ->seeInElement('label', '');
+    }
+
+    /** @test */
     public function it_can_generate_bootstrap_5_standard_form_labels()
     {
         $this->setFrameworkBootstrap5();

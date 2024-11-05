@@ -1,4 +1,4 @@
-@if($label)
+@if($label || $blankLabel)
     <label {!! $attributes->merge([
     'class' => (! $floating && $inline ? $inlineLabelClass : null)]) !!}>
         {{ $label }}
