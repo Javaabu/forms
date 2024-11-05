@@ -29,6 +29,7 @@ class FormGroup extends Component
         bool   $showLabel = true,
         public string $inlineLabelClass = '',
         string $inlineInputClass = '',
+        public bool $blankLabel = false,
         string $framework = ''
     ) {
         parent::__construct($framework);
@@ -42,5 +43,14 @@ class FormGroup extends Component
         $this->showLabel = $showLabel;
 
         $this->inlineInputClass = $inlineInputClass ?: $this->frameworkConfig('inline-input-class');
+    }
+
+    public function label(): string
+    {
+        if ($this->blankLabel) {
+            return '';
+        }
+
+        return parent::label();
     }
 }
