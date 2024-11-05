@@ -12,6 +12,7 @@ class FormGroup extends Component
     public bool $floating;
     public bool $wrap;
     public bool $showLabel;
+    public string $inlineInputClass;
 
     /**
      * Create a new component instance.
@@ -26,6 +27,8 @@ class FormGroup extends Component
         bool   $floating = false,
         bool   $wrap = true,
         bool   $showLabel = true,
+        public string $inlineLabelClass = '',
+        string $inlineInputClass = '',
         string $framework = ''
     ) {
         parent::__construct($framework);
@@ -37,5 +40,7 @@ class FormGroup extends Component
         $this->floating = $floating;
         $this->wrap = $wrap;
         $this->showLabel = $showLabel;
+
+        $this->inlineInputClass = $inlineInputClass ?: $this->frameworkConfig('inline-input-class');
     }
 }

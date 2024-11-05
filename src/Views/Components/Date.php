@@ -29,6 +29,8 @@ class Date extends Input
         bool $required = false,
         bool $inline = false,
         bool $floating = false,
+        string $inlineLabelClass = '',
+        string $inlineInputClass = '',
         string $framework = ''
     ) {
         parent::__construct(
@@ -41,10 +43,12 @@ class Date extends Input
             showLabel: $showLabel,
             placeholder: $placeholder,
             showPlaceholder: $showPlaceholder,
-            required:$required,
+            required: $required,
             inline: $inline,
             floating: $floating,
-            framework: $framework
+            inlineLabelClass: $inlineLabelClass,
+            inlineInputClass: $inlineInputClass,
+            framework: $framework,
         );
 
         $this->icon = $icon ?: $this->getFrameworkIcon($this->frameworkConfig('date-icon'));

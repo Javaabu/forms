@@ -31,6 +31,8 @@ class FileUpload extends File
         bool              $disabled = false,
         bool              $ignoreAccessor = false,
         bool              $inline = false,
+        string $inlineLabelClass = '',
+        string $inlineInputClass = '',
         string            $framework = ''
     )
     {
@@ -57,6 +59,8 @@ class FileUpload extends File
             ignoreAccessor: $ignoreAccessor,
             upload: true,
             inline: $inline,
+            inlineLabelClass: $inlineLabelClass,
+            inlineInputClass: $inlineInputClass,
             framework: $framework
         );
     }

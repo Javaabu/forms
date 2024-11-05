@@ -43,6 +43,8 @@ class Image extends File
         bool              $disabled = false,
         bool              $ignoreAccessor = false,
         bool              $inline = false,
+        string $inlineLabelClass = '',
+        string $inlineInputClass = '',
         string            $framework = ''
     )
     {
@@ -67,6 +69,8 @@ class Image extends File
             ignoreAccessor: $ignoreAccessor,
             upload: $upload,
             inline: $inline,
+            inlineLabelClass: $inlineLabelClass,
+            inlineInputClass: $inlineInputClass,
             framework: $framework
         );
 

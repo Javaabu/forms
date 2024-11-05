@@ -23,6 +23,8 @@ class Latitude extends Input
         bool $required = false,
         bool $inline = false,
         bool $floating = false,
+        string $inlineLabelClass = '',
+        string $inlineInputClass = '',
         string $framework = ''
     ) {
         parent::__construct(
@@ -38,6 +40,8 @@ class Latitude extends Input
             required:$required,
             inline: $inline,
             floating: $floating,
+            inlineLabelClass: $inlineLabelClass,
+            inlineInputClass: $inlineInputClass,
             framework: $framework
         );
     }

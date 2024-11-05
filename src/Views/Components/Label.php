@@ -10,6 +10,7 @@ class Label extends Component
     public bool $required;
     public bool $inline;
     public bool $floating;
+    public string $inlineLabelClass;
 
     /**
      * Create a new component instance.
@@ -21,6 +22,7 @@ class Label extends Component
         bool $required = false,
         bool $inline = false,
         bool $floating = false,
+        string $inlineLabelClass = '',
         string $framework = ''
     ) {
         parent::__construct($framework);
@@ -32,5 +34,7 @@ class Label extends Component
         $this->inline = $inline;
 
         $this->floating = $floating;
+
+        $this->inlineLabelClass = $inlineLabelClass ?: $this->frameworkConfig('inline-label-class');
     }
 }

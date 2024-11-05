@@ -38,6 +38,10 @@ return [
             'file-upload-icon' => 'fa-arrow-to-top',
             'file-clear-icon' => 'fa-close',
             'image-icon' => 'fa-image',
+            'inline-label-class' => 'col-sm-3 col-lg-2 col-form-label',
+            'inline-input-class' => 'col-sm-9 col-lg-10',
+            'inline-entry-label-class' => 'col-sm-6 col-md-4',
+            'inline-entry-class' => 'col-sm-6 col-md-8',
         ],
 
         'material-admin-26' => [
@@ -51,6 +55,10 @@ return [
             'file-upload-icon' => 'zmdi-upload',
             'file-clear-icon' => 'zmdi-close',
             'image-icon' => 'zmdi-image',
+            'inline-label-class' => 'col-sm-3 col-lg-2 col-form-label',
+            'inline-input-class' => 'col-sm-9 col-lg-10',
+            'inline-entry-label-class' => 'col-sm-6 col-md-4',
+            'inline-entry-class' => 'col-sm-6 col-md-8',
         ]
     ],
 

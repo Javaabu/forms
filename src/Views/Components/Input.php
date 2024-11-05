@@ -40,6 +40,8 @@ class Input extends Component
         bool   $required = false,
         bool   $inline = false,
         bool   $floating = false,
+        public string $inlineLabelClass = '',
+        public string $inlineInputClass = '',
         string $framework = ''
     ) {
         parent::__construct($framework);

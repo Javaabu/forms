@@ -54,6 +54,8 @@ class Select2 extends Select
         string $syncFieldName = '',
         bool $inline = false,
         bool $floating = false,
+        string $inlineLabelClass = '',
+        string $inlineInputClass = '',
         string $framework = ''
     ) {
         if ($allowClear && empty($placeholder)) {
@@ -82,6 +84,8 @@ class Select2 extends Select
             syncFieldName: $syncFieldName,
             nameField: $nameField,
             idField: $idField,
+            inlineLabelClass: $inlineLabelClass,
+            inlineInputClass: $inlineInputClass,
             framework: $framework
         );
 

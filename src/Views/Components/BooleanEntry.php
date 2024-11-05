@@ -16,6 +16,8 @@ class BooleanEntry extends TextEntry
         $model = null,
         bool $showLabel = true,
         bool $inline = false,
+        string $inlineEntryLabelClass = '',
+        string $inlineEntryClass = '',
         string $framework = ''
     ) {
         parent::__construct(
@@ -26,6 +28,8 @@ class BooleanEntry extends TextEntry
             showLabel: $showLabel,
             inline: $inline,
             multiline: false,
+            inlineEntryLabelClass: $inlineEntryLabelClass,
+            inlineEntryClass: $inlineEntryClass,
             framework: $framework
         );
 

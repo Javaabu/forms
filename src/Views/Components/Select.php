@@ -63,6 +63,8 @@ class Select extends Component
         string $syncFieldName = '',
         string $nameField = '',
         string $idField = '',
+        public string $inlineLabelClass = '',
+        public string $inlineInputClass = '',
         string $framework = ''
     ) {
         parent::__construct($framework);

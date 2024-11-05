@@ -17,6 +17,8 @@ class TextEntry extends Component
     public string $name;
     public bool $showLabel;
     public $value;
+    public string $inlineEntryLabelClass;
+    public string $inlineEntryClass;
 
     /**
      * Create a new component instance.
@@ -32,6 +34,8 @@ class TextEntry extends Component
         bool $inline = false,
         bool $multiline = false,
         public bool $wysiwyg = false,
+        string $inlineEntryLabelClass = '',
+        string $inlineEntryClass = '',
         string $framework = ''
     ) {
         parent::__construct($framework);
@@ -42,5 +46,8 @@ class TextEntry extends Component
         $this->name = $name;
         $this->multiline = $multiline;
         $this->value = $value ?: ($name ? $this->getBoundValue($model, $name) : '');
+
+        $this->inlineEntryLabelClass = $inlineEntryLabelClass ?: $this->frameworkConfig('inline-entry-label-class');
+        $this->inlineEntryClass = $inlineEntryClass ?: $this->frameworkConfig('inline-entry-class');
     }
 }

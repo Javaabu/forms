@@ -2,14 +2,14 @@
     @if($showLabel)
         <dt
             @if($inline)
-            class="col-sm-6 col-md-4"
+            class="{{ $inlineEntryLabelClass }}"
             @endif
         >{{ $label ?: $label() }}</dt>
     @endif
 
     <dd
         @if($inline)
-        class="col-sm-6 col-md-8"
+        class="{{ $inlineEntryClass }}"
         @endif
     >
         @if($slot->isNotEmpty())

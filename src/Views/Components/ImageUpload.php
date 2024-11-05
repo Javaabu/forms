@@ -37,6 +37,8 @@ class ImageUpload extends Image
         bool              $disabled = false,
         bool              $ignoreAccessor = false,
         bool              $inline = false,
+        string $inlineLabelClass = '',
+        string $inlineInputClass = '',
         string            $framework = ''
     )
     {
@@ -69,6 +71,8 @@ class ImageUpload extends Image
             disabled: $disabled,
             ignoreAccessor: $ignoreAccessor,
             inline: $inline,
+            inlineLabelClass: $inlineLabelClass,
+            inlineInputClass: $inlineInputClass,
             framework: $framework
         );
     }

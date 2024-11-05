@@ -1,5 +1,7 @@
 <x-forms::form-group :wrap="$showLabel && $type != 'hidden'" :label="$label ?: $label()"
                      :name="$attributes->get('id') ?: $id()" :framework="$framework" :inline="$inline"
+                     :inline-input-class="$inlineInputClass"
+                     :inline-label-class="$inlineLabelClass"
                      :required="$required" :floating="$floating">
     @if($isDateInput() || (! empty($prepend)) || (! empty($append)))
         <div class="input-group">

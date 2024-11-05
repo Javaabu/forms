@@ -48,6 +48,8 @@ class MapInput extends Input
         bool $showLabel = true,
         bool $required = false,
         bool $inline = false,
+        string $inlineLabelClass = '',
+        string $inlineInputClass = '',
         string $framework = ''
     ) {
         parent::__construct(
@@ -60,6 +62,8 @@ class MapInput extends Input
             required:$required,
             inline: $inline,
             floating: false,
+            inlineLabelClass: $inlineLabelClass,
+            inlineInputClass: $inlineInputClass,
             framework: $framework
         );
 

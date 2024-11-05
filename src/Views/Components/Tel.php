@@ -19,6 +19,8 @@ class Tel extends Input
         bool $required = false,
         bool $inline = false,
         bool $floating = false,
+        string $inlineLabelClass = '',
+        string $inlineInputClass = '',
         string $framework = ''
     ) {
         parent::__construct(
@@ -32,6 +34,8 @@ class Tel extends Input
             required:$required,
             inline: $inline,
             floating: $floating,
+            inlineLabelClass: $inlineLabelClass,
+            inlineInputClass: $inlineInputClass,
             framework: $framework
         );
     }

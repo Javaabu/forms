@@ -53,6 +53,8 @@ class File extends Input
         public bool $ignoreAccessor = false,
         public bool       $upload = false,
         bool $inline = false,
+        string $inlineLabelClass = '',
+        string $inlineInputClass = '',
         string $framework = ''
     ) {
         $this->showHint = $showHint;
@@ -75,6 +77,8 @@ class File extends Input
             required:$required,
             inline: $inline,
             floating: false,
+            inlineLabelClass: $inlineLabelClass,
+            inlineInputClass: $inlineInputClass,
             framework: $framework
         );
 
