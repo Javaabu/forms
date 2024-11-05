@@ -19,7 +19,7 @@ return [
     'meters_abbr' => 'm',
     'km_abbr' => 'km',
     'boundary' => 'ބައުންޑަރީ',
-    'file_hint' => 'ހަމައެކަނި :type ވައްތަރުގެ :size އަށް ވުރެ ބޮޑު ނޫން ފައިލް.',
+    'file_hint' => 'ހަމައެކަނި :types ވައްތަރުގެ :size އަށް ވުރެ ބޮޑު ނޫން ފައިލް.',
     'image_hint' => 'ރަނގަޅުވާނީ :widthpx x :heightpx.',
     'text_list_separator' => '، ',
     'text_list_separator_last_glue' => ' އަދި ',
