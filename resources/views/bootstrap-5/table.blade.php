@@ -1,4 +1,4 @@
-<div class="table-responsive">
+<div {!! $attributes->merge(['class' => 'table-responsive']) !!}>
 
     @if(empty($noBulk))
         @if(isset($bulkForm) && $bulkForm->isNotEmpty())

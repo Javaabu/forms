@@ -1,4 +1,4 @@
-<div class="table-responsive">
+<div {!! $attributes->merge(['class' => 'table-responsive']) !!}>
     @if(empty($noBulk))
         @if(isset($bulkForm) && $bulkForm->isNotEmpty())
             <x-forms::form-open :action="$bulkForm->attributes->get('action')" method="PUT" class="delete-form" />
