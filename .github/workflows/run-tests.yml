@@ -16,26 +16,33 @@ jobs:
         fail-fast: true
         matrix:
             os: [ ubuntu-latest ]
-            php: [ 8.3, 8.2, 8.1 ]
-            laravel: [ 11.*, 10.*, 9.* ]
+            php: [ 8.4, 8.3, 8.2, 8.1 ]
+            laravel: [ 12.*, 11.*, 10.*, 9.* ]
             stability: [ prefer-lowest, prefer-stable ]
             include:
+                -   laravel: 12.*
+                    testbench: 10.*
+                    carbon: ^3.8.4
+                    medialibrary: 11.*
+                    geospatial: ^4.5
                 -   laravel: 11.*
                     testbench: 9.*
                     carbon: ^2.63
                     medialibrary: 11.*
-                    geospatial: ^4.2
+                    geospatial: ^4.5
                 -   laravel: 10.*
                     testbench: 8.*
                     carbon: ^2.63
                     medialibrary: ^10.3.4
-                    geospatial: ^4.2
+                    geospatial: ^4.5
                 -   laravel: 9.*
                     testbench: 7.*
                     carbon: ^2.63
                     medialibrary: ^10.3.4
                     geospatial: ^2.10
             exclude:
+                -   laravel: 12.*
+                    php: 8.1
                 -   laravel: 11.*
                     php: 8.1
 
