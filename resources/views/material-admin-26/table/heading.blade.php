@@ -11,5 +11,9 @@
         'class' => $sortable ? $addSortClass() : ''
     ]) }}
 >
-    {{ $label }}
+    @if($slot->isNotEmpty())
+        {{ $slot }}
+    @else
+        {{ $label }}
+    @endif
 </th>

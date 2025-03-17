@@ -74,7 +74,9 @@
             <x-forms::table.heading label="Date B"/>
             <x-forms::table.heading label="Date C"/>
             <x-forms::table.heading label="Date D"/>
-            <x-forms::table.heading label="Date E"/>
+            <x-forms::table.heading>
+                Date E
+            </x-forms::table.heading>
         </x-slot:headers>
 
         {{--        <x-slot:rows>--}}
@@ -142,6 +144,3 @@
         </x-slot:rows>
     </x-forms::table>
 </div>
-
-
-
