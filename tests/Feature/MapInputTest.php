@@ -2,12 +2,11 @@
 
 namespace Javaabu\Forms\Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabaseState;
 use Illuminate\Support\Facades\Route;
 use Javaabu\Forms\Tests\TestCase;
+use Javaabu\Forms\Tests\TestSupport\Models\City;
 use MatanYadaev\EloquentSpatial\Objects\Point;
 use MatanYadaev\EloquentSpatial\Objects\Polygon;
-use Javaabu\Forms\Tests\TestSupport\Models\City;
 
 class MapInputTest extends TestCase
 {
@@ -66,10 +65,11 @@ class MapInputTest extends TestCase
         })->middleware('web');
 
         $this->visit('/map-input')
+            ->see('Search...')
             ->seeElement('#basic-map-input')
             ->within('#basic-map-input', function () use ($lat, $lng, $wkt, $radius) {
                 $this->seeElement('input[name="lat"][type="number"][value="' . $lat . '"]')
-                     ->seeElement('input[name="lng"][type="number"][value="' . $lng . '"]')
+                    ->seeElement('input[name="lng"][type="number"][value="' . $lng . '"]')
                     ->seeElement('input[name="radius"][type="number"][value="' . $radius . '"]')
                     ->seeInElement('textarea[name="boundary"]', $wkt);
             });
