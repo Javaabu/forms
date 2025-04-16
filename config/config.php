@@ -42,6 +42,7 @@ return [
             'inline-input-class' => 'col-sm-9 col-lg-10',
             'inline-entry-label-class' => 'col-sm-6 col-md-4',
             'inline-entry-class' => 'col-sm-6 col-md-8',
+            'search-icon' => 'fa-search',
         ],
 
         'material-admin-26' => [
@@ -59,6 +60,7 @@ return [
             'inline-input-class' => 'col-sm-9 col-lg-10',
             'inline-entry-label-class' => 'col-sm-6 col-md-4',
             'inline-entry-class' => 'col-sm-6 col-md-8',
+            'search-icon' => 'zmdi-search',
         ]
     ],
 

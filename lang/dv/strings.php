@@ -23,5 +23,6 @@ return [
     'image_hint' => 'ރަނގަޅުވާނީ :widthpx x :heightpx.',
     'text_list_separator' => '، ',
     'text_list_separator_last_glue' => ' އަދި ',
-    'map_search_string' => 'ހޯދާ...'
+    'map_search_string' => 'ހޯދާ...',
+    'search_form_placeholder' => 'ހޯދާ...'
 ];
