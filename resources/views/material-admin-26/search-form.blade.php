@@ -1,4 +1,4 @@
-<x-forms::form :action="route($route, $params)" class="search" :method="$method" :framework="$framework" :files="$files">
+<x-forms::form :action="$action ?: route($route, $params)" class="search" :method="$method" :framework="$framework" :files="$files">
     <div class="search__inner">
         <x-forms::text
             :name="$name"

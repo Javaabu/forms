@@ -15,6 +15,7 @@ class SearchForm extends Form
      */
     public function __construct(
         public string $name = 'search',
+        public string $action = '',
         public string $route = '',
         public array $params = [],
         public string $placeholder = '',
