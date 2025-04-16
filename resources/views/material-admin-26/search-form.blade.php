@@ -2,7 +2,7 @@
     <div class="search__inner">
         <x-forms::text
             :name="$name"
-            :placeholder="$placeholder ?: trans('search_form_placeholder')"
+            :placeholder="$placeholder ?: trans('forms::search_form_placeholder')"
             class="search__text"
             :show-label="false"
             :framework="$framework"
