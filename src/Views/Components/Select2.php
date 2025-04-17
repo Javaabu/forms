@@ -56,6 +56,7 @@ class Select2 extends Select
         bool $floating = false,
         string $inlineLabelClass = '',
         string $inlineInputClass = '',
+        string $formGroupClass = '',
         string $framework = ''
     ) {
         if ($allowClear && empty($placeholder)) {
@@ -86,6 +87,7 @@ class Select2 extends Select
             idField: $idField,
             inlineLabelClass: $inlineLabelClass,
             inlineInputClass: $inlineInputClass,
+            formGroupClass: $formGroupClass,
             framework: $framework
         );
 

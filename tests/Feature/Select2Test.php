@@ -114,4 +114,64 @@ class Select2Test extends TestCase
             ->seeElement('option[value=""]')
             ->seeElement('option[value="2"]:selected');
     }
+
+    /** @test */
+    public function it_can_render_a_select2_element_with_custom_form_group_class_material_admin_26()
+    {
+        $this->setFrameworkMaterialAdmin26();
+
+        $post = [
+            'author' => 2,
+        ];
+
+        $options = [
+            '1' => 'Arushad',
+            '2' => 'John',
+            '3' => 'Amy',
+        ];
+
+        Route::get('select2-basic', function () use ($post, $options) {
+            return view('select2-basic-form-group-class')
+                ->with('post', $post)
+                ->with('options', $options);
+        })->middleware('web');
+
+        $this->visit('/select2-basic')
+            ->seeElement('div.custom-class')
+            ->seeElement('select.select2-basic[id="author"][data-allow-clear="true"][data-placeholder="Nothing Selected"]')
+            ->seeElement('option[value=""]')
+            ->seeElement('option[value="1"]')
+            ->seeElement('option[value="2"]:selected')
+            ->seeElement('option[value="3"]');
+    }
+
+    /** @test */
+    public function it_can_render_a_select2_element_with_custom_form_group_class_bootstrap_5()
+    {
+        $this->setFrameworkBootstrap5();
+
+        $post = [
+            'author' => 2,
+        ];
+
+        $options = [
+            '1' => 'Arushad',
+            '2' => 'John',
+            '3' => 'Amy',
+        ];
+
+        Route::get('select2-basic', function () use ($post, $options) {
+            return view('select2-basic-form-group-class')
+                ->with('post', $post)
+                ->with('options', $options);
+        })->middleware('web');
+
+        $this->visit('/select2-basic')
+            ->seeElement('div.custom-class')
+            ->seeElement('select.select2-basic[id="author"][data-allow-clear="true"][data-placeholder="Nothing Selected"]')
+            ->seeElement('option[value=""]')
+            ->seeElement('option[value="1"]')
+            ->seeElement('option[value="2"]:selected')
+            ->seeElement('option[value="3"]');
+    }
 }
