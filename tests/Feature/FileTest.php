@@ -329,11 +329,11 @@ class FileTest extends TestCase
 
                         $this->seeElement('a.fileinput-filelink[href="/storage/1/some-cool-image.jpg"]')
                             ->within('a.fileinput-filelink', function () {
-                                $this->seeElement('i.fa.fa-arrow-to-bottom');
+                                $this->seeElement('i.fa-regular.fa-arrow-to-bottom');
                             })
                             ->seeElement('button.btn-dismiss')
                             ->within('button.btn-dismiss', function () {
-                                $this->seeElement('i.fa.fa-close');
+                                $this->seeElement('i.fa-regular.fa-close');
                             });
                     });
             });
@@ -358,7 +358,7 @@ class FileTest extends TestCase
                     ->within('div.fileinput', function () {
                         $this->seeElement('.upload-btn')
                             ->within('.upload-btn', function () {
-                                $this->seeElement('i.fa.fa-arrow-to-top')
+                                $this->seeElement('i.fa-regular.fa-arrow-to-top')
                                     ->seeText('Upload file');
                             });
                     });

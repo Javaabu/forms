@@ -62,6 +62,7 @@ return [
             'inline-entry-label-class' => 'col-sm-6 col-md-4',
             'inline-entry-class' => 'col-sm-6 col-md-8',
             'search-icon' => 'zmdi-search',
+            'no-items-icon' => 'zmdi-file',
         ]
     ],
 

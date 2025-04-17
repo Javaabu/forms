@@ -1,0 +1,18 @@
+{
+    "$schema": "https://laravel-ide.com/schema/laravel-ide-v2.json",
+    "completions": [
+        {
+            "complete": "configKey",
+            "options": {
+                "prefix": "forms.frameworks.bootstrap-5"
+            },
+            "condition": [
+                {
+                    "methodNames": ["frameworkConfig"],
+                    "classParentFqn": ["\\Javaabu\\Forms\\Views\\Components\\Component"],
+                    "parameters": [1]
+                }
+            ]
+        }
+    ]
+}
