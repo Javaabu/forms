@@ -1,5 +1,6 @@
 {
     "name": "javaabu/forms",
+    "version": "v1.99.0",
     "description": "Laravel Blade components for form elements",
     "homepage": "https://github.com/Javaabu/forms",
     "license": "MIT",

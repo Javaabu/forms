@@ -23,11 +23,12 @@ class NoItemsTest extends TestCase
     /** @test */
     public function it_can_generated_bulk_actions_for_bootstrap_5()
     {
+        $this->withoutExceptionHandling();
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('no-items');
 
         $this->visit('/no-items')
             ->see('Let\'s create some new activities')
-            ->seeElement('.zmdi.zmdi-file');
+            ->seeElement('.fa-regular.fa-file');
     }
 }

@@ -28,7 +28,7 @@ return [
 
     'frameworks' => [
         'bootstrap-5' => [
-            'icon-prefix' => 'fa',
+            'icon-prefix' => 'fa-regular',
             'date-icon' => 'fa-calendar',
             'datetime-icon' => 'fa-calendar',
             'time-icon' => 'fa-clock',
@@ -43,6 +43,7 @@ return [
             'inline-entry-label-class' => 'col-sm-6 col-md-4',
             'inline-entry-class' => 'col-sm-6 col-md-8',
             'search-icon' => 'fa-search',
+            'no-items-icon' => 'fa-file',
         ],
 
         'material-admin-26' => [
