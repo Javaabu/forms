@@ -12,9 +12,9 @@
                         @if($slot->isNotEmpty())
                             {{ $slot }}
                         @else
-                            <a href="{{ $createAction }}" class="btn btn-lg btn-primary btn-icon-text btn-raised">
+                            <x-forms::link-button class="btn-lg" :url="$createAction">
                                 <i class="fal fa-plus me-2"></i> {{ __('Create New') }}
-                            </a>
+                            </x-forms::link-button>
                         @endif
                     @endif
                 </div>

@@ -1,18 +1,18 @@
 <div class="no-items">
     <div class="card-body">
-        <i class="{{ $icon ?? 'zmdi zmdi-file' }} main-icon mb-4"></i>
+        <i class="{{ $icon }} main-icon mb-4"></i>
         <p class="lead mb-4">
-            {{ __('It\'s a bit lonely here.') }}<br/>
-            {{ __('Let\'s create some new :model_type.', ['model_type' => $modelType ?? __('items') ]) }}
+            @if($title){{ $title }} <br/> @endif
+            {{ $message  }}
         </p>
-        @can('create', $model)
+        @if($showCreate)
             @if($slot->isNotEmpty())
                 {{ $slot }}
             @else
-                <a href="{{ $createAction ?? '#' }}" class="btn btn-lg btn-primary btn--icon-text btn--raised">
+                <x-forms::link-button class="btn-lg btn--icon-text btn--raised" :url="$createAction">
                     <i class="zmdi zmdi-plus"></i> {{ __('Create New') }}
-                </a>
+                </x-forms::link-button>
             @endif
-        @endcan
+        @endif
     </div>
 </div>
