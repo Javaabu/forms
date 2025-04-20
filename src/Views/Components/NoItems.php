@@ -47,5 +47,6 @@ class NoItems extends Component
         $this->message = is_null($message)
             ? __('Let\'s create some new :model_type.', ['model_type' => $this->modelType ?? __('items')])
             : $message;
+
     }
 }
