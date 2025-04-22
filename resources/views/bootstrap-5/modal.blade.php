@@ -4,15 +4,15 @@
 >
     <div class="modal-dialog {{ $modalSizeClass ?? 'modal-lg' }}">
         <div class="modal-content">
-            <div class="modal-header">
-                @if($title)
+            @if($title)
+                <div class="modal-header">
                     <h5 class="modal-title">
                         {{ $title }}
                     </h5>
-                @endif
 
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            @endif
 
             <div class="modal-body">
                 {{ $slot }}
