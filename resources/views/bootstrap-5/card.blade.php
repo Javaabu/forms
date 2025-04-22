@@ -13,7 +13,7 @@
 
     <div class="card-body">
         @if(! empty($title))
-            <x-forms::card.title :framework="$framework" :attributes="$title->attributes">
+            <x-forms::card.title :framework="$framework">
                 {{ $title }}
             </x-forms::card.title>
         @endif
