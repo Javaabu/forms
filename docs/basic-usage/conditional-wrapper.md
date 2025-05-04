@@ -22,3 +22,15 @@ The conditional wrapper supports the following attributes:
 - `'hide-fields'` - Whether the fields should also be hidden when they are disabled. Default is `false`.
 - `'disable'` - Setting this to `true` will invert the behaviour. i.e The section will get disabled if the given value is selected.
 - `'json-encode'` - Whether to json encode the given value. Default is `true` if the given value is an array, otherwise it's false.
+
+
+## Disabling an input field depending on a checkbox status
+Sometimes, you may want to disable a if a checkbox is checked. This can be done using the `data-toggle-checkbox` attribute. 
+This attribute should be set to the selector of the input field you want to disable.
+
+In this example, we will disable the `max_salary` input field if the `any_max_salary` checkbox is checked. 
+
+```html
+<x-forms::number name="max_salary" label="Max Salary" />
+
+<x-forms::checkbox name="any_max_salary" :value="1" data-toggle-checkbox="#max-salary" />
