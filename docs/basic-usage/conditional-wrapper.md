@@ -34,3 +34,33 @@ In this example, we will disable the `max_salary` input field if the `any_max_sa
 <x-forms::number name="max_salary" label="Max Salary" />
 
 <x-forms::checkbox name="any_max_salary" :value="1" data-toggle-checkbox="#max-salary" />
+```
+
+## Enabling and disabling a section based on checkbox status
+You may want to show or hide parts of your UI depending on whether a checkbox is checked. The data-enable-section-checkbox attribute makes this easy to implement.
+
+In the example below, sections are conditionally shown or hidden based on the status of the #existing_user checkbox.
+
+```html
+
+<x-forms::checkbox name="existing_user" :label="__('Existing Public User')" :value="1" :checked="true" inline />
+
+<!-- This section is displayed only when the checkbox is checked -->
+<div data-enable-section-checkbox="#existing_user"
+         data-hide-fields="true">
+    <!-- Content visible when #existing_user is checked -->
+</div>
+
+<!-- This section is hidden when the checkbox is checked -->
+<div data-enable-section-checkbox="#existing_user"
+     data-hide-fields="true"
+     data-disable="true">
+    <!-- Content hidden when #existing_user is checked -->
+</div>
+```
+
+**Attribute Explanation:**
+- `data-enable-section-checkbox`: Selector for the checkbox that controls the section. 
+- `data-hide-fields="true"`: Hides all form fields within the section instead of removing the entire section. 
+- `data-disable="true"`: Inverts the logic—disables or hides the section when the checkbox is checked.
+
