@@ -32,6 +32,12 @@ class NavTabsTest extends TestCase
                     ->seeElement('a.nav-link')
                     ->seeInElement('a.nav-link.disabled', 'Disabled Tab')
                     ->seeElement('a.nav-link[href="https://disabled-tab.test"]');
+
+                // icon tabs
+                $this->seeElement('li.nav-item')
+                    ->seeElement('a.nav-link')
+                    ->seeInElement('a.nav-link', 'Icon Tab')
+                    ->seeElement('a.nav-link i[class="zmdi zmdi-shield-security mr-2"]');
             });
     }
 
@@ -61,6 +67,12 @@ class NavTabsTest extends TestCase
                     ->seeElement('a.nav-link')
                     ->seeInElement('a.nav-link.disabled', 'Disabled Tab')
                     ->seeElement('a.nav-link[href="https://disabled-tab.test"]');
+
+                // icon tabs
+                $this->seeElement('li.nav-item')
+                    ->seeElement('a.nav-link')
+                    ->seeInElement('a.nav-link', 'Icon Tab')
+                    ->seeElement('a.nav-link i[class="zmdi zmdi-shield-security mr-2"]');
             });
     }
 }

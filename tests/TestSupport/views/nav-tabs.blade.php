@@ -18,6 +18,13 @@ $items = [
         'active'   => false,
         'disabled' => true,
     ],
+    [
+        'title'    => __('Icon Tab'),
+        'url'      => 'https://active-tab.test',
+        'icon'     => 'zmdi zmdi-shield-security',
+        'active'   => false,
+        'disabled' => false,
+    ],
 ];
 @endphp
 
