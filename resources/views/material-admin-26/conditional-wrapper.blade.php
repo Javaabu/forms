@@ -1,11 +1,11 @@
 <div
     {{ $attributes }}
 
+    @if(! $enableCheckbox)
     data-enable-elem="{{ $enableElem }}"
     data-enable-section-value="{{ $jsonEncode ? json_encode($enableValue) : $enableValue }}"
-
-    @if($hideFields)
-    data-hide-fields="true"
+    @else
+    data-enable-section-checkbox="{{ $enableElem }}"
     @endif
 
     @if($disable)
