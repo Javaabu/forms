@@ -54,9 +54,9 @@ class Date extends Input
         );
 
         $this->icon = $icon ?: $this->getFrameworkIcon($this->frameworkConfig('date-icon'));
-        $this->icon = $icon ?: $this->getFrameworkIcon($this->frameworkConfig('date-icon'));
-        $this->iconWrapperClass = $iconWrapperClass ?: $this->frameworkConfig('date-icon-wrapper-class');
+        $this->clearIcon = $clearIcon ?: $this->getFrameworkIcon($this->frameworkConfig('date-clear-icon'));
         $this->clearBtnClass = $clearBtnClass ?: $this->frameworkConfig('date-clear-btn-class');
+        $this->iconWrapperClass = $iconWrapperClass ?: $this->frameworkConfig('date-icon-wrapper-class');
     }
 
     public function datePickerClass(): string
