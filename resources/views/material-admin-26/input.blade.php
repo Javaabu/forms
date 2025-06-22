@@ -4,7 +4,7 @@
         @if($isDateInput() || (! empty($prepend)))
             <div class="input-group-prepend">
                 @if($isDateInput())
-                    <span class="input-group-text">
+                    <span class="input-group-text {{ $iconWrapperClass }}">
                     <i class="{{ $icon }}"></i>
                 </span>
                 @elseif(! empty($prepend))

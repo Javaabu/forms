@@ -30,6 +30,7 @@ return [
         'bootstrap-5' => [
             'icon-prefix' => 'fa-regular',
             'date-icon' => 'fa-calendar',
+            'date-icon-wrapper-class' => 'date-icon-wrapper',
             'datetime-icon' => 'fa-calendar',
             'time-icon' => 'fa-clock',
             'date-clear-icon' => 'fa-close',
@@ -49,6 +50,7 @@ return [
         'material-admin-26' => [
             'icon-prefix' => 'zmdi',
             'date-icon' => 'zmdi-calendar',
+            'date-icon-wrapper-class' => 'date-icon-wrapper',
             'datetime-icon' => 'zmdi-calendar',
             'time-icon' => 'zmdi-clock',
             'date-clear-icon' => 'zmdi-close',

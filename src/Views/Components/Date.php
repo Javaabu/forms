@@ -5,6 +5,7 @@ namespace Javaabu\Forms\Views\Components;
 class Date extends Input
 {
     public string $icon;
+    public string $iconWrapperClass;
     public string $clearIcon;
     public string $clearBtnClass;
 
@@ -22,6 +23,7 @@ class Date extends Input
         string $icon = '',
         string $clearIcon = '',
         string $clearBtnClass = '',
+        string $iconWrapperClass = '',
         bool $showErrors = true,
         bool $showLabel = true,
         string $placeholder = '',
@@ -52,7 +54,8 @@ class Date extends Input
         );
 
         $this->icon = $icon ?: $this->getFrameworkIcon($this->frameworkConfig('date-icon'));
-        $this->clearIcon = $clearIcon ?: $this->getFrameworkIcon($this->frameworkConfig('date-clear-icon'));
+        $this->icon = $icon ?: $this->getFrameworkIcon($this->frameworkConfig('date-icon'));
+        $this->iconWrapperClass = $iconWrapperClass ?: $this->frameworkConfig('date-icon-wrapper-class');
         $this->clearBtnClass = $clearBtnClass ?: $this->frameworkConfig('date-clear-btn-class');
     }
 
