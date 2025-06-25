@@ -56,5 +56,12 @@ class FormsServiceProvider extends ServiceProvider
         $this->app->singleton(FormsDataBinder::class, fn () => new FormsDataBinder());
 
         app('router')->aliasMiddleware('forms', OverrideFormsDefaults::class);
+
+        // Register custom artisan commands
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                \Javaabu\Forms\Commands\PublishViewCommand::class,
+            ]);
+        }
     }
 }
