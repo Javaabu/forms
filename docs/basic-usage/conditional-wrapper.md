@@ -64,3 +64,15 @@ In the example below, sections are conditionally shown or hidden based on the st
 - `data-hide-fields="true"`: Hides all form fields within the section instead of removing the entire section. 
 - `data-disable="true"`: Inverts the logic—disables or hides the section when the checkbox is checked.
 
+
+### Updated Blade syntax for using the conditional wrapper using Checkbox
+```html
+<x-forms::conditional-wrapper enable-elem="#online_interview" :enable-value="1" enable-checkbox hide-fields >
+    This section is displayed only when the checkbox is checked
+</x-forms::conditional-wrapper>
+
+<x-forms::conditional-wrapper enable-elem="#online_interview" :enable-value="1" enable-checkbox hide-fields disable >
+    This section is HIDDEN when the checkbox is checked
+</x-forms::conditional-wrapper>
+
+```

@@ -1,8 +1,8 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card">
-                <div class="card-body text-center">
+            <x-forms::card>
+                <div class="text-center">
                     <i class="{{ $icon }} main-icon mb-4"></i>
                     <p class="lead mb-4">
                         @if($title){{ $title }} <br/> @endif
@@ -18,7 +18,7 @@
                         @endif
                     @endif
                 </div>
-            </div>
+            </x-forms::card>
         </div>
     </div>
 </div>
