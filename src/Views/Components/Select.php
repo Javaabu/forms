@@ -68,6 +68,7 @@ class Select extends Component
         public string $inlineLabelClass = '',
         public string $inlineInputClass = '',
         public string $formGroupClass = '',
+        public bool $showJsErrors = false,
         string $framework = ''
     ) {
         parent::__construct($framework);

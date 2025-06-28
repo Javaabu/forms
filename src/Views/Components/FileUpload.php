@@ -33,6 +33,7 @@ class FileUpload extends File
         bool              $inline = false,
         string $inlineLabelClass = '',
         string $inlineInputClass = '',
+        bool $showJsErrors = false,
         string            $framework = ''
     )
     {
@@ -61,6 +62,7 @@ class FileUpload extends File
             inline: $inline,
             inlineLabelClass: $inlineLabelClass,
             inlineInputClass: $inlineInputClass,
+            showJsErrors: $showJsErrors,
             framework: $framework
         );
     }

@@ -56,6 +56,7 @@ class Select2 extends Select
         string $inlineLabelClass = '',
         string $inlineInputClass = '',
         string $formGroupClass = '',
+        bool $showJsErrors = false,
         string $framework = ''
     ) {
         if ($allowClear && empty($placeholder)) {
@@ -88,6 +89,7 @@ class Select2 extends Select
             inlineLabelClass: $inlineLabelClass,
             inlineInputClass: $inlineInputClass,
             formGroupClass: $formGroupClass,
+            showJsErrors: $showJsErrors,
             framework: $framework
         );
 

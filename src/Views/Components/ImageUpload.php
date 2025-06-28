@@ -39,6 +39,7 @@ class ImageUpload extends Image
         bool              $inline = false,
         string $inlineLabelClass = '',
         string $inlineInputClass = '',
+        bool $showJsErrors = false,
         string            $framework = ''
     )
     {
@@ -73,6 +74,7 @@ class ImageUpload extends Image
             inline: $inline,
             inlineLabelClass: $inlineLabelClass,
             inlineInputClass: $inlineInputClass,
+            showJsErrors: $showJsErrors,
             framework: $framework
         );
     }

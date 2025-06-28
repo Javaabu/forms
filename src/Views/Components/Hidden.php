@@ -19,6 +19,7 @@ class Hidden extends Input
         bool $required = false,
         bool $inline = false,
         bool $floating = false,
+        bool $showJsErrors = false,
         string $framework = ''
     ) {
         parent::__construct(
@@ -32,6 +33,7 @@ class Hidden extends Input
             required:$required,
             inline: $inline,
             floating: $floating,
+            showJsErrors: $showJsErrors,
             framework: $framework
         );
     }

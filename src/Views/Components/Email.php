@@ -23,6 +23,7 @@ class Email extends Input
         bool $floating = false,
         string $inlineLabelClass = '',
         string $inlineInputClass = '',
+        bool $showJsErrors = false,
         string $framework = ''
     ) {
         parent::__construct(
@@ -40,6 +41,7 @@ class Email extends Input
             floating: $floating,
             inlineLabelClass: $inlineLabelClass,
             inlineInputClass: $inlineInputClass,
+            showJsErrors: $showJsErrors,
             framework: $framework
         );
     }
