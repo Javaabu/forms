@@ -1,3 +1,3 @@
 <ul {!! $attributes->merge(['class' => 'invalid-feedback ' . $name . '-error']) !!}>
-    {{ $message }}
+    {{ $slot }}
 </ul>
