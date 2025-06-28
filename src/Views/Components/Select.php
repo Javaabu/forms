@@ -35,6 +35,7 @@ class Select extends Component
     public bool $showLabel;
     public string $syncFieldName;
     public bool $isAjax;
+    public bool $tags;
 
     /**
      * Create a new component instance.
@@ -63,6 +64,7 @@ class Select extends Component
         string $syncFieldName = '',
         string $nameField = '',
         string $idField = '',
+        bool $tags = false,
         public string $inlineLabelClass = '',
         public string $inlineInputClass = '',
         public string $formGroupClass = '',
@@ -112,8 +114,20 @@ class Select extends Component
         $this->floating = $floating;
         $this->required = $required;
         $this->inline = $inline;
+        $this->tags = $tags;
 
         $this->options = $options instanceof BuilderContract ? $this->getOptionsFromQueryBuilder($options) : $options;
+
+        // include old values for tags
+        if ($this->tags && is_array($this->options)) {
+            $old_value = Arr::wrap(old($inputName));
+
+            foreach ($old_value as $value) {
+                if (! array_key_exists($value, $this->options)) {
+                    $this->options[$value] = $value;
+                }
+            }
+        }
     }
 
     public function getOptionsFromQueryBuilder(BuilderContract $query): array
