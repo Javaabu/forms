@@ -20,6 +20,6 @@ class JsErrors extends Component
     ) {
         parent::__construct($framework);
 
-        $this->name = static::convertBracketsToDots(Str::before($name, '[]'));
+        $this->name = Str::slug(static::convertBracketsToDots(Str::before($name, '[]')));
     }
 }
