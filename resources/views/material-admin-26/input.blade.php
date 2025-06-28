@@ -67,6 +67,6 @@
     @endif
 
     @if($showJsErrors)
-        <x-forms::errors :framework="$framework" :name="$name" />
+        <x-forms::js-errors :framework="$framework" :name="$name" />
     @endif
 </x-forms::form-group>
