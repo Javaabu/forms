@@ -4,7 +4,6 @@ namespace Javaabu\Forms\Views\Components;
 
 class Select2 extends Select
 {
-    public bool $tags;
     public bool $allowClear;
     public bool $isFirst;
     public bool $hideSearch;
@@ -57,6 +56,7 @@ class Select2 extends Select
         string $inlineLabelClass = '',
         string $inlineInputClass = '',
         string $formGroupClass = '',
+        bool $showJsErrors = false,
         string $framework = ''
     ) {
         if ($allowClear && empty($placeholder)) {
@@ -85,9 +85,11 @@ class Select2 extends Select
             syncFieldName: $syncFieldName,
             nameField: $nameField,
             idField: $idField,
+            tags: $tags,
             inlineLabelClass: $inlineLabelClass,
             inlineInputClass: $inlineInputClass,
             formGroupClass: $formGroupClass,
+            showJsErrors: $showJsErrors,
             framework: $framework
         );
 
@@ -97,7 +99,6 @@ class Select2 extends Select
         $this->ajaxUrl = $ajaxUrl;
         $this->selectedUrl = $selectedUrl;
         $this->filterField = $filterField;
-        $this->tags = $tags;
         $this->hideSearch = $hideSearch;
         $this->allowClear = $allowClear;
         $this->fallback = $fallback;

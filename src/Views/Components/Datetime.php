@@ -27,6 +27,7 @@ class Datetime extends Date
         bool $floating = false,
         string $inlineLabelClass = '',
         string $inlineInputClass = '',
+        bool $showJsErrors = false,
         string $framework = ''
     ) {
         parent::__construct(
@@ -48,6 +49,7 @@ class Datetime extends Date
             floating: $floating,
             inlineLabelClass: $inlineLabelClass,
             inlineInputClass: $inlineInputClass,
+            showJsErrors: $showJsErrors,
             framework: $framework
         );
 

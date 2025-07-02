@@ -29,6 +29,10 @@
     @if($hasErrorAndShow($name))
         <x-forms::errors :framework="$framework" :name="$name" />
     @endif
+
+    @if($showJsErrors)
+        <x-forms::js-errors :framework="$framework" :name="$name" />
+    @endif
 </x-forms::form-group>
 
 @if($wysiwyg)

@@ -45,6 +45,7 @@ class Image extends File
         bool              $inline = false,
         string $inlineLabelClass = '',
         string $inlineInputClass = '',
+        bool $showJsErrors = false,
         string            $framework = ''
     )
     {
@@ -71,6 +72,7 @@ class Image extends File
             inline: $inline,
             inlineLabelClass: $inlineLabelClass,
             inlineInputClass: $inlineInputClass,
+            showJsErrors: $showJsErrors,
             framework: $framework
         );
 

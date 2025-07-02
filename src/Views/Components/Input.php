@@ -42,6 +42,7 @@ class Input extends Component
         bool   $floating = false,
         public string $inlineLabelClass = '',
         public string $inlineInputClass = '',
+        public bool $showJsErrors = false,
         string $framework = ''
     ) {
         parent::__construct($framework);

@@ -55,6 +55,7 @@ class File extends Input
         bool $inline = false,
         string $inlineLabelClass = '',
         string $inlineInputClass = '',
+        bool $showJsErrors = false,
         string $framework = ''
     ) {
         $this->showHint = $showHint;
@@ -79,6 +80,7 @@ class File extends Input
             floating: false,
             inlineLabelClass: $inlineLabelClass,
             inlineInputClass: $inlineInputClass,
+            showJsErrors: $showJsErrors,
             framework: $framework
         );
 

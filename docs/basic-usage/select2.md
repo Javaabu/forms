@@ -43,7 +43,8 @@ This would add `data-minimum-results-for-search="Infinity"` to the select elemen
 
 # Enabling tags
 
-To enable the user to add their own options to the select, enable the `tags` feature of Select2 by using the `tags` attribute.
+To enable the user to add their own options to the select, enable the `tags` feature of Select2 by using the `tags` attribute. 
+When you use the `tags` option, any old values will automatically get added to the options if there's a validation error.
 
 ```html
 <x-forms::select2 name="categories" :options="$options" multiple tags />
