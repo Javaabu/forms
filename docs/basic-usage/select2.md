@@ -95,3 +95,36 @@ This will allow users to enter their own values if no options are available. Whe
     <x-forms::submit>Submit</x-forms::submit>
 </x-forms::form>
 ```
+# Configuring a Select2 element to search from multiple URLs
+
+You can configure a Select2 element to be able to search from multiple URLs, depending on the selected value of another select element. 
+
+Imagine you want to build a menu builder for your application, and you want to allow users to be able to select a menu item type (e.g. courses, job listings, employers) and then search for the items of that type.
+
+You can do this by using the `ajax-child` and `is-first` attribute on the type select field, and then use `is-ajax`, `ajax-url` and `selected-url` attributes on the child select field.
+
+```html
+@php
+    $menu_item_types = ['jobs' => 'Jobs', 'employers' => 'Employers'];
+    $urls = ['jobs' => 'https://example.com/api/jobs', 'employers' => 'https://example.com/api/employers'];
+@endphp
+
+<x-forms::select2
+    name="post_type"
+    :options="$menu_item_types"
+    ajax-child="#model_id"
+    is-first
+    allow-clear
+    placeholder="Nothing Selected"
+/>
+
+<x-forms::select2
+    name="post_id"
+    is-ajax
+    :ajax-url="json_encode($urls)"
+    placeholder="Select a post to link"
+    allow-clear
+    selected-url=""
+/>
+
+```
