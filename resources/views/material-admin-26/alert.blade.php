@@ -11,7 +11,7 @@
         <div class="d-flex align-items-start">
             <i class="{{ $icon }} flex-shrink-0 me-2" aria-hidden="true"></i>
             <div class="flex-grow-1">
-                @isset($heading)
+                @if(isset($heading) && $heading)
                     <h4 class="alert-heading">{{ $heading }}</h4>
                 @endisset
 
@@ -19,7 +19,7 @@
             </div>
         </div>
     @else
-        @isset($heading)
+        @if(isset($heading) && $heading)
             <h4 class="alert-heading">{{ $heading }}</h4>
         @endisset
 
