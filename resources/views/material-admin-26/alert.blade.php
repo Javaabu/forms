@@ -8,7 +8,7 @@
 
 <div {{ $attributes->merge(['class' => $classes]) }} role="alert">
     @if($icon)
-        <div class="d-flex align-items-start">
+        <div class="d-flex align-items-baseline">
             <i class="{{ $icon }} flex-shrink-0 me-2" aria-hidden="true"></i>
             <div class="flex-grow-1">
                 @if(isset($heading) && $heading)
