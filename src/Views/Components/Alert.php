@@ -20,7 +20,7 @@ class Alert extends Component
     public function __construct(
         string $type = 'primary',
         bool   $dismissible = false,
-        string $icon = null,
+        string $icon = '',
         string $heading = '',
         string $framework = ''
     )
