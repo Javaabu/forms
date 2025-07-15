@@ -8,6 +8,10 @@
     data-enable-section-checkbox="{{ $enableElem }}"
     @endif
 
+    @if($hideFields)
+    data-hide-fields="true"
+    @endif
+
     @if($disable)
     data-disable="true"
     @endif
