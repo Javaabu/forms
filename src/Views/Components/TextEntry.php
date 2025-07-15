@@ -45,7 +45,7 @@ class TextEntry extends Component
         $this->inline = $inline;
         $this->name = $name;
         $this->multiline = $multiline;
-        $this->value = $value ?: ($name ? $this->getBoundValue($model, $name) : '');
+        $this->value = ! is_null($value) ? $value : ($name ? $this->getBoundValue($model, $name) : '');
 
         $this->inlineEntryLabelClass = $inlineEntryLabelClass ?: $this->frameworkConfig('inline-entry-label-class');
         $this->inlineEntryClass = $inlineEntryClass ?: $this->frameworkConfig('inline-entry-class');

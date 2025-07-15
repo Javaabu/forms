@@ -40,6 +40,6 @@ class ConditionalLink extends Component
         $this->showLink = is_null($showLink) && $can ? auth()->guard($guard)->user()->can($can, $arg) : (bool) $showLink;
         $this->name = $name;
         $this->multiline = $multiline;
-        $this->value = $value ?: ($name ? $this->getBoundValue($model, $name) : '');
+        $this->value = ! is_null($value) ? $value : ($name ? $this->getBoundValue($model, $name) : '');
     }
 }
