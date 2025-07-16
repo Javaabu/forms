@@ -16,6 +16,8 @@
             {{ $slot }}
         @elseif($isAdminModel())
             {!! $value->admin_link !!}
+        @elseif($isAdminModelCollection())
+            {!! $value->implode('admin_link', trans('forms::strings.table_array_separator')) !!}
         @else
             @if($isStatusEnum())
                 <x-forms::status :framework="$framework" :color="$value->getColor()" :label="$getEnumLabel()" />

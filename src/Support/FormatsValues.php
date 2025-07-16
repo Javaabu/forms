@@ -4,6 +4,7 @@ namespace Javaabu\Forms\Support;
 
 use BackedEnum;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 trait FormatsValues
 {
@@ -23,7 +24,27 @@ trait FormatsValues
 
     public function isAdminModel(): bool
     {
-        return $this->value instanceof Model && method_exists($this->value, 'getAdminLinkAttribute');
+        return $this->checkIfIsAdminModel($this->value);
+    }
+
+    public function checkIfIsAdminModel(mixed $value): bool
+    {
+        return $value instanceof Model && method_exists($value, 'getAdminLinkAttribute');
+    }
+
+    public function isAdminModelCollection(): bool
+    {
+        if (! $this->value instanceof Collection) {
+            return false;
+        }
+
+        foreach ($this->value as $item) {
+            if (! $this->checkIfIsAdminModel($item)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public function formatValue()
