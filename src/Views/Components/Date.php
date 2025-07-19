@@ -2,6 +2,10 @@
 
 namespace Javaabu\Forms\Views\Components;
 
+use DateTimeInterface;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
+
 class Date extends Input
 {
     public string $icon;
@@ -20,6 +24,7 @@ class Date extends Input
         string $type = 'date',
         $model = null,
         $default = null,
+        public string $dateFormat = '',
         string $icon = '',
         string $clearIcon = '',
         string $clearBtnClass = '',
@@ -69,5 +74,14 @@ class Date extends Input
     public function isDateInput(): bool
     {
         return true;
+    }
+
+    protected function formatDateTime(Model $model, string $key, DateTimeInterface $date)
+    {
+        if (! $this->dateFormat) {
+            return parent::formatDateTime($model, $key, $date);
+        }
+
+        return $date->format($this->dateFormat);
     }
 }
