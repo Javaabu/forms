@@ -1,5 +1,7 @@
 <x-forms::form-group :inline-input-class="$inlineInputClass" :inline-label-class="$inlineLabelClass" :wrap="$showLabel && $type != 'hidden'" :label="$label ?: $label()" :name="$attributes->get('id') ?: $id()" :framework="$framework" :inline="$inline" :required="$required" :floating="$floating">
+    @if(! $floating)
     <div class="position-relative">
+    @endif
         <textarea
             {!! $attributes->merge([
                 'class' => 'form-control' . ($hasError($name) ? ' is-invalid' : '') . ($wysiwyg ? ' wysiwyg' : ''),
@@ -21,7 +23,9 @@
             @endif
         >{!! $value !!}</textarea>
         <i class="form-group__bar"></i>
+    @if(! $floating)
     </div>
+    @endif
 
     @if(! empty($help))
         <x-forms::input-help :framework="$framework">
