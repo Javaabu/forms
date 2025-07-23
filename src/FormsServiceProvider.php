@@ -78,7 +78,7 @@ class FormsServiceProvider extends ServiceProvider
 
             config()->set(
                 'forms.frameworks.' . $framework,
-                array_merge(is_array($user_config) ? $user_config : [], $configs)
+                array_merge($configs, is_array($user_config) ? $user_config : [])
             );
         }
     }
