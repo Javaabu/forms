@@ -49,8 +49,7 @@ class FormsServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // merge package config with user defined config
-        $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'forms');
+        $this->mergeConfig();
 
         // register the data binder
         $this->app->singleton(FormsDataBinder::class, fn () => new FormsDataBinder());
@@ -62,6 +61,25 @@ class FormsServiceProvider extends ServiceProvider
             $this->commands([
                 \Javaabu\Forms\Commands\PublishViewCommand::class,
             ]);
+        }
+    }
+
+    protected function mergeConfig(): void
+    {
+        // merge package config with user defined config
+        $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'forms');
+
+        // Deep merge for nested 'framework' config
+        $default = require __DIR__.'/../config/config.php';
+        $default_frameworks = $default['frameworks'];
+
+        foreach ($default_frameworks as $framework => $configs) {
+            $user_config = config('forms.frameworks.' . $framework);
+
+            config()->set(
+                'forms.frameworks.' . $framework,
+                array_merge(is_array($user_config) ? $user_config : [], $configs)
+            );
         }
     }
 }
