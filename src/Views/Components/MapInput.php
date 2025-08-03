@@ -72,10 +72,21 @@ class MapInput extends Input
         $this->defaultMapCenterLat = is_null($defaultMapCenterLat) ? (float) get_setting('default_lat') : $defaultMapCenterLat;
         $this->defaultMapCenterLng = is_null($defaultMapCenterLng) ? (float) get_setting('default_lng') : $defaultMapCenterLng;
 
-        $this->setLat($this->latName, $model, $this->defaultLat);
-        $this->setLng($this->lngName, $model, $this->defaultLng);
-        $this->setPolygon($this->polygonName, $model, $this->defaultPolygon);
-        $this->setRadius($this->radiusName, $model, $this->defaultRadius);
+        if (is_null($this->lat)) {
+            $this->setLat($this->latName, $model, $this->defaultLat);
+        }
+
+        if (is_null($this->lng)) {
+            $this->setLng($this->lngName, $model, $this->defaultLng);
+        }
+
+        if (is_null($this->polygon)) {
+            $this->setPolygon($this->polygonName, $model, $this->defaultPolygon);
+        }
+
+        if (is_null($this->radius)) {
+            $this->setRadius($this->radiusName, $model, $this->defaultRadius);
+        }
     }
 
     protected function setLat(string $name, $bind = null, $default = null)
