@@ -1,4 +1,4 @@
-<div class="button-group inline-btn-group">
+<div class="d-flex align-items-center gap-2 mb-4">
     {{ $before ?? '' }}
 
     <x-forms::button color="primary" type="submit">
@@ -57,7 +57,7 @@
 
     {{ $after ?? '' }}
 
-    <x-forms::link-button color="light">
+    <x-forms::link-button :url="$cancelUrl" color="light">
         {{ __('Clear') }}
     </x-forms::link-button>
 
