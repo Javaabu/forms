@@ -3,10 +3,11 @@
 namespace Javaabu\Forms\Tests\Feature;
 
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class SearchFormTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_render_a_material_admin_26_search_form()
     {
         $this->setFrameworkMaterialAdmin26();
@@ -19,7 +20,7 @@ class SearchFormTest extends TestCase
             ->seeElement('input[name="search"][value="hello"]');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_a_bootstrap_5_search_form()
     {
         $this->setFrameworkBootstrap5();

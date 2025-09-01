@@ -4,6 +4,7 @@ namespace Javaabu\Forms\Tests\Feature;
 
 use Illuminate\Support\Facades\Config;
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class LabelTest extends TestCase
 {
@@ -14,7 +15,7 @@ class LabelTest extends TestCase
         Config::set('forms.inputs.required_text', 'forms::strings.required_text');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_bootstrap_5_blank_form_group()
     {
         $this->setFrameworkBootstrap5();
@@ -30,7 +31,7 @@ class LabelTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_bootstrap_5_blank_label()
     {
         $this->setFrameworkBootstrap5();
@@ -41,7 +42,7 @@ class LabelTest extends TestCase
             ->seeInElement('label', '');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_bootstrap_5_standard_form_labels()
     {
         $this->setFrameworkBootstrap5();
@@ -56,7 +57,7 @@ class LabelTest extends TestCase
         $this->assertEquals('form-label', $class);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_bootstrap_5_required_string_for_form_labels()
     {
         $this->setFrameworkBootstrap5();
@@ -71,7 +72,7 @@ class LabelTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_float_bootstrap_5_labels()
     {
         $this->setFrameworkBootstrap5();
@@ -86,7 +87,7 @@ class LabelTest extends TestCase
         $this->assertNull($class);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_bootstrap_5_inline_form_labels()
     {
         $this->setFrameworkBootstrap5();
@@ -101,7 +102,7 @@ class LabelTest extends TestCase
         $this->assertEquals('col-sm-3 col-lg-2 col-form-label', $class);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_display_bootstrap_5_form_help_text()
     {
         $this->setFrameworkBootstrap5();
@@ -112,7 +113,7 @@ class LabelTest extends TestCase
             ->seeInElement('div.form-text', 'This is a help text');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_material_admin_26_standard_form_labels()
     {
         $this->setFrameworkMaterialAdmin26();
@@ -127,7 +128,7 @@ class LabelTest extends TestCase
         $this->assertNull($class);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_material_admin_26_required_string_for_form_labels()
     {
         $this->setFrameworkMaterialAdmin26();
@@ -142,7 +143,7 @@ class LabelTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_float_material_admin_26_labels()
     {
         $this->setFrameworkMaterialAdmin26();
@@ -157,7 +158,7 @@ class LabelTest extends TestCase
         $this->assertNull($class);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_material_admin_26_inline_form_labels()
     {
         $this->setFrameworkMaterialAdmin26();
@@ -172,7 +173,7 @@ class LabelTest extends TestCase
         $this->assertEquals('col-sm-3 col-lg-2 col-form-label', $class);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_display_material_admin_26_form_help_text()
     {
         $this->setFrameworkMaterialAdmin26();

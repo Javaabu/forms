@@ -5,6 +5,7 @@ namespace Javaabu\Forms\Tests\Feature;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class TextareaTest extends TestCase
 {
@@ -16,7 +17,7 @@ class TextareaTest extends TestCase
         Config::set('forms.inputs.inline', false);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_bootstrap_5_form_textarea()
     {
         $this->setFrameworkBootstrap5();
@@ -33,7 +34,7 @@ class TextareaTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_material_admin_26_form_textarea()
     {
         $this->setFrameworkMaterialAdmin26();
@@ -51,7 +52,7 @@ class TextareaTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_adds_the_tinymce_script_to_the_scripts_stack_for_wysiwyg_inputs()
     {
         $this->registerTestRoute('wysiwyg');

@@ -3,10 +3,11 @@
 namespace Javaabu\Forms\Tests\Feature;
 
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class BulkTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_generated_bulk_actions_for_material_admin_26()
     {
         $this->setFrameworkMaterialAdmin26();
@@ -23,7 +24,7 @@ class BulkTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generated_bulk_actions_for_bootstrap_5()
     {
         $this->setFrameworkBootstrap5();

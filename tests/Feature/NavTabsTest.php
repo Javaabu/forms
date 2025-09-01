@@ -3,10 +3,11 @@
 namespace Javaabu\Forms\Tests\Feature;
 
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class NavTabsTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_generate_material_admin_26_nav_tabs()
     {
         $this->setFrameworkMaterialAdmin26();
@@ -41,7 +42,7 @@ class NavTabsTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_bootstrap_5_nav_tabs()
     {
         $this->setFrameworkBootstrap5();

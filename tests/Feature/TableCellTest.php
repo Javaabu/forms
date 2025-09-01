@@ -3,10 +3,11 @@
 namespace Javaabu\Forms\Tests\Feature;
 
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class TableCellTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_render_status_table_cell_entries_for_bootstrap_5()
     {
         $this->setFrameworkBootstrap5();
@@ -23,7 +24,7 @@ class TableCellTest extends TestCase
 
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_status_table_cell_entries_for_material_admin_26()
     {
         $this->setFrameworkMaterialAdmin26();
@@ -40,7 +41,7 @@ class TableCellTest extends TestCase
 
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_boolean_table_cells()
     {
         $this->setFrameworkBootstrap5();
@@ -51,7 +52,7 @@ class TableCellTest extends TestCase
             ->seeInElement('td', 'Yes');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_array_text_table_cells()
     {
         $this->setFrameworkBootstrap5();
@@ -62,7 +63,7 @@ class TableCellTest extends TestCase
             ->seeInElement('td', 'orange');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_multiline_text_table_cells()
     {
         $this->setFrameworkBootstrap5();
@@ -73,7 +74,7 @@ class TableCellTest extends TestCase
             ->seeInElement('td', "Javaabu<br>\nCompany");
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_the_table_cell_from_model()
     {
         $this->setFrameworkBootstrap5();
@@ -87,7 +88,7 @@ class TableCellTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_the_table_cell_from_value()
     {
         $this->setFrameworkBootstrap5();
@@ -98,7 +99,7 @@ class TableCellTest extends TestCase
             ->seeInElement('td', 'Javaabu');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_bootstrap_5_table_cell()
     {
         $this->setFrameworkBootstrap5();
@@ -109,7 +110,7 @@ class TableCellTest extends TestCase
             ->seeInElement('td', 'Javaabu');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_material_admin_26_table_cell()
     {
         $this->setFrameworkMaterialAdmin26();

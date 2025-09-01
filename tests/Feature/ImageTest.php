@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Route;
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 use Javaabu\Forms\Tests\TestSupport\Models\Article;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
@@ -40,7 +41,7 @@ class ImageTest extends TestCase
 
 
 
-    /** @test */
+    #[Test]
     public function it_can_render_bootstrap_5_image_inputs()
     {
         $article = $this->getArticleWithMedia();
@@ -80,7 +81,7 @@ class ImageTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_material_admin_26_image_inputs()
     {
         $article = $this->getArticleWithMedia();
@@ -119,7 +120,7 @@ class ImageTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_image_upload_inputs()
     {
         $article = $this->getArticleWithMedia();

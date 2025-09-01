@@ -3,10 +3,11 @@
 namespace Javaabu\Forms\Tests\Feature;
 
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class StatusTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_generate_status_with_slot()
     {
         $this->registerTestRoute('status-slot');
@@ -19,7 +20,7 @@ class StatusTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_material_admin_26_status()
     {
         $this->setFrameworkMaterialAdmin26();
@@ -32,7 +33,7 @@ class StatusTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_bootstrap_5_status()
     {
         $this->setFrameworkBootstrap5();

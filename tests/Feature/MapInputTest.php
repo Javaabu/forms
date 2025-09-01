@@ -7,6 +7,7 @@ use Javaabu\Forms\Tests\TestCase;
 use Javaabu\Forms\Tests\TestSupport\Models\City;
 use MatanYadaev\EloquentSpatial\Objects\Point;
 use MatanYadaev\EloquentSpatial\Objects\Polygon;
+use PHPUnit\Framework\Attributes\Test;
 
 class MapInputTest extends TestCase
 {
@@ -23,7 +24,7 @@ class MapInputTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_adds_the_maps_script_to_the_scripts_stack()
     {
         $city = new City();
@@ -44,7 +45,7 @@ class MapInputTest extends TestCase
             ->seeInElement('script', 'The Google Maps JavaScript API');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_bind_map_inputs_from_attributes()
     {
         $city = new City();
@@ -75,7 +76,7 @@ class MapInputTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_bind_map_inputs_from_accessors()
     {
         $city = new City();
@@ -105,7 +106,7 @@ class MapInputTest extends TestCase
             });
     }
 
-    /** @test */
+//    #[Test]
     /*public function it_can_bind_map_inputs_from_direct_values()
     {
         $lat = 4.175804;

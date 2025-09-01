@@ -3,10 +3,11 @@
 namespace Javaabu\Forms\Tests\Feature;
 
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class ConditionalLinkTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_render_conditional_links_for_bootstrap_5()
     {
         $this->setFrameworkBootstrap5();
@@ -20,7 +21,7 @@ class ConditionalLinkTest extends TestCase
 
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_conditional_links_for_material_admin_26()
     {
         $this->setFrameworkMaterialAdmin26();

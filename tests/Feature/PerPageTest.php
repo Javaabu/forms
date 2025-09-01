@@ -3,10 +3,11 @@
 namespace Javaabu\Forms\Tests\Feature;
 
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class PerPageTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_see_the_default_per_page_options_bs5()
     {
         $this->setFrameworkBootstrap5();
@@ -20,7 +21,7 @@ class PerPageTest extends TestCase
             ->see('500');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_see_the_custom_per_page_options_bs5()
     {
         $this->setFrameworkBootstrap5();
@@ -33,7 +34,7 @@ class PerPageTest extends TestCase
             ->see('55');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_see_the_default_per_page_options_material_admin_26()
     {
         $this->setFrameworkMaterialAdmin26();
@@ -47,7 +48,7 @@ class PerPageTest extends TestCase
             ->see('500');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_see_the_custom_per_page_options_material_admin_26()
     {
         $this->setFrameworkMaterialAdmin26();
