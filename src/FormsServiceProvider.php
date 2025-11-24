@@ -60,6 +60,7 @@ class FormsServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 \Javaabu\Forms\Commands\PublishViewCommand::class,
+                \Javaabu\Forms\Commands\DiffViewsCommand::class,
             ]);
         }
     }
