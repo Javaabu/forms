@@ -9,7 +9,8 @@ use Symfony\Component\Finder\Finder;
 class DiffViewsCommand extends Command
 {
     protected $signature = 'forms:diff-views
-        {--only-redundant : Show only published views that are identical to the package views}';
+        {--only-redundant : Show only published views that are identical to the package views}
+        {--delete-redundant : Delete redundant published views after listing them}';
 
     protected $description = 'Find redundant or modified published form views in your application.';
 
@@ -17,7 +18,7 @@ class DiffViewsCommand extends Command
     {
         $filesystem = new Filesystem();
 
-        $packagePath  = __DIR__ . '/../../resources/views';
+        $packagePath   = __DIR__ . '/../../resources/views';
         $publishedPath = resource_path('views/vendor/forms');
 
         if (! $filesystem->isDirectory($packagePath)) {
@@ -41,11 +42,14 @@ class DiffViewsCommand extends Command
             'modified'  => 0,
         ];
 
+        // keep track of redundant files (published) for optional deletion
+        $redundantFiles = [];
+
         // ONLY check files in your app, ignore anything not published.
         foreach ($publishedFiles as $relativePath => $publishedRealPath) {
 
             if (! isset($packageFiles[$relativePath])) {
-                // orphan — ignore as per your requirements
+                // orphans ignored
                 continue;
             }
 
@@ -58,11 +62,16 @@ class DiffViewsCommand extends Command
                 } else {
                     $rows[] = ['<fg=gray>REDUNDANT</>', $relativePath];
                 }
+
                 $counts['redundant']++;
+
+                // collect for potential deletion
+                $redundantFiles[$relativePath] = $publishedRealPath;
             } else {
                 if (! $onlyRedundant) {
                     $rows[] = ['<fg=yellow>MODIFIED</>', $relativePath];
                 }
+
                 $counts['modified']++;
             }
         }
@@ -74,6 +83,12 @@ class DiffViewsCommand extends Command
             );
 
             $this->printSummary($counts);
+
+            // deletion hook (even if nothing to delete, this is a no-op)
+            if ($this->option('delete-redundant') && ! empty($redundantFiles)) {
+                $this->deleteRedundantViews($redundantFiles, $filesystem);
+            }
+
             return 0;
         }
 
@@ -83,6 +98,11 @@ class DiffViewsCommand extends Command
         );
 
         $this->printSummary($counts);
+
+        // deletion hook after showing table + summary
+        if ($this->option('delete-redundant') && ! empty($redundantFiles)) {
+            $this->deleteRedundantViews($redundantFiles, $filesystem);
+        }
 
         return 0;
     }
@@ -114,5 +134,34 @@ class DiffViewsCommand extends Command
         $this->info('Summary:');
         $this->line('  <fg=gray>Redundant (can be deleted):</> '.$counts['redundant']);
         $this->line('  <fg=yellow>Modified (customized override):</> '.$counts['modified']);
+    }
+
+    /**
+     * Prompt and delete redundant published views.
+     */
+    protected function deleteRedundantViews(array $redundantFiles, Filesystem $filesystem): void
+    {
+        $this->newLine();
+
+        $count = count($redundantFiles);
+
+        if ($count === 0) {
+            $this->info('No redundant views to delete.');
+            return;
+        }
+
+        if (! $this->confirm("Delete " . $count . " redundant view file(s) from your application?", false)) {
+            $this->info('No files were deleted.');
+            return;
+        }
+
+        foreach ($redundantFiles as $relativePath => $realPath) {
+            try {
+                $filesystem->delete($realPath);
+                $this->line("  <fg=red>DELETED</> {$relativePath}");
+            } catch (\Exception $e) {
+                $this->line("  <fg=red>FAILED</> {$relativePath}: {$e->getMessage()}");
+            }
+        }
     }
 }
