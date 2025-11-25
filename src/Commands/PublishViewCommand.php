@@ -5,9 +5,10 @@ namespace Javaabu\Forms\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
-use function Laravel\Prompts\select;
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\info;
+use function Laravel\Prompts\search;
+use function Laravel\Prompts\select;
 
 class PublishViewCommand extends Command
 {
@@ -23,7 +24,7 @@ class PublishViewCommand extends Command
         $targetBase = resource_path('views/vendor/forms');
         $filesystem = new Filesystem();
 
-        if (! $filesystem->isDirectory($sourcePath)) {
+        if (!$filesystem->isDirectory($sourcePath)) {
             $this->error('Source view directory not found.');
             return 1;
         }
@@ -75,7 +76,7 @@ class PublishViewCommand extends Command
             foreach ($tempFiles as $relativePath => $realPath) {
                 $files[$count] = [
                     'relative_path' => $relativePath,
-                    'real_path' => $realPath,
+                    'real_path'     => $realPath,
                 ];
                 $count++;
             }
@@ -101,7 +102,7 @@ class PublishViewCommand extends Command
             $relative = $file['relative_path'];
 
             $targetPath = $targetBase . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $relative);
-            $exists     = $filesystem->exists($targetPath);
+            $exists = $filesystem->exists($targetPath);
 
             $status = $exists
                 ? '<fg=yellow>Published</>'
@@ -115,12 +116,23 @@ class PublishViewCommand extends Command
         $this->newLine();
 
         // returns the KEY we defined (relative path)
-        $selectedRelativePath = select(
-            label: 'Which view would you like to publish?',
-            options: $options,
-        );
+        $choice = windows_os()
+            ? select(
+                label: 'Which view would you like to publish?',
+                options: $options,
+                scroll: 15
+            )
+            : search(
+                label: 'Which view would you like to publish?',
+                options: fn($search) => array_values(array_filter(
+                    $options,
+                    fn($choice) => str_contains(strtolower($choice), strtolower($search))
+                )),
+                placeholder: 'Search...',
+                scroll: 15
+            );
 
-        $selected_file = $this->parseChoice($selectedRelativePath);
+        $selected_file = $this->parseChoice($choice);
 
         // Find the index in the $files array
         $selectedIndex = array_search($selected_file, array_column($files, 'relative_path'), true);
@@ -128,7 +140,7 @@ class PublishViewCommand extends Command
         return $selectedIndex !== false ? $selectedIndex : null;
     }
 
-    public function parseChoice(string $choice)
+    public function parseChoice(string $choice): string
     {
         [$type, $value] = explode(': ', strip_tags($choice));
 
@@ -142,7 +154,7 @@ class PublishViewCommand extends Command
         $overwritten = 0;
 
         foreach ($selected as $fileIndex) {
-            if (! isset($files[$fileIndex])) {
+            if (!isset($files[$fileIndex])) {
                 continue;
             }
 
@@ -155,7 +167,7 @@ class PublishViewCommand extends Command
 
             $exists = $filesystem->exists($targetPath);
 
-            if ($exists && ! $this->option('force')) {
+            if ($exists && !$this->option('force')) {
                 $shouldOverwrite = confirm(
                     label: "File {$relativePath} already exists. Overwrite?",
                     default: false,
@@ -163,7 +175,7 @@ class PublishViewCommand extends Command
                     no: 'No, skip'
                 );
 
-                if (! $shouldOverwrite) {
+                if (!$shouldOverwrite) {
                     $this->line("  <fg=yellow>SKIPPED</> {$relativePath}");
                     $skipped++;
                     continue;
