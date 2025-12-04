@@ -12,6 +12,7 @@ class Select2 extends Select
     public string $ajaxUrl;
     public string $selectedUrl;
     public string $filterField;
+    public string $filterBy;
     public string $fallback;
     public string $parentModal;
     /**
@@ -45,6 +46,7 @@ class Select2 extends Select
         string $nameField = '',
         string $idField = '',
         string $filterField = '',
+        string $filterBy = '',
         string $fallback = '',
         string $parentModal = '',
         public string $iconPrefix = '',
@@ -99,6 +101,7 @@ class Select2 extends Select
         $this->ajaxUrl = $ajaxUrl;
         $this->selectedUrl = $selectedUrl;
         $this->filterField = $filterField;
+        $this->filterBy = $filterBy;
         $this->hideSearch = $hideSearch;
         $this->allowClear = $allowClear;
         $this->fallback = $fallback;

@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Route;
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 use Javaabu\Forms\Tests\TestSupport\Models\Article;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
@@ -38,7 +39,7 @@ class FileTest extends TestCase
         return $article;
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_missing_file_inputs()
     {
         $article = $this->getArticleWithMedia();
@@ -68,7 +69,7 @@ class FileTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_file_input_with_value()
     {
         $this->setFrameworkMaterialAdmin26();
@@ -96,7 +97,7 @@ class FileTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_unbound_file_inputs()
     {
         $this->setFrameworkMaterialAdmin26();
@@ -121,7 +122,7 @@ class FileTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_file_inputs_with_attribute_accessor()
     {
         $article = $this->getArticleWithMedia();
@@ -151,7 +152,7 @@ class FileTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_file_inputs_with_accessor()
     {
         $article = $this->getArticleWithMedia();
@@ -181,7 +182,7 @@ class FileTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_file_inputs_with_conversion_name()
     {
         $article = $this->getArticleWithMedia();
@@ -211,7 +212,7 @@ class FileTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_file_inputs_with_collection_name()
     {
         $article = $this->getArticleWithMedia();
@@ -241,7 +242,7 @@ class FileTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_show_file_hint()
     {
         $article = $this->getArticleWithMedia();
@@ -274,7 +275,7 @@ class FileTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_material_admin_26_file_inputs()
     {
         $article = $this->getArticleWithMedia();
@@ -305,7 +306,7 @@ class FileTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_bootstrap_5_file_inputs()
     {
         $article = $this->getArticleWithMedia();
@@ -339,7 +340,7 @@ class FileTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_file_upload_inputs()
     {
         $article = $this->getArticleWithMedia();

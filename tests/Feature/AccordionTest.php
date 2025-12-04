@@ -3,10 +3,11 @@
 namespace Javaabu\Forms\Tests\Feature;
 
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class AccordionTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_generate_bootstrap_5_accordion_header()
     {
         $this->setFrameworkBootstrap5();
@@ -26,7 +27,7 @@ class AccordionTest extends TestCase
 
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_material_admin_26_accordion_header()
     {
         $this->setFrameworkMaterialAdmin26();
@@ -39,7 +40,7 @@ class AccordionTest extends TestCase
             ->seeInElement('.accordion__title#item-2', 'Accordion Item #2');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_bootstrap_5_accordion_collapse()
     {
         $this->setFrameworkBootstrap5();
@@ -57,7 +58,7 @@ class AccordionTest extends TestCase
 
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_material_admin_26_accordion_collapse()
     {
         $this->setFrameworkMaterialAdmin26();
@@ -75,7 +76,7 @@ class AccordionTest extends TestCase
 
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_bootstrap_5_accordion_item()
     {
         $this->setFrameworkBootstrap5();
@@ -108,7 +109,7 @@ class AccordionTest extends TestCase
 
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_material_admin_26_accordion_item()
     {
         $this->setFrameworkMaterialAdmin26();
@@ -133,7 +134,7 @@ class AccordionTest extends TestCase
 
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_bootstrap_5_accordion_using_named_items()
     {
         $this->setFrameworkBootstrap5();
@@ -169,7 +170,7 @@ class AccordionTest extends TestCase
 
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_material_admin_accordion_using_named_items()
     {
         $this->setFrameworkMaterialAdmin26();
@@ -197,7 +198,7 @@ class AccordionTest extends TestCase
 
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_bootstrap_5_accordion_using_unnamed_items()
     {
         $this->setFrameworkBootstrap5();
@@ -233,7 +234,7 @@ class AccordionTest extends TestCase
 
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_bootstrap_5_accordion_using_slot()
     {
         $this->setFrameworkBootstrap5();

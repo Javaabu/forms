@@ -3,10 +3,11 @@
 namespace Javaabu\Forms\Tests\Feature;
 
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class SpoofMethodTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_spoofs_the_methods_for_put_patch_and_delete_forms()
     {
         $this->registerTestRoute('spoof-method')

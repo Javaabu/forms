@@ -62,6 +62,10 @@
                 data-filter-field="{{ $filterField }}"
             @endif
 
+            @if($filterBy)
+                data-filter-by="{{ $filterBy }}"
+            @endif
+
             @if($tags)
                 data-tags="true"
             @endif

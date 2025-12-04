@@ -4,13 +4,14 @@ namespace Javaabu\Forms\Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 use Javaabu\Forms\Tests\TestSupport\Models\Activity;
 
 class TableTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function it_can_generate_bootstrap_5_table()
     {
         $this->setFrameworkBootstrap5();
@@ -48,7 +49,7 @@ class TableTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_bootstrap_5_striped_table()
     {
         $this->setFrameworkBootstrap5();
@@ -61,7 +62,7 @@ class TableTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_material_26_table()
     {
         $this->setFrameworkMaterialAdmin26();
@@ -114,7 +115,7 @@ class TableTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_displays_empty_table_message_when_no_matching_rows()
     {
         $this->setFrameworkMaterialAdmin26();

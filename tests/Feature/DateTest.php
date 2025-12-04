@@ -4,6 +4,7 @@ namespace Javaabu\Forms\Tests\Feature;
 
 use Illuminate\Support\Facades\Config;
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class DateTest extends TestCase
 {
@@ -15,7 +16,7 @@ class DateTest extends TestCase
         Config::set('forms.inputs.inline', false);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_bootstrap_5_date_inputs()
     {
         $this->setFrameworkBootstrap5();

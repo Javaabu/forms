@@ -4,10 +4,11 @@ namespace Javaabu\Forms\Tests\Feature;
 
 use Illuminate\Http\Request;
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class SelectWithoutKeysTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_makes_the_values_numeric()
     {
         $this->registerTestRoute('select-without-keys', function (Request $request) {
@@ -22,7 +23,7 @@ class SelectWithoutKeysTest extends TestCase
             ->seeInElement('option[value="2"]', 'c');
     }
 
-    /** @test */
+    #[Test]
     public function it_shows_a_validation_error()
     {
         $this->registerTestRoute('select-without-keys', function (Request $request) {

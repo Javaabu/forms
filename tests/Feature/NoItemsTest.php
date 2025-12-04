@@ -3,10 +3,11 @@
 namespace Javaabu\Forms\Tests\Feature;
 
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class NoItemsTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_display_no_items_card_for_material_admin_26()
     {
         $this->withoutExceptionHandling();
@@ -21,7 +22,7 @@ class NoItemsTest extends TestCase
             ->seeElement('.zmdi.zmdi-file');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_display_no_items_card_for_bootstrap_5()
     {
         $this->withoutExceptionHandling();

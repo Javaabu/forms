@@ -4,12 +4,13 @@ namespace Javaabu\Forms\Tests\Feature;
 
 use Illuminate\Support\Facades\Route;
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 use Javaabu\Forms\Tests\TestSupport\Enums\ArticleStatuses;
 use Javaabu\Forms\Tests\TestSupport\Models\Article;
 
 class Select2Test extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_render_a_select_2_basic_element_whose_value_comes_from_an_enum_cast()
     {
         // create an article
@@ -37,7 +38,7 @@ class Select2Test extends TestCase
 
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_a_select2_basic_element()
     {
         $post = [
@@ -64,7 +65,7 @@ class Select2Test extends TestCase
             ->seeElement('option[value="3"]');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_a_select_2_basic_element_with_a_label()
     {
         $post = [
@@ -92,7 +93,7 @@ class Select2Test extends TestCase
             ->seeElement('option[value="3"]');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_a_select2_ajax_element()
     {
         $post = [
@@ -115,7 +116,7 @@ class Select2Test extends TestCase
             ->seeElement('option[value="2"]:selected');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_a_select2_element_with_custom_form_group_class_material_admin_26()
     {
         $this->setFrameworkMaterialAdmin26();
@@ -145,7 +146,7 @@ class Select2Test extends TestCase
             ->seeElement('option[value="3"]');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_a_select2_element_with_custom_form_group_class_bootstrap_5()
     {
         $this->setFrameworkBootstrap5();

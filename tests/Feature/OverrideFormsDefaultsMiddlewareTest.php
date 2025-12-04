@@ -4,10 +4,11 @@ namespace Javaabu\Forms\Tests\Feature;
 
 use Illuminate\Support\Facades\Config;
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class OverrideFormsDefaultsMiddlewareTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_use_the_middleware_to_switch_what_theme_to_use()
     {
         $this->withoutExceptionHandling();

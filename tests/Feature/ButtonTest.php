@@ -3,10 +3,11 @@
 namespace Javaabu\Forms\Tests\Feature;
 
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class ButtonTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_generate_bootstrap_5_button_group()
     {
         $this->setFrameworkBootstrap5();
@@ -19,7 +20,7 @@ class ButtonTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_material_admin_26_group()
     {
         $this->setFrameworkMaterialAdmin26();
@@ -32,7 +33,7 @@ class ButtonTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_bootstrap_5_button()
     {
         $this->setFrameworkBootstrap5();
@@ -43,7 +44,7 @@ class ButtonTest extends TestCase
             ->seeInElement('button[type="button"].btn.btn-danger', 'Button');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_material_admin_26_button()
     {
         $this->setFrameworkMaterialAdmin26();
@@ -54,7 +55,7 @@ class ButtonTest extends TestCase
             ->seeInElement('button[type="button"].btn.btn-danger', 'Button');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_bootstrap_5_submit_button()
     {
         $this->setFrameworkBootstrap5();
@@ -65,7 +66,7 @@ class ButtonTest extends TestCase
             ->seeInElement('button[type="submit"].btn.btn-danger', 'Button');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_material_admin_26_submit_button()
     {
         $this->setFrameworkMaterialAdmin26();
@@ -76,7 +77,7 @@ class ButtonTest extends TestCase
             ->seeInElement('button[type="submit"].btn.btn-danger', 'Button');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_bootstrap_5_link_button()
     {
         $this->setFrameworkBootstrap5();
@@ -87,7 +88,7 @@ class ButtonTest extends TestCase
             ->seeInElement('a[href="/test"].btn.btn-danger', 'Button');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_material_admin_26_link_button()
     {
         $this->setFrameworkMaterialAdmin26();

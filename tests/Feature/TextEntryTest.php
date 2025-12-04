@@ -3,10 +3,11 @@
 namespace Javaabu\Forms\Tests\Feature;
 
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class TextEntryTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_render_status_entries_for_bootstrap_5()
     {
         $this->setFrameworkBootstrap5();
@@ -28,7 +29,7 @@ class TextEntryTest extends TestCase
 
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_status_entries_for_material_admin_26()
     {
         $this->setFrameworkMaterialAdmin26();
@@ -50,7 +51,7 @@ class TextEntryTest extends TestCase
 
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_array_entries()
     {
         $this->setFrameworkBootstrap5();
@@ -66,7 +67,7 @@ class TextEntryTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_boolean_entries()
     {
         $this->setFrameworkBootstrap5();
@@ -82,7 +83,7 @@ class TextEntryTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_multiline_text_entries()
     {
         $this->setFrameworkBootstrap5();
@@ -98,7 +99,7 @@ class TextEntryTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_the_text_entry_from_model()
     {
         $this->setFrameworkBootstrap5();
@@ -117,7 +118,7 @@ class TextEntryTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_the_text_entry_from_value()
     {
         $this->setFrameworkBootstrap5();
@@ -133,7 +134,7 @@ class TextEntryTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_bootstrap_5_text_entry()
     {
         $this->setFrameworkBootstrap5();
@@ -149,7 +150,7 @@ class TextEntryTest extends TestCase
             });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_material_admin_26_text_entry()
     {
         $this->setFrameworkMaterialAdmin26();

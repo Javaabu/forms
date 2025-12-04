@@ -4,10 +4,11 @@ namespace Javaabu\Forms\Tests\Unit;
 
 use Javaabu\Forms\FormsDataBinder;
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class FormsDataBinderTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_bind_targets()
     {
         $binder = new FormsDataBinder();
@@ -17,7 +18,7 @@ class FormsDataBinderTest extends TestCase
         $this->assertEquals($array, $binder->get());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_bind_multiple_targets()
     {
         $binder = new FormsDataBinder();

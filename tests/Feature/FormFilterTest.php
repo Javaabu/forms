@@ -4,6 +4,7 @@ namespace Javaabu\Forms\Tests\Feature;
 
 use Illuminate\Support\Facades\Config;
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class FormFilterTest extends TestCase
 {
@@ -15,7 +16,7 @@ class FormFilterTest extends TestCase
         Config::set('forms.inputs.inline', false);
     }
 
-    //    /** @test */
+    //    #[Test]
     //    public function it_can_generate_bootstrap_5_form_filter()
     //    {
     //        $this->setFrameworkBootstrap5();
@@ -30,7 +31,7 @@ class FormFilterTest extends TestCase
     //            ->seeElement('input[type="hidden"][name="order"]');
     //    }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_material_admin_26_form_filter()
     {
         $this->setFrameworkMaterialAdmin26();

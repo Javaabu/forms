@@ -3,10 +3,11 @@
 namespace Javaabu\Forms\Tests\Feature;
 
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class SelectTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_shows_the_slot_if_the_options_are_empty()
     {
         $this->registerTestRoute('select-slot');
@@ -17,7 +18,7 @@ class SelectTest extends TestCase
             ->seeElement('option[value="c"]');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_a_placeholder()
     {
         $this->registerTestRoute('select-placeholder');
@@ -28,7 +29,7 @@ class SelectTest extends TestCase
             ->seeElement('option[value="b"]');
     }
 
-    /** @test */
+    #[Test]
     public function it_adds_a_sync_field_for_multi_selects()
     {
         $this->registerTestRoute('select-multiple');
