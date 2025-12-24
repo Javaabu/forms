@@ -4,5 +4,7 @@
 @endphp
 
 @model($article)
-<x-forms::table.cell name="status"/>
+<table>
+    <x-forms::table.cell name="status" />
+</table>
 @endmodel

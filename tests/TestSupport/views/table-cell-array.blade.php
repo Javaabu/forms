@@ -5,5 +5,7 @@
 @endphp
 
 @model($org)
-<x-forms::table.cell label="Name" name="name" />
+<table>
+    <x-forms::table.cell label="Colors" :value="['orange']" />
+</table>
 @endmodel

@@ -5,5 +5,7 @@
 @endphp
 
 @model($org)
-<x-forms::table.cell label="Name" name="name" multiline />
+<table>
+    <x-forms::table.cell label="Name" name="name" multiline />
+</table>
 @endmodel
