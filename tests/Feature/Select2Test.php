@@ -3,12 +3,15 @@
 namespace Javaabu\Forms\Tests\Feature;
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Javaabu\Forms\Tests\TestCase;
 use Javaabu\Forms\Tests\TestSupport\Enums\ArticleStatuses;
 use Javaabu\Forms\Tests\TestSupport\Models\Article;
 
 class Select2Test extends TestCase
 {
+    use RefreshDatabase;
+
     /** @test */
     public function it_can_render_a_select_2_basic_element_whose_value_comes_from_an_enum_cast()
     {
@@ -173,5 +176,31 @@ class Select2Test extends TestCase
             ->seeElement('option[value="1"]')
             ->seeElement('option[value="2"]:selected')
             ->seeElement('option[value="3"]');
+    }
+
+    /** @test */
+    public function it_only_loads_selected_options_for_ajax_selects()
+    {
+        $article1 = Article::create(['title' => 'Article 1']);
+        $article2 = Article::create(['title' => 'Article 2']);
+        $article3 = Article::create(['title' => 'Article 3']);
+
+        $model = [
+            'article' => $article2->id,
+        ];
+
+        $options = Article::query();
+
+        Route::get('select2-ajax-query', function () use ($model, $options) {
+            return view('select2-ajax-query')
+                ->with('model', $model)
+                ->with('options', $options);
+        })->middleware('web');
+
+        $this->visit('/select2-ajax-query')
+            ->seeElement('select.select2-ajax[name="article"]')
+            ->dontSeeElement('option[value="' . $article1->id . '"]')
+            ->seeElement('option[value="' . $article2->id . '"]:selected')
+            ->dontSeeElement('option[value="' . $article3->id . '"]');
     }
 }

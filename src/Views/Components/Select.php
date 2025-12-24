@@ -153,13 +153,18 @@ class Select extends Component
                            $model->hasGetMutator($id_field);
         }
 
-        if ($is_accessor) {
+        if ($is_accessor || $this->isJavaabuTranslatableModel($model)) {
             return $query->get()
                          ->pluck($name_field, $id_field)
                          ->all();
         }
 
         return $query->pluck($name_field, $id_field)->all();
+    }
+
+    public function isJavaabuTranslatableModel($model): bool
+    {
+        return method_exists($model, 'isTranslatable');
     }
 
     public function isSelected($key): bool

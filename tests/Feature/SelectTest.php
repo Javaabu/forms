@@ -2,10 +2,15 @@
 
 namespace Javaabu\Forms\Tests\Feature;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Route;
 use Javaabu\Forms\Tests\TestCase;
+use Javaabu\Forms\Tests\TestSupport\Models\Category;
 
 class SelectTest extends TestCase
 {
+    use RefreshDatabase;
+
     /** @test */
     public function it_shows_the_slot_if_the_options_are_empty()
     {
@@ -39,5 +44,49 @@ class SelectTest extends TestCase
             ->seeElement('option[value="a"]')
             ->seeElement('option[value="b"]')
             ->seeElement('option[value="c"]');
+    }
+
+    /** @test */
+    public function it_can_exclude_the_sync_field_for_multi_selects()
+    {
+        $this->registerTestRoute('select-sync-field');
+
+        $this->visit('/select-sync-field')
+            ->dontSeeElement('input[type="hidden"][name="sync_exclude_sync"]')
+            ->dontSeeElement('input[type="hidden"][name="sync_disabled_sync"]')
+            ->seeElement('input[type="hidden"][name="custom_sync_name"][value="1"]');
+    }
+
+    /** @test */
+    public function it_includes_old_values_for_tags()
+    {
+        $this->registerTestRoute('select-tags');
+
+        $this->session(['_old_input' => ['tags' => ['a', 'b', 'c']]]);
+
+        $this->visit('/select-tags')
+            ->seeElement('option[value="a"]:selected')
+            ->seeElement('option[value="b"]:selected')
+            ->seeElement('option[value="c"]:selected');
+    }
+
+    /** @test */
+    public function it_can_load_options_from_a_translatable_model()
+    {
+        $category1 = Category::create(['name' => 'Category 1']);
+        $category2 = Category::create(['name' => 'Category 2']);
+
+        $options = Category::query();
+
+        Route::get('select-translatable', function () use ($options) {
+            return view('select-translatable')
+                ->with('options', $options);
+        })->middleware('web');
+
+        $this->visit('/select-translatable')
+            ->seeElement('option[value="' . $category1->id . '"]')
+            ->see('Category 1')
+            ->seeElement('option[value="' . $category2->id . '"]')
+            ->see('Category 2');
     }
 }
