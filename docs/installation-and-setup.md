@@ -37,6 +37,16 @@ return [
 
     'framework' => 'bootstrap-5',
 
+    /*
+    |--------------------------------------------------------------------------
+    | Eloquent Date Casting
+    |--------------------------------------------------------------------------
+    |
+    | If enabled, date inputs will automatically try to cast values from
+    | Eloquent models to the appropriate format for the date picker.
+    |
+    */
+
     'use_eloquent_date_casting' => false,
 
     /*
@@ -44,13 +54,14 @@ return [
     | Framework Settings
     |--------------------------------------------------------------------------
     |
-    | Framework specific configs
+    | Here you can customize the classes and icons used for each framework.
+    | You can add your own framework here and reference it in the 'framework' key.
     |
     */
 
     'frameworks' => [
         'bootstrap-5' => [
-            'icon-prefix' => 'fa',
+            'icon-prefix' => 'fa', // FontAwesome prefix
             'date-icon' => 'fa-calendar',
             'datetime-icon' => 'fa-calendar',
             'time-icon' => 'fa-clock',
@@ -60,6 +71,7 @@ return [
             'file-upload-icon' => 'fa-arrow-to-top',
             'file-clear-icon' => 'fa-close',
             'image-icon' => 'fa-image',
+            // Classes for inline form layouts
             'inline-label-class' => 'col-sm-3 col-lg-2 col-form-label',
             'inline-input-class' => 'col-sm-9 col-lg-10',
             'inline-entry-label-class' => 'col-sm-6 col-md-4',
@@ -67,7 +79,7 @@ return [
         ],
 
         'material-admin-26' => [
-            'icon-prefix' => 'zmdi',
+            'icon-prefix' => 'zmdi', // Material Design Iconic Font
             'date-icon' => 'zmdi-calendar',
             'datetime-icon' => 'zmdi-calendar',
             'time-icon' => 'zmdi-clock',
@@ -89,7 +101,8 @@ return [
     | Scripts Stack
     |--------------------------------------------------------------------------
     |
-    | The name of the stack to push scripts
+    | The name of the blade stack where scripts (like Google Maps or Select2 init)
+    | should be pushed to. Make sure `@stack('scripts')` exists in your layout.
     |
     */
 
@@ -100,7 +113,7 @@ return [
     | Google Maps API Key
     |--------------------------------------------------------------------------
     |
-    | API key to use for map inputs
+    | Required if you use the <x-forms::map /> component.
     |
     */
 

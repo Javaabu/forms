@@ -3,128 +3,212 @@ title: Select2
 sidebar_position: 3
 ---
 
-This package supports [Select2](https://select2.org/) JS library and Javaabu's `select2-custom` data attributes.
-To use Select2, you must use the `select2` component instead of the standard `select` component. This will generate a select element with the `select2-basic` class applied.
+
+The `select2` component wraps the popular [Select2](https://select2.org/) library. It provides a robust dropdown with search, remote data loading, and dependent/cascading functionality.
+
+## Basic Usage
+
+The simplest usage involves passing an array or collection of options.
 
 ```html
 <x-forms::select2 name="country" :options="$countries" />
 ```
 
-# Using Ajax
+### Multiple Select & Tags
 
-To load the select options from Ajax as you type, you must use the `is-ajax` attribute and provide an API url using the `ajax-url` attribute.
-When using Ajax, make sure the initial options include the current selected value.
+To allow multiple selections or custom user-inputted tags:
+
+```html
+<!-- Multiple Selection -->
+<x-forms::select2 name="roles" :options="$roles" multiple />
+
+<!-- Tags (Allowing custom values) -->
+<x-forms::select2 name="skills" :options="$skills" multiple tags />
+```
+:::info
+When `tags` is enabled, any value present in `old()` input that isn't in `$options` will automatically be added to the list.
+:::
+
+## Ajax / Remote Data
+
+For large datasets, load options via Ajax as the user types.
+
+1.  Set `is-ajax` to true.
+2.  Provide the endpoint via `ajax-url`.
+
+```html
+<x-forms::select2 
+    name="user_id" 
+    :ajax-url="route('api.users.index')" 
+    is-ajax 
+/>
+```
+
+:::warning Be Careful
+When using Ajax, the initial page load won't have the "selected" option in the DOM. You **must** manually pre-load the currently selected option into the `:options` attribute so the user sees the existing value.
+:::
+
+```html
+<x-forms::select2 
+    name="user_id" 
+    :options="User::where('id', $post->user_id)" 
+    :ajax-url="route('api.users.index')" 
+    is-ajax 
+/>
+```
+
+## Cascading Selects (Parent / Child)
+
+You can link multiple selects so that choosing a value in one (Parent) filters the options in the next (Child).
+
+### Step-by-Step
+
+1.  **Parent**: Add `is-first` and specify `child="#child-id"`.
+2.  **Child**: Add `filter-field="parent_param_name"` (this is the query param sent to the API).
+3.  **Child**: Add `child="#next-child"` if the chain continues.
 
 ```html
 <x-forms::form :model="$address">
-    <x-forms::select2 name="country" :label="__('Country')" :options="Country::whereId(isset($address) ? $address->country_id : old('country'))" :ajax-url="route('api.countries.index')" is-ajax />
+    <!-- 1. Country (Parent) -->
+    <x-forms::select2 
+        name="country" 
+        :options="Country::all()" 
+        child="#state" 
+        is-first 
+    />
+
+    <!-- 2. State (Child of Country) -->
+    <!-- `filter-field="country"` means ?country=SELECTED_ID will be sent to states API -->
+    <x-forms::select2 
+        name="state" 
+        id="state"
+        :options="State::whereCountryId($address->country_id)" 
+        :ajax-url="route('api.states.index')" 
+        child="#city" 
+        filter-field="country" 
+    />
+
+    <!-- 3. City (Child of State) -->
+    <x-forms::select2 
+        name="city" 
+        id="city"
+        :options="City::whereStateId($address->state_id)" 
+        :ajax-url="route('api.cities.index')" 
+        filter-field="state" 
+    />
 </x-forms::form>
 ```
 
-You can use the `id-field` and `name-field` attributes to customize the fields that are used to retrieve the options in the API request.
+### Fallbacks (Manual Input)
 
-# Disabling allow clear 
+Sometimes a child select might return 0 results (e.g., you select a State, but your API has no Cities for it). You can allow the user to manually type a value instead.
 
-By default, all select2 elements will have the `data-allow-clear` option enabled which will show a button to clear the current selection.
-You can disabled this feature by setting `allow-clear` attribute to `false`.
+To do this:
+1.  Create a text input with the `fallback` class.
+2.  Link it to the select using `fallback="#id-of-text-input"`.
+3.  When the select receives 0 options from the API, it will be disabled and hidden, and the text input will appear.
 
 ```html
-<x-forms::select2 name="country" :options="$countries" :allow-clear="false" />
+<x-forms::form :model="$address">
+    <!-- 1. Parent -->
+    <x-forms::select2 
+        name="country" 
+        :options="Country::query()" 
+        child="#state" 
+        is-first 
+    />
+
+    <!-- 2. Child -->
+    <x-forms::select2 
+        name="state" 
+        :options="State::whereCountryId($address->country_id)" 
+        :ajax-url="route('api.states.index')" 
+        child="#city" 
+        filter-field="country" 
+    />
+
+    <!-- 3. Child with Fallback -->
+    <!-- If this returns 0 options, the #city-name input below is shown instead -->
+    <x-forms::select2 
+        name="city" 
+        :options="City::whereStateId($address->state_id)" 
+        :ajax-url="route('api.cities.index')" 
+        fallback="#city-name" 
+        filter-field="state" 
+        relation 
+    />
+    
+    <!-- The Fallback Input -->
+    <!-- Note: 'name' matches the select above so the server sees 'city' regardless of which input is used -->
+    <x-forms::text 
+        name="city" 
+        id="city-name" 
+        class="fallback" 
+        :placeholder="__('Write your own city name...')" 
+    />
+
+    <x-forms::submit>Submit</x-forms::submit>
+</x-forms::form>
 ```
 
-# Hiding the search box
+## Advanced Configuration
 
-If you want to hide the search box for a select2 element, use the `hide-search` attribute.
-This would add `data-minimum-results-for-search="Infinity"` to the select element, which will disable the search feature.
+### Inside Modals
 
-```html
-<x-forms::select2 name="country" :options="$countries" hide-search />
-```
-
-# Enabling tags
-
-To enable the user to add their own options to the select, enable the `tags` feature of Select2 by using the `tags` attribute. 
-When you use the `tags` option, any old values will automatically get added to the options if there's a validation error.
+Select2 has z-index issues inside Bootstrap modals. Use `parent-modal` to fix this.
 
 ```html
-<x-forms::select2 name="categories" :options="$options" multiple tags />
-```
-
-# Using Select2 inside a modal
-
-When using a select2 element inside a modal, remember to use the `parent-modal` attribute to specify the selector of the modal to properly render the select2 element.
-
-```html
-<x-modal id="your-modal">
-    <x-forms::select2 name="country" :options="$countries" parent-modal="#your-modal" />
+<x-modal id="create-user-modal">
+    <x-forms::select2 name="role" parent-modal="#create-user-modal" ... />
 </x-modal>
 ```
 
-# Setting up a Select2 cascade
+### Clean UI Options
 
-If you want to setup a cascade of selects that depends on each other, use the `is-first` attribute on the first select in the cascade and use the `child` attribute to specify its child select.
-Then on the child select, use the `filter-field` attribute to specify the field name that's used to filter the results in the API request.
-
-Notice that here `ajax-url` is used without setting `is-ajax` to true. The reason for this is we want the options of the children elements to be loaded only when a parent element's selected value changes, but we don't want the children elements' options to change as we search inside their select2 search boxes. 
+*   **Hide Search**: `hide-search` (useful for small lists).
+*   **Disable Clear**: `allow-clear="false"` (default is true).
 
 ```html
-<x-forms::form :model="$address">
-    <x-forms::select2 name="country" :options="Country::query()" child="#state" is-first />
-
-    <x-forms::select2 name="state" :options="State::whereCountryId($address->country?->id ?? null)" :ajax-url="route('api.states.index')" child="#city" filter-field="country" />
-
-    <x-forms::select2 name="city" :options="City::whereStateId($address->state?->id ?? null)" :ajax-url="route('api.cities.index')" filter-field="state" relation />
-
-    <x-forms::submit>Submit</x-forms::submit>
-</x-forms::form>
+<x-forms::select2 name="status" :options="$statuses" hide-search :allow-clear="false" />
 ```
 
-You can use the `fallback` attribute to specify a `text` input that would be displayed instead of a select when a child select receives 0 options from the API. 
-This will allow users to enter their own values if no options are available. When a fallback is active, its associated select will be disabled. Remember to add the `fallback` class to the fallback element. 
+### Dynamic Search URLs (Advanced)
+
+If the **API Endpoint itself** needs to change based on another valid (e.g. Type -> Entity), use `ajax-child` on the parent and dictionary logic on the child.
 
 ```html
-<x-forms::form :model="$address">
-    <x-forms::select2 name="country" :options="Country::query()" child="#state" is-first />
-
-    <x-forms::select2 name="state" :options="State::whereCountryId($address->country?->id ?? null)" :ajax-url="route('api.states.index')" child="#city" filter-field="country" />
-
-    <x-forms::select2 name="city" :options="City::whereStateId($address->state?->id ?? null)" :ajax-url="route('api.cities.index')" fallback="#city-name" filter-field="state" relation />
-    
-    <x-forms::text name="city" id="city-name" class="fallback" :placeholder="__('Write your own city name...')" />
-
-    <x-forms::submit>Submit</x-forms::submit>
-</x-forms::form>
-```
-# Configuring a Select2 element to search from multiple URLs
-
-You can configure a Select2 element to be able to search from multiple URLs, depending on the selected value of another select element. 
-
-Imagine you want to build a menu builder for your application, and you want to allow users to be able to select a menu item type (e.g. courses, job listings, employers) and then search for the items of that type.
-
-You can do this by using the `ajax-child` and `is-first` attribute on the type select field, and then use `is-ajax`, `ajax-url` and `selected-url` attributes on the child select field.
-
-```html
-@php
-    $menu_item_types = ['jobs' => 'Jobs', 'employers' => 'Employers'];
-    $urls = ['jobs' => 'https://example.com/api/jobs', 'employers' => 'https://example.com/api/employers'];
-@endphp
-
-<x-forms::select2
-    name="post_type"
-    :options="$menu_item_types"
-    ajax-child="#model_id"
-    is-first
-    allow-clear
-    placeholder="Nothing Selected"
+<!-- Parent changes the 'type' -->
+<x-forms::select2 
+    name="type" 
+    ajax-child="#entity_select" 
+    :options="['users' => 'Users', 'posts' => 'Posts']" 
 />
 
-<x-forms::select2
-    name="post_id"
-    is-ajax
-    :ajax-url="json_encode($urls)"
-    placeholder="Select a post to link"
-    allow-clear
-    selected-url=""
+<!-- Child receives different URL based on parent value -->
+<x-forms::select2 
+    id="entity_select"
+    name="entity_id" 
+    is-ajax 
+    :ajax-url="json_encode([
+        'users' => route('api.users.index'),
+        'posts' => route('api.posts.index')
+    ])" 
 />
-
 ```
+
+## Available Options
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `options` | `iterable` | `[]` | List of options (key => label). |
+| `is-ajax` | `bool` | `false` | Enable remote searching via Ajax. |
+| `ajax-url` | `string` | `null` | URL or JSON dictionary of URLs for remote data. |
+| `multiple` | `bool` | `false` | Allow multiple selections. |
+| `tags` | `bool` | `false` | Allow creating new options (tagging). |
+| `child` | `string` | `null` | CSS selector of the dependent child select element. |
+| `is-first` | `bool` | `false` | Mark as the start of a cascade chain (triggers change events on load). |
+| `filter-field` | `string` | `null` | The query parameter name sent to the child's API endpoint. |
+| `fallback` | `string` | `null` | CSS selector of a text input to show if no options are returned. |
+| `parent-modal` | `string` | `null` | CSS selector of the wrapping modal (fixes z-index). |
+| `hide-search` | `bool` | `false` | Hides the search input box. |
+| `allow-clear` | `bool` | `true` | Show 'x' button to clear selection. |

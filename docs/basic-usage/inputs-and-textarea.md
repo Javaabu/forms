@@ -3,63 +3,98 @@ title: Input and textarea elements
 sidebar_position: 1
 ---
 
-The minimum requirement for an `input` or `textarea` is the `name` attribute.
+
+The `input` and `textarea` components are the workhorses of form creation. They handle labels, values, validation errors, and layout automatically.
+
+## Basic Usage
+
+The minimum requirement is the `name` attribute.
 
 ```html
 <x-forms::input name="company_name" />
 ```
 
-Optionally you can add a `label` attribute, which can be computed as well.
+## Labels & Layout
+
+You have full control over how labels are rendered.
+
+### Standard Labels
+
+You can provide a label directly or let the value be computed from the name (e.g., `company_name` -> "Company Name").
 
 ```html
-<x-forms::input name="company_name" label="Company name" />
-<x-forms::input name="company_name" :label="__('Company name')" />
+<!-- Explicit Label -->
+<x-forms::input name="company_name" label="Company Name" />
+
+<!-- Translated Label -->
+<x-forms::input name="company_name" :label="__('Company Name')" />
 ```
 
-You can also choose to use a `placeholder` instead of a label, and of course you can change the `type` of the element.
+### Floating & Inline Labels
+
+Support for different form layouts is built-in.
+
+:::info
+The column widths for `inline` labels are defined in your `forms.php` config file under `frameworks`.
+:::
 
 ```html
-<x-forms::input type="email" name="current_email" placeholder="Current email address" />
+<!-- Floating Label (Material Style) -->
+<x-forms::input name="company_name" label="Company Name" floating />
+
+<!-- Inline Label (Horizontal Form) -->
+<x-forms::input name="company_name" label="Company Name" inline />
 ```
 
-By default, every element shows validation errors, but you can hide them if you want.
+### No Label
+
+If you need the input without the wrapping `form-group` or label:
 
 ```html
-<x-forms::textarea name="description" :show-errors="false" />
+<x-forms::input name="search" placeholder="Search..." :show-label="false" />
 ```
 
-By default, the input will be rendered inside a form group.
-You can display the `label` either inline or as a floating label using the `inline` and `floating` attributes. 
+## Validation & Required Fields
+
+Validation errors are shown automatically directly below the input if they exist in the `$errors` bag.
+
+### Required Indicator
+
+Adding the `required` attribute automatically appends an asterisk `*` to the label to indicate the field is mandatory.
 
 ```html
-<x-forms::input name="company_name" label="Company name" inline />
-<x-forms::input name="company_name" label="Company name" floating />
+<x-forms::input name="email" required />
 ```
 
-If you want to hide the label and not wrap the input inside a form group, you can hide the label:
+You can customize the text (removing the `*` or changing it to `(Required)`) by publishing the translations.
+
+### Hiding Errors
+
+To suppress validation messages for a specific field:
 
 ```html
-<x-forms::textarea name="description" :show-label="false" />
+<x-forms::input name="username" :show-errors="false" />
 ```
 
-You can mark an input as required using the `required` attribute.
-This will also add an `*` to the input label.
+## Available Options
 
-```html
-<x-forms::input name="company_name" label="Company name" required />
-```
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `name` | `string` | **Required** | The name of the input field. Used for id, name, and error bag lookup. |
+| `label` | `string` | `null` | The text for the label. If omitted, a title-cased version of `name` is tried. |
+| `value` | `mixed` | `null` | The default value. If a model is bound to the form, that takes precedence. |
+| `type` | `string` | `'text'` | The HTML input type (e.g., `text`, `email`, `password`). |
+| `placeholder` | `string` | `null` | The placeholder text. |
+| `required` | `bool` | `false` | If true, adds `required` attribute and appends `*` to label. |
+| `inline` | `bool` | `false` | Renders the label and input side-by-side (horizontal layout). |
+| `floating` | `bool` | `false` | Renders a floating label. |
+| `show-label` | `bool` | `true` | Set to `false` to render only the input tag. |
+| `show-errors` | `bool` | `true` | Set to `false` to hide validation errors. |
+| `help` | `string` | `null` | Helper text to display below the input. |
 
-To change the `*` to some other text such as `(Required)`, you can publish the package translations and edit the `strings.php` language file.
+## Available Components
 
-```php
-...
-'required_text' => '(Required)',
-...
-```
-
-The `input` element will default to `text` input.
-For convenience, components for other HTML5 input types are also included which are just extensions of the `input` component.
-The included input types are given below.
+For convenience, we provide aliases for common input types. These are all wrappers around the core `input` component.
 
 ```html
 <x-forms::text name="text" />
@@ -69,6 +104,16 @@ The included input types are given below.
 <x-forms::email name="email" />
 <x-forms::url name="url" />
 <x-forms::tel name="tel" />
-<x-forms::latitude name="latitude" /> <!-- Number field with range -90 to 90 -->
-<x-forms::longitude name="longitude" /> <!-- Number field with range -180 to 180 -->
+```
+
+### Special Inputs
+
+Some inputs have extra logic:
+
+*   **`<x-forms::latitude />`**: A number input restricted to `-90` to `90`.
+*   **`<x-forms::longitude />`**: A number input restricted to `-180` to `180`.
+
+```html
+<x-forms::latitude name="lat" step="0.000001" />
+<x-forms::longitude name="lng" step="0.000001" />
 ```

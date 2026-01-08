@@ -3,40 +3,55 @@ title: Model Binding and Default Values
 sidebar_position: 2
 ---
 
-You can use the `default` attribute to specify the default value of the element.
+
+Model binding allows you to populate your forms with data from Eloquent models or other objects automatically.
+
+## Precedence Order
+
+It is important to understand how the component decides which value to show. The priority list is as follows (highest to lowest):
+
+1.  **Old Input**: If a validation error occurred or the form was just submitted, `old('name')` takes top priority.
+2.  **Explicit Value**: A hardcoded `:value="..."` attribute.
+3.  **Model Binding**: Value derived from a bound Model or Object (e.g., `$user->name`).
+4.  **Default Attribute**: The `default="..."` attribute passed to the component.
+5.  **Null**: Empty string.
+
+## Binding Methods
+
+### 1. Simple Default Values
+
+For simple use cases where you just want a fallback value:
 
 ```html
 <x-forms::textarea name="motivation" default="I want to use this package because..." />
 ```
 
-# Binding a target
+### 2. Binding (Single Component)
 
-Instead of setting a default value, you can also pass in a target, like an Eloquent model. Now the component will get the value from the target by the `name`.
+You can bind a specific model to a single component.
 
 ```html
-<x-forms::textarea name="description" :model="$video" />
+<x-forms::input name="title" :model="$post" />
 ```
+*This renders value of `$post->title`.*
 
-In the example above, where `$video` is an Eloquent model, the default value will be `$video->description`.
+### 3. Binding (Whole Form)
 
-# Binding a form
-
-Instead of binding individual elements, you can bind a whole form.
+Commonly, you'll want to bind an entire form to a model.
 
 ```html
 <x-forms::form :model="$video">
+    <!-- Populates with $video->title -->
     <x-forms::input name="title" />
+    
+    <!-- Populates with $video->description -->
     <x-forms::textarea name="description" />
 </x-forms::form>
 ```
 
-In the example above, the elements inside the form will be bound to the `$video` Eloquent model.
-The default value of the `title` text input will be `$video->title` and the default value of the `description` textarea will be `$video->description`.
+### 4. The `@model` Directive
 
-# Binding a target to multiple elements
-
-You can also bind a target by using the `@model` directive. This will bind the target to all elements until the `@endmodel` directive.
-
+If you aren't using the `x-forms::form` component but still want binding scope, use the blade directive.
 
 ```html
 <div>
@@ -47,33 +62,40 @@ You can also bind a target by using the `@model` directive. This will bind the t
 </div>
 ```
 
-You can even mix targets!
+## Advanced & Nested Binding
+
+You can nest bindings or override them for specific fields.
+
+### Nested Models
+
+Useful when a form handles relations (e.g., User and UserProfile).
 
 ```html
-<x-forms::form>
-    @model($user)
-        <x-forms::input name="full_name" label="Full name" />
+<x-forms::form :model="$user">
+    <x-forms::input name="full_name" />
 
-        @model($userProfile)
-            <x-forms::textarea name="biography" label="Biography" />
-        @endmodel
-
-        <x-forms::input name="email" label="Email address" />
+    <!-- Switch context to profile -->
+    @model($user->profile)
+        <x-forms::textarea name="biography" />
     @endmodel
+
+    <!-- Back to $user context -->
+    <x-forms::input name="email" />
 </x-forms::form>
 ```
 
-# Override or remove a binding
+### Breaking the Binding
 
-You can override the `@model` directive by passing a target directly to the element using the `:model` attribute.
-If you want to remove a binding for a specific element, pass in false.
+You can opt-out of binding for a specific field by setting `:model="false"` or providing a specific bound object.
 
 ```html
-<x-forms::form>
-    @model($video)
-        <x-forms::input name="title" label="Title" />
-        <x-forms::input :model="$videoDetails" name="subtitle" label="Subtitle" />
-        <x-forms::textarea :model="false" name="description" label="Description" />
-    @endmodel
+<x-forms::form :model="$video">
+    <x-forms::input name="title" />
+    
+    <!-- Use a different model -->
+    <x-forms::input name="category_name" :model="$category" />
+    
+    <!-- No binding at all -->
+    <x-forms::textarea name="comments" :model="false" />
 </x-forms::form>
 ```
