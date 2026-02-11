@@ -37,6 +37,9 @@
                 @if($label && ! $attributes->get('id'))
                     id="{{ $id() }}"
                 @endif
+                @if($upload && $maxSize)
+                    data-max-file-size="{{ $maxSize }}"
+                @endif
             />
         </span>
 
