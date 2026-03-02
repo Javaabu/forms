@@ -13,10 +13,10 @@ This section covers all input field components including text, email, password, 
 
 Base input component for various HTML5 input types.
 
-<screenshot />
+![inputs/text-input](../../docs-assets/screenshots/images/inputs/text-input.jpg)
 
 ```blade
-<x-input name="email" type="email" label="Email Address" required />
+<x-input name="name" required show-placeholder />
 ```
 
 <details>
