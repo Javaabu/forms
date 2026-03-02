@@ -56,6 +56,10 @@
             "type": "vcs",
             "url": "https://github.com/Javaabu/laravel-eloquent-spatial.git",
             "canonical": false
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/javaabu/laravel-settings.git"
         }
     ],
     "minimum-stability": "dev",
