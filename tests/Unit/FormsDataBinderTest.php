@@ -7,8 +7,7 @@ use Javaabu\Forms\Tests\TestCase;
 
 class FormsDataBinderTest extends TestCase
 {
-    /** @test */
-    public function it_can_bind_targets()
+    public function test_it_can_bind_targets()
     {
         $binder = new FormsDataBinder();
         $this->assertNull($binder->get());
@@ -17,8 +16,7 @@ class FormsDataBinderTest extends TestCase
         $this->assertEquals($array, $binder->get());
     }
 
-    /** @test */
-    public function it_can_bind_multiple_targets()
+    public function test_it_can_bind_multiple_targets()
     {
         $binder = new FormsDataBinder();
 

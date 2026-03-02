@@ -6,8 +6,7 @@ use Javaabu\Forms\Tests\TestCase;
 
 class SelectBooleanValueTest extends TestCase
 {
-    /** @test */
-    public function it_shows_the_select_field()
+    public function test_it_shows_the_select_field()
     {
         $this->registerTestRoute('select-boolean-value');
 
@@ -16,8 +15,7 @@ class SelectBooleanValueTest extends TestCase
             ->seeElement('option[value="0"]');
     }
 
-    /** @test */
-    public function it_shows_the_false_value_selected()
+    public function test_it_shows_the_false_value_selected()
     {
         $this->registerTestRoute('select-boolean-value');
 

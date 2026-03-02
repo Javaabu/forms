@@ -30,8 +30,7 @@ class FormFilterTest extends TestCase
     //            ->seeElement('input[type="hidden"][name="order"]');
     //    }
 
-    /** @test */
-    public function it_can_generate_material_admin_26_form_filter()
+    public function test_it_can_generate_material_admin_26_form_filter()
     {
         $this->setFrameworkMaterialAdmin26();
         $this->registerTestRoute('form-filter');

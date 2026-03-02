@@ -14,8 +14,7 @@ class LabelTest extends TestCase
         Config::set('forms.inputs.required_text', 'forms::strings.required_text');
     }
 
-    /** @test */
-    public function it_can_generate_bootstrap_5_blank_form_group()
+    public function test_it_can_generate_bootstrap_5_blank_form_group()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('form-group-blank');
@@ -30,8 +29,7 @@ class LabelTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_generate_bootstrap_5_blank_label()
+    public function test_it_can_generate_bootstrap_5_blank_label()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('label-blank');
@@ -41,8 +39,7 @@ class LabelTest extends TestCase
             ->seeInElement('label', '');
     }
 
-    /** @test */
-    public function it_can_generate_bootstrap_5_standard_form_labels()
+    public function test_it_can_generate_bootstrap_5_standard_form_labels()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('form-label');
@@ -56,8 +53,7 @@ class LabelTest extends TestCase
         $this->assertEquals('form-label', $class);
     }
 
-    /** @test */
-    public function it_can_generate_bootstrap_5_required_string_for_form_labels()
+    public function test_it_can_generate_bootstrap_5_required_string_for_form_labels()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('form-label-required');
@@ -71,8 +67,7 @@ class LabelTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_float_bootstrap_5_labels()
+    public function test_it_can_float_bootstrap_5_labels()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('form-label-floating');
@@ -86,8 +81,7 @@ class LabelTest extends TestCase
         $this->assertNull($class);
     }
 
-    /** @test */
-    public function it_can_generate_bootstrap_5_inline_form_labels()
+    public function test_it_can_generate_bootstrap_5_inline_form_labels()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('form-label-inline');
@@ -101,8 +95,7 @@ class LabelTest extends TestCase
         $this->assertEquals('col-sm-3 col-lg-2 col-form-label', $class);
     }
 
-    /** @test */
-    public function it_can_display_bootstrap_5_form_help_text()
+    public function test_it_can_display_bootstrap_5_form_help_text()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('form-help');
@@ -112,8 +105,7 @@ class LabelTest extends TestCase
             ->seeInElement('div.form-text', 'This is a help text');
     }
 
-    /** @test */
-    public function it_can_generate_material_admin_26_standard_form_labels()
+    public function test_it_can_generate_material_admin_26_standard_form_labels()
     {
         $this->setFrameworkMaterialAdmin26();
         $this->registerTestRoute('form-label');
@@ -127,8 +119,7 @@ class LabelTest extends TestCase
         $this->assertNull($class);
     }
 
-    /** @test */
-    public function it_can_generate_material_admin_26_required_string_for_form_labels()
+    public function test_it_can_generate_material_admin_26_required_string_for_form_labels()
     {
         $this->setFrameworkMaterialAdmin26();
         $this->registerTestRoute('form-label-required');
@@ -142,8 +133,7 @@ class LabelTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_float_material_admin_26_labels()
+    public function test_it_can_float_material_admin_26_labels()
     {
         $this->setFrameworkMaterialAdmin26();
         $this->registerTestRoute('form-label-floating');
@@ -157,8 +147,7 @@ class LabelTest extends TestCase
         $this->assertNull($class);
     }
 
-    /** @test */
-    public function it_can_generate_material_admin_26_inline_form_labels()
+    public function test_it_can_generate_material_admin_26_inline_form_labels()
     {
         $this->setFrameworkMaterialAdmin26();
         $this->registerTestRoute('form-label-inline');
@@ -172,8 +161,7 @@ class LabelTest extends TestCase
         $this->assertEquals('col-sm-3 col-lg-2 col-form-label', $class);
     }
 
-    /** @test */
-    public function it_can_display_material_admin_26_form_help_text()
+    public function test_it_can_display_material_admin_26_form_help_text()
     {
         $this->setFrameworkMaterialAdmin26();
         $this->registerTestRoute('form-help');

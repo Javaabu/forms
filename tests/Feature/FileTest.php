@@ -38,8 +38,7 @@ class FileTest extends TestCase
         return $article;
     }
 
-    /** @test */
-    public function it_can_render_missing_file_inputs()
+    public function test_it_can_render_missing_file_inputs()
     {
         $article = $this->getArticleWithMedia();
 
@@ -68,8 +67,7 @@ class FileTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_render_file_input_with_value()
+    public function test_it_can_render_file_input_with_value()
     {
         $this->setFrameworkMaterialAdmin26();
 
@@ -96,8 +94,7 @@ class FileTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_render_unbound_file_inputs()
+    public function test_it_can_render_unbound_file_inputs()
     {
         $this->setFrameworkMaterialAdmin26();
 
@@ -121,8 +118,7 @@ class FileTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_render_file_inputs_with_attribute_accessor()
+    public function test_it_can_render_file_inputs_with_attribute_accessor()
     {
         $article = $this->getArticleWithMedia();
 
@@ -151,8 +147,7 @@ class FileTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_render_file_inputs_with_accessor()
+    public function test_it_can_render_file_inputs_with_accessor()
     {
         $article = $this->getArticleWithMedia();
 
@@ -181,8 +176,7 @@ class FileTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_render_file_inputs_with_conversion_name()
+    public function test_it_can_render_file_inputs_with_conversion_name()
     {
         $article = $this->getArticleWithMedia();
 
@@ -211,8 +205,7 @@ class FileTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_render_file_inputs_with_collection_name()
+    public function test_it_can_render_file_inputs_with_collection_name()
     {
         $article = $this->getArticleWithMedia();
 
@@ -241,8 +234,7 @@ class FileTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_show_file_hint()
+    public function test_it_can_show_file_hint()
     {
         $article = $this->getArticleWithMedia();
 
@@ -274,8 +266,7 @@ class FileTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_render_material_admin_26_file_inputs()
+    public function test_it_can_render_material_admin_26_file_inputs()
     {
         $article = $this->getArticleWithMedia();
 
@@ -305,8 +296,7 @@ class FileTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_render_bootstrap_5_file_inputs()
+    public function test_it_can_render_bootstrap_5_file_inputs()
     {
         $article = $this->getArticleWithMedia();
 
@@ -339,8 +329,7 @@ class FileTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_render_file_upload_inputs()
+    public function test_it_can_render_file_upload_inputs()
     {
         $article = $this->getArticleWithMedia();
 

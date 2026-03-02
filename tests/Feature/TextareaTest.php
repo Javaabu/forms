@@ -16,8 +16,7 @@ class TextareaTest extends TestCase
         Config::set('forms.inputs.inline', false);
     }
 
-    /** @test */
-    public function it_can_generate_bootstrap_5_form_textarea()
+    public function test_it_can_generate_bootstrap_5_form_textarea()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('form-textarea');
@@ -33,8 +32,7 @@ class TextareaTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_generate_material_admin_26_form_textarea()
+    public function test_it_can_generate_material_admin_26_form_textarea()
     {
         $this->setFrameworkMaterialAdmin26();
         $this->registerTestRoute('form-textarea');
@@ -51,8 +49,7 @@ class TextareaTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_adds_the_tinymce_script_to_the_scripts_stack_for_wysiwyg_inputs()
+    public function test_it_adds_the_tinymce_script_to_the_scripts_stack_for_wysiwyg_inputs()
     {
         $this->registerTestRoute('wysiwyg');
 

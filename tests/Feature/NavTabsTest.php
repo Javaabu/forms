@@ -6,8 +6,7 @@ use Javaabu\Forms\Tests\TestCase;
 
 class NavTabsTest extends TestCase
 {
-    /** @test */
-    public function it_can_generate_material_admin_26_nav_tabs()
+    public function test_it_can_generate_material_admin_26_nav_tabs()
     {
         $this->setFrameworkMaterialAdmin26();
         $this->registerTestRoute('nav-tabs');
@@ -41,8 +40,7 @@ class NavTabsTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_generate_bootstrap_5_nav_tabs()
+    public function test_it_can_generate_bootstrap_5_nav_tabs()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('nav-tabs');

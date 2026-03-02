@@ -6,8 +6,7 @@ use Javaabu\Forms\Tests\TestCase;
 
 class StatusTest extends TestCase
 {
-    /** @test */
-    public function it_can_generate_status_with_slot()
+    public function test_it_can_generate_status_with_slot()
     {
         $this->registerTestRoute('status-slot');
 
@@ -19,8 +18,7 @@ class StatusTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_generate_material_admin_26_status()
+    public function test_it_can_generate_material_admin_26_status()
     {
         $this->setFrameworkMaterialAdmin26();
         $this->registerTestRoute('status');
@@ -32,8 +30,7 @@ class StatusTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_generate_bootstrap_5_status()
+    public function test_it_can_generate_bootstrap_5_status()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('status');

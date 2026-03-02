@@ -6,8 +6,7 @@ use Javaabu\Forms\Tests\TestCase;
 
 class AccordionTest extends TestCase
 {
-    /** @test */
-    public function it_can_generate_bootstrap_5_accordion_header()
+    public function test_it_can_generate_bootstrap_5_accordion_header()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('accordion-header');
@@ -26,8 +25,7 @@ class AccordionTest extends TestCase
 
     }
 
-    /** @test */
-    public function it_can_generate_material_admin_26_accordion_header()
+    public function test_it_can_generate_material_admin_26_accordion_header()
     {
         $this->setFrameworkMaterialAdmin26();
         $this->registerTestRoute('accordion-header');
@@ -39,8 +37,7 @@ class AccordionTest extends TestCase
             ->seeInElement('.accordion__title#item-2', 'Accordion Item #2');
     }
 
-    /** @test */
-    public function it_can_generate_bootstrap_5_accordion_collapse()
+    public function test_it_can_generate_bootstrap_5_accordion_collapse()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('accordion-collapse');
@@ -57,8 +54,7 @@ class AccordionTest extends TestCase
 
     }
 
-    /** @test */
-    public function it_can_generate_material_admin_26_accordion_collapse()
+    public function test_it_can_generate_material_admin_26_accordion_collapse()
     {
         $this->setFrameworkMaterialAdmin26();
         $this->registerTestRoute('accordion-collapse');
@@ -75,8 +71,7 @@ class AccordionTest extends TestCase
 
     }
 
-    /** @test */
-    public function it_can_generate_bootstrap_5_accordion_item()
+    public function test_it_can_generate_bootstrap_5_accordion_item()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('accordion-item');
@@ -108,8 +103,7 @@ class AccordionTest extends TestCase
 
     }
 
-    /** @test */
-    public function it_can_generate_material_admin_26_accordion_item()
+    public function test_it_can_generate_material_admin_26_accordion_item()
     {
         $this->setFrameworkMaterialAdmin26();
         $this->registerTestRoute('accordion-item');
@@ -133,8 +127,7 @@ class AccordionTest extends TestCase
 
     }
 
-    /** @test */
-    public function it_can_generate_bootstrap_5_accordion_using_named_items()
+    public function test_it_can_generate_bootstrap_5_accordion_using_named_items()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('accordion');
@@ -169,8 +162,7 @@ class AccordionTest extends TestCase
 
     }
 
-    /** @test */
-    public function it_can_generate_material_admin_accordion_using_named_items()
+    public function test_it_can_generate_material_admin_accordion_using_named_items()
     {
         $this->setFrameworkMaterialAdmin26();
         $this->registerTestRoute('accordion');
@@ -197,8 +189,7 @@ class AccordionTest extends TestCase
 
     }
 
-    /** @test */
-    public function it_can_generate_bootstrap_5_accordion_using_unnamed_items()
+    public function test_it_can_generate_bootstrap_5_accordion_using_unnamed_items()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('accordion-unnamed');
@@ -233,8 +224,7 @@ class AccordionTest extends TestCase
 
     }
 
-    /** @test */
-    public function it_can_generate_bootstrap_5_accordion_using_slot()
+    public function test_it_can_generate_bootstrap_5_accordion_using_slot()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('accordion-slot');

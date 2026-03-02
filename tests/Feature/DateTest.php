@@ -15,8 +15,7 @@ class DateTest extends TestCase
         Config::set('forms.inputs.inline', false);
     }
 
-    /** @test */
-    public function it_can_generate_bootstrap_5_date_inputs()
+    public function test_it_can_generate_bootstrap_5_date_inputs()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('date-inputs');

@@ -6,8 +6,7 @@ use Javaabu\Forms\Tests\TestCase;
 
 class SearchFormTest extends TestCase
 {
-    /** @test */
-    public function it_can_render_a_material_admin_26_search_form()
+    public function test_it_can_render_a_material_admin_26_search_form()
     {
         $this->setFrameworkMaterialAdmin26();
 
@@ -19,8 +18,7 @@ class SearchFormTest extends TestCase
             ->seeElement('input[name="search"][value="hello"]');
     }
 
-    /** @test */
-    public function it_can_render_a_bootstrap_5_search_form()
+    public function test_it_can_render_a_bootstrap_5_search_form()
     {
         $this->setFrameworkBootstrap5();
 

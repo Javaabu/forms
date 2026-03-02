@@ -46,8 +46,7 @@ class SelectRelationTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
-    public function it_handles_belongs_to_many_relationships()
+    public function test_it_handles_belongs_to_many_relationships()
     {
 
 
@@ -78,8 +77,7 @@ class SelectRelationTest extends TestCase
         $this->assertCount(1, DB::getQueryLog());
     }
 
-    /** @test */
-    public function it_handles_morph_many_relationships()
+    public function test_it_handles_morph_many_relationships()
     {
 
 
@@ -108,8 +106,7 @@ class SelectRelationTest extends TestCase
         $this->assertCount(1, DB::getQueryLog());
     }
 
-    /** @test */
-    public function it_handles_morph_to_many_relationships()
+    public function test_it_handles_morph_to_many_relationships()
     {
 
 

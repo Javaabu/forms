@@ -6,8 +6,7 @@ use Javaabu\Forms\Tests\TestCase;
 
 class ConditionalLinkTest extends TestCase
 {
-    /** @test */
-    public function it_can_render_conditional_links_for_bootstrap_5()
+    public function test_it_can_render_conditional_links_for_bootstrap_5()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('conditional-link');
@@ -20,8 +19,7 @@ class ConditionalLinkTest extends TestCase
 
     }
 
-    /** @test */
-    public function it_can_render_conditional_links_for_material_admin_26()
+    public function test_it_can_render_conditional_links_for_material_admin_26()
     {
         $this->setFrameworkMaterialAdmin26();
         $this->registerTestRoute('conditional-link');

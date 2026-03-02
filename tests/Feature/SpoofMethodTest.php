@@ -6,8 +6,7 @@ use Javaabu\Forms\Tests\TestCase;
 
 class SpoofMethodTest extends TestCase
 {
-    /** @test */
-    public function it_spoofs_the_methods_for_put_patch_and_delete_forms()
+    public function test_it_spoofs_the_methods_for_put_patch_and_delete_forms()
     {
         $this->registerTestRoute('spoof-method')
             ->visit('/spoof-method')

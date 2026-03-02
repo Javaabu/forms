@@ -6,8 +6,7 @@ use Javaabu\Forms\Tests\TestCase;
 
 class FormTest extends TestCase
 {
-    /** @test */
-    public function it_can_render_a_form_with_an_action()
+    public function test_it_can_render_a_form_with_an_action()
     {
         $this->registerTestRoute('form');
 

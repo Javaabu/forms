@@ -40,8 +40,7 @@ class ImageTest extends TestCase
 
 
 
-    /** @test */
-    public function it_can_render_bootstrap_5_image_inputs()
+    public function test_it_can_render_bootstrap_5_image_inputs()
     {
         $article = $this->getArticleWithMedia();
 
@@ -80,8 +79,7 @@ class ImageTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_render_material_admin_26_image_inputs()
+    public function test_it_can_render_material_admin_26_image_inputs()
     {
         $article = $this->getArticleWithMedia();
 
@@ -119,8 +117,7 @@ class ImageTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_render_image_upload_inputs()
+    public function test_it_can_render_image_upload_inputs()
     {
         $article = $this->getArticleWithMedia();
 

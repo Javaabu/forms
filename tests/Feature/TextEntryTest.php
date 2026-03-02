@@ -6,8 +6,7 @@ use Javaabu\Forms\Tests\TestCase;
 
 class TextEntryTest extends TestCase
 {
-    /** @test */
-    public function it_can_render_status_entries_for_bootstrap_5()
+    public function test_it_can_render_status_entries_for_bootstrap_5()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('text-entry-status');
@@ -28,8 +27,7 @@ class TextEntryTest extends TestCase
 
     }
 
-    /** @test */
-    public function it_can_render_status_entries_for_material_admin_26()
+    public function test_it_can_render_status_entries_for_material_admin_26()
     {
         $this->setFrameworkMaterialAdmin26();
         $this->registerTestRoute('text-entry-status');
@@ -50,8 +48,7 @@ class TextEntryTest extends TestCase
 
     }
 
-    /** @test */
-    public function it_can_render_array_entries()
+    public function test_it_can_render_array_entries()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('text-entry-array');
@@ -66,8 +63,7 @@ class TextEntryTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_render_boolean_entries()
+    public function test_it_can_render_boolean_entries()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('boolean-entry');
@@ -82,8 +78,7 @@ class TextEntryTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_render_multiline_text_entries()
+    public function test_it_can_render_multiline_text_entries()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('text-entry-multiline');
@@ -98,8 +93,7 @@ class TextEntryTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_set_the_text_entry_from_model()
+    public function test_it_can_set_the_text_entry_from_model()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('text-entry-model');
@@ -117,8 +111,7 @@ class TextEntryTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_set_the_text_entry_from_value()
+    public function test_it_can_set_the_text_entry_from_value()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('text-entry-value');
@@ -133,8 +126,7 @@ class TextEntryTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_generate_bootstrap_5_text_entry()
+    public function test_it_can_generate_bootstrap_5_text_entry()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('text-entry');
@@ -149,8 +141,7 @@ class TextEntryTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_generate_material_admin_26_text_entry()
+    public function test_it_can_generate_material_admin_26_text_entry()
     {
         $this->setFrameworkMaterialAdmin26();
         $this->registerTestRoute('text-entry');

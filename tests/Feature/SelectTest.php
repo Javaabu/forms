@@ -11,8 +11,7 @@ class SelectTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
-    public function it_shows_the_slot_if_the_options_are_empty()
+    public function test_it_shows_the_slot_if_the_options_are_empty()
     {
         $this->registerTestRoute('select-slot');
 
@@ -22,8 +21,7 @@ class SelectTest extends TestCase
             ->seeElement('option[value="c"]');
     }
 
-    /** @test */
-    public function it_can_render_a_placeholder()
+    public function test_it_can_render_a_placeholder()
     {
         $this->registerTestRoute('select-placeholder');
 
@@ -33,8 +31,7 @@ class SelectTest extends TestCase
             ->seeElement('option[value="b"]');
     }
 
-    /** @test */
-    public function it_adds_a_sync_field_for_multi_selects()
+    public function test_it_adds_a_sync_field_for_multi_selects()
     {
         $this->registerTestRoute('select-multiple');
 
@@ -46,8 +43,7 @@ class SelectTest extends TestCase
             ->seeElement('option[value="c"]');
     }
 
-    /** @test */
-    public function it_can_exclude_the_sync_field_for_multi_selects()
+    public function test_it_can_exclude_the_sync_field_for_multi_selects()
     {
         $this->registerTestRoute('select-sync-field');
 
@@ -57,8 +53,7 @@ class SelectTest extends TestCase
             ->seeElement('input[type="hidden"][name="custom_sync_name"][value="1"]');
     }
 
-    /** @test */
-    public function it_includes_old_values_for_tags()
+    public function test_it_includes_old_values_for_tags()
     {
         $this->registerTestRoute('select-tags');
 
@@ -70,8 +65,7 @@ class SelectTest extends TestCase
             ->seeElement('option[value="c"]:selected');
     }
 
-    /** @test */
-    public function it_can_load_options_from_a_translatable_model()
+    public function test_it_can_load_options_from_a_translatable_model()
     {
         $category1 = Category::create(['name' => 'Category 1']);
         $category2 = Category::create(['name' => 'Category 2']);

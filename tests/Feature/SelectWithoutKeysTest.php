@@ -7,8 +7,7 @@ use Javaabu\Forms\Tests\TestCase;
 
 class SelectWithoutKeysTest extends TestCase
 {
-    /** @test */
-    public function it_makes_the_values_numeric()
+    public function test_it_makes_the_values_numeric()
     {
         $this->registerTestRoute('select-without-keys', function (Request $request) {
             $request->validate([
@@ -22,8 +21,7 @@ class SelectWithoutKeysTest extends TestCase
             ->seeInElement('option[value="2"]', 'c');
     }
 
-    /** @test */
-    public function it_shows_a_validation_error()
+    public function test_it_shows_a_validation_error()
     {
         $this->registerTestRoute('select-without-keys', function (Request $request) {
             $request->validate([

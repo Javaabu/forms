@@ -7,8 +7,7 @@ use Javaabu\Forms\Tests\TestCase;
 
 class MultipleSelectTest extends TestCase
 {
-    /** @test */
-    public function it_posts_all_selected_options()
+    public function test_it_posts_all_selected_options()
     {
         $this->registerTestRoute('multiple-select-keys', function (Request $request) {
             $request->validate([

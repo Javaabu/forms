@@ -23,8 +23,7 @@ class MapInputTest extends TestCase
         }
     }
 
-    /** @test */
-    public function it_adds_the_maps_script_to_the_scripts_stack()
+    public function test_it_adds_the_maps_script_to_the_scripts_stack()
     {
         $city = new City();
         $lat = 4.175804;
@@ -44,8 +43,7 @@ class MapInputTest extends TestCase
             ->seeInElement('script', 'The Google Maps JavaScript API');
     }
 
-    /** @test */
-    public function it_can_bind_map_inputs_from_attributes()
+    public function test_it_can_bind_map_inputs_from_attributes()
     {
         $city = new City();
         $lat = 4.175804;
@@ -75,8 +73,7 @@ class MapInputTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_bind_map_inputs_from_accessors()
+    public function test_it_can_bind_map_inputs_from_accessors()
     {
         $city = new City();
         $lat = 4.175804;

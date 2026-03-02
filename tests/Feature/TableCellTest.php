@@ -6,8 +6,7 @@ use Javaabu\Forms\Tests\TestCase;
 
 class TableCellTest extends TestCase
 {
-    /** @test */
-    public function it_can_render_status_table_cell_entries_for_bootstrap_5()
+    public function test_it_can_render_status_table_cell_entries_for_bootstrap_5()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('table-cell-status');
@@ -23,8 +22,7 @@ class TableCellTest extends TestCase
 
     }
 
-    /** @test */
-    public function it_can_render_status_table_cell_entries_for_material_admin_26()
+    public function test_it_can_render_status_table_cell_entries_for_material_admin_26()
     {
         $this->setFrameworkMaterialAdmin26();
         $this->registerTestRoute('table-cell-status');
@@ -40,8 +38,7 @@ class TableCellTest extends TestCase
 
     }
 
-    /** @test */
-    public function it_can_render_boolean_table_cells()
+    public function test_it_can_render_boolean_table_cells()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('table-cell-boolean');
@@ -51,8 +48,7 @@ class TableCellTest extends TestCase
             ->seeInElement('td', 'Yes');
     }
 
-    /** @test */
-    public function it_can_render_array_text_table_cells()
+    public function test_it_can_render_array_text_table_cells()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('table-cell-array');
@@ -62,8 +58,7 @@ class TableCellTest extends TestCase
             ->seeInElement('td', 'orange');
     }
 
-    /** @test */
-    public function it_can_render_multiline_text_table_cells()
+    public function test_it_can_render_multiline_text_table_cells()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('table-cell-multiline');
@@ -73,8 +68,7 @@ class TableCellTest extends TestCase
             ->seeInElement('td', "Javaabu<br>\nCompany");
     }
 
-    /** @test */
-    public function it_can_set_the_table_cell_from_model()
+    public function test_it_can_set_the_table_cell_from_model()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('table-cell-model');
@@ -87,8 +81,7 @@ class TableCellTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_set_the_table_cell_from_value()
+    public function test_it_can_set_the_table_cell_from_value()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('table-cell-value');
@@ -98,8 +91,7 @@ class TableCellTest extends TestCase
             ->seeInElement('td', 'Javaabu');
     }
 
-    /** @test */
-    public function it_can_generate_bootstrap_5_table_cell()
+    public function test_it_can_generate_bootstrap_5_table_cell()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('table-cell');
@@ -109,8 +101,7 @@ class TableCellTest extends TestCase
             ->seeInElement('td', 'Javaabu');
     }
 
-    /** @test */
-    public function it_can_generate_material_admin_26_table_cell()
+    public function test_it_can_generate_material_admin_26_table_cell()
     {
         $this->setFrameworkMaterialAdmin26();
         $this->registerTestRoute('table-cell');

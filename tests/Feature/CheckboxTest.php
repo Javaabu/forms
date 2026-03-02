@@ -16,8 +16,7 @@ class CheckboxTest extends TestCase
         Config::set('forms.inputs.inline', false);
     }
 
-    /** @test */
-    public function it_can_generate_bootstrap_5_form_checkbox()
+    public function test_it_can_generate_bootstrap_5_form_checkbox()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('form-checkbox');
@@ -32,8 +31,7 @@ class CheckboxTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_generate_bootstrap_5_form_checkbox_that_is_required()
+    public function test_it_can_generate_bootstrap_5_form_checkbox_that_is_required()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('form-checkbox-required');
@@ -52,8 +50,7 @@ class CheckboxTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_generate_bootstrap_5_form_checkbox_that_is_selected()
+    public function test_it_can_generate_bootstrap_5_form_checkbox_that_is_selected()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('form-checkbox-selected');
@@ -68,8 +65,7 @@ class CheckboxTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_generate_bootstrap_5_form_checkbox_that_is_selected_from_model_binding()
+    public function test_it_can_generate_bootstrap_5_form_checkbox_that_is_selected_from_model_binding()
     {
         $this->setFrameworkBootstrap5();
 
@@ -92,8 +88,7 @@ class CheckboxTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_generate_material_admin_26_form_checkbox()
+    public function test_it_can_generate_material_admin_26_form_checkbox()
     {
         $this->setFrameworkMaterialAdmin26();
         $this->registerTestRoute('form-checkbox');
@@ -108,8 +103,7 @@ class CheckboxTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_generate_material_admin_26_form_checkbox_that_is_required()
+    public function test_it_can_generate_material_admin_26_form_checkbox_that_is_required()
     {
         $this->setFrameworkMaterialAdmin26();
         $this->registerTestRoute('form-checkbox-required');
@@ -129,8 +123,7 @@ class CheckboxTest extends TestCase
     }
 
 
-    /** @test */
-    public function it_can_generate_material_admin_26_inline_form_checkbox_that_is_required()
+    public function test_it_can_generate_material_admin_26_inline_form_checkbox_that_is_required()
     {
         $this->setFrameworkMaterialAdmin26();
         $this->registerTestRoute('form-checkbox-inline-required');
@@ -150,8 +143,7 @@ class CheckboxTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_generate_material_admin_26_form_checkbox_with_helper_text()
+    public function test_it_can_generate_material_admin_26_form_checkbox_with_helper_text()
     {
         $this->setFrameworkMaterialAdmin26();
         $this->registerTestRoute('form-checkbox-helper-text');

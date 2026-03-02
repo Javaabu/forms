@@ -15,8 +15,7 @@ class InputTest extends TestCase
         Config::set('forms.inputs.inline', false);
     }
 
-    /** @test */
-    public function it_can_generate_bootstrap_5_form_inputs_with_input_group()
+    public function test_it_can_generate_bootstrap_5_form_inputs_with_input_group()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('form-input-prepend-append');
@@ -37,8 +36,7 @@ class InputTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_generate_bootstrap_5_form_inputs_without_form_group()
+    public function test_it_can_generate_bootstrap_5_form_inputs_without_form_group()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('form-input-without-label');
@@ -49,8 +47,7 @@ class InputTest extends TestCase
             ->dontSeeElement('div.mb-4');
     }
 
-    /** @test */
-    public function it_can_generate_material_admin_26_form_inputs_without_form_group()
+    public function test_it_can_generate_material_admin_26_form_inputs_without_form_group()
     {
         $this->setFrameworkMaterialAdmin26();
         $this->registerTestRoute('form-input-without-label');
@@ -61,8 +58,7 @@ class InputTest extends TestCase
             ->dontSeeElement('div.form-group');
     }
 
-    /** @test */
-    public function it_can_generate_bootstrap_5_form_inputs()
+    public function test_it_can_generate_bootstrap_5_form_inputs()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('form-input');
@@ -76,8 +72,7 @@ class InputTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_set_form_inputs_as_required()
+    public function test_it_can_set_form_inputs_as_required()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('form-input-required');
@@ -95,8 +90,7 @@ class InputTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_generate_bootstrap_5_inline_form_inputs()
+    public function test_it_can_generate_bootstrap_5_inline_form_inputs()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('form-input-inline');
@@ -113,8 +107,7 @@ class InputTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_generate_bootstrap_5_floating_form_inputs()
+    public function test_it_can_generate_bootstrap_5_floating_form_inputs()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('form-input-floating');
@@ -128,8 +121,7 @@ class InputTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_display_form_input_help_texts()
+    public function test_it_can_display_form_input_help_texts()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('form-input-help');
@@ -145,8 +137,7 @@ class InputTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_generate_material_admin_26_form_inputs()
+    public function test_it_can_generate_material_admin_26_form_inputs()
     {
         $this->setFrameworkMaterialAdmin26();
         $this->registerTestRoute('form-input');
@@ -161,8 +152,7 @@ class InputTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_generate_different_form_input_types()
+    public function test_it_can_generate_different_form_input_types()
     {
         $this->registerTestRoute('form-input-types');
 
@@ -176,8 +166,7 @@ class InputTest extends TestCase
             ->seeElement('input[name="tel"][type="tel"]');
     }
 
-    /** @test */
-    public function it_can_generate_latitude_inputs()
+    public function test_it_can_generate_latitude_inputs()
     {
         $this->registerTestRoute('latitude');
 
@@ -185,8 +174,7 @@ class InputTest extends TestCase
             ->seeElement('input[name="latitude"][type="number"][step="0.000001"][min="-90"][max="90"]');
     }
 
-    /** @test */
-    public function it_can_generate_longitude_inputs()
+    public function test_it_can_generate_longitude_inputs()
     {
         $this->registerTestRoute('longitude');
 

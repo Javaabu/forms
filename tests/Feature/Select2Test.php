@@ -12,8 +12,7 @@ class Select2Test extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
-    public function it_can_render_a_select_2_basic_element_whose_value_comes_from_an_enum_cast()
+    public function test_it_can_render_a_select_2_basic_element_whose_value_comes_from_an_enum_cast()
     {
         // create an article
         $article = new Article([
@@ -40,8 +39,7 @@ class Select2Test extends TestCase
 
     }
 
-    /** @test */
-    public function it_can_render_a_select2_basic_element()
+    public function test_it_can_render_a_select2_basic_element()
     {
         $post = [
             'author' => 2,
@@ -67,8 +65,7 @@ class Select2Test extends TestCase
             ->seeElement('option[value="3"]');
     }
 
-    /** @test */
-    public function it_can_render_a_select_2_basic_element_with_a_label()
+    public function test_it_can_render_a_select_2_basic_element_with_a_label()
     {
         $post = [
             'author' => 2,
@@ -95,8 +92,7 @@ class Select2Test extends TestCase
             ->seeElement('option[value="3"]');
     }
 
-    /** @test */
-    public function it_can_render_a_select2_ajax_element()
+    public function test_it_can_render_a_select2_ajax_element()
     {
         $post = [
             'author' => 2,
@@ -118,8 +114,7 @@ class Select2Test extends TestCase
             ->seeElement('option[value="2"]:selected');
     }
 
-    /** @test */
-    public function it_can_render_a_select2_element_with_custom_form_group_class_material_admin_26()
+    public function test_it_can_render_a_select2_element_with_custom_form_group_class_material_admin_26()
     {
         $this->setFrameworkMaterialAdmin26();
 
@@ -148,8 +143,7 @@ class Select2Test extends TestCase
             ->seeElement('option[value="3"]');
     }
 
-    /** @test */
-    public function it_can_render_a_select2_element_with_custom_form_group_class_bootstrap_5()
+    public function test_it_can_render_a_select2_element_with_custom_form_group_class_bootstrap_5()
     {
         $this->setFrameworkBootstrap5();
 
@@ -178,8 +172,7 @@ class Select2Test extends TestCase
             ->seeElement('option[value="3"]');
     }
 
-    /** @test */
-    public function it_only_loads_selected_options_for_ajax_selects()
+    public function test_it_only_loads_selected_options_for_ajax_selects()
     {
         $article1 = Article::create(['title' => 'Article 1']);
         $article2 = Article::create(['title' => 'Article 2']);

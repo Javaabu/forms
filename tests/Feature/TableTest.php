@@ -10,8 +10,7 @@ class TableTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
-    public function it_can_generate_bootstrap_5_table()
+    public function test_it_can_generate_bootstrap_5_table()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('table');
@@ -48,8 +47,7 @@ class TableTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_generate_bootstrap_5_striped_table()
+    public function test_it_can_generate_bootstrap_5_striped_table()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('table');
@@ -61,8 +59,7 @@ class TableTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_can_generate_material_26_table()
+    public function test_it_can_generate_material_26_table()
     {
         $this->setFrameworkMaterialAdmin26();
         $this->registerTestRoute('table');
@@ -114,8 +111,7 @@ class TableTest extends TestCase
             });
     }
 
-    /** @test */
-    public function it_displays_empty_table_message_when_no_matching_rows()
+    public function test_it_displays_empty_table_message_when_no_matching_rows()
     {
         $this->setFrameworkMaterialAdmin26();
         $this->registerTestRoute('table');

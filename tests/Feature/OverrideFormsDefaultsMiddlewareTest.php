@@ -7,8 +7,7 @@ use Javaabu\Forms\Tests\TestCase;
 
 class OverrideFormsDefaultsMiddlewareTest extends TestCase
 {
-    /** @test */
-    public function it_can_use_the_middleware_to_switch_what_theme_to_use()
+    public function test_it_can_use_the_middleware_to_switch_what_theme_to_use()
     {
         $this->withoutExceptionHandling();
 
