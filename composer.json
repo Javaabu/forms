@@ -19,7 +19,7 @@
         "orchestra/testbench-browser-kit": "^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0",
         "phpunit/phpunit": "^9.5 || ^10.5 || ^11.5.3 || ^12.5.8 || ^13.0.3",
         "spatie/laravel-medialibrary": "^10.3.4 || ^11.4",
-        "matanyadaev/laravel-eloquent-spatial": "^2.10 || ^4.6",
+        "matanyadaev/laravel-eloquent-spatial": "^2.10 || ^4.7",
         "composer/semver": "^3.4"
     },
     "suggest": {

@@ -21,25 +21,25 @@ jobs:
             stability: [ prefer-lowest, prefer-stable ]
             include:
                 -   laravel: 13.*
-                    testbench: 10.*
+                    testbench: 11.*
                     carbon: ^3.8.4
                     medialibrary: 11.*
-                    geospatial: ^4.6
+                    geospatial: ^4.7
                 -   laravel: 12.*
                     testbench: 10.*
                     carbon: ^3.8.4
                     medialibrary: 11.*
-                    geospatial: ^4.6
+                    geospatial: ^4.7
                 -   laravel: 11.*
                     testbench: 9.*
                     carbon: ^2.63
                     medialibrary: 11.*
-                    geospatial: ^4.6
+                    geospatial: ^4.7
                 -   laravel: 10.*
                     testbench: 8.*
                     carbon: ^2.63
                     medialibrary: ^10.3.4
-                    geospatial: ^4.6
+                    geospatial: ^4.7
                 -   laravel: 9.*
                     testbench: 7.*
                     carbon: ^2.63
