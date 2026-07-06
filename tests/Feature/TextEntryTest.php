@@ -6,6 +6,42 @@ use Javaabu\Forms\Tests\TestCase;
 
 class TextEntryTest extends TestCase
 {
+    public function test_it_can_render_enum_entries_for_bootstrap_5()
+    {
+        $this->setFrameworkBootstrap5();
+        $this->registerTestRoute('text-entry-enum');
+
+        $this->visit('/text-entry-enum')
+            ->seeElement('dl')
+            ->within('dl', function () {
+                $this->seeElement('dt')
+                    ->seeInElement('dt', 'Type')
+                    ->seeElement('dd')
+                    ->within('dd', function () {
+                        $this->seeText('Report Article');
+                    });
+            });
+
+    }
+
+    public function test_it_can_render_enum_entries_for_material_admin_26()
+    {
+        $this->setFrameworkMaterialAdmin26();
+        $this->registerTestRoute('text-entry-enum');
+
+        $this->visit('/text-entry-enum')
+            ->seeElement('dl')
+            ->within('dl', function () {
+                $this->seeElement('dt')
+                    ->seeInElement('dt', 'Type')
+                    ->seeElement('dd')
+                    ->within('dd', function () {
+                        $this->seeText('Report Article');
+                    });
+            });
+
+    }
+
     public function test_it_can_render_status_entries_for_bootstrap_5()
     {
         $this->setFrameworkBootstrap5();

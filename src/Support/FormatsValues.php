@@ -17,6 +17,11 @@ trait FormatsValues
         return '';
     }
 
+    public function isNativeEnum(): bool
+    {
+        return $this->value instanceof BackedEnum && method_exists($this->value, 'getLabel');
+    }
+
     public function isStatusEnum(): bool
     {
         return $this->value instanceof BackedEnum && method_exists($this->value, 'getColor');

@@ -6,6 +6,32 @@ use Javaabu\Forms\Tests\TestCase;
 
 class TableCellTest extends TestCase
 {
+    public function test_it_can_render_enum_table_cell_entries_for_bootstrap_5()
+    {
+        $this->setFrameworkBootstrap5();
+        $this->registerTestRoute('table-cell-enum');
+
+        $this->visit('/table-cell-enum')
+            ->seeElement('td')
+            ->within('td', function () {
+                $this->seeText('Report Article');
+            });
+
+    }
+
+    public function test_it_can_render_enum_table_cell_entries_for_material_admin_26()
+    {
+        $this->setFrameworkMaterialAdmin26();
+        $this->registerTestRoute('table-cell-enum');
+
+        $this->visit('/table-cell-enum')
+            ->seeElement('td')
+            ->within('td', function () {
+                $this->seeText('Report Article');
+            });
+
+    }
+
     public function test_it_can_render_status_table_cell_entries_for_bootstrap_5()
     {
         $this->setFrameworkBootstrap5();

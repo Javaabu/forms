@@ -21,6 +21,8 @@
         @else
             @if($isStatusEnum())
                 <x-forms::status :framework="$framework" :color="$value->getColor()" :label="$getEnumLabel()" />
+            @elseif($isNativeEnum())
+                {{ $getEnumLabel() }}
             @elseif($multiline)
                 {!! nl2br(e($value ?: trans('forms::strings.blank'))) !!}
             @elseif(is_array($value))
