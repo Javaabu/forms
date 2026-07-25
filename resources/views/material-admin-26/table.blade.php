@@ -45,6 +45,7 @@
                 {{ $rows ?? '' }}
 
                 </tbody>
+                {{ $afterTbody ?? '' }}
         </table>
     </div>
 
