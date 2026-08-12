@@ -14,6 +14,32 @@ class LabelTest extends TestCase
         Config::set('forms.inputs.required_text', 'forms::strings.required_text');
     }
 
+    public function test_it_can_generate_material_admin_label_with_a_slot()
+    {
+        $this->setFrameworkMaterialAdmin26();
+        $this->registerTestRoute('label-slot');
+
+        $this->visit('/label-slot')
+            ->seeElementCount('label', 1)
+            ->within('label', function() {
+                $this->seeElement('a')
+                    ->seeInElement('a', 'some site');
+            });
+    }
+
+    public function test_it_can_generate_bootstrap_5_label_with_a_slot()
+    {
+        $this->setFrameworkBootstrap5();
+        $this->registerTestRoute('label-slot');
+
+        $this->visit('/label-slot')
+            ->seeElementCount('label', 1)
+            ->within('label', function() {
+                $this->seeElement('a')
+                     ->seeInElement('a', 'some site');
+            });
+    }
+
     public function test_it_can_generate_bootstrap_5_blank_form_group()
     {
         $this->setFrameworkBootstrap5();
