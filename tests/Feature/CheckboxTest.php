@@ -16,6 +16,42 @@ class CheckboxTest extends TestCase
         Config::set('forms.inputs.inline', false);
     }
 
+    public function test_it_can_generate_material_admin_26_checkbox_with_slot()
+    {
+        $this->setFrameworkMaterialAdmin26();
+        $this->registerTestRoute('checkbox-slot');
+
+        $this->visit('/checkbox-slot')
+            ->seeElement('div.checkbox')
+            ->within('div.checkbox', function () {
+                $this
+                    ->seeElement('input[name="check_me"][id="check_me"][type="checkbox"]')
+                    ->seeElement('label.checkbox__label')
+                    ->within('label.checkbox__label', function () {
+                        $this->seeElement('a')
+                            ->seeInElement('a', 'some site');
+                    });
+            });
+    }
+
+    public function test_it_can_generate_bootstrap_5_checkbox_with_slot()
+    {
+        $this->setFrameworkBootstrap5();
+        $this->registerTestRoute('checkbox-slot');
+
+        $this->visit('/checkbox-slot')
+            ->seeElement('div.form-check')
+            ->within('div.form-check', function () {
+                $this
+                    ->seeElement('input[name="check_me"][id="check_me"][type="checkbox"].form-check-input')
+                    ->seeElement('label.form-check-label')
+                    ->within('label.form-check-label', function () {
+                        $this->seeElement('a')
+                            ->seeInElement('a', 'some site');
+                    });
+            });
+    }
+
     public function test_it_can_generate_bootstrap_5_form_checkbox()
     {
         $this->setFrameworkBootstrap5();
