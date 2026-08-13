@@ -16,7 +16,7 @@
             :for="$attributes->get('id') ?: $id()"
             class="form-check-label"
             :required="$inline ? false : $required"
-        >
+        >@if($slot->isNotEmpty()){{ $slot }}@endif
         </x-forms::label>
     </div>
 

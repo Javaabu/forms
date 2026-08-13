@@ -16,7 +16,43 @@ class RadioTest extends TestCase
         Config::set('forms.inputs.inline', false);
     }
 
-    public function test_it_can_generate_bootstrap_5_form_checkbox()
+    public function test_it_can_generate_material_admin_26_radio_with_slot()
+    {
+        $this->setFrameworkMaterialAdmin26();
+        $this->registerTestRoute('radio-slot');
+
+        $this->visit('/radio-slot')
+            ->seeElement('div.radio')
+            ->within('div.radio', function () {
+                $this
+                    ->seeElement('input[name="check_me"][id="check_me"][type="radio"]')
+                    ->seeElement('label.radio__label')
+                    ->within('label.radio__label', function () {
+                        $this->seeElement('a')
+                            ->seeInElement('a', 'some site');
+                    });
+            });
+    }
+
+    public function test_it_can_generate_bootstrap_5_radio_with_slot()
+    {
+        $this->setFrameworkBootstrap5();
+        $this->registerTestRoute('radio-slot');
+
+        $this->visit('/radio-slot')
+            ->seeElement('div.form-check')
+            ->within('div.form-check', function () {
+                $this
+                    ->seeElement('input[name="check_me"][id="check_me"][type="radio"].form-check-input')
+                    ->seeElement('label.form-check-label')
+                    ->within('label.form-check-label', function () {
+                        $this->seeElement('a')
+                            ->seeInElement('a', 'some site');
+                    });
+            });
+    }
+
+    public function test_it_can_generate_bootstrap_5_form_radio()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('form-radio');
@@ -31,7 +67,7 @@ class RadioTest extends TestCase
             });
     }
 
-    public function test_it_can_generate_bootstrap_5_form_checkbox_that_is_required()
+    public function test_it_can_generate_bootstrap_5_form_radio_that_is_required()
     {
         $this->setFrameworkBootstrap5();
         $this->registerTestRoute('form-radio-required');
@@ -51,7 +87,7 @@ class RadioTest extends TestCase
     }
 
 
-    public function test_it_can_generate_material_admin_26_form_checkbox()
+    public function test_it_can_generate_material_admin_26_form_radio()
     {
         $this->setFrameworkMaterialAdmin26();
         $this->registerTestRoute('form-radio');
@@ -66,7 +102,7 @@ class RadioTest extends TestCase
             });
     }
 
-    public function test_it_can_generate_material_admin_26_form_checkbox_that_is_required()
+    public function test_it_can_generate_material_admin_26_form_radio_that_is_required()
     {
         $this->setFrameworkMaterialAdmin26();
         $this->registerTestRoute('form-radio-required');

@@ -21,7 +21,7 @@
             :label="$inline ? ' ' : ($label ?: $label())"
             :for="$attributes->get('id') ?: $id()"
             class="radio__label"
-            :required="$inline ? false : $required" />
+            :required="$inline ? false : $required">@if($slot->isNotEmpty()){{ $slot }}@endif</x-forms::label>
     </div>
 
     @if(! empty($help))
