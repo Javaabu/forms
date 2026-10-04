@@ -17,11 +17,15 @@ In the example below, `expires_at` will be disabled and hidden unless the `quiz`
 ```
 
 The conditional wrapper supports the following attributes:
-- `'enable-elem'` - (Required) The selector of the input element's value which is used for the condition
-- `'enable-value'` - (Required) Which value when selected should the section be enabled. Can accept arrays as well.
-- `'hide-fields'` - Whether the fields should also be hidden when they are disabled. Default is `false`.
-- `'disable'` - Setting this to `true` will invert the behaviour. i.e The section will get disabled if the given value is selected.
-- `'json-encode'` - Whether to json encode the given value. Default is `true` if the given value is an array, otherwise it's false.
+
+| Attribute | Default | Description |
+| --- | --- | --- |
+| `enable-elem` | **Required** | Selector of the input element whose value is used for the condition. |
+| `enable-value` | **Required** | Value that enables the section when selected. Accepts arrays as well. |
+| `hide-fields` | `false` | Whether to also hide the fields when they are disabled. |
+| `disable` | `false` | Inverts the behaviour: disables the section when the given value is selected. |
+| `enable-checkbox` | `false` | Uses the checked status of the checkbox selected by `enable-elem` to control the section. |
+| `json-encode` | `true` for arrays, otherwise `false` | Whether to JSON encode `enable-value`. |
 
 
 ## Disabling an input field depending on a checkbox status
