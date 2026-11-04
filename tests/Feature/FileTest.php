@@ -14,7 +14,7 @@ class FileTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -86,8 +86,8 @@ class FileTest extends TestCase
                         $this->seeElement('span.fileinput-filename')
                             ->within('span.fileinput-filename', function () {
                                 $this->seeElement('a[href="https://example.com/uploads/Important-document.pdf?download=true"]')
-                                     ->seeInElement('a', 'Important-document.pdf')
-                                     ->dontSeeInElement('a', '?download=true')
+                                    ->seeInElement('a', 'Important-document.pdf')
+                                    ->dontSeeInElement('a', '?download=true')
                                     ->dontSeeInElement('a', 'https://example.com/uploads/');
                             });
                     });
@@ -281,18 +281,18 @@ class FileTest extends TestCase
             ->seeElement('div.form-group')
             ->within('div.form-group', function () {
                 $this->seeElement('div.fileinput.fileinput-exists')
-                     ->within('div.fileinput', function () {
-                         $this->seeElement('span.btn-file')
-                              ->within('span.btn-file', function () {
-                                  $this->seeElement('input[name="featured_image"][type="file"][accept="application/pdf,image/jpeg,image/png"]#featured_image');
-                              });
+                    ->within('div.fileinput', function () {
+                        $this->seeElement('span.btn-file')
+                            ->within('span.btn-file', function () {
+                                $this->seeElement('input[name="featured_image"][type="file"][accept="application/pdf,image/jpeg,image/png"]#featured_image');
+                            });
 
-                         $this->seeElement('span.fileinput-filename')
-                             ->within('span.fileinput-filename', function () {
-                                 $this->seeElement('a[href="/storage/1/some-cool-image.jpg"]')
-                                      ->seeElement('i.zmdi.zmdi-open-in-new');
-                             });
-                     });
+                        $this->seeElement('span.fileinput-filename')
+                            ->within('span.fileinput-filename', function () {
+                                $this->seeElement('a[href="/storage/1/some-cool-image.jpg"]')
+                                    ->seeElement('i.zmdi.zmdi-open-in-new');
+                            });
+                    });
             });
     }
 

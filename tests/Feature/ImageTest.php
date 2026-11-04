@@ -14,7 +14,7 @@ class ImageTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -37,8 +37,6 @@ class ImageTest extends TestCase
 
         return $article;
     }
-
-
 
     public function test_it_can_render_bootstrap_5_image_inputs()
     {

@@ -91,7 +91,7 @@ class TableTest extends TestCase
                                         ->within('tr', function () use ($activity) {
                                             $this
                                                 ->seeElement('.td-checkbox')
-                                                ->seeElement('input[type="checkbox"][id="activities-'. $activity->id . '-row-check"]')
+                                                ->seeElement('input[type="checkbox"][id="activities-' . $activity->id . '-row-check"]')
                                                 ->seeInElement('td', $activity->id)
                                                 ->seeInElement('td', $activity->date_a)
                                                 ->seeInElement('td', $activity->date_b)
@@ -106,7 +106,7 @@ class TableTest extends TestCase
 
                 // Pagination check
                 $this->seeElement('div.dataTables_info');
-                //$this->seeInElement('div.dataTables_info', 'Showing 2 from total 20 entries');
+                // $this->seeInElement('div.dataTables_info', 'Showing 2 from total 20 entries');
                 $this->seeInElement('div', 'Previous');
             });
     }

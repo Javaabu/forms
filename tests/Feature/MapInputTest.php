@@ -12,7 +12,7 @@ class MapInputTest extends TestCase
 {
     const SRID = 4326;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -25,7 +25,7 @@ class MapInputTest extends TestCase
 
     public function test_it_adds_the_maps_script_to_the_scripts_stack()
     {
-        $city = new City();
+        $city = new City;
         $lat = 4.175804;
         $lng = 73.509337;
 
@@ -45,7 +45,7 @@ class MapInputTest extends TestCase
 
     public function test_it_can_bind_map_inputs_from_attributes()
     {
-        $city = new City();
+        $city = new City;
         $lat = 4.175804;
         $lng = 73.509337;
         $wkt = 'POLYGON((73.5092 4.1758, 73.5094 4.1758, 73.5094 4.1757, 73.5092 4.1757, 73.5092 4.1758))';
@@ -75,7 +75,7 @@ class MapInputTest extends TestCase
 
     public function test_it_can_bind_map_inputs_from_accessors()
     {
-        $city = new City();
+        $city = new City;
         $lat = 4.175804;
         $lng = 73.509337;
         $wkt = 'POLYGON((73.5092 4.1758, 73.5094 4.1758, 73.5094 4.1757, 73.5092 4.1757, 73.5092 4.1758))';

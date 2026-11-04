@@ -2,6 +2,7 @@
 
 namespace Javaabu\Forms\Tests;
 
+use Composer\InstalledVersions;
 use Composer\Semver\VersionParser;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Artisan;
@@ -32,10 +33,10 @@ abstract class TestCase extends BaseTestCase
 
     public static function isMediaLibrary10(): bool
     {
-        return \Composer\InstalledVersions::satisfies(new VersionParser(), 'spatie/laravel-medialibrary', '10.*');
+        return InstalledVersions::satisfies(new VersionParser, 'spatie/laravel-medialibrary', '10.*');
     }
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -43,7 +44,7 @@ abstract class TestCase extends BaseTestCase
 
         $this->app['config']->set('session.serialization', 'php');
 
-        //$this->app['config']->set('form-components.framework', env('FORM_COMPONENTS_FRAMEWORK', 'tailwind'));
+        // $this->app['config']->set('form-components.framework', env('FORM_COMPONENTS_FRAMEWORK', 'tailwind'));
 
         View::addLocation(__DIR__ . '/TestSupport/views');
 
@@ -87,7 +88,7 @@ abstract class TestCase extends BaseTestCase
         return $this->setFramework('material-admin-26');
     }
 
-    protected function registerTestRoute($uri, callable $post = null): self
+    protected function registerTestRoute($uri, ?callable $post = null): self
     {
         Route::middleware('web')->group(function () use ($uri, $post) {
             Route::view($uri, $uri)->name($uri);
@@ -102,6 +103,7 @@ abstract class TestCase extends BaseTestCase
 
     /**
      * Copied from https://github.com/spatie/laravel-medialibrary/issues/623#issuecomment-2110321741
+     *
      * @return $this
      */
     protected function setupFakeMediaDisk(): self

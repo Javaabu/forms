@@ -8,7 +8,7 @@ use Javaabu\Forms\Tests\TestCase;
 
 class CheckboxTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -158,7 +158,6 @@ class CheckboxTest extends TestCase
             });
     }
 
-
     public function test_it_can_generate_material_admin_26_inline_form_checkbox_that_is_required()
     {
         $this->setFrameworkMaterialAdmin26();
@@ -175,7 +174,7 @@ class CheckboxTest extends TestCase
                         $this->dontSeeElement('span.required')
                             ->dontSeeInElement('span.required', '*');
                     });
-                ;
+
             });
     }
 
@@ -194,5 +193,4 @@ class CheckboxTest extends TestCase
             ->seeElement('small.form-text.text-muted')
             ->seeInElement('small.form-text.text-muted', 'This is some help text.');
     }
-
 }

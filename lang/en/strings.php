@@ -24,5 +24,5 @@ return [
     'text_list_separator' => ', ',
     'text_list_separator_last_glue' => ' and ',
     'map_search_string' => 'Search...',
-    'search_form_placeholder' => 'Search...'
+    'search_form_placeholder' => 'Search...',
 ];

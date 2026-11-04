@@ -16,15 +16,11 @@ abstract class Component extends BaseComponent
 
     /**
      * Framework used for this component
-     *
-     * @var string
      */
     public string $framework;
 
     /**
      * The view to be used
-     *
-     * @var string
      */
     protected string $view;
 
@@ -73,8 +69,6 @@ abstract class Component extends BaseComponent
 
     /**
      * Generates an ID, once, for this component.
-     *
-     * @return string
      */
     public function id(): string
     {
@@ -91,8 +85,6 @@ abstract class Component extends BaseComponent
 
     /**
      * Generates an ID by the name attribute.
-     *
-     * @return string
      */
     protected function generateIdByName(): string
     {
@@ -101,8 +93,6 @@ abstract class Component extends BaseComponent
 
     /**
      * Generates an ID by the name attribute.
-     *
-     * @return string
      */
     public function stringToId($text): string
     {
@@ -111,8 +101,6 @@ abstract class Component extends BaseComponent
 
     /**
      * Generates a label, once, for this component.
-     *
-     * @return string
      */
     public function label(): string
     {
@@ -125,24 +113,19 @@ abstract class Component extends BaseComponent
 
     /**
      * Generates a label by the name attribute.
-     *
-     * @return string
      */
     protected function generateLabelByName(): string
     {
         return trans(Str::of(str_replace(['[', ']'], ['_', ''], Str::before($this->name, '[]')))
-                    ->camel()
-                    ->snake()
-                    ->replace('_', ' ')
-                    ->title()
-                    ->toString());
+            ->camel()
+            ->snake()
+            ->replace('_', ' ')
+            ->title()
+            ->toString());
     }
 
     /**
      * Converts a bracket-notation to a dotted-notation
-     *
-     * @param  string  $name
-     * @return string
      */
     protected static function convertBracketsToDots(string $name): string
     {

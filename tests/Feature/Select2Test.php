@@ -2,8 +2,8 @@
 
 namespace Javaabu\Forms\Tests\Feature;
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Route;
 use Javaabu\Forms\Tests\TestCase;
 use Javaabu\Forms\Tests\TestSupport\Enums\ArticleStatuses;
 use Javaabu\Forms\Tests\TestSupport\Models\Article;

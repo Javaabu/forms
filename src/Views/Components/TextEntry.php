@@ -7,17 +7,25 @@ use Javaabu\Forms\Support\HandlesBoundValues;
 
 class TextEntry extends Component
 {
-    use HandlesBoundValues;
     use FormatsValues;
+    use HandlesBoundValues;
 
     protected string $view = 'text-entry';
+
     public bool $inline;
+
     public bool $multiline;
+
     public string $label;
+
     public string $name;
+
     public bool $showLabel;
+
     public $value;
+
     public string $inlineEntryLabelClass;
+
     public string $inlineEntryClass;
 
     /**

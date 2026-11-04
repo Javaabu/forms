@@ -7,7 +7,7 @@ use Javaabu\Forms\Tests\TestCase;
 
 class InputTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -85,7 +85,7 @@ class InputTest extends TestCase
                     ->seeInElement('label.form-label[for="title"]', 'Title')
                     ->within('label.form-label[for="title"]', function () {
                         $this->seeElement('span.required')
-                             ->seeInElement('span.required', '*');
+                            ->seeInElement('span.required', '*');
                     });
             });
     }

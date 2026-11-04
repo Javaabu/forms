@@ -28,8 +28,6 @@ trait HandlesBoundValues
 
     /**
      * Get an instance of FormDataBinder.
-     *
-     * @return FormsDataBinder
      */
     protected function getFormsDataBinder(): FormsDataBinder
     {
@@ -63,8 +61,7 @@ trait HandlesBoundValues
     /**
      * Get an item from the latest bound target.
      *
-     * @param mixed $bind
-     * @param string $name
+     * @param  mixed  $bind
      * @return mixed
      */
     protected function getBoundValue($bind, string $name)
@@ -91,9 +88,6 @@ trait HandlesBoundValues
     /**
      * Formats a DateTimeInterface if the key is specified as a date or datetime in the model.
      *
-     * @param \Illuminate\Database\Eloquent\Model $model
-     * @param string $key
-     * @param DateTimeInterface $date
      * @return void
      */
     protected function formatDateTime(Model $model, string $key, DateTimeInterface $date)
@@ -134,8 +128,7 @@ trait HandlesBoundValues
     /**
      * Returns an array with the attached keys.
      *
-     * @param mixed $bind
-     * @param string $name
+     * @param  mixed  $bind
      * @return mixed
      */
     protected function getAttachedKeysFromRelation($bind, string $name)

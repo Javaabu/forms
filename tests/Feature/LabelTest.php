@@ -7,7 +7,7 @@ use Javaabu\Forms\Tests\TestCase;
 
 class LabelTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -21,7 +21,7 @@ class LabelTest extends TestCase
 
         $this->visit('/label-slot')
             ->seeElementCount('label', 1)
-            ->within('label', function() {
+            ->within('label', function () {
                 $this->seeElement('a')
                     ->seeInElement('a', 'some site');
             });
@@ -34,9 +34,9 @@ class LabelTest extends TestCase
 
         $this->visit('/label-slot')
             ->seeElementCount('label', 1)
-            ->within('label', function() {
+            ->within('label', function () {
                 $this->seeElement('a')
-                     ->seeInElement('a', 'some site');
+                    ->seeInElement('a', 'some site');
             });
     }
 

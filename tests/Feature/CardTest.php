@@ -229,8 +229,6 @@ class CardTest extends TestCase
             });
     }
 
-
-
     public function test_it_can_generate_material_admin_26_card_with_subtitle()
     {
         $this->setFrameworkMaterialAdmin26();
@@ -263,6 +261,4 @@ class CardTest extends TestCase
                     });
             });
     }
-
-
 }

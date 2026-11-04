@@ -5,15 +5,25 @@ namespace Javaabu\Forms\Views\Components;
 class Select2 extends Select
 {
     public bool $allowClear;
+
     public bool $isFirst;
+
     public bool $hideSearch;
+
     public string $child;
+
     public string $ajaxChild;
+
     public string $ajaxUrl;
+
     public string $selectedUrl;
+
     public string $filterField;
+
     public string $fallback;
+
     public string $parentModal;
+
     /**
      * Create a new component instance.
      *
@@ -26,17 +36,17 @@ class Select2 extends Select
         $options = [],
         $model = null,
         $default = null,
-        bool   $multiple = false,
-        bool   $relation = false,
-        bool   $showErrors = true,
-        bool   $showLabel = true,
-        bool   $showPlaceholder = false,
-        bool   $required = false,
-        bool   $isAjax = false,
-        bool   $isFirst = false,
-        bool   $tags = false,
-        bool   $hideSearch = false,
-        bool   $allowClear = true,
+        bool $multiple = false,
+        bool $relation = false,
+        bool $showErrors = true,
+        bool $showLabel = true,
+        bool $showPlaceholder = false,
+        bool $required = false,
+        bool $isAjax = false,
+        bool $isFirst = false,
+        bool $tags = false,
+        bool $hideSearch = false,
+        bool $allowClear = true,
         public bool $isIconSelect = false,
         string $child = '',
         string $ajaxChild = '',

@@ -4,6 +4,7 @@ namespace Javaabu\Forms\Tests\Feature;
 
 use Illuminate\Support\Facades\Config;
 use Javaabu\Forms\Tests\TestCase;
+use Route;
 
 class OverrideFormsDefaultsMiddlewareTest extends TestCase
 {
@@ -19,7 +20,7 @@ class OverrideFormsDefaultsMiddlewareTest extends TestCase
         $current_theme = Config::get('forms.framework');
         $this->assertTrue($current_theme === 'material-admin-26');
 
-        \Route::get('/change-framework', function () {
+        Route::get('/change-framework', function () {
             return 'Framework changed to Bootstrap-5';
         })->middleware('forms:bootstrap-5');
 

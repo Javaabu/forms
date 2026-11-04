@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Simple trait for icon posts
  */
@@ -28,8 +29,6 @@ trait HasIcon
 
     /**
      * Convert icon to lowercase
-     *
-     * @param $icon
      */
     public function setIconAttribute($icon)
     {

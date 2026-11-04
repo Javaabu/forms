@@ -89,5 +89,4 @@ class ButtonTest extends TestCase
             ->seeElement('a[href="/test"].btn.btn-danger')
             ->seeInElement('a[href="/test"].btn.btn-danger', 'Button');
     }
-
 }

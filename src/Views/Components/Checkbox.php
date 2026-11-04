@@ -41,7 +41,7 @@ class Checkbox extends Input
             default: $default,
             showErrors: $showErrors,
             showLabel: $showLabel,
-            required:$required,
+            required: $required,
             inline: $inline,
             floating: $floating,
             inlineLabelClass: $inlineLabelClass,

@@ -9,6 +9,7 @@ class EmptyRow extends Component
     protected string $view = 'table.empty-row';
 
     public int $columns;
+
     public bool $noCheckbox;
 
     /**

@@ -10,6 +10,7 @@ class Tabs extends Component
     protected string $view = 'tabs';
 
     public Collection $tabs;
+
     public string $active;
 
     /**
@@ -19,8 +20,8 @@ class Tabs extends Component
      */
     public function __construct(
         array|Collection $tabs = [],
-        string           $active = '',
-        string           $framework = ''
+        string $active = '',
+        string $framework = ''
     ) {
         parent::__construct($framework);
 

@@ -13,16 +13,27 @@ class File extends Input
     use HandlesMediaValues;
 
     public array $fileTypes;
+
     public array $mimetypes;
+
     public string $collection;
+
     public string $conversion;
+
     public string $fileInputClass;
+
     public array $extensions;
+
     public int $maxSize;
+
     public bool $showHint;
+
     public string $fileName = '';
+
     public string $clearIcon;
+
     public string $downloadIcon;
+
     public string $uploadIcon;
 
     /**
@@ -31,27 +42,27 @@ class File extends Input
      * @return void
      */
     public function __construct(
-        string            $name,
-        string            $label = '',
-        string|array      $type = 'document',
+        string $name,
+        string $label = '',
+        string|array $type = 'document',
         null|string|array $mimetypes = null,
         null|string|array $extensions = null,
-        ?int              $maxSize = null,
-        string            $collection = '',
-        string            $conversion = '',
-        string            $fileInputClass = '',
-        string            $clearIcon = '',
-        string            $downloadIcon = '',
-        string            $uploadIcon = '',
-                          $model = null,
-                          $default = null,
-        bool              $showHint = true,
+        ?int $maxSize = null,
+        string $collection = '',
+        string $conversion = '',
+        string $fileInputClass = '',
+        string $clearIcon = '',
+        string $downloadIcon = '',
+        string $uploadIcon = '',
+        $model = null,
+        $default = null,
+        bool $showHint = true,
         bool $showErrors = true,
         bool $showLabel = true,
         bool $required = false,
         public bool $disabled = false,
         public bool $ignoreAccessor = false,
-        public bool       $upload = false,
+        public bool $upload = false,
         bool $inline = false,
         string $inlineLabelClass = '',
         string $inlineInputClass = '',
@@ -75,7 +86,7 @@ class File extends Input
             default: $default,
             showErrors: $showErrors,
             showLabel: $showLabel,
-            required:$required,
+            required: $required,
             inline: $inline,
             floating: false,
             inlineLabelClass: $inlineLabelClass,
@@ -93,8 +104,8 @@ class File extends Input
     {
         return trans('forms::strings.file_hint', [
             'types' => collect($this->extensions)
-                        ->map(fn($ext) => '.' . $ext)
-                        ->join(trans('forms::strings.text_list_separator'), trans('forms::strings.text_list_separator_last_glue')),
+                ->map(fn ($ext) => '.' . $ext)
+                ->join(trans('forms::strings.text_list_separator'), trans('forms::strings.text_list_separator_last_glue')),
 
             'size' => format_file_size($this->maxSize),
         ]);

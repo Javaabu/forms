@@ -1,9 +1,9 @@
 # Forms
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/javaabu/forms.svg?style=flat-square)](https://packagist.org/packages/javaabu/forms)
-[![Test Status](../../actions/workflows/run-tests.yml/badge.svg)](../../actions/workflows/run-tests.yml)
-![Code Coverage Badge](./.github/coverage.svg)
-[![Total Downloads](https://img.shields.io/packagist/dt/javaabu/forms.svg?style=flat-square)](https://packagist.org/packages/javaabu/forms)
+[![Tests](https://github.com/Javaabu/forms/actions/workflows/tests.yml/badge.svg?branch=next-gen)](https://github.com/Javaabu/forms/actions/workflows/tests.yml?query=branch%3Anext-gen)
+[![codecov](https://codecov.io/gh/Javaabu/forms/branch/next-gen/graph/badge.svg)](https://codecov.io/gh/Javaabu/forms/tree/next-gen)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/javaabu/forms.svg)](https://packagist.org/packages/javaabu/forms)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE.md)
 
 Laravel Blade components for form elements. Package inspired from [protonemedia/laravel-form-components](https://github.com/protonemedia/laravel-form-components)
 
@@ -19,8 +19,9 @@ If you've found a bug regarding security please mail [info@javaabu.com](mailto:i
 
 You can run the tests with
 
-``` bash
-./vendor/bin/phpunit
+```bash
+composer test
+composer lint
 ```
 
 ## Changelog

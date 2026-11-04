@@ -19,6 +19,23 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Defaults
+    |--------------------------------------------------------------------------
+    |
+    | Defaults used when a component isn't given a value. Leave one null to
+    | read it from javaabu/settings (get_setting()) when that is installed,
+    | falling back to the value shown in the comment.
+    |
+    */
+
+    'defaults' => [
+        'per_page' => null, // 20
+        'default_lat' => null, // 4.1755 (Malé)
+        'default_lng' => null, // 73.5093 (Malé)
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Framework Settings
     |--------------------------------------------------------------------------
     |
@@ -65,7 +82,7 @@ return [
             'inline-entry-class' => 'col-sm-6 col-md-8',
             'search-icon' => 'zmdi-search',
             'no-items-icon' => 'zmdi-file',
-        ]
+        ],
     ],
 
     /*

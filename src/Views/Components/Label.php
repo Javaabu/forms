@@ -7,9 +7,13 @@ class Label extends Component
     protected string $view = 'label';
 
     public string $label;
+
     public bool $required;
+
     public bool $inline;
+
     public bool $floating;
+
     public string $inlineLabelClass;
 
     /**

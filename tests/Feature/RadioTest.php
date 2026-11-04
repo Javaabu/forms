@@ -3,12 +3,11 @@
 namespace Javaabu\Forms\Tests\Feature;
 
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Route;
 use Javaabu\Forms\Tests\TestCase;
 
 class RadioTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -85,7 +84,6 @@ class RadioTest extends TestCase
                     });
             });
     }
-
 
     public function test_it_can_generate_material_admin_26_form_radio()
     {

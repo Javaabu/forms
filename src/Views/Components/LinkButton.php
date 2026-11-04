@@ -7,6 +7,7 @@ class LinkButton extends Component
     protected string $view = 'link-button';
 
     public string $url;
+
     public string $color;
 
     /**

@@ -2,8 +2,6 @@
 
 namespace Javaabu\Forms\Tests\Feature;
 
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Route;
 use Javaabu\Forms\Tests\TestCase;
 
 class JsErrorsTest extends TestCase

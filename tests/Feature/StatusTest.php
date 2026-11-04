@@ -14,7 +14,7 @@ class StatusTest extends TestCase
             ->seeElement('span.status')
             ->within('span.status', function () {
                 $this->seeElement('div.test')
-                     ->seeInElement('div.test', 'Rejected');
+                    ->seeInElement('div.test', 'Rejected');
             });
     }
 

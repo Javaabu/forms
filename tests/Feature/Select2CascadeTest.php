@@ -12,8 +12,6 @@ class Country extends Model
 {
     /**
      * Get the user's first name.
-     *
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
     protected function formattedName(): Attribute
     {
@@ -124,7 +122,6 @@ class Select2CascadeTest extends TestCase
     public function test_it_can_extract_an_accessor_field_from_the_builder()
     {
 
-
         $countryA = Country::create(['name' => 'Maldives']);
         $countryB = Country::create(['name' => 'India']);
         $countryC = Country::create(['name' => 'Japan']);
@@ -153,7 +150,6 @@ class Select2CascadeTest extends TestCase
     public function test_it_can_extract_a_get_accessor_field_from_the_builder()
     {
 
-
         $countryA = Country::create(['name' => 'Maldives']);
         $countryB = Country::create(['name' => 'India']);
         $countryC = Country::create(['name' => 'Japan']);
@@ -181,7 +177,6 @@ class Select2CascadeTest extends TestCase
 
     public function test_it_can_render_a_select2_cascade()
     {
-
 
         $countryA = Country::create(['name' => 'Maldives']);
         $countryB = Country::create(['name' => 'India']);

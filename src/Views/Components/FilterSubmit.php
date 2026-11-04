@@ -5,7 +5,9 @@ namespace Javaabu\Forms\Views\Components;
 class FilterSubmit extends Component
 {
     protected string $view = 'filter-submit';
+
     public string $cancelUrl;
+
     public bool|array $export;
 
     /**
@@ -23,5 +25,4 @@ class FilterSubmit extends Component
         $this->export = is_string($export) ? [$export] : $export;
         $this->cancelUrl = $cancelUrl;
     }
-
 }

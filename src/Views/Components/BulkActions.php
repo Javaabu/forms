@@ -11,6 +11,7 @@ class BulkActions extends Component
     protected string $view = 'bulk-actions';
 
     public string $model;
+
     public array $actions;
 
     /**

@@ -10,8 +10,11 @@ class Heading extends Component
     protected string $view = 'table.heading';
 
     public int $colspan;
+
     public string $sortable;
+
     public string $label;
+
     public string $name;
 
     /**
@@ -21,7 +24,7 @@ class Heading extends Component
      */
     public function __construct(
         string $label = '',
-        int    $colspan = 1,
+        int $colspan = 1,
         string $sortable = '',
         string $name = '',
         string $framework = '',
@@ -35,9 +38,6 @@ class Heading extends Component
 
     /**
      * Adds sorting class
-     *
-     * @param  string  $classes
-     * @return string
      */
     public function addSortClass(string $classes = ''): string
     {

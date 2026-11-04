@@ -4,13 +4,15 @@ namespace Javaabu\Forms\Views\Components;
 
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
 
 class Date extends Input
 {
     public string $icon;
+
     public string $iconWrapperClass;
+
     public string $clearIcon;
+
     public string $clearBtnClass;
 
     /**
@@ -32,7 +34,7 @@ class Date extends Input
         bool $showErrors = true,
         bool $showLabel = true,
         string $placeholder = '',
-        bool   $showPlaceholder = false,
+        bool $showPlaceholder = false,
         bool $required = false,
         bool $inline = false,
         bool $floating = false,

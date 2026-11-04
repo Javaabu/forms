@@ -4,6 +4,8 @@ namespace Javaabu\Forms;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Javaabu\Forms\Commands\DiffViewsCommand;
+use Javaabu\Forms\Commands\PublishViewCommand;
 use Javaabu\Forms\Http\Middleware\OverrideFormsDefaults;
 
 class FormsServiceProvider extends ServiceProvider
@@ -28,7 +30,7 @@ class FormsServiceProvider extends ServiceProvider
             ], 'forms-views');
         }
 
-        $this->loadTranslationsFrom(__DIR__.'/../lang', 'forms');
+        $this->loadTranslationsFrom(__DIR__ . '/../lang', 'forms');
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'forms');
 
@@ -52,15 +54,15 @@ class FormsServiceProvider extends ServiceProvider
         $this->mergeConfig();
 
         // register the data binder
-        $this->app->singleton(FormsDataBinder::class, fn () => new FormsDataBinder());
+        $this->app->singleton(FormsDataBinder::class, fn () => new FormsDataBinder);
 
         app('router')->aliasMiddleware('forms', OverrideFormsDefaults::class);
 
         // Register custom artisan commands
         if ($this->app->runningInConsole()) {
             $this->commands([
-                \Javaabu\Forms\Commands\PublishViewCommand::class,
-                \Javaabu\Forms\Commands\DiffViewsCommand::class,
+                PublishViewCommand::class,
+                DiffViewsCommand::class,
             ]);
         }
     }
@@ -71,7 +73,7 @@ class FormsServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'forms');
 
         // Deep merge for nested 'framework' config
-        $default = require __DIR__.'/../config/config.php';
+        $default = require __DIR__ . '/../config/config.php';
         $default_frameworks = $default['frameworks'];
 
         foreach ($default_frameworks as $framework => $configs) {

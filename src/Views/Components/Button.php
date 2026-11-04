@@ -7,6 +7,7 @@ class Button extends Component
     protected string $view = 'button';
 
     public string $type;
+
     public string $color;
 
     /**

@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 class JsErrors extends Component
 {
     protected string $view = 'js-errors';
+
     public string $name;
 
     /**

@@ -14,10 +14,6 @@ trait HandlesValidationErrors
     /**
      * Returns a boolean whether the given attribute has an error,
      * and they should be shown.
-     *
-     * @param string $name
-     * @param string $bag
-     * @return bool
      */
     public function hasErrorAndShow(string $name, string $bag = 'default'): bool
     {
@@ -28,23 +24,16 @@ trait HandlesValidationErrors
 
     /**
      * Getter for the ErrorBag.
-     *
-     * @param string $bag
-     * @return \Illuminate\Contracts\Support\MessageBag
      */
     protected function getErrorBag(string $bag = 'default'): MessageBag
     {
-        $bags = View::shared('errors', fn () => request()->session()->get('errors', new ViewErrorBag()));
+        $bags = View::shared('errors', fn () => request()->session()->get('errors', new ViewErrorBag));
 
         return $bags->getBag($bag);
     }
 
     /**
      * Returns a boolean whether the given attribute has an error.
-     *
-     * @param string $name
-     * @param string $bag
-     * @return bool
      */
     public function hasError(string $name, string $bag = 'default'): bool
     {

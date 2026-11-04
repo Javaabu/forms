@@ -7,7 +7,9 @@ use Illuminate\Support\Str;
 class Errors extends Component
 {
     protected string $view = 'errors';
+
     public string $name;
+
     public string $bag;
 
     /**

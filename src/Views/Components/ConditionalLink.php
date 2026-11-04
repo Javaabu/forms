@@ -7,14 +7,19 @@ use Javaabu\Forms\Support\HandlesBoundValues;
 
 class ConditionalLink extends Component
 {
-    use HandlesBoundValues;
     use FormatsValues;
+    use HandlesBoundValues;
 
     protected string $view = 'conditional-link';
+
     public bool $multiline;
+
     public bool $showLink;
+
     public string $name;
+
     public string $url;
+
     public $value;
 
     /**

@@ -14,12 +14,10 @@ class PerPage extends Component
      * @return void
      */
     public function __construct(
-        array  $amounts = [10 => 10, 20 => 20, 50 => 50, 100 => 100, 500 => 500],
+        array $amounts = [10 => 10, 20 => 20, 50 => 50, 100 => 100, 500 => 500],
         string $framework = '',
-    )
-    {
+    ) {
         $this->amounts = $amounts;
         parent::__construct($framework);
     }
-
 }

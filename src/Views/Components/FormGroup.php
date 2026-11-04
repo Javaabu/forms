@@ -5,13 +5,21 @@ namespace Javaabu\Forms\Views\Components;
 class FormGroup extends Component
 {
     protected string $view = 'form-group';
+
     public string $name;
+
     public string $label;
+
     public bool $required;
+
     public bool $inline;
+
     public bool $floating;
+
     public bool $wrap;
+
     public bool $showLabel;
+
     public string $inlineInputClass;
 
     /**
@@ -22,11 +30,11 @@ class FormGroup extends Component
     public function __construct(
         string $name = '',
         string $label = '',
-        bool   $required = false,
-        bool   $inline = false,
-        bool   $floating = false,
-        bool   $wrap = true,
-        bool   $showLabel = true,
+        bool $required = false,
+        bool $inline = false,
+        bool $floating = false,
+        bool $wrap = true,
+        bool $showLabel = true,
         public string $inlineLabelClass = '',
         string $inlineInputClass = '',
         public bool $blankLabel = false,
