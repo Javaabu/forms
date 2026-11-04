@@ -103,8 +103,16 @@ Strings that were hard-coded English in v1 are now in `lang/{en,dv}/strings.php`
 php artisan vendor:publish --tag=forms-translations
 ```
 
+## Small output changes
+
+- Arrays in table cells and conditional links are joined with `, ` (Dhivehi `، `) instead of `,`. Change `table_array_separator` in the translations to keep the old value.
+- Bound dates show in the picker's format (`Y-m-d`, `Y-m-d H:i`, `H:i`) unless `date-format` is set.
+- A radio is checked only when the bound value equals its `value`.
+
 ## Bug fixes you might notice
 
 - Components no longer throw when a view renders without a session (mail, queued jobs, console). There are simply no validation errors to show.
 - `<x-forms::modal>` without a `footer` slot no longer throws.
-- `<textarea>` no longer gets an invalid `type` attribute.
+- `<textarea>` no longer gets an invalid `type` attribute, and its value is escaped.
+- Fields after `</x-forms::form>` no longer read the form's model.
+- `framework` on `form-open` and `search-form`, and `no-bulk` on `table`, work.

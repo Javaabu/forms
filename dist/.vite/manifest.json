@@ -7,8 +7,8 @@
     "file": "assets/i18n-D0vJVAyQ.js",
     "name": "i18n"
   },
-  "_lang-DEao1bKA.js": {
-    "file": "assets/lang-DEao1bKA.js",
+  "_lang-DgwDgsJs.js": {
+    "file": "assets/lang-DgwDgsJs.js",
     "name": "lang",
     "imports": [
       "_i18n-D0vJVAyQ.js"
@@ -64,14 +64,14 @@
     ]
   },
   "resources/js/files.ts": {
-    "file": "assets/files-CYahOnS1.js",
+    "file": "assets/files-DWEdQGOv.js",
     "name": "files",
     "src": "resources/js/files.ts",
     "isEntry": true,
     "imports": [
       "_dom-CmCSwMiH.js",
       "_i18n-D0vJVAyQ.js",
-      "_lang-DEao1bKA.js"
+      "_lang-DgwDgsJs.js"
     ]
   },
   "resources/js/forms.ts": {
@@ -84,14 +84,14 @@
     ]
   },
   "resources/js/select.ts": {
-    "file": "assets/select-ZL_M-dcV.js",
+    "file": "assets/select-Ck4ei_A0.js",
     "name": "select",
     "src": "resources/js/select.ts",
     "isEntry": true,
     "imports": [
       "_dom-CmCSwMiH.js",
       "_i18n-D0vJVAyQ.js",
-      "_lang-DEao1bKA.js"
+      "_lang-DgwDgsJs.js"
     ]
   },
   "resources/js/wysiwyg.ts": {

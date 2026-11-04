@@ -58,7 +58,7 @@
   "select_all": "Select All",
   "select_row": "Select :name",
   "sort_by": "Sort by :label",
-  "table_array_separator": ",",
+  "table_array_separator": ", ",
   "text_list_separator": ", ",
   "text_list_separator_last_glue": " and ",
   "thaana_toggle": "Type in Thaana",

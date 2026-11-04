@@ -58,7 +58,7 @@
   "select_all": "ހުރިހާ އެއްޗެއް ޚިޔާރުކުރޭ",
   "select_row": ":name ޚިޔާރުކުރޭ",
   "sort_by": ":label އިން ތަރުތީބުކުރޭ",
-  "table_array_separator": "،",
+  "table_array_separator": "، ",
   "text_list_separator": "، ",
   "text_list_separator_last_glue": " އަދި ",
   "thaana_toggle": "ތާނައިން ލިޔުއްވާ",

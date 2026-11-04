@@ -6,7 +6,7 @@ return [
     'blank' => '-',
     'yes' => 'އާނ',
     'no' => 'ނޫން',
-    'table_array_separator' => '،',
+    'table_array_separator' => '، ',
     'fileinput_select_file' => 'ފައިލް ސެލެކްޓްކޮށްލާ',
     'fileinput_upload_file' => 'ފައިލް އަޕްލޯޑްކުރޭ',
     'fileinput_change_file' => 'ބަދަލުކޮށްލާ',

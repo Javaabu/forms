@@ -6,7 +6,7 @@ return [
     'blank' => '-',
     'yes' => 'Yes',
     'no' => 'No',
-    'table_array_separator' => ',',
+    'table_array_separator' => ', ',
     'fileinput_select_file' => 'Select file',
     'fileinput_upload_file' => 'Upload file',
     'fileinput_change_file' => 'Change',

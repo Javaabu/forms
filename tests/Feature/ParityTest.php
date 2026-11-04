@@ -175,7 +175,7 @@ class ParityTest extends TestCase
     {
         $html = $this->renderBlade('<x-forms::formatted-value :value="[\'މާލެ\', \'އައްޑޫ\']" /> | <x-forms::formatted-value :value="null" />');
 
-        $this->assertStringContainsString('މާލެ,އައްޑޫ', $html->text());
+        $this->assertStringContainsString('މާލެ, އައްޑޫ', $html->text());
         $this->assertStringContainsString('-', $html->text());
     }
 
