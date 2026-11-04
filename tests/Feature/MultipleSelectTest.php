@@ -4,10 +4,12 @@ namespace Javaabu\Forms\Tests\Feature;
 
 use Illuminate\Http\Request;
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class MultipleSelectTest extends TestCase
 {
-    public function test_it_posts_all_selected_options()
+    #[Test]
+    public function it_posts_all_selected_options()
     {
         $this->registerTestRoute('multiple-select-keys', function (Request $request) {
             $request->validate([

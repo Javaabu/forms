@@ -3,12 +3,14 @@
 namespace Javaabu\Forms\Tests\Feature;
 
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class PerPageTest extends TestCase
 {
-    public function test_it_can_see_the_default_per_page_options_bs5()
+    #[Test]
+    public function it_can_see_the_default_per_page_options_bs5()
     {
-        $this->setFrameworkBootstrap5();
+        $this->setFrameworkBootstrap6();
 
         $this->registerTestRoute('per-page')
             ->visit('/per-page')
@@ -19,9 +21,10 @@ class PerPageTest extends TestCase
             ->see('500');
     }
 
-    public function test_it_can_see_the_custom_per_page_options_bs5()
+    #[Test]
+    public function it_can_see_the_custom_per_page_options_bs5()
     {
-        $this->setFrameworkBootstrap5();
+        $this->setFrameworkBootstrap6();
 
         $this->withoutExceptionHandling();
         $this->registerTestRoute('per-page-custom')
@@ -31,9 +34,10 @@ class PerPageTest extends TestCase
             ->see('55');
     }
 
-    public function test_it_can_see_the_default_per_page_options_material_admin_26()
+    #[Test]
+    public function it_can_see_the_default_per_page_options_bootstrap_6()
     {
-        $this->setFrameworkMaterialAdmin26();
+        $this->setFrameworkBootstrap6();
 
         $this->registerTestRoute('per-page')
             ->visit('/per-page')
@@ -44,9 +48,10 @@ class PerPageTest extends TestCase
             ->see('500');
     }
 
-    public function test_it_can_see_the_custom_per_page_options_material_admin_26()
+    #[Test]
+    public function it_can_see_the_custom_per_page_options_bootstrap_6()
     {
-        $this->setFrameworkMaterialAdmin26();
+        $this->setFrameworkBootstrap6();
 
         $this->withoutExceptionHandling();
         $this->registerTestRoute('per-page-custom')

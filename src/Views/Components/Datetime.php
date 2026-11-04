@@ -56,7 +56,7 @@ class Datetime extends Date
         );
 
         if (! $icon) {
-            $this->icon = $this->getFrameworkIcon($this->frameworkConfig('datetime-icon'));
+            $this->icon = $this->getFrameworkIcon('datetime');
         }
     }
 

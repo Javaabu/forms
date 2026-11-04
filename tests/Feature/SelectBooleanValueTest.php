@@ -3,10 +3,12 @@
 namespace Javaabu\Forms\Tests\Feature;
 
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class SelectBooleanValueTest extends TestCase
 {
-    public function test_it_shows_the_select_field()
+    #[Test]
+    public function it_shows_the_select_field()
     {
         $this->registerTestRoute('select-boolean-value');
 
@@ -15,7 +17,8 @@ class SelectBooleanValueTest extends TestCase
             ->seeElement('option[value="0"]');
     }
 
-    public function test_it_shows_the_false_value_selected()
+    #[Test]
+    public function it_shows_the_false_value_selected()
     {
         $this->registerTestRoute('select-boolean-value');
 

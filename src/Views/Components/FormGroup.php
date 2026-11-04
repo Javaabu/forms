@@ -50,7 +50,7 @@ class FormGroup extends Component
         $this->wrap = $wrap;
         $this->showLabel = $showLabel;
 
-        $this->inlineInputClass = $inlineInputClass ?: $this->frameworkConfig('inline-input-class');
+        $this->inlineInputClass = $inlineInputClass ?: $this->frameworkConfig('inline_input_class', '');
     }
 
     public function label(): string

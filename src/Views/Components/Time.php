@@ -54,7 +54,7 @@ class Time extends Date
         );
 
         if (! $icon) {
-            $this->icon = $this->getFrameworkIcon($this->frameworkConfig('time-icon'));
+            $this->icon = $this->getFrameworkIcon('time');
         }
     }
 

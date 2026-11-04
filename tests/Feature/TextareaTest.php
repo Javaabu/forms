@@ -4,6 +4,7 @@ namespace Javaabu\Forms\Tests\Feature;
 
 use Illuminate\Support\Facades\Config;
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class TextareaTest extends TestCase
 {
@@ -15,9 +16,10 @@ class TextareaTest extends TestCase
         Config::set('forms.inputs.inline', false);
     }
 
-    public function test_it_can_generate_bootstrap_5_form_textarea()
+    #[Test]
+    public function it_can_generate_bootstrap_6_form_textarea()
     {
-        $this->setFrameworkBootstrap5();
+        $this->setFrameworkBootstrap6();
         $this->registerTestRoute('form-textarea');
 
         $this->visit('/form-textarea')
@@ -31,24 +33,8 @@ class TextareaTest extends TestCase
             });
     }
 
-    public function test_it_can_generate_material_admin_26_form_textarea()
-    {
-        $this->setFrameworkMaterialAdmin26();
-        $this->registerTestRoute('form-textarea');
-
-        $this->visit('/form-textarea')
-            ->seeElement('div.form-group')
-            ->within('div.form-group', function () {
-                $this->seeElement('textarea[name="title"][id="title"].form-control')
-                    ->seeElement('textarea[rows="3"]')
-                    ->seeInElement('textarea[name="title"][id="title"].form-control', 'Lorem ipsum')
-                    ->seeElement('i.form-group__bar')
-                    ->seeElement('label[for="title"]')
-                    ->seeInElement('label', 'Title');
-            });
-    }
-
-    public function test_it_adds_the_tinymce_script_to_the_scripts_stack_for_wysiwyg_inputs()
+    #[Test]
+    public function it_adds_the_tinymce_script_to_the_scripts_stack_for_wysiwyg_inputs()
     {
         $this->registerTestRoute('wysiwyg');
 

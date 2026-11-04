@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Route;
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class Country extends Model
 {
@@ -69,7 +70,8 @@ class Select2CascadeTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_it_can_create_select2_options_from_a_collection()
+    #[Test]
+    public function it_can_create_select2_options_from_a_collection()
     {
         $countryA = Country::create(['name' => 'Maldives']);
         $countryB = Country::create(['name' => 'India']);
@@ -94,7 +96,8 @@ class Select2CascadeTest extends TestCase
             ->seeElement('option[value="' . $countryC->getKey() . '"]:not(:selected)');
     }
 
-    public function test_it_can_create_select2_options_from_a_query_builder()
+    #[Test]
+    public function it_can_create_select2_options_from_a_query_builder()
     {
         $countryA = Country::create(['name' => 'Maldives']);
         $countryB = Country::create(['name' => 'India']);
@@ -119,7 +122,8 @@ class Select2CascadeTest extends TestCase
             ->seeElement('option[value="' . $countryC->getKey() . '"]:not(:selected)');
     }
 
-    public function test_it_can_extract_an_accessor_field_from_the_builder()
+    #[Test]
+    public function it_can_extract_an_accessor_field_from_the_builder()
     {
 
         $countryA = Country::create(['name' => 'Maldives']);
@@ -147,7 +151,8 @@ class Select2CascadeTest extends TestCase
             ->seeElement('option[value="' . $countryC->getKey() . '"]:not(:selected)');
     }
 
-    public function test_it_can_extract_a_get_accessor_field_from_the_builder()
+    #[Test]
+    public function it_can_extract_a_get_accessor_field_from_the_builder()
     {
 
         $countryA = Country::create(['name' => 'Maldives']);
@@ -175,7 +180,8 @@ class Select2CascadeTest extends TestCase
             ->seeElement('option[value="' . $countryC->getKey() . '"]:not(:selected)');
     }
 
-    public function test_it_can_render_a_select2_cascade()
+    #[Test]
+    public function it_can_render_a_select2_cascade()
     {
 
         $countryA = Country::create(['name' => 'Maldives']);

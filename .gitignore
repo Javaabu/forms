@@ -7,3 +7,4 @@ coverage
 .php-cs-fixer.cache
 clover.xml
 coverage.xml
+node_modules

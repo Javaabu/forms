@@ -1,0 +1,17 @@
+{
+  "name": "javaabu-forms-assets",
+  "private": true,
+  "description": "Build tooling for the javaabu/forms Blade components: JS behaviours, CSS and icons.",
+  "license": "MIT",
+  "type": "module",
+  "packageManager": "pnpm@10.34.5",
+  "engines": {
+    "node": ">=20.19"
+  },
+  "scripts": {
+    "icons": "node scripts/icons.mjs"
+  },
+  "devDependencies": {
+    "lucide-static": "^1.68.0"
+  }
+}

@@ -6,14 +6,24 @@ return [
     | Default CSS Framework
     |--------------------------------------------------------------------------
     |
-    | This option controls the default CSS framework that will be used by the
-    | package when rendering form components
+    | The framework the components render for. Any component can override it
+    | with a framework="..." attribute.
     |
-    | Supported: "bootstrap-5", "material-admin-26"
+    | Supported: "onu", "bootstrap-6"
     |
     */
 
-    'framework' => 'bootstrap-5',
+    'framework' => env('FORMS_FRAMEWORK', 'bootstrap-6'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Eloquent date casting
+    |--------------------------------------------------------------------------
+    |
+    | When true, date inputs format bound model dates with the model's own
+    | date casts instead of the component's date format.
+    |
+    */
 
     'use_eloquent_date_casting' => false,
 
@@ -36,52 +46,63 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Icons
+    |--------------------------------------------------------------------------
+    |
+    | The icon each component uses. A value is either the name of one of the
+    | bundled Lucide icons (rendered as inline SVG, see resources/icons) or
+    | CSS classes for an icon font, e.g. "fa-regular fa-calendar". A
+    | framework can override these under frameworks.<name>.icons.
+    |
+    */
+
+    'icons' => [
+        'date' => 'calendar',
+        'datetime' => 'calendar',
+        'time' => 'clock',
+        'clear' => 'x',
+        'download' => 'download',
+        'upload' => 'upload',
+        'image' => 'image',
+        'search' => 'search',
+        'no_items' => 'file',
+        'create' => 'plus',
+        'sort' => 'arrow-up-down',
+        'sort_asc' => 'arrow-up',
+        'sort_desc' => 'arrow-down',
+        'alert_success' => 'circle-check',
+        'alert_danger' => 'circle-x',
+        'alert_warning' => 'triangle-alert',
+        'alert_info' => 'info',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Framework Settings
     |--------------------------------------------------------------------------
     |
-    | Framework specific configs
+    | Framework specific settings. Each framework can also have its own
+    | "icons" array, merged over the icons above.
     |
     */
 
     'frameworks' => [
-        'bootstrap-5' => [
-            'icon-prefix' => 'fa-regular',
-            'date-icon' => 'fa-calendar',
-            'date-icon-wrapper-class' => 'date-icon-wrapper',
-            'datetime-icon' => 'fa-calendar',
-            'time-icon' => 'fa-clock',
-            'date-clear-icon' => 'fa-close',
-            'date-clear-btn-class' => 'btn btn-outline-secondary btn-date-clear disable-w-input',
-            'file-download-icon' => 'fa-arrow-to-bottom',
-            'file-upload-icon' => 'fa-arrow-to-top',
-            'file-clear-icon' => 'fa-close',
-            'image-icon' => 'fa-image',
-            'inline-label-class' => 'col-sm-3 col-lg-2 col-form-label',
-            'inline-input-class' => 'col-sm-9 col-lg-10',
-            'inline-entry-label-class' => 'col-sm-6 col-md-4',
-            'inline-entry-class' => 'col-sm-6 col-md-8',
-            'search-icon' => 'fa-search',
-            'no-items-icon' => 'fa-file',
+        'onu' => [
+            'inline_label_class' => 'sm:w-1/4 lg:w-1/6 sm:shrink-0',
+            'inline_input_class' => 'min-w-0 flex-1',
+            'inline_entry_label_class' => 'sm:w-1/2 md:w-1/3 sm:shrink-0',
+            'inline_entry_class' => 'min-w-0 flex-1',
+            'date_icon_wrapper_class' => '',
+            'date_clear_btn_class' => '',
         ],
 
-        'material-admin-26' => [
-            'icon-prefix' => 'zmdi',
-            'date-icon' => 'zmdi-calendar',
-            'date-icon-wrapper-class' => 'date-icon-wrapper',
-            'datetime-icon' => 'zmdi-calendar',
-            'time-icon' => 'zmdi-clock',
-            'date-clear-icon' => 'zmdi-close',
-            'date-clear-btn-class' => 'text-body btn-date-clear disable-w-input',
-            'file-download-icon' => 'zmdi-open-in-new',
-            'file-upload-icon' => 'zmdi-upload',
-            'file-clear-icon' => 'zmdi-close',
-            'image-icon' => 'zmdi-image',
-            'inline-label-class' => 'col-sm-3 col-lg-2 col-form-label',
-            'inline-input-class' => 'col-sm-9 col-lg-10',
-            'inline-entry-label-class' => 'col-sm-6 col-md-4',
-            'inline-entry-class' => 'col-sm-6 col-md-8',
-            'search-icon' => 'zmdi-search',
-            'no-items-icon' => 'zmdi-file',
+        'bootstrap-6' => [
+            'inline_label_class' => 'sm:col-3 lg:col-2 col-form-label',
+            'inline_input_class' => 'sm:col-9 lg:col-10',
+            'inline_entry_label_class' => 'sm:col-6 md:col-4',
+            'inline_entry_class' => 'sm:col-6 md:col-8',
+            'date_icon_wrapper_class' => '',
+            'date_clear_btn_class' => '',
         ],
     ],
 
@@ -90,7 +111,8 @@ return [
     | Scripts Stack
     |--------------------------------------------------------------------------
     |
-    | The name of the stack to push scripts
+    | The Blade stack the components push their scripts to when javaabu/manifest
+    | isn't handling assets. Render it with @stack('scripts') in your layout.
     |
     */
 

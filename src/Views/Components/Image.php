@@ -76,7 +76,7 @@ class Image extends File
             framework: $framework
         );
 
-        $this->icon = $icon ?: $this->getFrameworkIcon($this->frameworkConfig('image-icon'));
+        $this->icon = $icon ?: $this->getFrameworkIcon('image');
 
         if ($this->circle) {
             $aspectRatio = 1;

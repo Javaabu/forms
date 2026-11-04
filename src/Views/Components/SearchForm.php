@@ -31,6 +31,6 @@ class SearchForm extends Form
 
         parent::__construct($method, $model, $files, $framework);
 
-        $this->icon = $icon ?: $this->getFrameworkIcon($this->frameworkConfig('search-icon'));
+        $this->icon = $icon ?: $this->getFrameworkIcon('search');
     }
 }

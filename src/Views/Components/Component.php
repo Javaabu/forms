@@ -2,8 +2,11 @@
 
 namespace Javaabu\Forms\Views\Components;
 
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 use Illuminate\View\Component as BaseComponent;
+use Javaabu\Forms\Frameworks\Framework;
+use Javaabu\Forms\Frameworks\Frameworks;
 
 abstract class Component extends BaseComponent
 {
@@ -38,16 +41,27 @@ abstract class Component extends BaseComponent
         $this->framework = $framework;
     }
 
+    /**
+     * Resolves a logical icon (date, clear, upload, ...) from the forms.icons config.
+     */
     public function getFrameworkIcon(string $icon): string
     {
-        $icon_prefix = $this->frameworkConfig('icon-prefix');
-
-        return "$icon_prefix $icon";
+        return $this->frameworkConfig("icons.{$icon}")
+            ?? config("forms.icons.{$icon}")
+            ?? $icon;
     }
 
-    public function frameworkConfig(string $config, $default = null)
+    /**
+     * The framework's class map (button colours, badges, alerts).
+     */
+    public function frameworkClasses(): Framework
     {
-        return config('forms.frameworks.' . $this->framework . '.' . $config, $default);
+        return Frameworks::get($this->framework);
+    }
+
+    public function frameworkConfig(string $config, mixed $default = null): mixed
+    {
+        return config("forms.frameworks.{$this->framework}.{$config}", $default);
     }
 
     public function getView(): string
@@ -56,15 +70,19 @@ abstract class Component extends BaseComponent
     }
 
     /**
-     * {@inheritDoc}
+     * The framework's own view, or the shared one in forms::common when the framework has none.
      */
     public function render()
     {
-        $view = $this->getView();
+        $view = str_replace('{framework}', $this->framework, $this->getView());
 
-        $framework = $this->framework;
+        if (View::exists($view)) {
+            return $view;
+        }
 
-        return str_replace('{framework}', $framework, $view);
+        $common = str_replace('{framework}', 'common', $this->getView());
+
+        return View::exists($common) ? $common : $view;
     }
 
     /**

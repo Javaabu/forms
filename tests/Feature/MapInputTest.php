@@ -7,6 +7,7 @@ use Javaabu\Forms\Tests\TestCase;
 use Javaabu\Forms\Tests\TestSupport\Models\City;
 use MatanYadaev\EloquentSpatial\Objects\Point;
 use MatanYadaev\EloquentSpatial\Objects\Polygon;
+use PHPUnit\Framework\Attributes\Test;
 
 class MapInputTest extends TestCase
 {
@@ -23,7 +24,8 @@ class MapInputTest extends TestCase
         }
     }
 
-    public function test_it_adds_the_maps_script_to_the_scripts_stack()
+    #[Test]
+    public function it_adds_the_maps_script_to_the_scripts_stack()
     {
         $city = new City;
         $lat = 4.175804;
@@ -31,7 +33,7 @@ class MapInputTest extends TestCase
 
         $city->coordinates = new Point($lat, $lng, self::SRID);
 
-        $this->setFrameworkMaterialAdmin26();
+        $this->setFrameworkBootstrap6();
 
         Route::get('map-input', function () use ($city) {
             return view('map-input')
@@ -43,7 +45,8 @@ class MapInputTest extends TestCase
             ->seeInElement('script', 'The Google Maps JavaScript API');
     }
 
-    public function test_it_can_bind_map_inputs_from_attributes()
+    #[Test]
+    public function it_can_bind_map_inputs_from_attributes()
     {
         $city = new City;
         $lat = 4.175804;
@@ -55,7 +58,7 @@ class MapInputTest extends TestCase
         $city->boundary = Polygon::fromWkt($wkt, self::SRID);
         $city->radius = $radius;
 
-        $this->setFrameworkMaterialAdmin26();
+        $this->setFrameworkBootstrap6();
 
         Route::get('map-input', function () use ($city) {
             return view('map-input')
@@ -73,7 +76,8 @@ class MapInputTest extends TestCase
             });
     }
 
-    public function test_it_can_bind_map_inputs_from_accessors()
+    #[Test]
+    public function it_can_bind_map_inputs_from_accessors()
     {
         $city = new City;
         $lat = 4.175804;
@@ -85,7 +89,7 @@ class MapInputTest extends TestCase
         $city->boundary = Polygon::fromWkt($wkt, self::SRID);
         $city->radius = $radius;
 
-        $this->setFrameworkMaterialAdmin26();
+        $this->setFrameworkBootstrap6();
 
         Route::get('map-input-accessor', function () use ($city) {
             return view('map-input-accessor')

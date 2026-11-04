@@ -95,9 +95,9 @@ class File extends Input
             framework: $framework
         );
 
-        $this->downloadIcon = $downloadIcon ?: $this->getFrameworkIcon($this->frameworkConfig('file-download-icon'));
-        $this->uploadIcon = $uploadIcon ?: $this->getFrameworkIcon($this->frameworkConfig('file-upload-icon'));
-        $this->clearIcon = $clearIcon ?: $this->getFrameworkIcon($this->frameworkConfig('file-clear-icon'));
+        $this->downloadIcon = $downloadIcon ?: $this->getFrameworkIcon('download');
+        $this->uploadIcon = $uploadIcon ?: $this->getFrameworkIcon('upload');
+        $this->clearIcon = $clearIcon ?: $this->getFrameworkIcon('clear');
     }
 
     public function getHint(): string

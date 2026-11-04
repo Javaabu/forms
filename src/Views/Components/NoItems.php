@@ -41,7 +41,7 @@ class NoItems extends Component
         $this->createAction = $createAction;
         $this->modelType = $modelType;
 
-        $this->icon = $icon ?: $this->getFrameworkIcon($this->frameworkConfig('no-items-icon'));
+        $this->icon = $icon ?: $this->getFrameworkIcon('no_items');
         $this->showCreate = is_null($showCreate)
             ? ($this->model && auth()->user() ? auth()->user()->can('create', $this->model) : false)
             : $showCreate;

@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class PostBelongsToMany extends Model
 {
@@ -44,7 +45,8 @@ class SelectRelationTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_it_handles_belongs_to_many_relationships()
+    #[Test]
+    public function it_handles_belongs_to_many_relationships()
     {
 
         $post = PostBelongsToMany::create(['content' => 'Content']);
@@ -74,7 +76,8 @@ class SelectRelationTest extends TestCase
         $this->assertCount(1, DB::getQueryLog());
     }
 
-    public function test_it_handles_morph_many_relationships()
+    #[Test]
+    public function it_handles_morph_many_relationships()
     {
 
         $post = PostMorphMany::create(['content' => 'Content']);
@@ -102,7 +105,8 @@ class SelectRelationTest extends TestCase
         $this->assertCount(1, DB::getQueryLog());
     }
 
-    public function test_it_handles_morph_to_many_relationships()
+    #[Test]
+    public function it_handles_morph_to_many_relationships()
     {
 
         $post = PostMorphToMany::create(['content' => 'Content']);

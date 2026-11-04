@@ -40,7 +40,7 @@ class Label extends Component
 
         $this->floating = $floating;
 
-        $this->inlineLabelClass = $inlineLabelClass ?: $this->frameworkConfig('inline-label-class');
+        $this->inlineLabelClass = $inlineLabelClass ?: $this->frameworkConfig('inline_label_class', '');
     }
 
     public function label(): string

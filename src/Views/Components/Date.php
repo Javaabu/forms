@@ -62,10 +62,10 @@ class Date extends Input
             framework: $framework,
         );
 
-        $this->icon = $icon ?: $this->getFrameworkIcon($this->frameworkConfig('date-icon'));
-        $this->clearIcon = $clearIcon ?: $this->getFrameworkIcon($this->frameworkConfig('date-clear-icon'));
-        $this->clearBtnClass = $clearBtnClass ?: $this->frameworkConfig('date-clear-btn-class');
-        $this->iconWrapperClass = $iconWrapperClass ?: $this->frameworkConfig('date-icon-wrapper-class');
+        $this->icon = $icon ?: $this->getFrameworkIcon('date');
+        $this->clearIcon = $clearIcon ?: $this->getFrameworkIcon('clear');
+        $this->clearBtnClass = $clearBtnClass ?: $this->frameworkConfig('date_clear_btn_class', '');
+        $this->iconWrapperClass = $iconWrapperClass ?: $this->frameworkConfig('date_icon_wrapper_class', '');
     }
 
     public function datePickerClass(): string
