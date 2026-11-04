@@ -90,4 +90,18 @@ class MimeTypesTest extends TestCase
         $this->assertEquals('application/epub+zip', $html->filter('input[type="file"]')->attr('accept'));
         $this->assertStringContainsString('.epub', $html->text());
     }
+
+    #[Test]
+    public function file_inputs_render_their_default_hint_without_a_global_format_file_size(): void
+    {
+        $html = $this->renderBlade('<x-forms::file name="file" :label="__(\'File\')" :extensions="[\'csv\', \'xlsx\']" :max-size="51200" :model="false" />');
+
+        $this->assertStringContainsString('Only .csv and .xlsx files of max 50MB allowed.', $html->text());
+
+        app()->setLocale('dv');
+
+        $html = $this->renderBlade('<x-forms::file name="file" :extensions="[\'csv\']" :max-size="512" :model="false" />');
+
+        $this->assertStringContainsString('ހަމައެކަނި .csv ވައްތަރުގެ 512KB', $html->text());
+    }
 }
