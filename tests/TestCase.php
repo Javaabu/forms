@@ -16,6 +16,7 @@ use Illuminate\Support\ViewErrorBag;
 use Javaabu\Forms\FormsServiceProvider;
 use Javaabu\Forms\Tests\TestSupport\Providers\TestServiceProvider;
 use Javaabu\Helpers\HelpersServiceProvider;
+use Javaabu\Manifest\ManifestServiceProvider;
 use Javaabu\Settings\SettingsServiceProvider;
 use Orchestra\Testbench\BrowserKit\TestCase as BaseTestCase;
 use Spatie\MediaLibrary\MediaLibraryServiceProvider;
@@ -48,6 +49,9 @@ abstract class TestCase extends BaseTestCase
 
         $this->app['config']->set('session.serialization', 'php');
 
+        // Tests check which assets components require; AssetsTest covers injection.
+        $this->app['config']->set('manifest.inject', false);
+
         // Behaviour tests render with Bootstrap 6; framework tests pick their own.
         $this->app['config']->set('forms.framework', 'bootstrap-6');
 
@@ -73,6 +77,7 @@ abstract class TestCase extends BaseTestCase
             SettingsServiceProvider::class,
             MediaLibraryServiceProvider::class,
             HelpersServiceProvider::class,
+            ManifestServiceProvider::class,
             FormsServiceProvider::class,
             TestServiceProvider::class,
         ];

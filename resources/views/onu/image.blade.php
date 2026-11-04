@@ -58,6 +58,9 @@
                         type="file"
                         accept="{{ implode(',', $mimetypes) }}"
                         name="{{ $name }}"
+                        @if($upload && $maxSize)
+                            data-max-file-size="{{ $maxSize }}"
+                        @endif
                         @if($label && ! $attributes->get('id'))
                             id="{{ $id() }}"
                         @endif

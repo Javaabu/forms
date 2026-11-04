@@ -2,6 +2,8 @@
 
 namespace Javaabu\Forms\Views\Components;
 
+use Javaabu\Forms\Assets\Assets;
+
 class Textarea extends Input
 {
     protected string $view = 'textarea';
@@ -57,5 +59,11 @@ class Textarea extends Input
         if (! is_null($value)) {
             $this->value = $value;
         }
+    }
+
+    /** @return array<int, string> */
+    public function assets(): array
+    {
+        return $this->wysiwyg ? [Assets::CORE, Assets::WYSIWYG] : [Assets::CORE];
     }
 }

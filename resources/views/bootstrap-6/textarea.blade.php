@@ -16,7 +16,7 @@
         @if($floating || $placeholder)
             placeholder="{{ $placeholder ?: ' ' }}"
         @endif
-    >{!! $value !!}</textarea>
+    >{{ $value }}</textarea>
 
     @if(! empty($help))
         <x-forms::input-help :framework="$framework">

@@ -29,7 +29,7 @@ class SearchForm extends Form
             $model = request()->query();
         }
 
-        parent::__construct($method, $model, $files, $framework);
+        parent::__construct($method, $model, $files, framework: $framework);
 
         $this->icon = $icon ?: $this->getFrameworkIcon('search');
     }

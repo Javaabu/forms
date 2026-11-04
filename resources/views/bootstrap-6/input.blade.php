@@ -13,12 +13,8 @@
                 {{ $prepend }}
             @endif
             @endif
-
-            @if($isFileInput())
-                @include('forms::bootstrap-6.file.file-input')
-            @else
                 <input
-                    {!! $attributes->merge([
+                    {!! $attributes->except(['value'])->merge([
                         'class' => 'form-control' . ($type === 'color' ? ' form-control-color' : '') . ($hasError($name) ? ' is-invalid' : '') . ($isDateInput() ? ' ' . $datePickerClass() : ''),
                         'required' => $required,
                         'aria-invalid' => $hasError($name) ? 'true' : null,
@@ -27,7 +23,7 @@
                         data-decimals="{{ $decimalPlaces() }}"
                     @endif
                     type="{{ $type }}"
-                    value="{{ $value ?? ($type === 'color' ? '#000000' : '') }}"
+                    value="{{ $value ?? $attributes->get('value') ?? ($type === 'color' ? '#000000' : '') }}"
                     name="{{ $name }}"
                     @if($label && ! $attributes->get('id'))
                         id="{{ $id() }}"
@@ -36,7 +32,6 @@
                         placeholder="{{ $placeholder ?: ' ' }}"
                     @endif
                 />
-            @endif
 
             @if($isDateInput() || (! empty($prepend)) || (! empty($append)))
                 @if($isDateInput())

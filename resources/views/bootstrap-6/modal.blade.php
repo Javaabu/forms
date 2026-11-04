@@ -7,6 +7,10 @@
     aria-labelledby="{{ ($attributes->get('id') ?: $id()) . '-title' }}"
     @endif
 >
+    @if(! $title)
+        <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="dialog" aria-label="{{ __('forms::strings.close') }}"></button>
+    @endif
+
     @if($title)
         <div class="dialog-header">
             <h2 class="dialog-title" id="{{ ($attributes->get('id') ?: $id()) . '-title' }}">

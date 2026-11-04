@@ -2,6 +2,7 @@
 
 namespace Javaabu\Forms\Views\Components;
 
+use BackedEnum;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -66,12 +67,32 @@ class Radio extends Input
             }
 
             if (is_array($boundValue)) {
-                $this->checked = in_array($value, $boundValue);
+                $this->checked = in_array($value instanceof BackedEnum ? $value->value : $value, array_map(fn ($item) => $item instanceof BackedEnum ? $item->value : $item, $boundValue));
 
                 return;
             }
 
-            $this->checked = is_null($boundValue) ? $default : $boundValue;
+            $this->checked = is_null($boundValue) ? (bool) $default : $this->matchesValue($boundValue, $value);
         }
+    }
+
+    /**
+     * A radio is checked when the bound value is its value (backed enums by their value).
+     */
+    protected function matchesValue(mixed $bound, mixed $value): bool
+    {
+        if ($bound instanceof BackedEnum) {
+            $bound = $bound->value;
+        }
+
+        if ($value instanceof BackedEnum) {
+            $value = $value->value;
+        }
+
+        if (is_bool($bound)) {
+            return $bound === (bool) $value;
+        }
+
+        return (string) $bound === (string) $value;
     }
 }

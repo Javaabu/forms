@@ -1,5 +1,5 @@
 @php($c = \Javaabu\Forms\Frameworks\Frameworks::get('onu'))
-@if($paginator->count())
+@if($paginator->count() && method_exists($paginator, 'total'))
     <div class="flex items-center justify-between">
         <div class="text-sm text-muted-foreground">
             {{ trans_choice('forms::strings.pagination_showing', $paginator->total(), ['count' => $paginator->count(), 'total' => $paginator->total()]) }}
@@ -24,7 +24,7 @@
                 @endif
             </li>
 
-            @foreach ($elements as $element)
+            @foreach ($elements ?? [] as $element)
                 @if (is_string($element))
                     <li class="page-item disabled" data-slot="pagination-item">
                         <span class="{{ $c->classes('pagination.pagination-ellipsis') }}" data-slot="pagination-ellipsis" aria-hidden="true">

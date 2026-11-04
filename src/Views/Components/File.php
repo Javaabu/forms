@@ -3,7 +3,9 @@
 namespace Javaabu\Forms\Views\Components;
 
 use Illuminate\Support\Arr;
+use Javaabu\Forms\Assets\Assets;
 use Javaabu\Forms\Support\HandlesMediaValues;
+use Javaabu\Forms\Support\Settings;
 use Javaabu\Helpers\Media\AllowedMimeTypes;
 
 class File extends Input
@@ -77,7 +79,11 @@ class File extends Input
         $this->fileTypes = Arr::wrap($type);
         $this->mimetypes = $mimetypes ? Arr::wrap($mimetypes) : AllowedMimeTypes::getAllowedMimeTypes($this->fileTypes);
         $this->extensions = $extensions ? Arr::wrap($extensions) : AllowedMimeTypes::getExtensions($this->mimetypes);
-        $this->maxSize = $maxSize ?: AllowedMimeTypes::getMaxFileSize($this->fileTypes);
+        $this->maxSize = $maxSize ?: (
+            function_exists('get_setting')
+                ? AllowedMimeTypes::getMaxFileSize($this->fileTypes)
+                : (int) Settings::get('max_upload_file_size', 10240)
+        );
 
         parent::__construct(
             $name,
@@ -115,5 +121,11 @@ class File extends Input
     public function isFileInput(): bool
     {
         return true;
+    }
+
+    /** @return array<int, string> */
+    public function assets(): array
+    {
+        return [Assets::CORE, Assets::FILES];
     }
 }

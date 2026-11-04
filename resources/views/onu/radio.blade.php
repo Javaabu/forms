@@ -3,7 +3,7 @@
     <div class="{{ $c->classes('choice.checkbox-field') }}" data-slot="radio-field">
         <span class="{{ $c->classes('choice.control') }}">
             <input
-                {!! $attributes->merge([
+                {!! $attributes->except(['id'])->merge([
                     'class' => $c->classes('radio.native') . ' forms-radio' . ($hasErrorAndShow($name) ? ' is-invalid' : ''),
                     'aria-invalid' => $hasErrorAndShow($name) ? 'true' : null,
                 ]) !!}

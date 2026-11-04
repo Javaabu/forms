@@ -4,6 +4,7 @@ namespace Javaabu\Forms\Views\Components;
 
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
+use Javaabu\Forms\Assets\Assets;
 
 class Date extends Input
 {
@@ -78,12 +79,30 @@ class Date extends Input
         return true;
     }
 
+    /**
+     * The format bound dates are shown in when date-format isn't given: the format the picker uses.
+     */
+    public function defaultDateFormat(): string
+    {
+        return 'Y-m-d';
+    }
+
     protected function formatDateTime(Model $model, string $key, DateTimeInterface $date)
     {
-        if (! $this->dateFormat) {
+        if ($this->dateFormat) {
+            return $date->format($this->dateFormat);
+        }
+
+        if (config('forms.use_eloquent_date_casting')) {
             return parent::formatDateTime($model, $key, $date);
         }
 
-        return $date->format($this->dateFormat);
+        return $date->format($this->defaultDateFormat());
+    }
+
+    /** @return array<int, string> */
+    public function assets(): array
+    {
+        return [Assets::CORE, Assets::DATES];
     }
 }

@@ -52,4 +52,16 @@ class Heading extends Component
 
         return $sorting_class;
     }
+
+    /**
+     * The logical icon (forms.icons) for the current sort state of this column.
+     */
+    public function sortIcon(): string
+    {
+        if (Request::get('orderby') != $this->sortable) {
+            return 'sort';
+        }
+
+        return strtolower(Request::get('order', 'ASC')) === 'desc' ? 'sort_desc' : 'sort_asc';
+    }
 }

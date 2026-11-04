@@ -2,7 +2,9 @@
 
 namespace Javaabu\Forms\Tests\Feature;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Javaabu\Forms\Tests\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
@@ -139,7 +141,7 @@ class ParityTest extends TestCase
         $summary = $html->filter('form > [data-forms-summary][role="alert"]');
 
         $this->assertCount(1, $summary);
-        $this->assertStringContainsString('ތިރީގައިވާ ކުށްތައް', $this->renderBladeInDhivehi('<x-forms::error-summary />')->text());
+        $this->assertStringContainsString('ތިރީގައިވާ ގޯސްތައް', $this->renderBladeInDhivehi('<x-forms::error-summary />')->text());
         $this->assertCount(1, $summary->filter('a[href="#name"]'));
         $this->assertCount(1, $summary->filter('a[href="#address-city"]'));
         $this->assertNotNull($html->filter('form')->attr('data-focus-on-error'));
@@ -215,5 +217,110 @@ class ParityTest extends TestCase
         } finally {
             app()->setLocale('en');
         }
+    }
+
+    #[Test]
+    #[DataProvider('frameworks')]
+    public function it_does_not_duplicate_value_or_id_attributes(string $framework): void
+    {
+        $this->setFramework($framework);
+
+        $html = $this->renderBlade('<x-forms::hidden name="redirect" value="/back" /><x-forms::checkbox name="agree" id="agree-terms" />');
+
+        $this->assertEquals(1, substr_count($html->html(), 'value="/back"'));
+        $this->assertEquals(1, substr_count($html->html(), 'id="agree-terms"'));
+    }
+
+    #[Test]
+    #[DataProvider('frameworks')]
+    public function it_escapes_textarea_values(string $framework): void
+    {
+        $this->setFramework($framework);
+
+        $html = $this->renderBlade('<x-forms::textarea name="body" :default="$value" />', ['value' => '</textarea><script>alert(1)</script>']);
+
+        $this->assertCount(0, $html->filter('script'));
+        $this->assertEquals('</textarea><script>alert(1)</script>', $html->filter('textarea')->text());
+    }
+
+    #[Test]
+    public function it_stops_binding_the_form_model_after_the_form(): void
+    {
+        $html = $this->renderBlade('<x-forms::form :model="$article"><x-forms::text name="title" /></x-forms::form><x-forms::text name="title" id="after" />', ['article' => ['title' => 'ރާއްޖެ']]);
+
+        $this->assertEquals('ރާއްޖެ', $html->filter('form input[name="title"]')->attr('value'));
+        $this->assertEquals('', $html->filter('input#after')->attr('value'));
+    }
+
+    #[Test]
+    public function search_forms_respect_the_framework_attribute(): void
+    {
+        $this->setFrameworkOnu();
+
+        $html = $this->renderBlade('<x-forms::search-form action="/islands" framework="bootstrap-6" />');
+
+        $this->assertCount(1, $html->filter('input.form-control[name="search"]'));
+    }
+
+    #[Test]
+    public function radios_are_checked_only_for_their_own_value(): void
+    {
+        $html = $this->renderBlade(<<<'BLADE'
+            <x-forms::form :model="$island">
+                <x-forms::radio name="type" value="inhabited" id="type-inhabited" />
+                <x-forms::radio name="type" value="resort" id="type-resort" />
+                <x-forms::checkbox name="is_capital" />
+            </x-forms::form>
+            BLADE, ['island' => ['type' => 'resort', 'is_capital' => true]]);
+
+        $this->assertNull($html->filter('#type-inhabited')->attr('checked'));
+        $this->assertNotNull($html->filter('#type-resort')->attr('checked'));
+        $this->assertNotNull($html->filter('input[name="is_capital"]')->attr('checked'));
+    }
+
+    #[Test]
+    public function bound_dates_use_the_format_of_their_picker(): void
+    {
+        $event = new class extends Model
+        {
+            protected $casts = ['starts_at' => 'datetime'];
+        };
+
+        $event->starts_at = '2026-11-04 08:30:15';
+
+        $html = $this->renderBlade(<<<'BLADE'
+            <x-forms::date name="starts_at" :model="$event" id="d" />
+            <x-forms::datetime name="starts_at" :model="$event" id="dt" />
+            <x-forms::time name="starts_at" :model="$event" id="t" />
+            <x-forms::time name="starts_at" :model="$event" id="t2" date-format="H:i:s" />
+            BLADE, ['event' => $event]);
+
+        $this->assertEquals('2026-11-04', $html->filter('#d')->attr('value'));
+        $this->assertEquals('2026-11-04 08:30', $html->filter('#dt')->attr('value'));
+        $this->assertEquals('08:30', $html->filter('#t')->attr('value'));
+        $this->assertEquals('08:30:15', $html->filter('#t2')->attr('value'));
+        $this->assertNull($html->filter('#t2')->attr('date-format'));
+    }
+
+    #[Test]
+    #[DataProvider('frameworks')]
+    public function it_renders_simple_paginators(string $framework): void
+    {
+        $this->setFramework($framework);
+
+        $paginator = new Paginator(range(1, 11), 10, 1, ['path' => '/posts']);
+
+        $html = $this->renderBlade('<x-forms::pagination :paginator="$paginator" />', ['paginator' => $paginator]);
+
+        $this->assertCount(1, $html->filter('a[rel="next"][href="/posts?page=2"]'));
+    }
+
+    #[Test]
+    public function conditional_links_hide_for_guests_instead_of_failing(): void
+    {
+        $html = $this->renderBlade('<x-forms::conditional-link url="/admin/islands/1" can="update" :arg="null" value="ހުޅުމާލެ" />');
+
+        $this->assertCount(0, $html->filter('a'));
+        $this->assertStringContainsString('ހުޅުމާލެ', $html->text());
     }
 }

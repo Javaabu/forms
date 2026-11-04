@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Javaabu\Forms\Assets\Assets;
 use Javaabu\Forms\Support\HandlesDefaultAndOldValue;
 use Javaabu\Forms\Support\HandlesValidationErrors;
 
@@ -196,5 +197,11 @@ class Select extends Component
     public function shouldShowSyncField(): bool
     {
         return (! $this->excludeSyncField) && $this->multiple && (! $this->disabled);
+    }
+
+    /** @return array<int, string> */
+    public function assets(): array
+    {
+        return $this->isSelect2 ? [Assets::CORE, Assets::SELECT] : [Assets::CORE];
     }
 }

@@ -16,4 +16,7 @@
     @else
         {{ $label }}
     @endif
+    @if($sortable)
+        <x-forms::icon :name="$sortIcon()" :framework="$framework" class="sort-icon ms-1 opacity-50" />
+    @endif
 </th>

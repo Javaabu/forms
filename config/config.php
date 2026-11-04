@@ -42,6 +42,7 @@ return [
         'per_page' => null, // 20
         'default_lat' => null, // 4.1755 (Malé)
         'default_lng' => null, // 73.5093 (Malé)
+        'max_upload_file_size' => null, // 10240 KB, when javaabu/settings isn't installed
     ],
 
     /*
@@ -110,6 +111,23 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Assets
+    |--------------------------------------------------------------------------
+    |
+    | Components load the JS and CSS they need through javaabu/manifest: on
+    | their own (injected into the page), or where you put @manifestScripts
+    | and @manifestStyles. Turn "styles" off when your app's own Tailwind
+    | build imports resources/css/onu.css, so Onu's CSS isn't loaded twice.
+    |
+    */
+
+    'assets' => [
+        'enabled' => env('FORMS_ASSETS', true),
+        'styles' => env('FORMS_STYLES', true),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Scripts Stack
     |--------------------------------------------------------------------------
     |
@@ -119,6 +137,20 @@ return [
     */
 
     'scripts_stack' => 'scripts',
+
+    /*
+    |--------------------------------------------------------------------------
+    | WYSIWYG
+    |--------------------------------------------------------------------------
+    |
+    | Wysiwyg textareas use TinyMCE, which your app hosts (it isn't bundled).
+    | Defaults to asset('vendors/tinymce/tinymce.min.js').
+    |
+    */
+
+    'wysiwyg' => [
+        'tinymce_url' => env('TINYMCE_URL'),
+    ],
 
     /*
     |--------------------------------------------------------------------------

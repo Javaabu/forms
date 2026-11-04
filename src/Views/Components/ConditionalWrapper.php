@@ -15,7 +15,7 @@ class ConditionalWrapper extends Component
      */
     public function __construct(
         public string $enableElem,
-        public $enableValue,
+        public $enableValue = null,
         public bool $hideFields = false,
         public bool $disable = false,
         public bool $enableCheckbox = false,

@@ -64,4 +64,9 @@ class Datetime extends Date
     {
         return 'datetime-picker';
     }
+
+    public function defaultDateFormat(): string
+    {
+        return 'Y-m-d H:i';
+    }
 }

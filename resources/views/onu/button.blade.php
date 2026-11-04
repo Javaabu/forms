@@ -7,7 +7,9 @@
     data-slot="button"
     data-variant="{{ $frameworkClasses()->buttonVariant($color) }}"
     data-size="{{ $frameworkSize() ?? 'default' }}"
-    type="{{ $type ?: 'button' }}"
+    @if($type)
+        type="{{ $type }}"
+    @endif
     @if($loading)
         aria-busy="true"
         aria-disabled="true"

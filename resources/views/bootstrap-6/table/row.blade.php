@@ -7,3 +7,4 @@
 
     {{ $slot }}
 </tr>
+{{ $unbindModel() }}

@@ -1,4 +1,4 @@
-@if($paginator->count())
+@if($paginator->count() && method_exists($paginator, 'total'))
     <div class="d-flex justify-content-between align-items-center">
         <div class="fg-3">
             {{ trans_choice('forms::strings.pagination_showing', $paginator->total(), ['count' => $paginator->count(), 'total' => $paginator->total()]) }}
@@ -21,7 +21,7 @@
             @endif
 
             {{-- Pagination Elements --}}
-            @foreach ($elements as $element)
+            @foreach ($elements ?? [] as $element)
                 {{-- "Three Dots" Separator --}}
                 @if (is_string($element))
                     <li class="page-item disabled" aria-disabled="true"><span class="page-link">{{ $element }}</span></li>

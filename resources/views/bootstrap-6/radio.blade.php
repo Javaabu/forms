@@ -1,7 +1,7 @@
 <x-forms::form-group :class="$groupClass()" :inline-input-class="$inlineInputClass" :inline-label-class="$inlineLabelClass" :show-label="$inline" :wrap="$showLabel && $type != 'hidden'" :label="$label ?: $label()" :name="$attributes->get('id') ?: $id()" :framework="$framework" :inline="$inline" :required="$required" :floating="$floating">
     <div class="form-field">
         <input
-            {!! $attributes->merge([
+            {!! $attributes->except(['id'])->merge([
                 'class' => 'radio' . ($hasErrorAndShow($name) ? ' is-invalid' : ''),
                 'aria-invalid' => $hasErrorAndShow($name) ? 'true' : null,
             ]) !!}

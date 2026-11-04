@@ -113,7 +113,7 @@ class OnuTest extends TestCase
 
         $danger = $html->filter('button[data-variant="destructive"]');
 
-        $this->assertEquals('button', $danger->attr('type'));
+        $this->assertNull($danger->attr('type'), 'Like v1, a button without a type keeps the browser default');
         $this->assertStringContainsString($this->onu->classes('button.destructive.default'), $danger->attr('class'));
         $this->assertCount(1, $html->filter('button[data-variant="outline"][type="submit"]'));
         $this->assertCount(1, $html->filter('a[data-slot="button"][data-variant="outline"][href="/x"]'));

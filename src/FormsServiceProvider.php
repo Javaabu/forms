@@ -4,12 +4,17 @@ namespace Javaabu\Forms;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Javaabu\Forms\Assets\Assets;
 use Javaabu\Forms\Commands\DiffViewsCommand;
 use Javaabu\Forms\Commands\PublishViewCommand;
 use Javaabu\Forms\Http\Middleware\OverrideFormsDefaults;
+use Javaabu\Manifest\Concerns\RegistersAssets;
+use Javaabu\Manifest\Package;
 
 class FormsServiceProvider extends ServiceProvider
 {
+    use RegistersAssets;
+
     /**
      * Bootstrap the application services.
      */
@@ -28,11 +33,9 @@ class FormsServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__ . '/../resources/views' => resource_path('views/vendor/forms'),
             ], 'forms-views');
-
-            $this->publishes([
-                __DIR__ . '/../dist' => public_path('vendor/forms'),
-            ], 'forms-assets');
         }
+
+        $this->registerAssets(Assets::PACKAGE, __DIR__ . '/../resources', fn (Package $package) => Assets::register($package));
 
         $this->loadTranslationsFrom(__DIR__ . '/../lang', 'forms');
 

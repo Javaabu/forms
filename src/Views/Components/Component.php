@@ -5,10 +5,12 @@ namespace Javaabu\Forms\Views\Components;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 use Illuminate\View\Component as BaseComponent;
+use Javaabu\Forms\Assets\Assets;
 use Javaabu\Forms\Frameworks\Framework;
 use Javaabu\Forms\Frameworks\Frameworks;
+use Javaabu\Manifest\Contracts\DeclaresAssets;
 
-abstract class Component extends BaseComponent
+abstract class Component extends BaseComponent implements DeclaresAssets
 {
     /**
      * ID for this component.
@@ -135,6 +137,23 @@ abstract class Component extends BaseComponent
         }
 
         $this->framework = $framework;
+    }
+
+    /**
+     * The package assets (Assets::* names) this component needs on the page.
+     * javaabu/manifest loads them when the component renders.
+     *
+     * @return array<int, string>
+     */
+    public function assets(): array
+    {
+        return [Assets::CORE];
+    }
+
+    /** @return array<int, string> */
+    public function requiredAssets(): array
+    {
+        return Assets::ids($this->assets(), $this->framework);
     }
 
     /**

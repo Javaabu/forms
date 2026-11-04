@@ -40,7 +40,17 @@ class TextareaTest extends TestCase
 
         $this->visit('/wysiwyg')
             ->seeElement('textarea[name="title"][id="title"].wysiwyg')
-            ->seeElement('script')
-            ->seeInElement('script', 'tinymce');
+            ->seeElement('script[src$="vendors/tinymce/tinymce.min.js"]');
+    }
+
+    #[Test]
+    public function it_loads_tinymce_from_the_configured_url(): void
+    {
+        config()->set('forms.wysiwyg.tinymce_url', 'https://cdn.example.com/tinymce/7/tinymce.min.js');
+
+        $this->registerTestRoute('wysiwyg');
+
+        $this->visit('/wysiwyg')
+            ->seeElement('script[src="https://cdn.example.com/tinymce/7/tinymce.min.js"]');
     }
 }

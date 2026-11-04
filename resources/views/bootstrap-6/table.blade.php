@@ -1,6 +1,6 @@
 <div {!! $attributes->merge(['class' => 'table-responsive']) !!}>
 
-    @if(empty($noBulk))
+    @if(empty($no_bulk))
         @if(isset($bulkForm) && $bulkForm->isNotEmpty())
             <x-forms::form :action="$bulkForm->attributes->get('action')" >
                 <div class="p-4">
@@ -47,7 +47,7 @@
         </table>
     </div>
 
-    @if(empty($noBulk))
+    @if(empty($no_bulk))
         @if(isset($bulkForm) && $bulkForm->isNotEmpty())
             </x-forms::form>
         @endif

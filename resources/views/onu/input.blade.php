@@ -17,12 +17,8 @@
                 </div>
             @endif
     @endif
-
-            @if($isFileInput())
-                @include('forms::onu.file.file-input')
-            @else
                 <input
-                    {!! $attributes->merge([
+                    {!! $attributes->except(['value'])->merge([
                         'class' => ($grouped ? $c->classes('input_group.input-group-control') : $c->classes('input.input')) . ($hasError($name) ? ' is-invalid' : '') . ($isDateInput() ? ' ' . $datePickerClass() : ''),
                         'required' => $required,
                         'aria-invalid' => $hasError($name) ? 'true' : null,
@@ -32,7 +28,7 @@
                     @endif
                     data-slot="{{ $grouped ? 'input-group-control' : 'input' }}"
                     type="{{ $type }}"
-                    value="{{ $value ?? ($type === 'color' ? '#000000' : '') }}"
+                    value="{{ $value ?? $attributes->get('value') ?? ($type === 'color' ? '#000000' : '') }}"
                     name="{{ $name }}"
                     @if($label && ! $attributes->get('id'))
                         id="{{ $id() }}"
@@ -41,7 +37,6 @@
                         placeholder="{{ $placeholder }}"
                     @endif
                 />
-            @endif
 
     @if($grouped)
             @if($isDateInput())

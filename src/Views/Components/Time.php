@@ -14,6 +14,7 @@ class Time extends Date
         string $label = '',
         $model = null,
         $default = null,
+        string $dateFormat = '',
         string $icon = '',
         string $clearIcon = '',
         string $clearBtnClass = '',
@@ -36,6 +37,7 @@ class Time extends Date
             type: 'time',
             model: $model,
             default: $default,
+            dateFormat: $dateFormat,
             icon: $icon,
             clearIcon: $clearIcon,
             clearBtnClass: $clearBtnClass,
@@ -61,5 +63,10 @@ class Time extends Date
     public function datePickerClass(): string
     {
         return 'time-picker';
+    }
+
+    public function defaultDateFormat(): string
+    {
+        return 'H:i';
     }
 }

@@ -37,15 +37,32 @@ trait HandlesBoundValues
     /**
      * Bind model from props
      */
+    protected bool $bound_model = false;
+
     protected function bindModel($model)
     {
         if ($model) {
             $this->getFormsDataBinder()->bind($model);
+            $this->bound_model = true;
         } else {
             $model = $this->getBoundTarget();
         }
 
         $this->model = $model;
+    }
+
+    /**
+     * Removes the model this component bound, once its content has rendered, so
+     * fields after the component don't pick it up. Called at the end of the view.
+     */
+    public function unbindModel(): string
+    {
+        if ($this->bound_model) {
+            $this->getFormsDataBinder()->pop();
+            $this->bound_model = false;
+        }
+
+        return '';
     }
 
     /**
