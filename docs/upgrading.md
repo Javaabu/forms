@@ -11,7 +11,7 @@ v2 keeps every component name and attribute from v1, so most Blade templates kee
 
 - PHP 8.4 or newer.
 - Laravel 12 or 13.
-- `javaabu/settings` is no longer required. See [Defaults](#defaults-no-longer-need-javaabusettings).
+- `javaabu/settings` and `javaabu/helpers` are no longer required, so forms v2 installs alongside javaabu/settings v2 and anything built on it. See [Defaults](#defaults-no-longer-need-javaabusettings) and [File types](#file-types-without-javaabuhelpers).
 
 ```bash
 composer require javaabu/forms:^2.0
@@ -94,6 +94,22 @@ Icon attributes on components (`icon="…"` on `<x-forms::alert>`, `<x-forms::da
 ## Defaults no longer need javaabu/settings
 
 `<x-forms::per-page>` and `<x-forms::map-input>` used `get_setting('per_page')`, `get_setting('default_lat')` and `get_setting('default_lng')`. v2 reads `forms.defaults.*` first, then `get_setting()` when javaabu/settings is installed, then falls back to 20 per page and Malé for the map centre. If you use javaabu/settings, nothing changes.
+
+## File types without javaabu/helpers
+
+v1 read file types, mime types, extensions and size limits from `Javaabu\Helpers\Media\AllowedMimeTypes`. v2 ships the same lists in `Javaabu\Forms\Support\MimeTypes`:
+
+- **If your app has javaabu/helpers:** forms still reads `AllowedMimeTypes`, so types you register there keep working.
+- **Without it:** register extra types on `MimeTypes`:
+
+```php
+use Javaabu\Forms\Support\MimeTypes;
+
+MimeTypes::register('ebook', ['application/epub+zip']);
+MimeTypes::registerExtensions(['application/epub+zip' => 'epub']);
+```
+
+The size limit of a `file` or `image` input without `max-size` comes from javaabu/settings when it's installed (`max_{type}_file_size`, then `max_image_file_size` or `max_upload_file_size`). Otherwise it's `forms.defaults.max_upload_file_size`, or 10240 KB.
 
 ## Translations
 

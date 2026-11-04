@@ -323,4 +323,47 @@ class ParityTest extends TestCase
         $this->assertCount(0, $html->filter('a'));
         $this->assertStringContainsString('ހުޅުމާލެ', $html->text());
     }
+
+    #[Test]
+    #[DataProvider('frameworks')]
+    public function tables_render_with_no_bulk(string $framework): void
+    {
+        $this->setFramework($framework);
+
+        $html = $this->renderBlade(<<<'BLADE'
+            <x-forms::table model="exports" no-checkbox no-bulk>
+                <x-slot:headers><th>ނަން</th></x-slot:headers>
+                <x-slot:rows><tr><td>ROW</td></tr></x-slot:rows>
+            </x-forms::table>
+            BLADE);
+
+        $this->assertCount(1, $html->filter('table thead th'));
+        $this->assertStringContainsString('ROW', $html->filter('table tbody')->text());
+        $this->assertCount(0, $html->filter('form'));
+    }
+
+    #[Test]
+    #[DataProvider('frameworks')]
+    public function no_bulk_leaves_out_the_bulk_form_even_with_the_slot(string $framework): void
+    {
+        $this->setFramework($framework);
+
+        $template = <<<'BLADE'
+            <x-forms::table model="exports" :no-bulk="$no_bulk">
+                <x-slot:bulk-form action="/exports/bulk">
+                    <x-forms::bulk-actions model="exports" :actions="['delete' => 'ފޮހެލާ']" />
+                </x-slot:bulk-form>
+                <x-slot:headers><th>ނަން</th></x-slot:headers>
+                <x-slot:rows><tr><td>ROW</td></tr></x-slot:rows>
+            </x-forms::table>
+            BLADE;
+
+        $with = $this->renderBlade($template, ['no_bulk' => false]);
+        $without = $this->renderBlade($template, ['no_bulk' => true]);
+
+        $this->assertCount(1, $with->filter('form[action="/exports/bulk"] table tbody td'));
+        $this->assertCount(1, $with->filter('form select[name="action"]'));
+        $this->assertCount(0, $without->filter('form'));
+        $this->assertCount(1, $without->filter('table tbody td'));
+    }
 }

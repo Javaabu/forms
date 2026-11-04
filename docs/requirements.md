@@ -15,5 +15,6 @@ Optional packages:
 | --- | --- |
 | `spatie/laravel-medialibrary` | Binding `file` and `image` inputs to media collections |
 | `matanyadaev/laravel-eloquent-spatial` | Binding `map-input` to points and polygons |
-| `javaabu/settings` | Reading the per-page and map defaults from settings |
+| `javaabu/settings` | Reading the per-page, map and file size defaults from settings |
+| `javaabu/helpers` | File inputs read the file types your app registers with `AllowedMimeTypes` |
 | TinyMCE (hosted by your app) | `wysiwyg` textareas |

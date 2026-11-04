@@ -21,7 +21,7 @@ The field shows "No file selected." until a file is chosen. When the model has a
 
 ## Allowed types and size
 
-`type` is one or more file types from `Javaabu\Helpers\Media\AllowedMimeTypes`: `image`, `icon`, `video`, `audio`, `excel`, `word`, `powerpoint`, `pdf`, `text`, `json`, `document` (the default) and `zip`. It sets the input's `accept` attribute and the hint below the field:
+`type` is one or more file types from `Javaabu\Forms\Support\MimeTypes` (the same as javaabu/helpers' `AllowedMimeTypes`, which is used when installed): `image`, `icon`, `video`, `audio`, `excel`, `word`, `powerpoint`, `pdf`, `text`, `json`, `document` (the default) and `zip`. It sets the input's `accept` attribute and the hint below the field:
 
 ```blade
 <x-forms::file name="attachment" :type="['pdf', 'word']" />
@@ -152,7 +152,7 @@ Upload fields must be inside a form.
 | --- | --- | --- | --- |
 | `name` | `string` | required | Field name. |
 | `label` | `string` | from `name` | Label text. |
-| `type` | `string` or `array` | `'document'` | Allowed file type(s) from `AllowedMimeTypes`. |
+| `type` | `string` or `array` | `'document'` | Allowed file type(s) from `MimeTypes` (see [upgrading](../upgrading.md#file-types-without-javaabuhelpers) to register more). |
 | `mimetypes` | `string` or `array` | from `type` | Accepted MIME types (the `accept` attribute). |
 | `extensions` | `string` or `array` | from `mimetypes` | Extensions shown in the hint. |
 | `max-size` | `int` | from `type` | Maximum size in KB, shown in the hint and checked before uploading. |

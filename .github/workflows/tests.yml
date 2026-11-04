@@ -76,6 +76,13 @@ jobs:
       - name: Check code style
         run: vendor/bin/pint --test
 
+      - name: No javaabu/settings or javaabu/helpers in production dependencies
+        run: |
+          if composer show --tree --no-dev | grep -E 'javaabu/(settings|helpers)'; then
+            echo "javaabu/forms must not require javaabu/settings or javaabu/helpers (see #18)"
+            exit 1
+          fi
+
       - name: Boost component reference is up to date
         run: |
           php scripts/components-reference.php

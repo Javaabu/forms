@@ -23,7 +23,7 @@ All notable changes are documented in this file. See [docs/upgrading.md](docs/up
 - Requires PHP 8.4 and Laravel 12 or 13.
 - Framework config keys are snake_case.
 - Hard-coded English texts are now `forms::strings` translations.
-- `javaabu/settings` is optional.
+- `javaabu/settings` and `javaabu/helpers` are optional (file types ship in `Support\MimeTypes`), so forms doesn't constrain javaabu/settings.
 
 ### Removed
 
@@ -34,3 +34,4 @@ All notable changes are documented in this file. See [docs/upgrading.md](docs/up
 - Components no longer need a session to render (mail, queues, console).
 - `<x-forms::modal>` without a footer slot no longer throws.
 - Paginator views no longer need component variables.
+- `<x-forms::table no-bulk>` renders the table (it rendered nothing), and the bulk form uses the slot's `method`.

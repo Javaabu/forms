@@ -18,23 +18,24 @@
         "php": "^8.4",
         "illuminate/support": "^12.0 || ^13.0",
         "illuminate/view": "^12.0 || ^13.0",
-        "javaabu/helpers": "^1.74",
         "javaabu/manifest": "^1.0@dev"
     },
     "require-dev": {
         "javaabu/boost-javaabu-guidelines": "^1.4",
+        "javaabu/helpers": "^1.74",
+        "javaabu/settings": "^1.8",
         "laravel/pint": "^1.25",
+        "matanyadaev/laravel-eloquent-spatial": "^4.7",
         "orchestra/testbench": "^10.0 || ^11.0",
         "orchestra/testbench-browser-kit": "^10.1 || ^11.0",
         "phpunit/phpunit": "^11.5.3 || ^12.5.8",
-        "spatie/laravel-medialibrary": "^11.13",
-        "matanyadaev/laravel-eloquent-spatial": "^4.7",
-        "javaabu/settings": "^1.8"
+        "spatie/laravel-medialibrary": "^11.13"
     },
     "suggest": {
         "spatie/laravel-medialibrary": "Required for the file and image components",
         "matanyadaev/laravel-eloquent-spatial": "Required for the map components",
-        "javaabu/settings": "Lets the per-page and map components read defaults from settings"
+        "javaabu/settings": "Lets the per-page and map components read defaults from settings",
+        "javaabu/helpers": "File inputs then use the mime types your app registers with AllowedMimeTypes"
     },
     "autoload": {
         "psr-4": {

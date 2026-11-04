@@ -5,8 +5,7 @@ namespace Javaabu\Forms\Views\Components;
 use Illuminate\Support\Arr;
 use Javaabu\Forms\Assets\Assets;
 use Javaabu\Forms\Support\HandlesMediaValues;
-use Javaabu\Forms\Support\Settings;
-use Javaabu\Helpers\Media\AllowedMimeTypes;
+use Javaabu\Forms\Support\MimeTypes;
 
 class File extends Input
 {
@@ -77,13 +76,9 @@ class File extends Input
         $this->conversion = $conversion;
         $this->fileInputClass = $fileInputClass;
         $this->fileTypes = Arr::wrap($type);
-        $this->mimetypes = $mimetypes ? Arr::wrap($mimetypes) : AllowedMimeTypes::getAllowedMimeTypes($this->fileTypes);
-        $this->extensions = $extensions ? Arr::wrap($extensions) : AllowedMimeTypes::getExtensions($this->mimetypes);
-        $this->maxSize = $maxSize ?: (
-            function_exists('get_setting')
-                ? AllowedMimeTypes::getMaxFileSize($this->fileTypes)
-                : (int) Settings::get('max_upload_file_size', 10240)
-        );
+        $this->mimetypes = $mimetypes ? Arr::wrap($mimetypes) : MimeTypes::mimeTypes($this->fileTypes);
+        $this->extensions = $extensions ? Arr::wrap($extensions) : MimeTypes::extensions($this->mimetypes);
+        $this->maxSize = $maxSize ?: MimeTypes::maxFileSize($this->fileTypes);
 
         parent::__construct(
             $name,
@@ -114,7 +109,7 @@ class File extends Input
                 ->map(fn ($ext) => '.' . $ext)
                 ->join(trans('forms::strings.text_list_separator'), trans('forms::strings.text_list_separator_last_glue')),
 
-            'size' => format_file_size($this->maxSize),
+            'size' => MimeTypes::formatFileSize($this->maxSize),
         ]);
     }
 
