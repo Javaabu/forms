@@ -105,7 +105,7 @@ class Bootstrap6Test extends TestCase
     {
         $html = $this->renderBlade('<x-forms::text name="title" inline />');
 
-        $this->assertCount(1, $html->filter('div.row.mb-4 > label.sm\:col-3.lg\:col-2.col-form-label'));
-        $this->assertCount(1, $html->filter('div.row.mb-4 > div.sm\:col-9.lg\:col-10 input.form-control'));
+        $this->assertCount(1, $html->filter('div.row.mb-4 > label.col-form-label[class~="sm:col-3"][class~="lg:col-2"]'));
+        $this->assertCount(1, $html->filter('div.row.mb-4 > div[class~="sm:col-9"][class~="lg:col-10"] input.form-control'));
     }
 }

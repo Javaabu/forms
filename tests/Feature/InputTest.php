@@ -95,8 +95,8 @@ class InputTest extends TestCase
             ->within('div.row.mb-4', function () {
                 $this->seeElement('label.col-form-label[for="title"]')
                     ->seeInElement('label.col-form-label[for="title"]', 'Title')
-                    ->seeElement('div.sm\\:col-9.lg\\:col-10')
-                    ->within('div.sm\\:col-9.lg\\:col-10', function () {
+                    ->seeElement('div[class~="sm:col-9"][class~="lg:col-10"]')
+                    ->within('div[class~="sm:col-9"][class~="lg:col-10"]', function () {
                         $this->seeElement('input[name="title"][id="title"][value="Lorem ipsum"].form-control');
                     });
             });
