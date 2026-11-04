@@ -35,7 +35,11 @@ class Bootstrap6 implements Framework
 
     public function button(string $color, ?string $size = null): string
     {
-        $size_class = $size ? " btn-{$size}" : '';
+        $size_class = match ($size) {
+            null, '', 'md', 'default' => '',
+            'icon' => ' btn-icon',
+            default => " btn-{$size}",
+        };
 
         if ($color === 'link') {
             return "btn-link{$size_class}";

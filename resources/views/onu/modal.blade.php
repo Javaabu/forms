@@ -15,6 +15,9 @@
             <h2 class="{{ $c->classes('modal.modal-title') }}" id="{{ $modal_id }}-title" data-slot="modal-title">
                 {{ $title }}
             </h2>
+            @if($description)
+                <p class="text-sm text-muted-foreground" data-slot="modal-description">{{ $description }}</p>
+            @endif
         </div>
     @endif
 

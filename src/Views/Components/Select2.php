@@ -67,8 +67,13 @@ class Select2 extends Select
         string $inlineInputClass = '',
         string $formGroupClass = '',
         bool $showJsErrors = false,
+        ?bool $clearable = null,
+        public ?int $minChars = null,
+        public string $parent = '',
         string $framework = ''
     ) {
+        $allowClear = $clearable ?? $allowClear;
+
         if ($allowClear && empty($placeholder)) {
             $placeholder = $this->getNothingSelectedText();
         }

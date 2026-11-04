@@ -1,6 +1,6 @@
 @php($c = $frameworkClasses())
 @php($grouped = $isDateInput() || (! empty($prepend)) || (! empty($append)))
-<x-forms::form-group :wrap="$showLabel && $type != 'hidden'" :label="$label ?: $label()"
+<x-forms::form-group :class="$groupClass()" :wrap="$showLabel && $type != 'hidden'" :label="$label ?: $label()"
                      :name="$attributes->get('id') ?: $id()" :framework="$framework" :inline="$inline"
                      :inline-input-class="$inlineInputClass"
                      :inline-label-class="$inlineLabelClass"
@@ -26,7 +26,10 @@
                         'class' => ($grouped ? $c->classes('input_group.input-group-control') : $c->classes('input.input')) . ($hasError($name) ? ' is-invalid' : '') . ($isDateInput() ? ' ' . $datePickerClass() : ''),
                         'required' => $required,
                         'aria-invalid' => $hasError($name) ? 'true' : null,
-                    ] + $getDefaultAttributes()) !!}
+                    ] + $thaanaAttributes() + $getDefaultAttributes()) !!}
+                    @if($decimalPlaces() !== null)
+                        data-decimals="{{ $decimalPlaces() }}"
+                    @endif
                     data-slot="{{ $grouped ? 'input-group-control' : 'input' }}"
                     type="{{ $type }}"
                     value="{{ $value ?? ($type === 'color' ? '#000000' : '') }}"

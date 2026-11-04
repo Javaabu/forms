@@ -1,5 +1,5 @@
 @if($isSvg())
-<svg {{ $attributes->merge(['class' => 'forms-icon', 'aria-hidden' => 'true', 'focusable' => 'false']) }} data-icon="{{ $icon }}" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{!! $svg() !!}</svg>
+<svg {{ $attributes->merge(['class' => 'forms-icon', 'aria-hidden' => 'true', 'focusable' => 'false']) }} data-icon-name="{{ $icon }}" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{!! $svg() !!}</svg>
 @elseif($icon)
 <i {{ $attributes->merge(['class' => $icon, 'aria-hidden' => 'true']) }}></i>
 @endif

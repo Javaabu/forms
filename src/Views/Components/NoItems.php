@@ -47,10 +47,10 @@ class NoItems extends Component
             : $showCreate;
 
         $this->title = is_null($title)
-            ? __('It\'s a bit lonely here.')
+            ? __('forms::strings.no_items_title')
             : $title;
         $this->message = is_null($message)
-            ? __('Let\'s create some new :model_type.', ['model_type' => $this->modelType ?? __('items')])
+            ? __('forms::strings.no_items_message', ['model_type' => $this->modelType ?? __('forms::strings.items')])
             : $message;
 
     }

@@ -20,6 +20,7 @@ class Modal extends Component
         string $title = '',
         ?string $modalSizeClass = null,
         public string $size = 'lg',
+        public string $description = '',
         string $framework = ''
     ) {
         parent::__construct($framework);

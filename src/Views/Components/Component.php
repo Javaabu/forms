@@ -28,6 +28,102 @@ abstract class Component extends BaseComponent
     protected string $view;
 
     /**
+     * Classes for the field's form group (wrapper). Read from the form-group-class attribute.
+     */
+    public string $formGroupClass = '';
+
+    /**
+     * Type Thaana from a Latin keyboard. Read from the thaana attribute.
+     */
+    public bool $thaana = false;
+
+    /**
+     * Grow a textarea with its content. Read from the auto-resize attribute.
+     */
+    public bool $autoResize = false;
+
+    /**
+     * Most decimals a number input keeps. Read from the decimals attribute.
+     */
+    public ?int $decimals = null;
+
+    /**
+     * Attributes every field accepts without a constructor parameter, mapped to their property.
+     *
+     * @var array<string, string>
+     */
+    protected array $field_options = [
+        'form-group-class' => 'formGroupClass',
+        'formGroupClass' => 'formGroupClass',
+        'thaana' => 'thaana',
+        'auto-resize' => 'autoResize',
+        'autoResize' => 'autoResize',
+        'decimals' => 'decimals',
+    ];
+
+    /**
+     * Pulls the shared field options out of the attributes, so they reach the view as
+     * properties instead of HTML attributes.
+     */
+    public function withAttributes(array $attributes)
+    {
+        foreach ($this->field_options as $attribute => $property) {
+            if (! array_key_exists($attribute, $attributes)) {
+                continue;
+            }
+
+            $this->setFieldOption($property, $attributes[$attribute]);
+
+            unset($attributes[$attribute]);
+        }
+
+        return parent::withAttributes($attributes);
+    }
+
+    protected function setFieldOption(string $property, mixed $value): void
+    {
+        $this->{$property} = match ($property) {
+            'thaana', 'autoResize' => filter_var($value, FILTER_VALIDATE_BOOL, FILTER_NULL_ON_FAILURE) ?? (bool) $value,
+            'decimals' => is_numeric($value) ? (int) $value : null,
+            default => (string) $value,
+        };
+    }
+
+    /*
+     * The shared field options are read through methods in views: Blade captures a
+     * component's properties before withAttributes() runs, but calls methods lazily.
+     */
+
+    public function groupClass(): string
+    {
+        return $this->formGroupClass;
+    }
+
+    public function shouldAutoResize(): bool
+    {
+        return $this->autoResize;
+    }
+
+    public function decimalPlaces(): ?int
+    {
+        return $this->decimals;
+    }
+
+    /**
+     * HTML attributes for a Thaana field, as Onu's TextInput renders them.
+     *
+     * @return array<string, string>
+     */
+    public function thaanaAttributes(): array
+    {
+        if (! $this->thaana) {
+            return [];
+        }
+
+        return ['dir' => 'rtl', 'lang' => 'dv', 'data-thaana' => ''];
+    }
+
+    /**
      * Create a new component instance.
      *
      * @return void

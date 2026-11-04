@@ -1,5 +1,5 @@
-@error($name, $bag)
+@foreach($messages() as $message)
 <div {!! $attributes->merge(['class' => 'invalid-feedback d-block']) !!}>
     {{ $message }}
 </div>
-@enderror
+@endforeach

@@ -1,7 +1,7 @@
 <x-forms::form-group
     :inline-input-class="$inlineInputClass"
     :inline-label-class="$inlineLabelClass"
-    :class="$formGroupClass"
+    :class="$groupClass()"
     :wrap="$showLabel"
     :label="$label ?: $label()"
     :name="$attributes->get('id') ?: $id()"
@@ -37,6 +37,14 @@
 
             @if($child)
                 data-select-child="{{ $child }}"
+            @endif
+
+            @if(! empty($parent))
+                data-select-parent="{{ $parent }}"
+            @endif
+
+            @if(! empty($minChars))
+                data-minimum-input-length="{{ $minChars }}"
             @endif
 
             @if($ajaxChild)

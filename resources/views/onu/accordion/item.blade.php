@@ -1,4 +1,4 @@
-<details {!! $attributes->merge(['class' => $frameworkClasses()->classes('accordion.accordion-item') . ' group/accordion-item', 'name' => $parent]) !!} data-slot="accordion-item" @if($show) open @endif>
+<details {!! $attributes->merge(['class' => $frameworkClasses()->classes('accordion.accordion-item') . ' group/accordion-item', 'name' => $parent]) !!} data-slot="accordion-item" @if($show && ! $disabled) open @endif @if($disabled) data-disabled="true" aria-disabled="true" inert @endif>
     <x-forms::accordion.header
         :framework="$framework"
         :title="$title"

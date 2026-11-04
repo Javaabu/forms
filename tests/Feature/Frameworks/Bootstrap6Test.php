@@ -83,7 +83,7 @@ class Bootstrap6Test extends TestCase
         $html = $this->renderBlade('<x-forms::alert type="danger" icon="circle-x" heading="Oops" dismissible>Body</x-forms::alert>');
 
         $this->assertCount(1, $html->filter('div.alert.theme-danger[role="alert"]'));
-        $this->assertCount(1, $html->filter('.alert svg[data-icon="circle-x"]'));
+        $this->assertCount(1, $html->filter('.alert svg[data-icon-name="circle-x"]'));
         $this->assertEquals('Oops', trim($html->filter('h4.alert-heading')->text()));
         $this->assertCount(1, $html->filter('.alert button.btn-close[data-bs-dismiss="alert"]'));
         $this->assertCount(0, $html->filter('.alert-dismissible'));

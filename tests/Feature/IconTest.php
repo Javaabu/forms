@@ -13,7 +13,7 @@ class IconTest extends TestCase
     {
         $html = $this->renderBlade('<x-forms::icon name="calendar" class="size-4" />');
 
-        $svg = $html->filter('svg.forms-icon.size-4[data-icon="calendar"][aria-hidden="true"]');
+        $svg = $html->filter('svg.forms-icon.size-4[data-icon-name="calendar"][aria-hidden="true"]');
 
         $this->assertCount(1, $svg);
         $this->assertGreaterThan(0, $svg->filter('path')->count());
@@ -24,7 +24,7 @@ class IconTest extends TestCase
     {
         $html = $this->renderBlade('<x-forms::icon name="date" />');
 
-        $this->assertCount(1, $html->filter('svg[data-icon="calendar"]'));
+        $this->assertCount(1, $html->filter('svg[data-icon-name="calendar"]'));
     }
 
     #[Test]
@@ -46,7 +46,7 @@ class IconTest extends TestCase
 
         $html = $this->renderBlade('<x-forms::icon name="clear" framework="bootstrap-6" />');
 
-        $this->assertCount(1, $html->filter('svg[data-icon="circle-x"]'));
+        $this->assertCount(1, $html->filter('svg[data-icon-name="circle-x"]'));
     }
 
     #[Test]
@@ -56,7 +56,7 @@ class IconTest extends TestCase
 
         $html = $this->renderBlade('<x-forms::date name="published_at" />');
 
-        $this->assertCount(1, $html->filter('.input-group-text svg[data-icon="calendar"]'));
-        $this->assertCount(1, $html->filter('button.btn-date-clear[data-date-clear="#published_at"] svg[data-icon="x"]'));
+        $this->assertCount(1, $html->filter('.input-group-text svg[data-icon-name="calendar"]'));
+        $this->assertCount(1, $html->filter('button.btn-date-clear[data-date-clear="#published_at"] svg[data-icon-name="x"]'));
     }
 }

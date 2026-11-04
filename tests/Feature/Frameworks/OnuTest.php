@@ -48,7 +48,7 @@ class OnuTest extends TestCase
         $this->assertEquals('true', $html->filter('input[name="title"]')->attr('aria-invalid'));
         $this->assertStringContainsString('ދިވެހިން ލިޔޭ', $html->filter('p[data-slot="help-text"]')->text());
         $this->assertStringContainsString('ސުރުޚީ ލިޔުން ލާޒިމް.', $html->filter('div[data-slot="field-errors"][aria-live="polite"]')->text());
-        $this->assertCount(1, $html->filter('div[data-slot="field-errors"] svg[data-icon="circle-alert"]'));
+        $this->assertCount(1, $html->filter('div[data-slot="field-errors"] svg[data-icon-name="circle-alert"]'));
     }
 
     #[Test]

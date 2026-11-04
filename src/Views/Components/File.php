@@ -67,6 +67,7 @@ class File extends Input
         string $inlineLabelClass = '',
         string $inlineInputClass = '',
         bool $showJsErrors = false,
+        public bool $multiple = false,
         string $framework = ''
     ) {
         $this->showHint = $showHint;

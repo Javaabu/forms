@@ -11,12 +11,12 @@
         <ul class="pagination">
             {{-- Previous Page Link --}}
             @if ($paginator->onFirstPage())
-                <li class="page-item disabled" aria-disabled="true" aria-label="{{ __('forms::strings.pagination_previous') }}">
+                <li class="page-item disabled" aria-disabled="true" aria-label="{{ __('forms::strings.previous') }}">
                     <span class="page-link" aria-hidden="true">&lsaquo;</span>
                 </li>
             @else
                 <li class="page-item">
-                    <a class="page-link" href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-label="{{ __('forms::strings.pagination_previous') }}">&lsaquo;</a>
+                    <a class="page-link" href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-label="{{ __('forms::strings.previous') }}">&lsaquo;</a>
                 </li>
             @endif
 
@@ -42,10 +42,10 @@
             {{-- Next Page Link --}}
             @if ($paginator->hasMorePages())
                 <li class="page-item">
-                    <a class="page-link" href="{{ $paginator->nextPageUrl() }}" rel="next" aria-label="{{ __('forms::strings.pagination_next') }}">&rsaquo;</a>
+                    <a class="page-link" href="{{ $paginator->nextPageUrl() }}" rel="next" aria-label="{{ __('forms::strings.next') }}">&rsaquo;</a>
                 </li>
             @else
-                <li class="page-item disabled" aria-disabled="true" aria-label="{{ __('forms::strings.pagination_next') }}">
+                <li class="page-item disabled" aria-disabled="true" aria-label="{{ __('forms::strings.next') }}">
                     <span class="page-link" aria-hidden="true">&rsaquo;</span>
                 </li>
             @endif

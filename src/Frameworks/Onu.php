@@ -74,7 +74,7 @@ class Onu implements Framework
     public function button(string $color, ?string $size = null): string
     {
         $variant = $this->buttonVariant($color);
-        $size = $size ?: 'default';
+        $size = in_array($size, [null, '', 'md'], true) ? 'default' : $size;
 
         return $this->classes("button.{$variant}.{$size}", $this->classes("button.{$variant}.default"));
     }

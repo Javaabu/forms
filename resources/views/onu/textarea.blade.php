@@ -1,10 +1,13 @@
-<x-forms::form-group :inline-input-class="$inlineInputClass" :inline-label-class="$inlineLabelClass" :wrap="$showLabel && $type != 'hidden'" :label="$label ?: $label()" :name="$attributes->get('id') ?: $id()" :framework="$framework" :inline="$inline" :required="$required" :floating="$floating">
+<x-forms::form-group :class="$groupClass()" :inline-input-class="$inlineInputClass" :inline-label-class="$inlineLabelClass" :wrap="$showLabel && $type != 'hidden'" :label="$label ?: $label()" :name="$attributes->get('id') ?: $id()" :framework="$framework" :inline="$inline" :required="$required" :floating="$floating">
     <textarea
         {!! $attributes->merge([
             'class' => $frameworkClasses()->classes('textarea.textarea') . ($hasError($name) ? ' is-invalid' : '') . ($wysiwyg ? ' wysiwyg' : ''),
             'required' => $required,
             'aria-invalid' => $hasError($name) ? 'true' : null,
-        ]) !!}
+        ] + $thaanaAttributes()) !!}
+        @if($shouldAutoResize())
+            data-auto-resize="true"
+        @endif
         data-slot="textarea"
         name="{{ $name }}"
         rows="{{ $rows }}"

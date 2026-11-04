@@ -12,14 +12,14 @@
         <ul class="pagination {{ $c->classes('pagination.pagination-content') }}" data-slot="pagination-content">
             <li class="page-item {{ $paginator->onFirstPage() ? 'disabled' : '' }}" data-slot="pagination-item">
                 @if ($paginator->onFirstPage())
-                    <span class="page-link {{ $c->classes('pagination.previous') }} pointer-events-none opacity-50" aria-disabled="true" aria-label="{{ __('forms::strings.pagination_previous') }}">
+                    <span class="page-link {{ $c->classes('pagination.previous') }} pointer-events-none opacity-50" aria-disabled="true" aria-label="{{ __('forms::strings.previous') }}">
                         <x-forms::icon name="chevron-left" framework="onu" class="rtl:rotate-180" />
-                        <span class="hidden sm:block">{{ __('forms::strings.pagination_previous') }}</span>
+                        <span class="hidden sm:block">{{ __('forms::strings.previous') }}</span>
                     </span>
                 @else
-                    <a class="page-link {{ $c->classes('pagination.previous') }}" data-slot="pagination-link" href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-label="{{ __('forms::strings.pagination_previous') }}">
+                    <a class="page-link {{ $c->classes('pagination.previous') }}" data-slot="pagination-link" href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-label="{{ __('forms::strings.previous') }}">
                         <x-forms::icon name="chevron-left" framework="onu" class="rtl:rotate-180" />
-                        <span class="hidden sm:block">{{ __('forms::strings.pagination_previous') }}</span>
+                        <span class="hidden sm:block">{{ __('forms::strings.previous') }}</span>
                     </a>
                 @endif
             </li>
@@ -50,13 +50,13 @@
 
             <li class="page-item {{ $paginator->hasMorePages() ? '' : 'disabled' }}" data-slot="pagination-item">
                 @if ($paginator->hasMorePages())
-                    <a class="page-link {{ $c->classes('pagination.next') }}" data-slot="pagination-link" href="{{ $paginator->nextPageUrl() }}" rel="next" aria-label="{{ __('forms::strings.pagination_next') }}">
-                        <span class="hidden sm:block">{{ __('forms::strings.pagination_next') }}</span>
+                    <a class="page-link {{ $c->classes('pagination.next') }}" data-slot="pagination-link" href="{{ $paginator->nextPageUrl() }}" rel="next" aria-label="{{ __('forms::strings.next') }}">
+                        <span class="hidden sm:block">{{ __('forms::strings.next') }}</span>
                         <x-forms::icon name="chevron-right" framework="onu" class="rtl:rotate-180" />
                     </a>
                 @else
-                    <span class="page-link {{ $c->classes('pagination.next') }} pointer-events-none opacity-50" aria-disabled="true" aria-label="{{ __('forms::strings.pagination_next') }}">
-                        <span class="hidden sm:block">{{ __('forms::strings.pagination_next') }}</span>
+                    <span class="page-link {{ $c->classes('pagination.next') }} pointer-events-none opacity-50" aria-disabled="true" aria-label="{{ __('forms::strings.next') }}">
+                        <span class="hidden sm:block">{{ __('forms::strings.next') }}</span>
                         <x-forms::icon name="chevron-right" framework="onu" class="rtl:rotate-180" />
                     </span>
                 @endif

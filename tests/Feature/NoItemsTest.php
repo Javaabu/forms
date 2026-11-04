@@ -16,6 +16,6 @@ class NoItemsTest extends TestCase
 
         $this->visit('/no-items')
             ->see('Let\'s create some new activities')
-            ->seeElement('svg[data-icon="file"]');
+            ->seeElement('svg[data-icon-name="file"]');
     }
 }

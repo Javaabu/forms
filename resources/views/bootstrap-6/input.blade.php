@@ -1,4 +1,4 @@
-<x-forms::form-group :wrap="$showLabel && $type != 'hidden'" :label="$label ?: $label()"
+<x-forms::form-group :class="$groupClass()" :wrap="$showLabel && $type != 'hidden'" :label="$label ?: $label()"
                      :name="$attributes->get('id') ?: $id()" :framework="$framework" :inline="$inline"
                      :inline-input-class="$inlineInputClass"
                      :inline-label-class="$inlineLabelClass"
@@ -22,7 +22,10 @@
                         'class' => 'form-control' . ($type === 'color' ? ' form-control-color' : '') . ($hasError($name) ? ' is-invalid' : '') . ($isDateInput() ? ' ' . $datePickerClass() : ''),
                         'required' => $required,
                         'aria-invalid' => $hasError($name) ? 'true' : null,
-                    ] + $getDefaultAttributes()) !!}
+                    ] + $thaanaAttributes() + $getDefaultAttributes()) !!}
+                    @if($decimalPlaces() !== null)
+                        data-decimals="{{ $decimalPlaces() }}"
+                    @endif
                     type="{{ $type }}"
                     value="{{ $value ?? ($type === 'color' ? '#000000' : '') }}"
                     name="{{ $name }}"

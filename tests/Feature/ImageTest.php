@@ -68,7 +68,7 @@ class ImageTest extends TestCase
                     })
                     ->seeElement('.fileinput-image-missing')
                     ->within('.fileinput-image-missing', function () {
-                        $this->seeElement('svg[data-icon="image"]');
+                        $this->seeElement('svg[data-icon-name="image"]');
                     })
                     ->seeElement('button[data-dismiss="fileinput"]')
                     ->seeInElement('button[data-dismiss="fileinput"]', 'Remove')
@@ -98,7 +98,7 @@ class ImageTest extends TestCase
                     ->within('div.fileinput', function () {
                         $this->seeElement('.upload-btn')
                             ->within('.upload-btn', function () {
-                                $this->seeElement('svg[data-icon="upload"]')
+                                $this->seeElement('svg[data-icon-name="upload"]')
                                     ->seeText('Upload file');
                             });
                     });

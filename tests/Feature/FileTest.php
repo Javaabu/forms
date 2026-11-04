@@ -88,7 +88,7 @@ class FileTest extends TestCase
 
                         $this->seeElement('a.fileinput-filelink[href="https://example.com/uploads/Important-document.pdf?download=true"]')
                             ->within('a.fileinput-filelink', function () {
-                                $this->seeElement('svg[data-icon="download"]')
+                                $this->seeElement('svg[data-icon-name="download"]')
                                     ->see('Important-document.pdf')
                                     ->dontSee('?download=true')
                                     ->dontSee('https://example.com/uploads/');
@@ -146,7 +146,7 @@ class FileTest extends TestCase
 
                         $this->seeElement('a.fileinput-filelink[href="/storage/1/conversions/some-cool-image-thumb.jpg"]')
                             ->within('a.fileinput-filelink', function () {
-                                $this->seeElement('svg[data-icon="download"]');
+                                $this->seeElement('svg[data-icon-name="download"]');
                             });
                     });
             });
@@ -176,7 +176,7 @@ class FileTest extends TestCase
 
                         $this->seeElement('a.fileinput-filelink[href="/storage/1/some-cool-image.jpg"]')
                             ->within('a.fileinput-filelink', function () {
-                                $this->seeElement('svg[data-icon="download"]');
+                                $this->seeElement('svg[data-icon-name="download"]');
                             });
                     });
             });
@@ -206,7 +206,7 @@ class FileTest extends TestCase
 
                         $this->seeElement('a.fileinput-filelink[href="/storage/1/conversions/some-cool-image-thumb.jpg"]')
                             ->within('a.fileinput-filelink', function () {
-                                $this->seeElement('svg[data-icon="download"]');
+                                $this->seeElement('svg[data-icon-name="download"]');
                             });
                     });
             });
@@ -236,7 +236,7 @@ class FileTest extends TestCase
 
                         $this->seeElement('a.fileinput-filelink[href="/storage/1/some-cool-image.jpg"]')
                             ->within('a.fileinput-filelink', function () {
-                                $this->seeElement('svg[data-icon="download"]');
+                                $this->seeElement('svg[data-icon-name="download"]');
                             });
                     });
             });
@@ -266,7 +266,7 @@ class FileTest extends TestCase
 
                         $this->seeElement('a.fileinput-filelink[href="/storage/1/some-cool-image.jpg"]')
                             ->within('a.fileinput-filelink', function () {
-                                $this->seeElement('svg[data-icon="download"]');
+                                $this->seeElement('svg[data-icon-name="download"]');
                             });
                     });
 
@@ -299,11 +299,11 @@ class FileTest extends TestCase
 
                         $this->seeElement('a.fileinput-filelink[href="/storage/1/some-cool-image.jpg"]')
                             ->within('a.fileinput-filelink', function () {
-                                $this->seeElement('svg[data-icon="download"]');
+                                $this->seeElement('svg[data-icon-name="download"]');
                             })
                             ->seeElement('button.btn-dismiss')
                             ->within('button.btn-dismiss', function () {
-                                $this->seeElement('svg[data-icon="x"]');
+                                $this->seeElement('svg[data-icon-name="x"]');
                             });
                     });
             });
@@ -328,7 +328,7 @@ class FileTest extends TestCase
                     ->within('div.fileinput', function () {
                         $this->seeElement('.upload-btn')
                             ->within('.upload-btn', function () {
-                                $this->seeElement('svg[data-icon="upload"]')
+                                $this->seeElement('svg[data-icon-name="upload"]')
                                     ->seeText('Upload file');
                             });
                     });

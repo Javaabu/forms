@@ -1,4 +1,4 @@
-<details {!! $attributes->merge(['class' => 'accordion-item', 'name' => $parent]) !!} @if($show) open @endif>
+<details {!! $attributes->merge(['class' => 'accordion-item', 'name' => $parent]) !!} @if($show && ! $disabled) open @endif @if($disabled) data-disabled="true" aria-disabled="true" inert @endif>
     <x-forms::accordion.header
         :framework="$framework"
         :title="$title"
