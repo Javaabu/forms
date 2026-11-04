@@ -28,6 +28,10 @@ class FormsServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__ . '/../resources/views' => resource_path('views/vendor/forms'),
             ], 'forms-views');
+
+            $this->publishes([
+                __DIR__ . '/../dist' => public_path('vendor/forms'),
+            ], 'forms-assets');
         }
 
         $this->loadTranslationsFrom(__DIR__ . '/../lang', 'forms');

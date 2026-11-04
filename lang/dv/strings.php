@@ -39,4 +39,6 @@ return [
     'pagination_showing' => 'ޖުމްލަ :total އިން :count ދައްކަނީ',
     'pagination_previous' => 'ކުރީގެ',
     'pagination_next' => 'ދެން',
+    'sections' => 'ސެކްޝަންތައް',
+    'pagination' => 'ޞަފްޙާތައް',
 ];

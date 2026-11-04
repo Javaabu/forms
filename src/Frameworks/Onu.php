@@ -32,10 +32,10 @@ class Onu implements Framework
         'info' => 'info',
         'success' => 'success',
         'warning' => 'warning',
-        'danger' => 'destructive',
-        'secondary' => 'default',
-        'light' => 'default',
-        'dark' => 'default',
+        'danger' => 'danger',
+        'secondary' => 'neutral',
+        'light' => 'neutral',
+        'dark' => 'neutral',
     ];
 
     public function name(): string
@@ -68,7 +68,7 @@ class Onu implements Framework
 
     public function tone(string $color): string
     {
-        return $this->tones[$color] ?? 'default';
+        return $this->tones[$color] ?? 'neutral';
     }
 
     public function button(string $color, ?string $size = null): string
@@ -86,6 +86,6 @@ class Onu implements Framework
 
     public function alert(string $type): string
     {
-        return $this->classes('alert.' . $this->tone($type));
+        return $this->classes('alert.' . $this->tone($type) . '.callout');
     }
 }

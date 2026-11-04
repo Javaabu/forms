@@ -39,4 +39,6 @@ return [
     'pagination_showing' => 'Showing :count from total :total entry|Showing :count from total :total entries',
     'pagination_previous' => 'Previous',
     'pagination_next' => 'Next',
+    'sections' => 'Sections',
+    'pagination' => 'Pagination',
 ];

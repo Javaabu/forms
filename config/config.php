@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'framework' => env('FORMS_FRAMEWORK', 'bootstrap-6'),
+    'framework' => env('FORMS_FRAMEWORK', 'onu'),
 
     /*
     |--------------------------------------------------------------------------
@@ -88,10 +88,12 @@ return [
 
     'frameworks' => [
         'onu' => [
-            'inline_label_class' => 'sm:w-1/4 lg:w-1/6 sm:shrink-0',
-            'inline_input_class' => 'min-w-0 flex-1',
-            'inline_entry_label_class' => 'sm:w-1/2 md:w-1/3 sm:shrink-0',
-            'inline_entry_class' => 'min-w-0 flex-1',
+            // Onu lays out inline fields with container queries and --onu-label-width;
+            // these classes are added on top.
+            'inline_label_class' => '',
+            'inline_input_class' => '',
+            'inline_entry_label_class' => '',
+            'inline_entry_class' => '',
             'date_icon_wrapper_class' => '',
             'date_clear_btn_class' => '',
         ],

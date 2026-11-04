@@ -45,4 +45,12 @@ class FrameworksTest extends TestCase
         $this->assertEquals('badge theme-success', $framework->badge('success'));
         $this->assertEquals('alert theme-warning', $framework->alert('warning'));
     }
+
+    #[Test]
+    public function it_defaults_to_the_onu_framework(): void
+    {
+        $config = require __DIR__ . '/../../config/config.php';
+
+        $this->assertEquals('onu', $config['framework']);
+    }
 }
