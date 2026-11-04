@@ -33,14 +33,10 @@ npm install @javaabu/onu tailwindcss @tailwindcss/vite
 
 ### Apps without a Tailwind build
 
-The package ships a prebuilt stylesheet with Tailwind, Onu and the forms styles in one file, `dist/onu.css`. Publish it and link it in your layout:
+The package ships a prebuilt stylesheet with Tailwind, Onu and the forms styles in one file (the `forms::onu` asset, built from `resources/css/onu-standalone.css` into `dist/`). javaabu/manifest adds it to pages with `onu` components while `forms.assets.styles` (`FORMS_STYLES`) is on, which is the default. To serve it as a static file instead of through a route:
 
 ```bash
-php artisan vendor:publish --tag=forms-assets
-```
-
-```blade
-<link rel="stylesheet" href="{{ asset('vendor/forms/onu.css') }}">
+php artisan vendor:publish --tag=manifest-dist
 ```
 
 It is about 46 KB gzipped, because it contains every Onu class. Use the Tailwind setup above when you can.

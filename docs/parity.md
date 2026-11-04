@@ -73,7 +73,7 @@ sidebar_position: 90
 
 | Behaviour | Status |
 | --- | --- |
-| Value precedence: old input, then `default`, then the bound model, then `value` | ✅ |
+| Value precedence (inputs, textareas, dates, files): old input, then the bound model, then `default`, then `value`. Selects: old input, then `default`, then the bound model. Both as in v1. | ✅ |
 | Ids from names (`address[city]` → `address-city`) and labels from names (`first_name` → `First Name`, translated) | ✅ |
 | Errors from the `default` bag, bracket names as dot keys, `name.*` errors on array fields | ✅ |
 | `sync_<name>` hidden field for multiple selects | ✅ |

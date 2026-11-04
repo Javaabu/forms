@@ -1,128 +1,107 @@
 ---
 title: Alert
-sidebar_position: 12
+sidebar_position: 15
 ---
 
-The `alert` component displays messages using the selected CSS framework's alert styles. It supports Bootstrap 5 and Material Admin 2.6, with optional headings, icons, and a dismiss button.
+# Alert
 
-## Basic Usage
+`<x-forms::alert>` shows a message box: Onu's callout in `onu`, a Bootstrap alert in `bootstrap-6`.
 
-Place the message in the default slot. No attributes are required.
-
-```html
-<x-forms::alert>
-    Your application is being reviewed.
-</x-forms::alert>
-```
-
-By default, the component renders a `div` with the classes `alert alert-primary` and `role="alert"`.
-
-## Alert Types
-
-Use `type` to choose the alert style. Its value is appended to `alert-`, so `type="success"` produces the `alert-success` class. Choose a type supported by your application's CSS framework.
-
-```html
+```blade
 <x-forms::alert type="success">
-    Your changes have been saved.
-</x-forms::alert>
-
-<x-forms::alert type="warning">
-    Your subscription expires soon.
-</x-forms::alert>
-
-<x-forms::alert type="danger">
-    The upload failed. Please try again.
+    ބަދަލުތައް ސޭވްކުރެވިއްޖެ.
 </x-forms::alert>
 ```
 
-## Headings and Content
+## Types
 
-Pass `heading` to display an `h4` with the `alert-heading` class above the message. The default slot can contain HTML, including paragraphs and links.
+`type` sets the colour:
 
-```html
-<x-forms::alert type="success" heading="Application submitted">
-    <p>We have received your application.</p>
-    <a href="/applications" class="alert-link">View your applications</a>
-</x-forms::alert>
-```
-
-Use Blade's `:` syntax for dynamic or translated headings:
-
-```html
-<x-forms::alert type="warning" :heading="__('Action required')">
-    {{ __('Please complete your profile before applying.') }}
-</x-forms::alert>
-```
-
-## Icons
-
-Pass the complete CSS classes for an icon using `icon`. The component places the icon beside the heading and content and marks it with `aria-hidden="true"`.
-
-```html
-<x-forms::alert type="info" icon="fa-solid fa-circle-info" heading="Before you begin">
-    Have your supporting documents ready.
-</x-forms::alert>
-```
-
-Load the corresponding icon library in your application. The component uses the classes you supply directly; it does not prepend the framework's configured icon prefix.
-
-## Dismissible Alerts
-
-Add `dismissible` to display a close button and apply the `alert-dismissible fade show` classes.
-
-```html
-<x-forms::alert type="success" dismissible>
-    Your preferences have been updated.
-</x-forms::alert>
-```
-
-Dismissal requires the Bootstrap alert JavaScript used by your theme to be loaded in your application. The component renders the button and its attributes; it does not load JavaScript itself.
-
-| Framework | Close button class | Dismiss attribute |
+| `type` | `onu` tone | `bootstrap-6` classes |
 | --- | --- | --- |
-| `bootstrap-5` | `btn-close` | `data-bs-dismiss="alert"` |
-| `material-admin-26` | `close` | `data-dismiss="alert"` |
+| `primary` (default), `info` | `info` | `alert theme-primary`, `alert theme-info` |
+| `success` | `success` | `alert theme-success` |
+| `warning` | `warning` | `alert theme-warning` |
+| `danger` | `danger` | `alert theme-danger` |
+| `secondary`, `light`, `dark` | `neutral` | `alert theme-secondary`, `alert theme-secondary`, `alert theme-inverse` |
 
-You can also bind the option to a boolean with `:dismissible="true"` or `:dismissible="false"`.
+In `onu`, `danger` and `warning` alerts have `role="alert"`, so screen readers announce them straight away, and the others have `role="status"`. In `bootstrap-6` every alert has `role="alert"`.
 
-### Flash Messages
+## Heading and icon
 
-Render an alert conditionally to show a session message:
+```blade
+<x-forms::alert type="warning" heading="ސަބްސްކްރިޕްޝަން ހަމަވަނީ" icon="alert_warning">
+    {{ __('Your subscription ends on :date.', ['date' => $ends_at->format('d M Y')]) }}
+</x-forms::alert>
+```
 
-```html
-@if (session('status'))
-    <x-forms::alert type="success" dismissible>
-        {{ session('status') }}
+`icon` takes a [bundled Lucide name, a logical name from the `icons` config, or icon font classes](./icons.md). The config has `alert_success`, `alert_danger`, `alert_warning` and `alert_info` for alerts. Alerts have no icon unless you pass one.
+
+The slot can hold HTML: paragraphs, lists and links.
+
+## Dismissible alerts
+
+`dismissible` adds a close button:
+
+```blade
+<x-forms::alert type="info" dismissible>
+    {{ __('New features are available.') }}
+</x-forms::alert>
+```
+
+- `onu`: the button has `data-dismiss="alert"`, and the package's script removes the alert (see [Assets](../advanced-usage/assets.md)).
+- `bootstrap-6`: the button is `.btn-close` with `data-bs-dismiss="alert"`, handled by Bootstrap's JavaScript.
+
+## Flash messages
+
+```blade
+@if (session('success'))
+    <x-forms::alert type="success" icon="alert_success" dismissible>
+        {{ session('success') }}
     </x-forms::alert>
 @endif
 ```
 
-## Additional HTML Attributes
-
-Additional attributes are applied to the outer alert `div`. Custom classes are merged with the component's alert classes.
+## Rendered HTML
 
 ```html
-<x-forms::alert type="info" id="application-notice" class="mb-4" data-notice="application">
-    Applications close at the end of the month.
-</x-forms::alert>
+<!-- onu (classes shortened) -->
+<div class="alert …" data-slot="callout" data-tone="warning" role="alert">
+    <svg data-icon-name="triangle-alert" …></svg>
+    <div class="…" data-slot="alert-title">ސަބްސްކްރިޕްޝަން ހަމަވަނީ</div>
+    <div class="…" data-slot="alert-description">…</div>
+</div>
+
+<!-- bootstrap-6 -->
+<div class="alert theme-warning" role="alert">
+    <svg class="forms-icon flex-shrink-0" data-icon-name="triangle-alert" …></svg>
+    <div class="flex-grow-1">
+        <h4 class="alert-heading">ސަބްސްކްރިޕްޝަން ހަމަވަނީ</h4>
+        …
+    </div>
+</div>
 ```
 
-## Available Options
+## Attributes
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `type` | `string` | `'primary'` | Alert style, used to generate the `alert-{type}` class. |
-| `dismissible` | `bool` | `false` | Adds a close button and the dismissal and transition classes. Requires your theme's alert JavaScript. |
-| `icon` | `string` | `''` | Complete icon CSS classes. An empty string omits the icon. |
-| `heading` | `string` | `''` | Heading displayed above the slot content. An empty string omits the heading. |
-| `framework` | `string` | `''` | Uses `forms.framework` when omitted. Supports `bootstrap-5` and `material-admin-26`. |
+| `type` | `string` | `'primary'` | Colour. See [Types](#types). |
+| `heading` | `string` | `''` | Heading above the message. |
+| `icon` | `string` | `''` | Icon before the message. |
+| `dismissible` | `bool` | `false` | Adds a close button. |
+| `framework` | `string` | config | `onu` or `bootstrap-6`. |
 
-To select a framework for a single alert, pass `framework` explicitly:
+Other attributes go on the wrapper. Slot: the message.
 
-```html
-<x-forms::alert type="info" framework="material-admin-26" icon="zmdi zmdi-info-outline">
-    Please review the instructions before continuing.
-</x-forms::alert>
+## React
+
+```jsx
+import { Alert } from "@javaabu/forms"
+
+<Alert type="warning" heading="ސަބްސްކްރިޕްޝަން ހަމަވަނީ" dismissible>
+  …
+</Alert>
 ```
 
-See [Installation & Setup](../installation-and-setup.md) to configure the default framework or publish the component views.
+See [Parity](../parity.md).

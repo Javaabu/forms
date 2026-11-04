@@ -1,68 +1,92 @@
 ---
-title: Conditional Link
-sidebar_position: 11
+title: Conditional link
+sidebar_position: 13
 ---
 
-You can use the `conditional-link` component to render `<a>` tags conditionally. This can be useful if you want to link to something only if a user has the permission to do so.
+# Conditional link
 
-## Basic usage
+`<x-forms::conditional-link>` renders its content as a link only when a condition holds, for example when the user may view the page it links to. Otherwise it renders the content as plain text.
 
-```bladehtml
-<x-forms::conditional-link :url="route('admin.users.index', $organization)" :show-link="$your_condition_boolean" value="10" />
-```
+## Showing a link when a condition holds
 
-## Using `can`
-
-Instead of directly using the `show-link` prop, you can also check for a user permission by using the `can` and `arg` props.
-
-```bladehtml
-<x-forms::conditional-link :url="route('admin.users.index', $organization)" can="view" arg="users" value="10" />
-```
-
-You can also specify a specific `guard` when using `can`
-
-```bladehtml
-<x-forms::conditional-link :url="route('admin.users.index', $organization)" can="view" arg="users" guard="web" value="10" />
-```
-
-## Using slot
-
-You can also render your data manually instead of using the `value` prop.
-
-```bladehtml
-<x-forms::conditional-link :url="route('admin.users.index', $organization)" can="view" arg="users">
+```blade
+<x-forms::conditional-link :url="route('admin.users.index', $organization)" :show-link="$can_view_users">
     {{ $organization->users_count }}
 </x-forms::conditional-link>
 ```
 
-## Using model value binding
+## Checking a permission
 
-You can also bind to a model attribute value by using `name` prop when in a model context.
+Instead of `show-link`, pass an ability to `can` and its argument to `arg`. The link shows when the signed-in user is authorized:
 
-```bladehtml
+```blade
+<x-forms::conditional-link :url="route('admin.users.index')" can="viewAny" :arg="App\Models\User::class">
+    {{ __('Users') }}
+</x-forms::conditional-link>
+
+{{-- with another guard --}}
+<x-forms::conditional-link :url="route('admin.users.index')" can="viewAny" :arg="App\Models\User::class" guard="admin">
+    {{ __('Users') }}
+</x-forms::conditional-link>
+```
+
+`can` is only checked when `show-link` isn't given. For guests the link is hidden. To decide yourself, pass `show-link`:
+
+```blade
+<x-forms::conditional-link :url="$url" :show-link="auth()->user()?->can('view', $island) ?? false">
+    {{ $island->name }}
+</x-forms::conditional-link>
+```
+
+## Showing a value instead of a slot
+
+Without a slot, the component shows `value`, or the bound model's attribute named `name`. Values are formatted like [text entries](./text-entry.md): enums show their label (or a status badge when they have a colour), `true`/`false` show "Yes"/"No", arrays are joined with commas, and empty values show "-".
+
+```blade
+<x-forms::conditional-link :url="route('admin.users.index')" can="viewAny" :arg="App\Models\User::class" :value="$users_count" />
+
 @model($organization)
-<x-forms::conditional-link :url="route('admin.users.index', $organization)" can="view" arg="users" name="users_count" />
+    <x-forms::conditional-link :url="route('admin.users.index', $organization)" can="viewAny" :arg="App\Models\User::class" name="users_count" />
 @endmodel
 ```
 
-## Passing additional HTML attributes
+When the value is a model with an `admin_link` accessor (Javaabu's admin models), its `admin_link_name` is shown. `multiline` keeps line breaks in text values.
 
-HTML attributes will get rendered on the `a` tag. For example, to set the `target` to `_blank`, just use the `target` attribute. 
-Remember, if the `show-link` evaluates to `false`, then these extra attributes won't be rendered.
+## Other attributes
 
-```bladehtml
-<x-forms::conditional-link :url="route('admin.users.index', $organization)" can="view" arg="users" value="10" target="_blank" />
+Attributes such as `target`, `class` or `title` go on the `<a>` tag, so they're only rendered when the link is:
+
+```blade
+<x-forms::conditional-link :url="$document_url" :show-link="$is_published" target="_blank" class="underline">
+    {{ __('View') }}
+</x-forms::conditional-link>
 ```
 
-## Allowed props
+## Attributes
 
-The `conditional-link` support the following props:
-- `'url'` - (Required) the url to link to.
-- `'show-link'` - (Bool) Whether to render as a link or not
-- `'value'` - (Optional) Value to render in the link
-- `'name'` - Name of the attribute, if using model value binding
-- `'can'` - Ability to check for, instead of using `show-link`
-- `'arg'` - Argument to pass to `can` method
-- `'guard'` - User guard to use when using `can`. By default uses the current guard.
-- `'multiline'` - (Bool) If the bound value should be rendered as multiline
-- `framework` - Which css framework to use.
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `url` | `string` | required | Link URL. |
+| `show-link` | `bool` | `null` | Renders the link when `true`. When not given, `can` decides. |
+| `can` | `string` | `''` | Ability to check with the signed-in user's `can()`. |
+| `arg` | `mixed` | `[]` | Argument for the ability. |
+| `guard` | `string` | default guard | Guard to get the user from. |
+| `value` | `mixed` | `null` | Value to show when there is no slot. |
+| `name` | `string` | `''` | Bound model attribute to show when there is no slot and no `value`. |
+| `model` | `mixed` | bound model | Model to read `name` from. |
+| `multiline` | `bool` | `false` | Keeps line breaks in the value. |
+| `framework` | `string` | config | `onu` or `bootstrap-6`, for status badges. |
+
+Slot: the content.
+
+## React
+
+```jsx
+import { ConditionalLink } from "@javaabu/forms"
+
+<ConditionalLink url="/admin/users" showLink={canViewUsers}>
+  {usersCount}
+</ConditionalLink>
+```
+
+See [Parity](../parity.md).
