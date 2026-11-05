@@ -20,7 +20,7 @@ class FileTest extends TestCase
         parent::setUp();
 
         $this->setupFakeMediaDisk();
-        $this->app['config']->set('defaults.max_upload_file_size', 1024 * 2);
+        $this->app['config']->set('forms.defaults.max_upload_file_size', 1024 * 2);
         $this->app['config']->set('defaults.max_image_file_size', 1024 * 2);
     }
 

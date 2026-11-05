@@ -5,25 +5,12 @@ namespace Javaabu\Forms\Tests\Unit;
 use Illuminate\Support\Facades\Config;
 use Javaabu\Forms\Support\MimeTypes;
 use Javaabu\Forms\Tests\TestCase;
+use Javaabu\Forms\Tests\TestSupport\FakeSettings;
 use Javaabu\Helpers\Media\AllowedMimeTypes;
 use PHPUnit\Framework\Attributes\Test;
 
 class MimeTypesTest extends TestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        MimeTypes::$use_helpers = false;
-    }
-
-    protected function tearDown(): void
-    {
-        MimeTypes::$use_helpers = true;
-
-        parent::tearDown();
-    }
-
     #[Test]
     public function it_does_not_require_javaabu_helpers_or_settings(): void
     {
@@ -34,17 +21,32 @@ class MimeTypesTest extends TestCase
     }
 
     #[Test]
-    public function it_ships_the_same_lists_as_javaabu_helpers(): void
+    public function it_tests_without_javaabu_helpers_or_settings(): void
     {
-        $types = ['image', 'document', 'pdf', 'excel'];
+        $composer = json_decode(file_get_contents(__DIR__ . '/../../composer.json'), true);
 
-        foreach ($types as $type) {
-            $this->assertEquals(AllowedMimeTypes::getAllowedMimeTypes($type), MimeTypes::mimeTypes($type), $type);
-        }
+        // helpers v1 can't install next to settings v2, and settings v2 requires forms (#20).
+        $this->assertArrayNotHasKey('javaabu/helpers', $composer['require-dev']);
+        $this->assertArrayNotHasKey('javaabu/settings', $composer['require-dev']);
+        $this->assertFalse(class_exists(AllowedMimeTypes::class));
+    }
 
-        $mime_types = MimeTypes::mimeTypes($types);
+    #[Test]
+    public function it_ships_the_types_javaabu_helpers_had(): void
+    {
+        $data = require __DIR__ . '/../../resources/data/mime-types.php';
 
-        $this->assertEquals(array_values(AllowedMimeTypes::getExtensions($mime_types)), MimeTypes::extensions($mime_types));
+        $this->assertEquals(
+            ['image', 'icon', 'video', 'audio', 'excel', 'word', 'powerpoint', 'pdf', 'text', 'json', 'document', 'zip'],
+            array_keys($data['mime_types']),
+        );
+        $this->assertCount(186, $data['extensions']);
+        $this->assertEquals(['application/pdf', 'image/jpeg', 'image/png'], MimeTypes::mimeTypes('document'));
+        $this->assertContains('application/msword', MimeTypes::mimeTypes('word'));
+        $this->assertEquals(['docx', 'xlsx'], MimeTypes::extensions([
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        ]));
     }
 
     #[Test]
@@ -66,6 +68,25 @@ class MimeTypesTest extends TestCase
         $this->assertEquals(2048, MimeTypes::maxFileSize('document'));
         $this->assertEquals('max_image_file_size', MimeTypes::fileSizeSetting('image'));
         $this->assertEquals('max_upload_file_size', MimeTypes::fileSizeSetting('document'));
+    }
+
+    #[Test]
+    public function it_reads_the_max_file_size_from_settings(): void
+    {
+        FakeSettings::$values = [
+            'max_upload_file_size' => 4096,
+            'max_image_file_size' => 1024,
+            'max_pdf_file_size' => 8192,
+        ];
+
+        $this->assertEquals(4096, MimeTypes::maxFileSize('document'));
+        $this->assertEquals(1024, MimeTypes::maxFileSize('image'));
+        $this->assertEquals(1024, MimeTypes::maxFileSize('icon'));
+        $this->assertEquals(8192, MimeTypes::maxFileSize(['image', 'pdf']));
+
+        $html = $this->renderBlade('<x-forms::file name="photo" type="image" :model="false" />');
+
+        $this->assertStringContainsString('1MB', $html->text());
     }
 
     #[Test]

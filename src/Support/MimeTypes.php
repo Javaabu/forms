@@ -17,14 +17,9 @@ class MimeTypes
     /** @var array{mime_types: array<string, array<int, string>>, extensions: array<string, string>, file_size_settings: array<string, array<int, string>>}|null */
     protected static ?array $data = null;
 
-    /**
-     * Whether to read javaabu/helpers when it's installed. Tests turn this off.
-     */
-    public static bool $use_helpers = true;
-
     protected static function helpers(): bool
     {
-        return static::$use_helpers && class_exists(AllowedMimeTypes::class);
+        return class_exists(AllowedMimeTypes::class);
     }
 
     /** @return array{mime_types: array<string, array<int, string>>, extensions: array<string, string>, file_size_settings: array<string, array<int, string>>} */

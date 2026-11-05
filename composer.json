@@ -22,8 +22,6 @@
     },
     "require-dev": {
         "javaabu/boost-javaabu-guidelines": "^1.4",
-        "javaabu/helpers": "^1.74",
-        "javaabu/settings": "^1.8",
         "laravel/pint": "^1.25",
         "matanyadaev/laravel-eloquent-spatial": "^4.7",
         "orchestra/testbench": "^10.0 || ^11.0",
@@ -34,7 +32,7 @@
     "suggest": {
         "spatie/laravel-medialibrary": "Required for the file and image components",
         "matanyadaev/laravel-eloquent-spatial": "Required for the map components",
-        "javaabu/settings": "Lets the per-page and map components read defaults from settings",
+        "javaabu/settings": "Lets the per-page, map and file components read defaults from settings (^2.0)",
         "javaabu/helpers": "File inputs then use the mime types your app registers with AllowedMimeTypes"
     },
     "autoload": {
@@ -45,7 +43,10 @@
     "autoload-dev": {
         "psr-4": {
             "Javaabu\\Forms\\Tests\\": "tests/"
-        }
+        },
+        "files": [
+            "tests/TestSupport/helpers.php"
+        ]
     },
     "extra": {
         "branch-alias": {

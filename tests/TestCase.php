@@ -14,10 +14,9 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\ViewErrorBag;
 use Javaabu\Forms\FormsServiceProvider;
+use Javaabu\Forms\Tests\TestSupport\FakeSettings;
 use Javaabu\Forms\Tests\TestSupport\Providers\TestServiceProvider;
-use Javaabu\Helpers\HelpersServiceProvider;
 use Javaabu\Manifest\ManifestServiceProvider;
-use Javaabu\Settings\SettingsServiceProvider;
 use Orchestra\Testbench\BrowserKit\TestCase as BaseTestCase;
 use Spatie\MediaLibrary\MediaLibraryServiceProvider;
 use Symfony\Component\DomCrawler\Crawler;
@@ -69,14 +68,14 @@ abstract class TestCase extends BaseTestCase
         }
 
         Model::unguard();
+
+        FakeSettings::$values = [];
     }
 
     protected function getPackageProviders($app)
     {
         return [
-            SettingsServiceProvider::class,
             MediaLibraryServiceProvider::class,
-            HelpersServiceProvider::class,
             ManifestServiceProvider::class,
             FormsServiceProvider::class,
             TestServiceProvider::class,
