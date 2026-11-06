@@ -96,7 +96,7 @@ export default defineConfig({
 })
 ```
 
-See [Assets](./advanced-usage/assets.md) for the asset names, the Vite setup and turning assets off.
+With the plugin, install the npm packages the sources import; `php artisan manifest:check` lists them (see [npm packages](./requirements.md#npm-packages)). See [Assets](./advanced-usage/assets.md) for the asset names, the Vite setup and turning assets off.
 
 Some components still need a script that takes your settings, and these are pushed to the `scripts` stack: Google Maps for `map-input` (with `MAP_API_KEY`) and TinyMCE for `wysiwyg`. Render the stack in your layout:
 

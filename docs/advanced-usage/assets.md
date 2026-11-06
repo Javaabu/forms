@@ -62,8 +62,10 @@ export default defineConfig({
 Install the packages the sources import (`php artisan manifest:check` lists what's missing):
 
 ```bash
-npm install tom-select flatpickr github:Javaabu/i18n#main @javaabu/onu
+npm install tom-select flatpickr @javaabu/onu tailwindcss react
 ```
+
+`react` is needed only to resolve `@javaabu/onu/thaana` while building; no React code is bundled, and a Blade app doesn't need `react-dom`, Inertia or the React `@javaabu/forms`. See [npm packages](../requirements.md#npm-packages).
 
 The sources are importable too, under `@javaabu/forms-blade` (not `@javaabu/forms`, which is the React package):
 

@@ -2,6 +2,7 @@
 
 namespace Javaabu\Forms\Assets;
 
+use Javaabu\Manifest\Enums\NpmScopes;
 use Javaabu\Manifest\Package;
 
 /**
@@ -49,13 +50,19 @@ class Assets
             ->script(self::DATES, 'js/dates.ts', depends_on: [self::id(self::CORE), self::id('dates-styles')])
             ->script(self::FILES, 'js/files.ts', depends_on: [self::id(self::CORE)])
             ->script(self::WYSIWYG, 'js/wysiwyg.ts', depends_on: [self::id(self::CORE)])
+            // Only what the Blade scripts and styles above import. Apps importing
+            // @javaabu/forms-blade get the same files, and forms has no Inertia pages,
+            // so nothing is pages-only: the React @javaabu/forms isn't needed at all.
             ->npm([
                 'flatpickr' => '^4.6',
                 'tom-select' => '^2.4',
             ], [
                 '@javaabu/onu' => '^0.2.1',
                 'tailwindcss' => '^4.0',
-            ]);
+                // @javaabu/onu/thaana (imported by js/thaana.ts) also exports React hooks, so
+                // the build must resolve "react" even though none of it ends up in the bundle.
+                'react' => '^19.0',
+            ], for: NpmScopes::ASSETS);
     }
 
     public static function id(string $name): string

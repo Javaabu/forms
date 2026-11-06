@@ -9,6 +9,7 @@ All notable changes are documented in this file. See [docs/upgrading.md](docs/up
 - `onu` framework (the new default): the markup, `data-slot`s and Tailwind classes of `@javaabu/onu`, generated from Onu's own components (`resources/onu/classes.php`), plus `resources/css/onu.css` for Tailwind apps and a prebuilt stylesheet in `dist/`.
 - `bootstrap-6` framework (Bootstrap 6.0.0-alpha.1).
 - JavaScript and CSS shipped through javaabu/manifest and loaded only on pages that need them: core behaviours, Tom Select selects, flatpickr dates, file inputs, TinyMCE setup. No jQuery or js-utilities.
+- npm requirements are registered for manifest's assets scope only, and include `react` (needed to resolve `@javaabu/onu/thaana` when building from source). Blade-only apps' `manifest:check` doesn't ask for `react-dom`, Inertia or the React `@javaabu/forms`. CI builds the Blade sources in an app that installs only the registered packages.
 - Components: `error-summary`, `pagination`, `formatted-value`, `icon`.
 - Attributes on every field: `form-group-class`, `thaana`. Also `auto-resize` (textarea), `decimals` (number), button `size`/`start-icon`/`end-icon`/`loading`, link button `disabled`, select2 `clearable`/`min-chars`/`parent`, modal `size`/`description`, errors `first-only`, file `multiple`, accordion item `disabled`, per-page `label`/`show-label`/`per-page`, and form `summary`/`summary-title`/`focus-on-error`/`error-bag`.
 - `aria-invalid` on invalid controls.
