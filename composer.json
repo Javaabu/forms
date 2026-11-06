@@ -22,6 +22,7 @@
     },
     "require-dev": {
         "javaabu/boost-javaabu-guidelines": "^1.4",
+        "laravel/boost": "^2.10",
         "laravel/pint": "^1.25",
         "matanyadaev/laravel-eloquent-spatial": "^4.7",
         "orchestra/testbench": "^10.0 || ^11.0",

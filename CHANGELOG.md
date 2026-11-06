@@ -16,7 +16,7 @@ All notable changes are documented in this file. See [docs/upgrading.md](docs/up
 - Dhivehi translations for every string, with RTL-safe layouts.
 - `Frameworks::register()` for custom frameworks.
 - `forms.defaults`, `forms.assets` and `forms.wysiwyg` config.
-- Laravel Boost guideline and skill, `llms.txt`, docs for people and agents.
+- Laravel Boost guideline and skill, `llms.txt`, docs for people and agents. A test renders the guideline the way Boost does, so its Blade examples stay escaped.
 
 ### Changed
 
