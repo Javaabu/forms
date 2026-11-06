@@ -6,12 +6,14 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Route;
 use Javaabu\Forms\Tests\TestCase;
 use Javaabu\Forms\Tests\TestSupport\Models\Category;
+use PHPUnit\Framework\Attributes\Test;
 
 class SelectTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_it_shows_the_slot_if_the_options_are_empty()
+    #[Test]
+    public function it_shows_the_slot_if_the_options_are_empty()
     {
         $this->registerTestRoute('select-slot');
 
@@ -21,7 +23,8 @@ class SelectTest extends TestCase
             ->seeElement('option[value="c"]');
     }
 
-    public function test_it_can_render_a_placeholder()
+    #[Test]
+    public function it_can_render_a_placeholder()
     {
         $this->registerTestRoute('select-placeholder');
 
@@ -31,7 +34,8 @@ class SelectTest extends TestCase
             ->seeElement('option[value="b"]');
     }
 
-    public function test_it_adds_a_sync_field_for_multi_selects()
+    #[Test]
+    public function it_adds_a_sync_field_for_multi_selects()
     {
         $this->registerTestRoute('select-multiple');
 
@@ -43,7 +47,8 @@ class SelectTest extends TestCase
             ->seeElement('option[value="c"]');
     }
 
-    public function test_it_can_exclude_the_sync_field_for_multi_selects()
+    #[Test]
+    public function it_can_exclude_the_sync_field_for_multi_selects()
     {
         $this->registerTestRoute('select-sync-field');
 
@@ -53,7 +58,8 @@ class SelectTest extends TestCase
             ->seeElement('input[type="hidden"][name="custom_sync_name"][value="1"]');
     }
 
-    public function test_it_includes_old_values_for_tags()
+    #[Test]
+    public function it_includes_old_values_for_tags()
     {
         $this->registerTestRoute('select-tags');
 
@@ -65,7 +71,8 @@ class SelectTest extends TestCase
             ->seeElement('option[value="c"]:selected');
     }
 
-    public function test_it_can_load_options_from_a_translatable_model()
+    #[Test]
+    public function it_can_load_options_from_a_translatable_model()
     {
         $category1 = Category::create(['name' => 'Category 1']);
         $category2 = Category::create(['name' => 'Category 2']);

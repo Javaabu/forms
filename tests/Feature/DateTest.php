@@ -4,10 +4,11 @@ namespace Javaabu\Forms\Tests\Feature;
 
 use Illuminate\Support\Facades\Config;
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class DateTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -15,9 +16,10 @@ class DateTest extends TestCase
         Config::set('forms.inputs.inline', false);
     }
 
-    public function test_it_can_generate_bootstrap_5_date_inputs()
+    #[Test]
+    public function it_can_generate_bootstrap_6_date_inputs()
     {
-        $this->setFrameworkBootstrap5();
+        $this->setFrameworkBootstrap6();
         $this->registerTestRoute('date-inputs');
 
         $this->visit('/date-inputs')

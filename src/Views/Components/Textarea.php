@@ -2,6 +2,8 @@
 
 namespace Javaabu\Forms\Views\Components;
 
+use Javaabu\Forms\Assets\Assets;
+
 class Textarea extends Input
 {
     protected string $view = 'textarea';
@@ -23,7 +25,7 @@ class Textarea extends Input
         bool $showErrors = true,
         bool $showLabel = true,
         string $placeholder = '',
-        bool   $showPlaceholder = false,
+        bool $showPlaceholder = false,
         public bool $wysiwyg = false,
         bool $required = false,
         bool $inline = false,
@@ -43,7 +45,7 @@ class Textarea extends Input
             showLabel: $showLabel,
             placeholder: $placeholder,
             showPlaceholder: $showPlaceholder,
-            required:$required,
+            required: $required,
             inline: $inline,
             floating: $floating,
             inlineLabelClass: $inlineLabelClass,
@@ -57,5 +59,11 @@ class Textarea extends Input
         if (! is_null($value)) {
             $this->value = $value;
         }
+    }
+
+    /** @return array<int, string> */
+    public function assets(): array
+    {
+        return $this->wysiwyg ? [Assets::CORE, Assets::WYSIWYG] : [Assets::CORE];
     }
 }

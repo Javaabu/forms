@@ -4,15 +4,15 @@ namespace Javaabu\Forms\Views\Components;
 
 class Submit extends Button
 {
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
     public function __construct(
         string $color = 'primary',
-        string $framework = ''
+        string $size = '',
+        string $startIcon = '',
+        string $endIcon = '',
+        bool $animate = true,
+        bool $loading = false,
+        string $framework = '',
     ) {
-        parent::__construct('submit', $color, true, $framework);
+        parent::__construct('submit', $color, $animate, $size, $startIcon, $endIcon, $loading, $framework);
     }
 }

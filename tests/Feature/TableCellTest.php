@@ -3,12 +3,14 @@
 namespace Javaabu\Forms\Tests\Feature;
 
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class TableCellTest extends TestCase
 {
-    public function test_it_can_render_enum_table_cell_entries_for_bootstrap_5()
+    #[Test]
+    public function it_can_render_enum_table_cell_entries_for_bootstrap_6()
     {
-        $this->setFrameworkBootstrap5();
+        $this->setFrameworkBootstrap6();
         $this->registerTestRoute('table-cell-enum');
 
         $this->visit('/table-cell-enum')
@@ -19,28 +21,16 @@ class TableCellTest extends TestCase
 
     }
 
-    public function test_it_can_render_enum_table_cell_entries_for_material_admin_26()
+    #[Test]
+    public function it_can_render_status_table_cell_entries_for_bootstrap_6()
     {
-        $this->setFrameworkMaterialAdmin26();
-        $this->registerTestRoute('table-cell-enum');
-
-        $this->visit('/table-cell-enum')
-            ->seeElement('td')
-            ->within('td', function () {
-                $this->seeText('Report Article');
-            });
-
-    }
-
-    public function test_it_can_render_status_table_cell_entries_for_bootstrap_5()
-    {
-        $this->setFrameworkBootstrap5();
+        $this->setFrameworkBootstrap6();
         $this->registerTestRoute('table-cell-status');
 
         $this->visit('/table-cell-status')
             ->seeElement('td')
             ->within('td', function () {
-                $this->seeElement('span.status.text-bg-success')
+                $this->seeElement('span.status.badge.theme-success')
                     ->within('span.status', function () {
                         $this->seeText('Published');
                     });
@@ -48,25 +38,10 @@ class TableCellTest extends TestCase
 
     }
 
-    public function test_it_can_render_status_table_cell_entries_for_material_admin_26()
+    #[Test]
+    public function it_can_render_boolean_table_cells()
     {
-        $this->setFrameworkMaterialAdmin26();
-        $this->registerTestRoute('table-cell-status');
-
-        $this->visit('/table-cell-status')
-            ->seeElement('td')
-            ->within('td', function () {
-                $this->seeElement('span.status.bg-success')
-                    ->within('span.status', function () {
-                        $this->seeText('Published');
-                    });
-            });
-
-    }
-
-    public function test_it_can_render_boolean_table_cells()
-    {
-        $this->setFrameworkBootstrap5();
+        $this->setFrameworkBootstrap6();
         $this->registerTestRoute('table-cell-boolean');
 
         $this->visit('/table-cell-boolean')
@@ -74,9 +49,10 @@ class TableCellTest extends TestCase
             ->seeInElement('td', 'Yes');
     }
 
-    public function test_it_can_render_array_text_table_cells()
+    #[Test]
+    public function it_can_render_array_text_table_cells()
     {
-        $this->setFrameworkBootstrap5();
+        $this->setFrameworkBootstrap6();
         $this->registerTestRoute('table-cell-array');
 
         $this->visit('/table-cell-array')
@@ -84,9 +60,10 @@ class TableCellTest extends TestCase
             ->seeInElement('td', 'orange');
     }
 
-    public function test_it_can_render_multiline_text_table_cells()
+    #[Test]
+    public function it_can_render_multiline_text_table_cells()
     {
-        $this->setFrameworkBootstrap5();
+        $this->setFrameworkBootstrap6();
         $this->registerTestRoute('table-cell-multiline');
 
         $this->visit('/table-cell-multiline')
@@ -94,9 +71,10 @@ class TableCellTest extends TestCase
             ->seeInElement('td', "Javaabu<br>\nCompany");
     }
 
-    public function test_it_can_set_the_table_cell_from_model()
+    #[Test]
+    public function it_can_set_the_table_cell_from_model()
     {
-        $this->setFrameworkBootstrap5();
+        $this->setFrameworkBootstrap6();
         $this->registerTestRoute('table-cell-model');
 
         $this->visit('/table-cell-model')
@@ -107,9 +85,10 @@ class TableCellTest extends TestCase
             });
     }
 
-    public function test_it_can_set_the_table_cell_from_value()
+    #[Test]
+    public function it_can_set_the_table_cell_from_value()
     {
-        $this->setFrameworkBootstrap5();
+        $this->setFrameworkBootstrap6();
         $this->registerTestRoute('table-cell-value');
 
         $this->visit('/table-cell-value')
@@ -117,19 +96,10 @@ class TableCellTest extends TestCase
             ->seeInElement('td', 'Javaabu');
     }
 
-    public function test_it_can_generate_bootstrap_5_table_cell()
+    #[Test]
+    public function it_can_generate_bootstrap_6_table_cell()
     {
-        $this->setFrameworkBootstrap5();
-        $this->registerTestRoute('table-cell');
-
-        $this->visit('/table-cell')
-            ->seeElement('td')
-            ->seeInElement('td', 'Javaabu');
-    }
-
-    public function test_it_can_generate_material_admin_26_table_cell()
-    {
-        $this->setFrameworkMaterialAdmin26();
+        $this->setFrameworkBootstrap6();
         $this->registerTestRoute('table-cell');
 
         $this->visit('/table-cell')

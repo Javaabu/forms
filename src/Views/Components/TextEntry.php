@@ -7,17 +7,25 @@ use Javaabu\Forms\Support\HandlesBoundValues;
 
 class TextEntry extends Component
 {
-    use HandlesBoundValues;
     use FormatsValues;
+    use HandlesBoundValues;
 
     protected string $view = 'text-entry';
+
     public bool $inline;
+
     public bool $multiline;
+
     public string $label;
+
     public string $name;
+
     public bool $showLabel;
+
     public $value;
+
     public string $inlineEntryLabelClass;
+
     public string $inlineEntryClass;
 
     /**
@@ -47,7 +55,7 @@ class TextEntry extends Component
         $this->multiline = $multiline;
         $this->value = ! is_null($value) ? $value : ($name ? $this->getBoundValue($model, $name) : '');
 
-        $this->inlineEntryLabelClass = $inlineEntryLabelClass ?: $this->frameworkConfig('inline-entry-label-class');
-        $this->inlineEntryClass = $inlineEntryClass ?: $this->frameworkConfig('inline-entry-class');
+        $this->inlineEntryLabelClass = $inlineEntryLabelClass ?: $this->frameworkConfig('inline_entry_label_class', '');
+        $this->inlineEntryClass = $inlineEntryClass ?: $this->frameworkConfig('inline_entry_class', '');
     }
 }

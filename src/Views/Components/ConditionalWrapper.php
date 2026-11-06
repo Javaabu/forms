@@ -15,14 +15,13 @@ class ConditionalWrapper extends Component
      */
     public function __construct(
         public string $enableElem,
-        public        $enableValue,
-        public bool   $hideFields = false,
-        public bool   $disable = false,
-        public bool   $enableCheckbox = false,
-        ?bool         $jsonEncode = null,
-        string        $framework = ''
-    )
-    {
+        public $enableValue = null,
+        public bool $hideFields = false,
+        public bool $disable = false,
+        public bool $enableCheckbox = false,
+        ?bool $jsonEncode = null,
+        string $framework = ''
+    ) {
         parent::__construct($framework);
 
         $this->jsonEncode = is_null($jsonEncode) ? is_array($this->enableValue) : $jsonEncode;

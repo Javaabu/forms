@@ -4,29 +4,32 @@ namespace Javaabu\Forms\Tests\Feature;
 
 use Illuminate\Support\Facades\Config;
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
+use Route;
 
 class OverrideFormsDefaultsMiddlewareTest extends TestCase
 {
-    public function test_it_can_use_the_middleware_to_switch_what_theme_to_use()
+    #[Test]
+    public function it_can_use_the_middleware_to_switch_what_theme_to_use()
     {
         $this->withoutExceptionHandling();
 
         $current_theme = Config::get('forms.framework');
-        $this->assertTrue($current_theme === 'bootstrap-5');
+        $this->assertEquals('bootstrap-6', $current_theme);
 
-        $this->setFrameworkMaterialAdmin26();
+        $this->setFrameworkOnu();
 
         $current_theme = Config::get('forms.framework');
-        $this->assertTrue($current_theme === 'material-admin-26');
+        $this->assertEquals('onu', $current_theme);
 
-        \Route::get('/change-framework', function () {
-            return 'Framework changed to Bootstrap-5';
-        })->middleware('forms:bootstrap-5');
+        Route::get('/change-framework', function () {
+            return 'Framework changed to Bootstrap 6';
+        })->middleware('forms:bootstrap-6');
 
         $this->get('/change-framework')
-            ->seeText('Framework changed to Bootstrap-5');
+            ->seeText('Framework changed to Bootstrap 6');
 
         $current_theme = Config::get('forms.framework');
-        $this->assertTrue($current_theme === 'bootstrap-5');
+        $this->assertEquals('bootstrap-6', $current_theme);
     }
 }

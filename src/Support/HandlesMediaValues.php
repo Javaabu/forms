@@ -47,6 +47,7 @@ trait HandlesMediaValues
     {
         if ($url) {
             $path = parse_url($url, PHP_URL_PATH);
+
             return basename($path);
         }
 

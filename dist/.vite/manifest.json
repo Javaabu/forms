@@ -1,0 +1,106 @@
+{
+  "_dom-CmCSwMiH.js": {
+    "file": "assets/dom-CmCSwMiH.js",
+    "name": "dom"
+  },
+  "_i18n-D0vJVAyQ.js": {
+    "file": "assets/i18n-D0vJVAyQ.js",
+    "name": "i18n"
+  },
+  "_lang-DgwDgsJs.js": {
+    "file": "assets/lang-DgwDgsJs.js",
+    "name": "lang",
+    "imports": [
+      "_i18n-D0vJVAyQ.js"
+    ]
+  },
+  "node_modules/.pnpm/@javaabu+onu@0.2.1_@tanstack+react-query@5.105.3_react@19.3.1__react-dom@19.3.1_react@1_07c845925a50f2ca8dc8fb6345d6149b/node_modules/@javaabu/onu/src/styles/fonts/faruma.woff2": {
+    "file": "assets/faruma-COs-Yx8C.woff2",
+    "src": "node_modules/.pnpm/@javaabu+onu@0.2.1_@tanstack+react-query@5.105.3_react@19.3.1__react-dom@19.3.1_react@1_07c845925a50f2ca8dc8fb6345d6149b/node_modules/@javaabu/onu/src/styles/fonts/faruma.woff2"
+  },
+  "node_modules/.pnpm/@javaabu+onu@0.2.1_@tanstack+react-query@5.105.3_react@19.3.1__react-dom@19.3.1_react@1_07c845925a50f2ca8dc8fb6345d6149b/node_modules/@javaabu/onu/src/styles/fonts/mv-faseyha.woff2": {
+    "file": "assets/mv-faseyha-nvL5GWqs.woff2",
+    "src": "node_modules/.pnpm/@javaabu+onu@0.2.1_@tanstack+react-query@5.105.3_react@19.3.1__react-dom@19.3.1_react@1_07c845925a50f2ca8dc8fb6345d6149b/node_modules/@javaabu/onu/src/styles/fonts/mv-faseyha.woff2"
+  },
+  "resources/css/dates.css": {
+    "file": "assets/dates-DCEl9lWA.css",
+    "name": "dates",
+    "names": [
+      "dates.css"
+    ],
+    "src": "resources/css/dates.css",
+    "isEntry": true
+  },
+  "resources/css/onu-standalone.css": {
+    "file": "assets/onu-standalone-kV7nD-TP.css",
+    "name": "onu-standalone",
+    "names": [
+      "onu-standalone.css"
+    ],
+    "src": "resources/css/onu-standalone.css",
+    "isEntry": true,
+    "assets": [
+      "assets/faruma-COs-Yx8C.woff2",
+      "assets/mv-faseyha-nvL5GWqs.woff2"
+    ]
+  },
+  "resources/css/select.css": {
+    "file": "assets/select-DGesah9e.css",
+    "name": "select",
+    "names": [
+      "select.css"
+    ],
+    "src": "resources/css/select.css",
+    "isEntry": true
+  },
+  "resources/js/dates.ts": {
+    "file": "assets/dates-UzY-kKqL.js",
+    "name": "dates",
+    "src": "resources/js/dates.ts",
+    "isEntry": true,
+    "imports": [
+      "_dom-CmCSwMiH.js",
+      "_i18n-D0vJVAyQ.js"
+    ]
+  },
+  "resources/js/files.ts": {
+    "file": "assets/files-DWEdQGOv.js",
+    "name": "files",
+    "src": "resources/js/files.ts",
+    "isEntry": true,
+    "imports": [
+      "_dom-CmCSwMiH.js",
+      "_i18n-D0vJVAyQ.js",
+      "_lang-DgwDgsJs.js"
+    ]
+  },
+  "resources/js/forms.ts": {
+    "file": "assets/forms-BSjN9JWE.js",
+    "name": "forms",
+    "src": "resources/js/forms.ts",
+    "isEntry": true,
+    "imports": [
+      "_dom-CmCSwMiH.js"
+    ]
+  },
+  "resources/js/select.ts": {
+    "file": "assets/select-Ck4ei_A0.js",
+    "name": "select",
+    "src": "resources/js/select.ts",
+    "isEntry": true,
+    "imports": [
+      "_dom-CmCSwMiH.js",
+      "_i18n-D0vJVAyQ.js",
+      "_lang-DgwDgsJs.js"
+    ]
+  },
+  "resources/js/wysiwyg.ts": {
+    "file": "assets/wysiwyg-Dwpxck7g.js",
+    "name": "wysiwyg",
+    "src": "resources/js/wysiwyg.ts",
+    "isEntry": true,
+    "imports": [
+      "_dom-CmCSwMiH.js"
+    ]
+  }
+}

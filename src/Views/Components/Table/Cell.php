@@ -8,14 +8,19 @@ use Javaabu\Forms\Views\Components\Component;
 
 class Cell extends Component
 {
-    use HandlesBoundValues;
     use FormatsValues;
+    use HandlesBoundValues;
 
     protected string $view = 'table.cell';
+
     public bool $multiline;
+
     public bool $showLabel;
+
     public string $label;
+
     public string $name;
+
     public $value;
 
     /**

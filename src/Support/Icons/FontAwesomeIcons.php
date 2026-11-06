@@ -4,9 +4,6 @@ namespace Javaabu\Forms\Support\Icons;
 
 abstract class FontAwesomeIcons extends Icons
 {
-    /**
-     * @var array
-     */
     protected static array $icons = [
         'abacus' => 'abacus',
         'acorn' => 'acorn',
@@ -1826,9 +1823,5 @@ abstract class FontAwesomeIcons extends Icons
         'yin-yang' => 'yin-yang',
     ];
 
-    /**
-     * @var string
-     */
     protected static string $icon_prefix = 'fa';
-
 }

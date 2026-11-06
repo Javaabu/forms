@@ -4,20 +4,12 @@ namespace Javaabu\Forms\Support\Icons;
 
 abstract class Icons
 {
-    /**
-     * @var array
-     */
     protected static array $icons = [];
 
-    /**
-     * @var string
-     */
     protected static string $icon_prefix = '';
 
     /**
      * Get the icons
-     *
-     * @return array
      */
     public static function getIcons(): array
     {
@@ -26,8 +18,6 @@ abstract class Icons
 
     /**
      * Get the icon prefix
-     *
-     * @return string
      */
     public static function getIconPrefix(): string
     {
@@ -36,9 +26,6 @@ abstract class Icons
 
     /**
      * Get the icon class
-     *
-     * @param $icon
-     * @return string
      */
     public static function getIconClass($icon): string
     {
@@ -53,8 +40,6 @@ abstract class Icons
 
     /**
      * Get keys
-     *
-     * @return array
      */
     public static function getKeys(): array
     {

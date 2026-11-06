@@ -14,8 +14,7 @@ class FormsDataBinder
     /**
      * Bind a target to the current instance
      *
-     * @param mixed $target
-     * @return void
+     * @param  mixed  $target
      */
     public function bind($target): void
     {
@@ -34,8 +33,6 @@ class FormsDataBinder
 
     /**
      * Remove the last binding.
-     *
-     * @return void
      */
     public function pop(): void
     {

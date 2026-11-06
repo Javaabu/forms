@@ -1,0 +1,89 @@
+---
+title: Parity with @javaabu/forms
+sidebar_position: 90
+---
+
+# Parity with @javaabu/forms (React)
+
+`javaabu/forms` (Blade) and [`@javaabu/forms`](https://github.com/Javaabu/react-forms) (React) have the same components, attributes, binding and error behaviour, so a form can move between Blade and Inertia React without being redesigned. The React repo keeps the matching matrix in its own `docs/parity.md`; this page shows the Blade status.
+
+**Naming:** Blade attributes are kebab-case and React props camelCase (`show-label` ↔ `showLabel`). Blade named slots are React props of the same name (`<x-slot:help>` ↔ `help`), and the default slot is `children`.
+
+**Status:** ✅ same in both · 🅱️ Blade only · ⚛️ React only · ≠ intentional difference
+
+## Components
+
+| Blade | React | Status | Notes |
+| --- | --- | --- | --- |
+| `form` | `Form` | ✅ | `summary`, `summary-title`, `focus-on-error`, `error-bag` added in v2. Blade's `summary` defaults to `false` (v1 had none); React's to `true` ([react-forms#18](https://github.com/Javaabu/react-forms/issues/18)). |
+| `form-open`, `form-close` | — | 🅱️ | For forms split across partials. React has no equivalent. |
+| `@model` / `@endmodel` | `Model` | ✅ | |
+| — | `OldInput`, `FormsProvider` | ⚛️ | React context; Blade reads old input and config directly. |
+| `form-group`, `label`, `label-required`, `input-help`, `errors` | `FormGroup`, `Label`, `LabelRequired`, `InputHelp`, `Errors` | ✅ | `errors` takes `first-only` (default `true`) in v2. |
+| `error-summary` | `ErrorSummary` | ✅ | New in v2. Lists every error with a link to its field. |
+| `input`, `text`, `email`, `password`, `number`, `tel`, `url`, `hidden`, `latitude`, `longitude` | same names | ✅ | `thaana`, `decimals` (number) and `form-group-class` added in v2. |
+| `textarea` | `Textarea` | ✅ | `thaana` and `auto-resize` added in v2. |
+| `wysiwyg`, `textarea wysiwyg` | `Wysiwyg` | ✅ | |
+| `checkbox`, `radio` | `Checkbox`, `Radio` | ✅ | |
+| `date`, `datetime`, `time` | `Date`, `Datetime`, `Time` | ✅ | |
+| `select`, `select2` | `Select`, `Select2` | ✅ | `clearable` (alias of `allow-clear`), `min-chars` and `parent` added in v2. |
+| `file`, `file-upload`, `image`, `image-upload` | `File`, `FileUpload`, `Image`, `ImageUpload` | ✅ | `multiple` added to `file` in v2. |
+| `map-input` | `MapInput` | ✅ | |
+| `conditional-wrapper` | `ConditionalWrapper` | ✅ | |
+| `conditional-link` | `ConditionalLink` | ✅ | |
+| `button`, `submit`, `link-button`, `button-group` | `Button`, `Submit`, `LinkButton`, `ButtonGroup` | ✅ | `size`, `start-icon`, `end-icon`, `loading` (button) and `disabled` (link button) added in v2. |
+| `alert` | `Alert` | ✅ | |
+| `card` (+ `.header`, `.title`, `.subtitle`, `.footer`) | `Card`, `CardHeader`, `CardTitle`, `CardSubtitle`, `CardFooter` | ✅ | |
+| `accordion`, `accordion.item` | `Accordion`, `AccordionItem` | ✅ | `disabled` added to items in v2. |
+| `accordion.header`, `accordion.collapse` | — | 🅱️ | Parts of an item, for custom item markup. |
+| `tabs`, `tabs.pane`, `nav-tabs` | `Tabs`, `TabsPane`, `NavTabs` | ✅ | |
+| `tabs.nav-item` | — | 🅱️ | Part of `tabs`. |
+| `modal` | `Modal` | ✅ | `size` and `description` added in v2. |
+| `status` | `Status` | ✅ | |
+| `text-entry`, `boolean-entry`, `infolist` | `TextEntry`, `BooleanEntry`, `Infolist` | ✅ | React's `Infolist` `layout` sets every entry; in Blade set `inline` on each entry. |
+| `formatted-value` | `FormattedValue` | ✅ | New in v2. |
+| `table` (+ `.row`, `.cell`, `.heading`, `.empty-row`) | `Table`, `TableRow`, `TableCell`, `TableHeading`, `TableEmptyRow` | ✅ | |
+| `bulk-actions`, `filter`, `filter-submit`, `per-page`, `search-form`, `no-items` | same names | ✅ | `per-page` takes `label`, `show-label` and `per-page` in v2. |
+| `pagination` | `Pagination` | ✅ | New in v2. The paginator views (`forms::onu.pagination`, `forms::bootstrap-6.pagination`) still work with `$paginator->links()`. |
+| `icon` | — | 🅱️ | React uses Onu's `Icon`. |
+| `js-errors` | — | 🅱️ | A placeholder for errors from js-utilities' AJAX validation. React shows those errors itself. |
+
+## Attributes only Blade has
+
+| Component | Attribute | Why |
+| --- | --- | --- |
+| every field | `floating` | Bootstrap floating labels. Onu has none, so the `onu` framework renders a normal label. |
+| every field | `show-js-errors` | Adds the `js-errors` placeholder (see above). |
+| `date`, `datetime`, `time` | `date-format`, `icon`, `clear-icon`, `clear-btn-class`, `icon-wrapper-class` | Server-side formatting and Blade icon overrides. React formats on the client and uses Onu's pickers. |
+| `select2` | `is-first`, `is-icon-select`, `icon-prefix`, `parent-modal` | Select2 and js-utilities options. `parent-modal` is unnecessary in React (its dropdowns portal). |
+| `conditional-wrapper` | `json-encode` | How the value reaches the `data-` attribute. |
+| `table.heading` | `colspan` | Plain HTML in React. |
+| `tabs.pane` | `labelled-by` | Generated by React. |
+
+## Attributes only React has
+
+| Component | Prop | Why |
+| --- | --- | --- |
+| fields | `onChange`, `onValueChange`, `onCheckedChange` | React event props. |
+| `Form` | `onSubmit`, `onSuccess`, `onError`, `onProgress`, `visitOptions`, `preserveScroll`, `preserveState`, `resetOnSuccess`, `processing`, `disableWhileProcessing`, `errors`, `old`, `components` | Inertia submission. Blade forms submit normally. |
+| `File` | `onUploaded` | Upload callback. |
+| `Modal` | `open`, `defaultOpen`, `onOpenChange`, `trigger` | React state. In Blade, open a modal with its `id` (see [Assets](advanced-usage/assets.md)). |
+
+## Behaviour
+
+| Behaviour | Status |
+| --- | --- |
+| Value precedence (inputs, textareas, dates, files): old input, then the bound model, then `default`, then `value`. Selects: old input, then `default`, then the bound model. Both as in v1. | ✅ |
+| Ids from names (`address[city]` → `address-city`) and labels from names (`first_name` → `First Name`, translated) | ✅ |
+| Errors from the `default` bag, bracket names as dot keys, `name.*` errors on array fields | ✅ |
+| `sync_<name>` hidden field for multiple selects | ✅ |
+| `aria-invalid="true"` on invalid controls | ✅ |
+| Thaana fields: `dir="rtl" lang="dv" data-thaana` | ✅ |
+| Strings: same keys in `lang/{en,dv}/strings.php` and React's `en`/`dv` locales | ✅ |
+
+## Open questions
+
+Raised with the React package in [Javaabu/react-forms#18](https://github.com/Javaabu/react-forms/issues/18):
+
+- `Form` `summary` default: Blade keeps `false` so v1 forms render unchanged.
+- React has no `floating`, `dateFormat`, Select2 `isFirst`/icon-select options, or ConditionalWrapper `jsonEncode`. Each is either added in React or documented as Blade-only.

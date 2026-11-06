@@ -2,8 +2,6 @@
 
 namespace Javaabu\Forms\Views\Components;
 
-use Illuminate\View\ComponentAttributeBag;
-
 class Longitude extends Input
 {
     /**
@@ -19,7 +17,7 @@ class Longitude extends Input
         bool $showErrors = true,
         bool $showLabel = true,
         string $placeholder = '',
-        bool   $showPlaceholder = false,
+        bool $showPlaceholder = false,
         bool $required = false,
         bool $inline = false,
         bool $floating = false,
@@ -38,7 +36,7 @@ class Longitude extends Input
             showLabel: $showLabel,
             placeholder: $placeholder,
             showPlaceholder: $showPlaceholder,
-            required:$required,
+            required: $required,
             inline: $inline,
             floating: $floating,
             inlineLabelClass: $inlineLabelClass,
@@ -53,7 +51,7 @@ class Longitude extends Input
         return [
             'step' => '0.000001',
             'min' => -180,
-            'max' => 180
+            'max' => 180,
         ];
     }
 }

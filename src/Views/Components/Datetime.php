@@ -22,7 +22,7 @@ class Datetime extends Date
         bool $showErrors = true,
         bool $showLabel = true,
         string $placeholder = '',
-        bool   $showPlaceholder = false,
+        bool $showPlaceholder = false,
         bool $required = false,
         bool $inline = false,
         bool $floating = false,
@@ -46,7 +46,7 @@ class Datetime extends Date
             showLabel: $showLabel,
             placeholder: $placeholder,
             showPlaceholder: $showPlaceholder,
-            required:$required,
+            required: $required,
             inline: $inline,
             floating: $floating,
             inlineLabelClass: $inlineLabelClass,
@@ -56,12 +56,17 @@ class Datetime extends Date
         );
 
         if (! $icon) {
-            $this->icon = $this->getFrameworkIcon($this->frameworkConfig('datetime-icon'));
+            $this->icon = $this->getFrameworkIcon('datetime');
         }
     }
 
     public function datePickerClass(): string
     {
         return 'datetime-picker';
+    }
+
+    public function defaultDateFormat(): string
+    {
+        return 'Y-m-d H:i';
     }
 }

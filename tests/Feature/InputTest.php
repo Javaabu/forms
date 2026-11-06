@@ -4,10 +4,11 @@ namespace Javaabu\Forms\Tests\Feature;
 
 use Illuminate\Support\Facades\Config;
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class InputTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -15,9 +16,10 @@ class InputTest extends TestCase
         Config::set('forms.inputs.inline', false);
     }
 
-    public function test_it_can_generate_bootstrap_5_form_inputs_with_input_group()
+    #[Test]
+    public function it_can_generate_bootstrap_6_form_inputs_with_input_group()
     {
-        $this->setFrameworkBootstrap5();
+        $this->setFrameworkBootstrap6();
         $this->registerTestRoute('form-input-prepend-append');
 
         $this->visit('/form-input-prepend-append')
@@ -36,9 +38,10 @@ class InputTest extends TestCase
             });
     }
 
-    public function test_it_can_generate_bootstrap_5_form_inputs_without_form_group()
+    #[Test]
+    public function it_can_generate_bootstrap_6_form_inputs_without_form_group()
     {
-        $this->setFrameworkBootstrap5();
+        $this->setFrameworkBootstrap6();
         $this->registerTestRoute('form-input-without-label');
 
         $this->visit('/form-input-without-label')
@@ -47,20 +50,10 @@ class InputTest extends TestCase
             ->dontSeeElement('div.mb-4');
     }
 
-    public function test_it_can_generate_material_admin_26_form_inputs_without_form_group()
+    #[Test]
+    public function it_can_generate_bootstrap_6_form_inputs()
     {
-        $this->setFrameworkMaterialAdmin26();
-        $this->registerTestRoute('form-input-without-label');
-
-        $this->visit('/form-input-without-label')
-            ->seeElement('input[name="title"][value="Lorem ipsum"].form-control')
-            ->dontSeeElement('label')
-            ->dontSeeElement('div.form-group');
-    }
-
-    public function test_it_can_generate_bootstrap_5_form_inputs()
-    {
-        $this->setFrameworkBootstrap5();
+        $this->setFrameworkBootstrap6();
         $this->registerTestRoute('form-input');
 
         $this->visit('/form-input')
@@ -72,9 +65,10 @@ class InputTest extends TestCase
             });
     }
 
-    public function test_it_can_set_form_inputs_as_required()
+    #[Test]
+    public function it_can_set_form_inputs_as_required()
     {
-        $this->setFrameworkBootstrap5();
+        $this->setFrameworkBootstrap6();
         $this->registerTestRoute('form-input-required');
 
         $this->visit('/form-input-required')
@@ -85,14 +79,15 @@ class InputTest extends TestCase
                     ->seeInElement('label.form-label[for="title"]', 'Title')
                     ->within('label.form-label[for="title"]', function () {
                         $this->seeElement('span.required')
-                             ->seeInElement('span.required', '*');
+                            ->seeInElement('span.required', '*');
                     });
             });
     }
 
-    public function test_it_can_generate_bootstrap_5_inline_form_inputs()
+    #[Test]
+    public function it_can_generate_bootstrap_6_inline_form_inputs()
     {
-        $this->setFrameworkBootstrap5();
+        $this->setFrameworkBootstrap6();
         $this->registerTestRoute('form-input-inline');
 
         $this->visit('/form-input-inline')
@@ -100,16 +95,17 @@ class InputTest extends TestCase
             ->within('div.row.mb-4', function () {
                 $this->seeElement('label.col-form-label[for="title"]')
                     ->seeInElement('label.col-form-label[for="title"]', 'Title')
-                    ->seeElement('div.col-sm-9.col-lg-10')
-                    ->within('div.col-sm-9.col-lg-10', function () {
+                    ->seeElement('div[class~="sm:col-9"][class~="lg:col-10"]')
+                    ->within('div[class~="sm:col-9"][class~="lg:col-10"]', function () {
                         $this->seeElement('input[name="title"][id="title"][value="Lorem ipsum"].form-control');
                     });
             });
     }
 
-    public function test_it_can_generate_bootstrap_5_floating_form_inputs()
+    #[Test]
+    public function it_can_generate_bootstrap_6_floating_form_inputs()
     {
-        $this->setFrameworkBootstrap5();
+        $this->setFrameworkBootstrap6();
         $this->registerTestRoute('form-input-floating');
 
         $this->visit('/form-input-floating')
@@ -121,9 +117,10 @@ class InputTest extends TestCase
             });
     }
 
-    public function test_it_can_display_form_input_help_texts()
+    #[Test]
+    public function it_can_display_form_input_help_texts()
     {
-        $this->setFrameworkBootstrap5();
+        $this->setFrameworkBootstrap6();
         $this->registerTestRoute('form-input-help');
 
         $this->visit('/form-input-help')
@@ -131,28 +128,14 @@ class InputTest extends TestCase
             ->within('div', function () {
                 $this->seeElement('input[name="title"][value="Lorem ipsum"][id="title"].form-control')
                     ->seeElement('label.form-label[for="title"]')
-                    ->seeElement('div.form-text')
-                    ->seeInElement('div.form-text', 'This is some help text.');
+                    ->seeElement('small.form-text')
+                    ->seeInElement('small.form-text', 'This is some help text.');
 
             });
     }
 
-    public function test_it_can_generate_material_admin_26_form_inputs()
-    {
-        $this->setFrameworkMaterialAdmin26();
-        $this->registerTestRoute('form-input');
-
-        $this->visit('/form-input')
-            ->seeElement('div.form-group')
-            ->within('div.form-group', function () {
-                $this->seeElement('input[name="title"][value="Lorem ipsum"].form-control')
-                    ->seeElement('i.form-group__bar')
-                    ->seeElement('label[for="title"]')
-                    ->seeInElement('label', 'Title');
-            });
-    }
-
-    public function test_it_can_generate_different_form_input_types()
+    #[Test]
+    public function it_can_generate_different_form_input_types()
     {
         $this->registerTestRoute('form-input-types');
 
@@ -166,7 +149,8 @@ class InputTest extends TestCase
             ->seeElement('input[name="tel"][type="tel"]');
     }
 
-    public function test_it_can_generate_latitude_inputs()
+    #[Test]
+    public function it_can_generate_latitude_inputs()
     {
         $this->registerTestRoute('latitude');
 
@@ -174,7 +158,8 @@ class InputTest extends TestCase
             ->seeElement('input[name="latitude"][type="number"][step="0.000001"][min="-90"][max="90"]');
     }
 
-    public function test_it_can_generate_longitude_inputs()
+    #[Test]
+    public function it_can_generate_longitude_inputs()
     {
         $this->registerTestRoute('longitude');
 

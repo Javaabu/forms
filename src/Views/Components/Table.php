@@ -7,13 +7,17 @@ class Table extends Component
     protected string $view = 'table';
 
     public bool $striped;
+
     public bool $no_bulk;
 
     public string $model;
+
     public string $table_class;
+
     public ?string $filter_id;
 
     public bool $no_pagination;
+
     public bool $noCheckbox;
 
     /**
@@ -23,11 +27,11 @@ class Table extends Component
      */
     public function __construct(
         string $framework = '',
-        bool   $striped = false,
-        bool   $noBulk = false,
+        bool $striped = false,
+        bool $noBulk = false,
         string $model = '',
         string $tableClass = '',
-        string $filterId = null,
+        ?string $filterId = null,
         bool $noPagination = false,
         bool $noCheckbox = false,
     ) {

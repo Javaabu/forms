@@ -3,91 +3,53 @@
 namespace Javaabu\Forms\Tests\Feature;
 
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class ButtonTest extends TestCase
 {
-    public function test_it_can_generate_bootstrap_5_button_group()
+    #[Test]
+    public function it_can_generate_bootstrap_6_button_group()
     {
-        $this->setFrameworkBootstrap5();
+        $this->setFrameworkBootstrap6();
         $this->registerTestRoute('button-group');
 
         $this->visit('/button-group')
             ->seeElement('div.btn-group')
             ->within('div.btn-group', function () {
-                $this->seeElement('button.btn');
+                $this->seeElement('button.btn-solid.theme-primary');
             });
     }
 
-    public function test_it_can_generate_material_admin_26_group()
+    #[Test]
+    public function it_can_generate_bootstrap_6_button()
     {
-        $this->setFrameworkMaterialAdmin26();
-        $this->registerTestRoute('button-group');
-
-        $this->visit('/button-group')
-            ->seeElement('div.button-group.inline-btn-group')
-            ->within('div.button-group', function () {
-                $this->seeElement('button.btn');
-            });
-    }
-
-    public function test_it_can_generate_bootstrap_5_button()
-    {
-        $this->setFrameworkBootstrap5();
+        $this->setFrameworkBootstrap6();
         $this->registerTestRoute('button');
 
         $this->visit('/button')
-            ->seeElement('button[type="button"].btn.btn-danger')
-            ->seeInElement('button[type="button"].btn.btn-danger', 'Button');
+            ->seeElement('button[type="button"].btn-solid.theme-danger')
+            ->seeInElement('button[type="button"].btn-solid.theme-danger', 'Button');
     }
 
-    public function test_it_can_generate_material_admin_26_button()
+    #[Test]
+    public function it_can_generate_bootstrap_6_submit_button()
     {
-        $this->setFrameworkMaterialAdmin26();
-        $this->registerTestRoute('button');
-
-        $this->visit('/button')
-            ->seeElement('button[type="button"].btn.btn-danger')
-            ->seeInElement('button[type="button"].btn.btn-danger', 'Button');
-    }
-
-    public function test_it_can_generate_bootstrap_5_submit_button()
-    {
-        $this->setFrameworkBootstrap5();
+        $this->setFrameworkBootstrap6();
         $this->registerTestRoute('button-submit');
 
         $this->visit('/button-submit')
-            ->seeElement('button[type="submit"].btn.btn-danger')
-            ->seeInElement('button[type="submit"].btn.btn-danger', 'Button');
+            ->seeElement('button[type="submit"].btn-solid.theme-danger')
+            ->seeInElement('button[type="submit"].btn-solid.theme-danger', 'Button');
     }
 
-    public function test_it_can_generate_material_admin_26_submit_button()
+    #[Test]
+    public function it_can_generate_bootstrap_6_link_button()
     {
-        $this->setFrameworkMaterialAdmin26();
-        $this->registerTestRoute('button-submit');
-
-        $this->visit('/button-submit')
-            ->seeElement('button[type="submit"].btn.btn-danger')
-            ->seeInElement('button[type="submit"].btn.btn-danger', 'Button');
-    }
-
-    public function test_it_can_generate_bootstrap_5_link_button()
-    {
-        $this->setFrameworkBootstrap5();
+        $this->setFrameworkBootstrap6();
         $this->registerTestRoute('button-link');
 
         $this->visit('/button-link')
-            ->seeElement('a[href="/test"].btn.btn-danger')
-            ->seeInElement('a[href="/test"].btn.btn-danger', 'Button');
+            ->seeElement('a[href="/test"].btn-solid.theme-danger')
+            ->seeInElement('a[href="/test"].btn-solid.theme-danger', 'Button');
     }
-
-    public function test_it_can_generate_material_admin_26_link_button()
-    {
-        $this->setFrameworkMaterialAdmin26();
-        $this->registerTestRoute('button-link');
-
-        $this->visit('/button-link')
-            ->seeElement('a[href="/test"].btn.btn-danger')
-            ->seeInElement('a[href="/test"].btn.btn-danger', 'Button');
-    }
-
 }
