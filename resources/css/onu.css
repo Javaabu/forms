@@ -1,0 +1,87 @@
+/*
+ * javaabu/forms for Onu (Tailwind CSS v4).
+ *
+ * In your app's CSS, after Tailwind and Onu:
+ *
+ *   @import "tailwindcss";
+ *   @import "@javaabu/onu/tailwind.css";
+ *   @import "../../vendor/javaabu/forms/resources/css/onu.css";
+ *
+ * The design tokens, theme and component classes all come from @javaabu/onu.
+ * This file only lets Tailwind see the classes the Blade views use, and styles
+ * the native controls (checkbox, radio, dialog, file input) that Onu builds
+ * from React components.
+ */
+
+@source "../views/onu";
+@source "../views/common";
+@source "../onu/classes.php";
+
+@layer components {
+  /* Native checkbox and radio, styled like Onu's Checkbox and RadioGroupItem. */
+  .forms-checkbox,
+  .forms-radio {
+    appearance: none;
+    cursor: pointer;
+  }
+
+  .forms-checkbox:checked {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M20 6 9 17l-5-5'/%3e%3c/svg%3e");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 0.75rem;
+  }
+
+  .forms-checkbox:indeterminate {
+    border-color: var(--primary);
+    background-color: var(--primary);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round'%3e%3cpath d='M5 12h14'/%3e%3c/svg%3e");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 0.75rem;
+  }
+
+  .forms-radio:checked {
+    background-image: radial-gradient(circle, var(--primary-foreground) 0 30%, transparent 34%);
+  }
+
+  /* <x-forms::modal> is a native <dialog>; Onu's classes position it. */
+  .forms-dialog {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    max-width: none;
+    max-height: none;
+  }
+
+  .forms-dialog:not([open]) {
+    display: none;
+  }
+
+  .forms-dialog::backdrop {
+    background: var(--overlay, rgb(0 0 0 / 0.45));
+  }
+
+  /* File inputs: the real <input type=file> covers its button. */
+  .btn-file > input[type="file"] {
+    position: absolute;
+    inset: 0;
+    cursor: pointer;
+    opacity: 0;
+  }
+
+  .fileinput-new .fileinput-exists,
+  .fileinput-exists .fileinput-new {
+    display: none;
+  }
+
+  .fileinput-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .cover-preview .fileinput-preview img {
+    object-fit: cover;
+  }
+}

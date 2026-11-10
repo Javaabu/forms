@@ -7,9 +7,13 @@ class Label extends Component
     protected string $view = 'label';
 
     public string $label;
+
     public bool $required;
+
     public bool $inline;
+
     public bool $floating;
+
     public string $inlineLabelClass;
 
     /**
@@ -36,7 +40,7 @@ class Label extends Component
 
         $this->floating = $floating;
 
-        $this->inlineLabelClass = $inlineLabelClass ?: $this->frameworkConfig('inline-label-class');
+        $this->inlineLabelClass = $inlineLabelClass ?: $this->frameworkConfig('inline_label_class', '');
     }
 
     public function label(): string

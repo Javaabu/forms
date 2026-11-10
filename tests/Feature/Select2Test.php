@@ -2,17 +2,19 @@
 
 namespace Javaabu\Forms\Tests\Feature;
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Route;
 use Javaabu\Forms\Tests\TestCase;
 use Javaabu\Forms\Tests\TestSupport\Enums\ArticleStatuses;
 use Javaabu\Forms\Tests\TestSupport\Models\Article;
+use PHPUnit\Framework\Attributes\Test;
 
 class Select2Test extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_it_can_render_a_select_2_basic_element_whose_value_comes_from_an_enum_cast()
+    #[Test]
+    public function it_can_render_a_select_2_basic_element_whose_value_comes_from_an_enum_cast()
     {
         // create an article
         $article = new Article([
@@ -39,7 +41,8 @@ class Select2Test extends TestCase
 
     }
 
-    public function test_it_can_render_a_select2_basic_element()
+    #[Test]
+    public function it_can_render_a_select2_basic_element()
     {
         $post = [
             'author' => 2,
@@ -65,7 +68,8 @@ class Select2Test extends TestCase
             ->seeElement('option[value="3"]');
     }
 
-    public function test_it_can_render_a_select_2_basic_element_with_a_label()
+    #[Test]
+    public function it_can_render_a_select_2_basic_element_with_a_label()
     {
         $post = [
             'author' => 2,
@@ -92,7 +96,8 @@ class Select2Test extends TestCase
             ->seeElement('option[value="3"]');
     }
 
-    public function test_it_can_render_a_select2_ajax_element()
+    #[Test]
+    public function it_can_render_a_select2_ajax_element()
     {
         $post = [
             'author' => 2,
@@ -114,9 +119,10 @@ class Select2Test extends TestCase
             ->seeElement('option[value="2"]:selected');
     }
 
-    public function test_it_can_render_a_select2_element_with_custom_form_group_class_material_admin_26()
+    #[Test]
+    public function it_can_render_a_select2_element_with_custom_form_group_class_bootstrap_6()
     {
-        $this->setFrameworkMaterialAdmin26();
+        $this->setFrameworkBootstrap6();
 
         $post = [
             'author' => 2,
@@ -143,36 +149,8 @@ class Select2Test extends TestCase
             ->seeElement('option[value="3"]');
     }
 
-    public function test_it_can_render_a_select2_element_with_custom_form_group_class_bootstrap_5()
-    {
-        $this->setFrameworkBootstrap5();
-
-        $post = [
-            'author' => 2,
-        ];
-
-        $options = [
-            '1' => 'Arushad',
-            '2' => 'John',
-            '3' => 'Amy',
-        ];
-
-        Route::get('select2-basic', function () use ($post, $options) {
-            return view('select2-basic-form-group-class')
-                ->with('post', $post)
-                ->with('options', $options);
-        })->middleware('web');
-
-        $this->visit('/select2-basic')
-            ->seeElement('div.custom-class')
-            ->seeElement('select.select2-basic[id="author"][data-allow-clear="true"][data-placeholder="Nothing Selected"]')
-            ->seeElement('option[value=""]')
-            ->seeElement('option[value="1"]')
-            ->seeElement('option[value="2"]:selected')
-            ->seeElement('option[value="3"]');
-    }
-
-    public function test_it_only_loads_selected_options_for_ajax_selects()
+    #[Test]
+    public function it_only_loads_selected_options_for_ajax_selects()
     {
         $article1 = Article::create(['title' => 'Article 1']);
         $article2 = Article::create(['title' => 'Article 2']);

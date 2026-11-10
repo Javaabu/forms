@@ -3,12 +3,12 @@
 namespace Javaabu\Forms\Tests\Feature;
 
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Route;
 use Javaabu\Forms\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class RadioTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -16,105 +16,55 @@ class RadioTest extends TestCase
         Config::set('forms.inputs.inline', false);
     }
 
-    public function test_it_can_generate_material_admin_26_radio_with_slot()
+    #[Test]
+    public function it_can_generate_bootstrap_6_radio_with_slot()
     {
-        $this->setFrameworkMaterialAdmin26();
+        $this->setFrameworkBootstrap6();
         $this->registerTestRoute('radio-slot');
 
         $this->visit('/radio-slot')
-            ->seeElement('div.radio')
-            ->within('div.radio', function () {
+            ->seeElement('div.form-field')
+            ->within('div.form-field', function () {
                 $this
-                    ->seeElement('input[name="check_me"][id="check_me"][type="radio"]')
-                    ->seeElement('label.radio__label')
-                    ->within('label.radio__label', function () {
+                    ->seeElement('input[name="check_me"][id="check_me"][type="radio"].radio')
+                    ->seeElement('label.radio-label')
+                    ->within('label.radio-label', function () {
                         $this->seeElement('a')
                             ->seeInElement('a', 'some site');
                     });
             });
     }
 
-    public function test_it_can_generate_bootstrap_5_radio_with_slot()
+    #[Test]
+    public function it_can_generate_bootstrap_6_form_radio()
     {
-        $this->setFrameworkBootstrap5();
-        $this->registerTestRoute('radio-slot');
-
-        $this->visit('/radio-slot')
-            ->seeElement('div.form-check')
-            ->within('div.form-check', function () {
-                $this
-                    ->seeElement('input[name="check_me"][id="check_me"][type="radio"].form-check-input')
-                    ->seeElement('label.form-check-label')
-                    ->within('label.form-check-label', function () {
-                        $this->seeElement('a')
-                            ->seeInElement('a', 'some site');
-                    });
-            });
-    }
-
-    public function test_it_can_generate_bootstrap_5_form_radio()
-    {
-        $this->setFrameworkBootstrap5();
+        $this->setFrameworkBootstrap6();
         $this->registerTestRoute('form-radio');
 
         $this->visit('/form-radio')
-            ->seeElement('div.form-check')
-            ->within('div.form-check', function () {
+            ->seeElement('div.form-field')
+            ->within('div.form-field', function () {
                 $this
-                    ->seeElement('input[name="status"][id="status"][type="radio"].form-check-input')
-                    ->seeElement('label.form-check-label')
-                    ->seeInElement('label.form-check-label[for="status"]', 'Status 1');
+                    ->seeElement('input[name="status"][id="status"][type="radio"].radio')
+                    ->seeElement('label.radio-label')
+                    ->seeInElement('label.radio-label[for="status"]', 'Status 1');
             });
     }
 
-    public function test_it_can_generate_bootstrap_5_form_radio_that_is_required()
+    #[Test]
+    public function it_can_generate_bootstrap_6_form_radio_that_is_required()
     {
-        $this->setFrameworkBootstrap5();
+        $this->setFrameworkBootstrap6();
         $this->registerTestRoute('form-radio-required');
 
         $this->visit('/form-radio-required')
-            ->seeElement('div.form-check')
-            ->within('div.form-check', function () {
+            ->seeElement('div.form-field')
+            ->within('div.form-field', function () {
                 $this
-                    ->seeElement('input[name="status"][id="status"][type="radio"][required].form-check-input')
-                    ->seeElement('label.form-check-label[for="status"]')
-                    ->seeInElement('label.form-check-label[for="status"]', 'Status 1')
-                    ->within('label.form-check-label[for="status"]', function () {
-                        $this->seeElement('span.required')
-                            ->seeInElement('span.required', '*');
-                    });
-            });
-    }
-
-
-    public function test_it_can_generate_material_admin_26_form_radio()
-    {
-        $this->setFrameworkMaterialAdmin26();
-        $this->registerTestRoute('form-radio');
-
-        $this->visit('/form-radio')
-            ->seeElement('div.radio')
-            ->within('div.radio', function () {
-                $this
-                    ->seeElement('input[name="status"][id="status"][type="radio"]')
-                    ->seeElement('label.radio__label')
-                    ->seeInElement('label.radio__label[for="status"]', 'Status 1');
-            });
-    }
-
-    public function test_it_can_generate_material_admin_26_form_radio_that_is_required()
-    {
-        $this->setFrameworkMaterialAdmin26();
-        $this->registerTestRoute('form-radio-required');
-
-        $this->visit('/form-radio-required')
-            ->seeElement('div.radio')
-            ->within('div.radio', function () {
-                $this
-                    ->seeElement('input[name="status"][id="status"][type="radio"][required]')
-                    ->seeElement('label.radio__label[for="status"]')
-                    ->seeInElement('label.radio__label[for="status"]', 'Status 1')
-                    ->within('label.radio__label[for="status"]', function () {
+                    ->seeElement('input[name="status"][id="status"][type="radio"][required].radio')
+                    ->seeElement('label.radio-label[for="status"]')
+                    ->seeInElement('label.radio-label[for="status"]', 'Status 1')
+                    ->within('label.radio-label[for="status"]', function () {
                         $this->seeElement('span.required')
                             ->seeInElement('span.required', '*');
                     });

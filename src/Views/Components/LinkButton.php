@@ -6,22 +6,25 @@ class LinkButton extends Component
 {
     protected string $view = 'link-button';
 
-    public string $url;
-    public string $color;
-
     /**
-     * Create a new component instance.
-     *
-     * @return void
+     * @param  string  $color  Bootstrap colour name: primary, danger, outline-secondary, link, ...
+     * @param  string  $size  sm, md (default), lg or icon
+     * @param  bool  $disabled  Render without an href and mark it aria-disabled
      */
     public function __construct(
-        string $url = '',
-        string $color = 'primary',
-        string $framework = ''
+        public string $url = '',
+        public string $color = 'primary',
+        public string $size = '',
+        public string $startIcon = '',
+        public string $endIcon = '',
+        public bool $disabled = false,
+        string $framework = '',
     ) {
         parent::__construct($framework);
+    }
 
-        $this->url = $url;
-        $this->color = $color;
+    public function frameworkSize(): ?string
+    {
+        return in_array($this->size, ['', 'md', 'default']) ? null : $this->size;
     }
 }

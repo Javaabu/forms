@@ -30,7 +30,7 @@ class Hidden extends Input
             default: $default,
             showErrors: $showErrors,
             showLabel: $showLabel,
-            required:$required,
+            required: $required,
             inline: $inline,
             floating: $floating,
             showJsErrors: $showJsErrors,

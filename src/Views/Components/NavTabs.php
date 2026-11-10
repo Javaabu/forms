@@ -17,7 +17,7 @@ class NavTabs extends Component
      */
     public function __construct(
         array|Collection $tabs = [],
-        string           $framework = ''
+        string $framework = ''
     ) {
         parent::__construct($framework);
 

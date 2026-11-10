@@ -10,8 +10,11 @@ class Heading extends Component
     protected string $view = 'table.heading';
 
     public int $colspan;
+
     public string $sortable;
+
     public string $label;
+
     public string $name;
 
     /**
@@ -21,7 +24,7 @@ class Heading extends Component
      */
     public function __construct(
         string $label = '',
-        int    $colspan = 1,
+        int $colspan = 1,
         string $sortable = '',
         string $name = '',
         string $framework = '',
@@ -35,9 +38,6 @@ class Heading extends Component
 
     /**
      * Adds sorting class
-     *
-     * @param  string  $classes
-     * @return string
      */
     public function addSortClass(string $classes = ''): string
     {
@@ -51,5 +51,17 @@ class Heading extends Component
         }
 
         return $sorting_class;
+    }
+
+    /**
+     * The logical icon (forms.icons) for the current sort state of this column.
+     */
+    public function sortIcon(): string
+    {
+        if (Request::get('orderby') != $this->sortable) {
+            return 'sort';
+        }
+
+        return strtolower(Request::get('order', 'ASC')) === 'desc' ? 'sort_desc' : 'sort_asc';
     }
 }

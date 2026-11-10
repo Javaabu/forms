@@ -1,0 +1,62 @@
+# javaabu/forms
+
+> Laravel Blade components (`<x-forms::…>`) for forms, listing pages and details pages, with model binding, old input and validation errors. Renders for Onu (Tailwind with @javaabu/onu's classes, the default) or Bootstrap 6. Same components and attributes as the React package @javaabu/forms. Dhivehi and RTL built in.
+
+Paths are relative to this file. In a project, that's vendor/javaabu/forms/.
+
+## Rules
+
+- Build forms and admin views with the components (`<x-forms::text>`, `<x-forms::select2>`, `<x-forms::submit>`, `<x-forms::table>`, …); don't write form HTML or Onu/Bootstrap classes by hand. Extra classes go in `class` (the control) or `form-group-class` (the wrapper).
+- Bind the model once, on `<x-forms::form :model="$model">` or with `@model($model) … @endmodel`. Never write `value="{{ old(...) }}"`: old input, the model and `default` are applied for you.
+- `name` gives the id (`address[city]` → `address-city`), the label (`first_name` → `First Name`, through `__()`), the bound value and the error key (`address.city`). Pass `label` for a different label; don't translate `name`.
+- Errors show under each field by themselves; add `summary` to the form for a list at the top. Don't add `@error` blocks next to fields.
+- Attributes are kebab-case; pass PHP values with `:` (`:options="$islands"`). Options are `[value => label]` arrays, collections or Eloquent queries.
+- Colours use Bootstrap's names in both frameworks: `color="danger"`, `color="outline-secondary"`, `type="success"` (alerts).
+- Free-text fields that hold Dhivehi get `thaana`. All user-facing text goes through `__()` with a Dhivehi translation.
+- JavaScript and CSS load through javaabu/manifest. Don't add jQuery, Select2, flatpickr or js-utilities. Keep `@stack('scripts')` in the layout for Google Maps and TinyMCE.
+- Choose the framework in `config/forms.php` (`FORMS_FRAMEWORK`), not per view.
+- To change markup, publish one view with `php artisan forms:publish-view`.
+
+## Docs
+
+- [Introduction](docs/intro.md): what the package does
+- [Requirements](docs/requirements.md): PHP, Laravel and optional packages
+- [Installation & Setup](docs/installation-and-setup.md): installing, choosing a framework, styles, scripts, publishing
+- [Upgrading from v1](docs/upgrading.md): removed frameworks, Bootstrap 6 markup, config, icons, strings
+- [AI assistants](docs/ai-assistants.md): Laravel Boost and these docs
+- [Parity with @javaabu/forms](docs/parity.md): Blade and React components and attributes side by side
+- [Onu](docs/frameworks/onu.md): the default framework, Tailwind setup, how classes stay in sync with Onu
+- [Bootstrap 6](docs/frameworks/bootstrap-6.md): markup, colours, Bootstrap's JavaScript
+- [Forms](docs/basic-usage/forms.md): form, form-open/form-close, methods, files, error summary, focus on error
+- [Model binding and default values](docs/basic-usage/model-binding.md): `:model`, `@model`, value precedence, enums, dates, relations
+- [Inputs and textarea](docs/basic-usage/inputs-and-textarea.md): every input type, prepend/append, inline, Thaana, decimals, auto-resize
+- [Labels, help and errors](docs/basic-usage/labels-help-and-errors.md): form-group, label, help, errors, error-summary
+- [Checkbox and radio](docs/basic-usage/checkbox.md): checked state, groups, enums
+- [Select](docs/basic-usage/select-elements.md): options from arrays, enums and queries, multiple, sync field, tags
+- [Select2](docs/basic-usage/select2.md): searchable, ajax and dependent selects
+- [Dates and times](docs/basic-usage/dates.md): date, datetime, time, formats, Dhivehi calendar
+- [File and image inputs](docs/basic-usage/file-inputs.md): file, file-upload, image, image-upload, media library
+- [WYSIWYG](docs/basic-usage/wysiwyg.md): TinyMCE textareas
+- [Map input](docs/basic-usage/map-input.md): coordinates, radius and polygons
+- [Conditional wrapper](docs/basic-usage/conditional-wrapper.md): show or enable sections for a value or checkbox
+- [Conditional link](docs/basic-usage/conditional-link.md): links shown by condition or permission
+- [Buttons](docs/basic-usage/buttons.md): button, submit, link-button, button-group, sizes, icons, loading
+- [Alert](docs/basic-usage/alert.md): types, icons, headings, dismissible
+- [Card](docs/basic-usage/card.md): header, title, subtitle, footer
+- [Accordion](docs/basic-usage/accordion.md): items, slots, exclusive and disabled items
+- [Tabs and nav tabs](docs/basic-usage/tabs.md): tab panes and link tabs
+- [Modal](docs/basic-usage/modal.md): sizes, description, footer, opening it
+- [Status](docs/basic-usage/status.md): status badges and status enums
+- [Text entries and infolists](docs/basic-usage/text-entry.md): text-entry, boolean-entry, infolist, formatted-value
+- [Tables and listings](docs/basic-usage/tables-and-listings.md): table, rows, cells, sorting, bulk actions, filters, per-page, search, no-items
+- [Pagination](docs/basic-usage/pagination.md): the component and the paginator views
+- [Icons](docs/basic-usage/icons.md): bundled Lucide icons, the icons config, icon fonts
+- [Configuration](docs/advanced-usage/configuration.md): every config option, the forms middleware
+- [Assets](docs/advanced-usage/assets.md): the JS and CSS assets, manifest directives, Vite, turning assets off
+- [Customizing views](docs/advanced-usage/customizing-views.md): publishing and diffing views, view data
+- [Custom frameworks](docs/advanced-usage/custom-frameworks.md): adding a framework, changing colour mappings
+- [Translations, Dhivehi and RTL](docs/advanced-usage/translations-and-rtl.md): strings, RTL pages, Thaana fields, translations for review
+- [Questions and Security](docs/questions-and-security.md): where to get help
+- [Changelog](docs/changelog.md): where changes are listed
+- [About Us](docs/about-us.md): Javaabu
+- [Contributing to the docs](docs/contributing-to-docs.md): how the docs are built

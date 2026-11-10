@@ -2,13 +2,16 @@
 
 namespace Javaabu\Forms\Commands;
 
+use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
-use Symfony\Component\Finder\Finder;
+
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\info;
 use function Laravel\Prompts\search;
 use function Laravel\Prompts\select;
+
+use Symfony\Component\Finder\Finder;
 
 class PublishViewCommand extends Command
 {
@@ -22,10 +25,11 @@ class PublishViewCommand extends Command
     {
         $sourcePath = __DIR__ . '/../../resources/views';
         $targetBase = resource_path('views/vendor/forms');
-        $filesystem = new Filesystem();
+        $filesystem = new Filesystem;
 
-        if (!$filesystem->isDirectory($sourcePath)) {
+        if (! $filesystem->isDirectory($sourcePath)) {
             $this->error('Source view directory not found.');
+
             return 1;
         }
 
@@ -33,6 +37,7 @@ class PublishViewCommand extends Command
 
         if (empty($files)) {
             $this->error('No view files found to publish.');
+
             return 1;
         }
 
@@ -45,6 +50,7 @@ class PublishViewCommand extends Command
 
             if ($selectedIndex === null) {
                 $this->info('No file selected for publishing.');
+
                 return 0;
             }
 
@@ -59,7 +65,7 @@ class PublishViewCommand extends Command
     protected function getViewFiles(string $sourcePath, Filesystem $filesystem): array
     {
         $files = [];
-        $finder = new Finder();
+        $finder = new Finder;
 
         try {
             $finder->files()->in($sourcePath)->name('*.blade.php');
@@ -76,12 +82,13 @@ class PublishViewCommand extends Command
             foreach ($tempFiles as $relativePath => $realPath) {
                 $files[$count] = [
                     'relative_path' => $relativePath,
-                    'real_path'     => $realPath,
+                    'real_path' => $realPath,
                 ];
                 $count++;
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->error('Error scanning view files: ' . $e->getMessage());
+
             return [];
         }
 
@@ -124,9 +131,9 @@ class PublishViewCommand extends Command
             )
             : search(
                 label: 'Which view would you like to publish?',
-                options: fn($search) => array_values(array_filter(
+                options: fn ($search) => array_values(array_filter(
                     $options,
-                    fn($choice) => str_contains(strtolower($choice), strtolower($search))
+                    fn ($choice) => str_contains(strtolower($choice), strtolower($search))
                 )),
                 placeholder: 'Search...',
                 scroll: 15
@@ -154,7 +161,7 @@ class PublishViewCommand extends Command
         $overwritten = 0;
 
         foreach ($selected as $fileIndex) {
-            if (!isset($files[$fileIndex])) {
+            if (! isset($files[$fileIndex])) {
                 continue;
             }
 
@@ -167,7 +174,7 @@ class PublishViewCommand extends Command
 
             $exists = $filesystem->exists($targetPath);
 
-            if ($exists && !$this->option('force')) {
+            if ($exists && ! $this->option('force')) {
                 $shouldOverwrite = confirm(
                     label: "File {$relativePath} already exists. Overwrite?",
                     default: false,
@@ -175,9 +182,10 @@ class PublishViewCommand extends Command
                     no: 'No, skip'
                 );
 
-                if (!$shouldOverwrite) {
+                if (! $shouldOverwrite) {
                     $this->line("  <fg=yellow>SKIPPED</> {$relativePath}");
                     $skipped++;
+
                     continue;
                 }
 
@@ -189,7 +197,7 @@ class PublishViewCommand extends Command
                 $action = $exists ? 'UPDATED' : 'PUBLISHED';
                 $this->line("  <fg=green>{$action}</> {$relativePath}");
                 $published++;
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $this->line("  <fg=red>FAILED</> {$relativePath}: " . $e->getMessage());
             }
         }

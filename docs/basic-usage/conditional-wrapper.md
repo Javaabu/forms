@@ -1,82 +1,122 @@
 ---
-title: Conditional Wrapper
-sidebar_position: 6
+title: Conditional wrapper
+sidebar_position: 12
 ---
 
-This component uses [`@javaabu/js-utilities`](https://github.com/Javaabu/js-utilities) `conditionalDisplay` `data-enable-section-value` function to conditionally enable or disable inputs based on another input value.
+# Conditional wrapper
 
-In the example below, `expires_at` will be disabled and hidden unless the `quiz` option is selected from the `type` select.
+`<x-forms::conditional-wrapper>` enables the fields inside it only when another field has a given value or a checkbox is checked, and can hide them too. Disabled fields aren't submitted, so the server only gets the fields that apply. It works in the browser, with the package's script (see [Assets](../advanced-usage/assets.md)).
 
+## From another field's value
 
-```html
-<x-forms::select2 :options="['quiz' => __('Quiz'), 'video' => __('Video')]" name="type" />
+```blade
+<x-forms::select name="type" label="ބާވަތް" :options="[
+    'quiz' => 'ކުއިޒް',
+    'video' => 'ވީޑިއޯ',
+]" />
 
-<x-forms::conditional-wrapper enable-elem="#type" enable-value="quiz" hide-fields="true">
+<x-forms::conditional-wrapper enable-elem="#type" enable-value="quiz" hide-fields>
     <x-forms::datetime name="expires_at" />
+    <x-forms::number name="pass_mark" />
 </x-forms::conditional-wrapper>
 ```
 
-The conditional wrapper supports the following attributes:
+`expires_at` and `pass_mark` are enabled and shown while "ކުއިޒް" is selected, and disabled and hidden otherwise. It's applied when the page loads, so a pre-filled form starts in the right state.
 
-| Attribute | Default | Description |
+- `enable-elem` is a CSS selector for the field to watch. For radio buttons, select the whole group: `enable-elem="[name=delivery]"`.
+- `enable-value` is the value, or an array of values, that enables the section. Pass arrays with `:enable-value`:
+
+```blade
+<x-forms::conditional-wrapper enable-elem="#type" :enable-value="['quiz', 'video']">
+    …
+</x-forms::conditional-wrapper>
+```
+
+For a multiple select or a group of checkboxes, the section is enabled when any selected value matches.
+
+## Hiding as well as disabling
+
+Without `hide-fields`, the fields stay visible but disabled. With it, the wrapper gets the `hidden` attribute while its fields are disabled.
+
+## The other way round
+
+`disable` inverts the condition: the fields are disabled when the value matches.
+
+```blade
+<x-forms::conditional-wrapper enable-elem="#delivery_method" enable-value="pickup" disable hide-fields>
+    <x-forms::textarea name="delivery_address" label="އެޑްރެސް" thaana />
+</x-forms::conditional-wrapper>
+```
+
+## From a checkbox
+
+`enable-checkbox` watches whether a checkbox is checked instead. `enable-value` is still required but isn't used:
+
+```blade
+<x-forms::checkbox name="online_interview" label="އޮންލައިން އިންޓަވިއު" />
+
+<x-forms::conditional-wrapper enable-elem="#online_interview" :enable-value="1" enable-checkbox hide-fields>
+    <x-forms::url name="meeting_link" />
+</x-forms::conditional-wrapper>
+
+<x-forms::conditional-wrapper enable-elem="#online_interview" :enable-value="1" enable-checkbox hide-fields disable>
+    <x-forms::text name="venue" />
+</x-forms::conditional-wrapper>
+```
+
+The first section shows while the checkbox is checked, the second while it isn't. In checkbox mode, buttons inside the section are disabled too.
+
+## Only fields the wrapper disabled
+
+Fields the wrapper disables get the `auto-disabled` class, and only those are enabled again. A field you rendered `disabled` stays disabled.
+
+## Without a wrapper
+
+The same script reads these attributes, which you can put on fields directly:
+
+| Attribute | On | Effect |
 | --- | --- | --- |
-| `enable-elem` | **Required** | Selector of the input element whose value is used for the condition. |
-| `enable-value` | **Required** | Value that enables the section when selected. Accepts arrays as well. |
-| `hide-fields` | `false` | Whether to also hide the fields when they are disabled. |
-| `disable` | `false` | Inverts the behaviour: disables the section when the given value is selected. |
-| `enable-checkbox` | `false` | Uses the checked status of the checkbox selected by `enable-elem` to control the section. |
-| `json-encode` | `true` for arrays, otherwise `false` | Whether to JSON encode `enable-value`. |
+| `data-toggle-checkbox="#field"` | a checkbox | Disables the matching fields while the checkbox is checked. |
+| `data-enable-checkbox="#section"` | a checkbox | Enables and shows the inputs and selects in the section while checked. With `data-disable`, while unchecked. |
+| `data-disable-on-select="#section"` | a select or input | Disables the inputs and selects in the section while it has a value. With `data-hide-fields`, hides them too. |
 
-
-## Disabling an input field depending on a checkbox status
-Sometimes, you may want to disable a if a checkbox is checked. This can be done using the `data-toggle-checkbox` attribute. 
-This attribute should be set to the selector of the input field you want to disable.
-
-In this example, we will disable the `max_salary` input field if the `any_max_salary` checkbox is checked. 
-
-```html
-<x-forms::number name="max_salary" label="Max Salary" />
-
-<x-forms::checkbox name="any_max_salary" :value="1" data-toggle-checkbox="#max-salary" />
+```blade
+<x-forms::number name="max_salary" />
+<x-forms::checkbox name="no_max_salary" label="ލިމިޓެއް ނެތް" data-toggle-checkbox="#max_salary" />
 ```
 
-## Enabling and disabling a section based on checkbox status
-You may want to show or hide parts of your UI depending on whether a checkbox is checked. The data-enable-section-checkbox attribute makes this easy to implement.
+## Rendered HTML
 
-In the example below, sections are conditionally shown or hidden based on the status of the #existing_user checkbox.
+The wrapper is a plain `<div>` with data attributes. Other attributes, such as `class` and `id`, go on it:
 
 ```html
+<div data-enable-elem="#type" data-enable-section-value="quiz" data-hide-fields="true">…</div>
 
-<x-forms::checkbox name="existing_user" :label="__('Existing Public User')" :value="1" :checked="true" inline />
-
-<!-- This section is displayed only when the checkbox is checked -->
-<div data-enable-section-checkbox="#existing_user"
-         data-hide-fields="true">
-    <!-- Content visible when #existing_user is checked -->
-</div>
-
-<!-- This section is hidden when the checkbox is checked -->
-<div data-enable-section-checkbox="#existing_user"
-     data-hide-fields="true"
-     data-disable="true">
-    <!-- Content hidden when #existing_user is checked -->
-</div>
+<div data-enable-section-checkbox="#online_interview" data-hide-fields="true" data-disable="true">…</div>
 ```
 
-**Attribute Explanation:**
-- `data-enable-section-checkbox`: Selector for the checkbox that controls the section. 
-- `data-hide-fields="true"`: Hides all form fields within the section instead of removing the entire section. 
-- `data-disable="true"`: Inverts the logic—disables or hides the section when the checkbox is checked.
+## Attributes
 
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `enable-elem` | `string` | required | Selector of the field (or checkbox) to watch. |
+| `enable-value` | `mixed` | required | Value or array of values that enables the section. Unused with `enable-checkbox`. |
+| `hide-fields` | `bool` | `false` | Hides the section while its fields are disabled. |
+| `disable` | `bool` | `false` | Inverts the condition. |
+| `enable-checkbox` | `bool` | `false` | Watches whether `enable-elem` is checked instead of its value. |
+| `json-encode` | `bool` | `true` for arrays | JSON-encodes `enable-value` in the data attribute. |
+| `framework` | `string` | config | Not used by the markup. |
 
-### Updated Blade syntax for using the conditional wrapper using Checkbox
-```html
-<x-forms::conditional-wrapper enable-elem="#online_interview" :enable-value="1" enable-checkbox hide-fields >
-    This section is displayed only when the checkbox is checked
-</x-forms::conditional-wrapper>
+Slot: the fields.
 
-<x-forms::conditional-wrapper enable-elem="#online_interview" :enable-value="1" enable-checkbox hide-fields disable >
-    This section is HIDDEN when the checkbox is checked
-</x-forms::conditional-wrapper>
+## React
 
+```jsx
+import { ConditionalWrapper } from "@javaabu/forms"
+
+<ConditionalWrapper enableElem="#type" enableValue="quiz" hideFields>
+  <Datetime name="expires_at" />
+</ConditionalWrapper>
 ```
+
+`json-encode` is Blade only. See [Parity](../parity.md).

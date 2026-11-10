@@ -1,0 +1,372 @@
+/*
+ * Tom Select theme for javaabu/forms (resources/js/select.ts).
+ *
+ * Looks like a native control in both frameworks: it reads Onu's tokens
+ * (--input, --border, --popover, --primary, --accent, --muted, --radius, --ring)
+ * and falls back to Bootstrap 6's (--bs-border-color, --bs-body-bg, --bs-primary, ...).
+ * Override any --forms-select-* property to adjust it. Logical properties only,
+ * so it works right to left.
+ */
+
+.ts-wrapper,
+.ts-dropdown {
+  --forms-select-border: var(--input, var(--bs-border-color, #dee2e6));
+  --forms-select-bg: var(--bs-body-bg, transparent);
+  --forms-select-fg: var(--foreground, var(--bs-body-color, inherit));
+  --forms-select-popover: var(--popover, var(--bs-body-bg, #fff));
+  --forms-select-popover-fg: var(--popover-foreground, var(--bs-body-color, #212529));
+  --forms-select-popover-border: var(--border, var(--bs-border-color, #dee2e6));
+  --forms-select-accent: var(--accent, var(--bs-tertiary-bg, #f1f3f5));
+  --forms-select-accent-fg: var(--accent-foreground, var(--bs-body-color, inherit));
+  --forms-select-primary: var(--primary, var(--bs-primary, #0d6efd));
+  --forms-select-muted: var(--muted, var(--bs-secondary-bg, #e9ecef));
+  --forms-select-muted-fg: var(--muted-foreground, var(--bs-secondary-color, #6c757d));
+  --forms-select-ring: var(--ring, var(--bs-focus-ring-color, rgb(13 110 253 / 0.25)));
+  --forms-select-danger: var(--destructive, var(--bs-danger, #dc3545));
+  --forms-select-radius: var(--radius, var(--bs-border-radius, 0.375rem));
+  --forms-select-min-height: calc(1.5em + 0.75rem + 2px);
+  --forms-select-padding-block: 0.25rem;
+  --forms-select-padding-inline: 0.75rem;
+  --forms-select-font-size: var(--bs-body-font-size, 1rem);
+  --forms-select-caret: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='m6 9 6 6 6-6'/%3e%3c/svg%3e");
+}
+
+/* Onu's inputs are smaller. */
+[data-slot="native-select-wrapper"] .ts-wrapper,
+[data-slot="native-select-wrapper"] .ts-dropdown {
+  --forms-select-min-height: 2rem;
+  --forms-select-padding-inline: 0.625rem;
+  --forms-select-font-size: 0.875rem;
+}
+
+/* The select stays in the page (for forms and screen readers), out of sight. */
+.ts-hidden-accessible {
+  position: absolute !important;
+  inline-size: 1px !important;
+  block-size: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Onu's chevron for the native select. */
+.ts-wrapper ~ [data-slot="native-select-icon"] {
+  display: none;
+}
+
+.ts-wrapper {
+  position: relative;
+  display: block;
+  inline-size: 100%;
+  min-inline-size: 0;
+  font-size: var(--forms-select-font-size);
+  line-height: 1.5;
+  color: var(--forms-select-fg);
+}
+
+/* Bootstrap's input groups. */
+.input-group > .ts-wrapper {
+  flex: 1 1 auto;
+  inline-size: 1%;
+}
+
+.ts-control {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem;
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-block-size: var(--forms-select-min-height);
+  padding-block: var(--forms-select-padding-block);
+  padding-inline: var(--forms-select-padding-inline);
+  overflow: hidden;
+  color: inherit;
+  cursor: text;
+  background-color: var(--forms-select-bg);
+  border: 1px solid var(--forms-select-border);
+  border-radius: var(--forms-select-radius);
+  box-shadow: none;
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+}
+
+.ts-wrapper.single .ts-control {
+  flex-wrap: nowrap;
+  padding-inline-end: calc(var(--forms-select-padding-inline) + 1.25rem);
+  cursor: pointer;
+}
+
+.ts-wrapper.single .ts-control::after {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: var(--forms-select-padding-inline);
+  inline-size: 1rem;
+  content: "";
+  background-color: var(--forms-select-muted-fg);
+  mask: var(--forms-select-caret) center / 1rem no-repeat;
+  pointer-events: none;
+}
+
+.ts-wrapper.single.dropdown-active .ts-control::after {
+  transform: rotate(180deg);
+}
+
+.ts-wrapper.focus .ts-control {
+  border-color: var(--forms-select-ring);
+  outline: 0;
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--forms-select-ring) 50%, transparent);
+}
+
+.ts-wrapper.is-invalid .ts-control,
+.ts-wrapper.invalid .ts-control {
+  border-color: var(--forms-select-danger);
+}
+
+.ts-wrapper.is-invalid.focus .ts-control,
+.ts-wrapper.invalid.focus .ts-control {
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--forms-select-danger) 25%, transparent);
+}
+
+.ts-wrapper.disabled .ts-control {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.ts-wrapper.disabled .ts-control * {
+  cursor: not-allowed !important;
+}
+
+.ts-control > * {
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+.ts-wrapper.single .ts-control > .item {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* The search box. */
+.ts-control > input {
+  display: inline-block !important;
+  flex: 1 1 auto;
+  min-inline-size: 4rem;
+  max-inline-size: 100% !important;
+  min-block-size: 0 !important;
+  max-block-size: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  font: inherit;
+  line-height: inherit !important;
+  color: inherit;
+  text-indent: 0 !important;
+  background: none !important;
+  border: 0 none !important;
+  box-shadow: none !important;
+  user-select: auto !important;
+}
+
+.ts-control > input:focus {
+  outline: none !important;
+}
+
+.ts-control > input::placeholder {
+  color: var(--forms-select-muted-fg);
+  opacity: 1;
+}
+
+.ts-wrapper.input-hidden .ts-control > input {
+  position: absolute;
+  inset-inline-start: -10000px;
+  opacity: 0;
+}
+
+.ts-wrapper.single.has-items .ts-control > input {
+  min-inline-size: 0;
+}
+
+/* Multiple: the chosen values are chips. */
+.ts-wrapper.multi .ts-control > div {
+  display: inline-flex;
+  align-items: center;
+  max-inline-size: 100%;
+  padding-block: 0;
+  padding-inline: 0.5rem;
+  font-size: 0.875em;
+  line-height: 1.5rem;
+  color: var(--forms-select-fg);
+  cursor: pointer;
+  background: var(--forms-select-muted);
+  border-radius: calc(var(--forms-select-radius) - 2px);
+}
+
+.ts-wrapper.multi .ts-control > div.active {
+  color: var(--forms-select-accent-fg);
+  background: var(--forms-select-accent);
+  outline: 1px solid var(--forms-select-ring);
+}
+
+.ts-wrapper.plugin-remove_button .item {
+  padding-inline-end: 0 !important;
+}
+
+.ts-wrapper.plugin-remove_button .item .remove {
+  display: inline-flex;
+  align-items: center;
+  align-self: stretch;
+  padding-inline: 0.375rem;
+  margin-inline-start: 0.25rem;
+  color: inherit;
+  text-decoration: none;
+  border-inline-start: 1px solid color-mix(in oklab, currentColor 20%, transparent);
+  border-start-end-radius: inherit;
+  border-end-end-radius: inherit;
+}
+
+.ts-wrapper.plugin-remove_button .item .remove:hover {
+  background: color-mix(in oklab, currentColor 10%, transparent);
+}
+
+.ts-wrapper.plugin-remove_button.disabled .item .remove {
+  pointer-events: none;
+}
+
+/* Clear button. */
+.plugin-clear_button .clear-button {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-end: calc(var(--forms-select-padding-inline) + 1.25rem);
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+  font-size: 1.125rem;
+  line-height: 1;
+  color: var(--forms-select-muted-fg);
+  cursor: pointer;
+  background: transparent;
+  border-radius: 9999px;
+  opacity: 0;
+  transform: translateY(-50%);
+  transition: opacity 0.15s;
+}
+
+.plugin-clear_button.multi .clear-button {
+  inset-inline-end: 0.375rem;
+}
+
+.plugin-clear_button.single .ts-control {
+  padding-inline-end: calc(var(--forms-select-padding-inline) + 2.5rem);
+}
+
+.plugin-clear_button.focus.has-items .clear-button,
+.plugin-clear_button:not(.disabled):hover.has-items .clear-button {
+  opacity: 1;
+}
+
+.plugin-clear_button .clear-button:hover {
+  color: var(--forms-select-fg);
+  background: var(--forms-select-accent);
+}
+
+/* Dropdown. */
+.ts-dropdown {
+  position: absolute;
+  inset-block-start: 100%;
+  inset-inline-start: 0;
+  z-index: 1060;
+  box-sizing: border-box;
+  inline-size: 100%;
+  padding: 0.25rem;
+  margin-block-start: 0.25rem;
+  font-size: var(--forms-select-font-size);
+  line-height: 1.5;
+  color: var(--forms-select-popover-fg);
+  background: var(--forms-select-popover);
+  border: 1px solid var(--forms-select-popover-border);
+  border-radius: var(--forms-select-radius);
+  box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.ts-dropdown-content {
+  max-block-size: 16rem;
+  overflow: hidden auto;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+}
+
+.ts-dropdown .option,
+.ts-dropdown .optgroup-header,
+.ts-dropdown .no-results,
+.ts-dropdown .create,
+.ts-dropdown .loading,
+.ts-dropdown .loading-more-results {
+  padding-block: 0.375rem;
+  padding-inline: 0.5rem;
+  border-radius: calc(var(--forms-select-radius) - 2px);
+}
+
+.ts-dropdown .option,
+.ts-dropdown [data-disabled],
+.ts-dropdown [data-disabled] [data-selectable].option {
+  cursor: inherit;
+  opacity: 0.5;
+}
+
+.ts-dropdown [data-selectable] {
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.ts-dropdown [data-selectable].option {
+  cursor: pointer;
+  opacity: 1;
+}
+
+.ts-dropdown .option.selected {
+  font-weight: 500;
+}
+
+.ts-dropdown .active {
+  color: var(--forms-select-accent-fg);
+  background-color: var(--forms-select-accent);
+}
+
+.ts-dropdown [data-selectable] .highlight {
+  background: color-mix(in oklab, var(--forms-select-primary) 20%, transparent);
+  border-radius: 2px;
+}
+
+.ts-dropdown .optgroup-header {
+  font-size: 0.75em;
+  font-weight: 500;
+  color: var(--forms-select-muted-fg);
+  cursor: default;
+}
+
+.ts-dropdown .no-results,
+.ts-dropdown .loading,
+.ts-dropdown .loading-more-results,
+.ts-dropdown .create {
+  color: var(--forms-select-muted-fg);
+}
+
+.ts-dropdown .active.create {
+  color: var(--forms-select-accent-fg);
+}
+
+/* The icon select. */
+.select2-icon {
+  margin-inline-end: 0.5rem;
+}

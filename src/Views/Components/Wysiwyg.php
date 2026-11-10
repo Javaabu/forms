@@ -19,7 +19,7 @@ class Wysiwyg extends Textarea
         bool $showErrors = true,
         bool $showLabel = true,
         string $placeholder = '',
-        bool   $showPlaceholder = false,
+        bool $showPlaceholder = false,
         bool $required = false,
         bool $inline = false,
         bool $floating = false,

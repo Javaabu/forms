@@ -7,7 +7,9 @@ class Alert extends Component
     protected string $view = 'alert';
 
     public string $type;
+
     public string $icon;
+
     public bool $dismissible;
 
     public string $heading;
@@ -19,12 +21,11 @@ class Alert extends Component
      */
     public function __construct(
         string $type = 'primary',
-        bool   $dismissible = false,
+        bool $dismissible = false,
         string $icon = '',
         string $heading = '',
         string $framework = ''
-    )
-    {
+    ) {
         parent::__construct($framework);
 
         $this->type = $type;

@@ -2,6 +2,7 @@
 
 namespace Javaabu\Forms\Commands;
 
+use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -16,22 +17,24 @@ class DiffViewsCommand extends Command
 
     public function handle(): int
     {
-        $filesystem = new Filesystem();
+        $filesystem = new Filesystem;
 
-        $packagePath   = __DIR__ . '/../../resources/views';
+        $packagePath = __DIR__ . '/../../resources/views';
         $publishedPath = resource_path('views/vendor/forms');
 
         if (! $filesystem->isDirectory($packagePath)) {
             $this->error('Package view directory not found.');
+
             return 1;
         }
 
         if (! $filesystem->isDirectory($publishedPath)) {
             $this->info('No published views found in your application.');
+
             return 0;
         }
 
-        $packageFiles   = $this->getViewFiles($packagePath, $filesystem);
+        $packageFiles = $this->getViewFiles($packagePath, $filesystem);
         $publishedFiles = $this->getViewFiles($publishedPath, $filesystem);
 
         $onlyRedundant = (bool) $this->option('only-redundant');
@@ -39,7 +42,7 @@ class DiffViewsCommand extends Command
         $rows = [];
         $counts = [
             'redundant' => 0,
-            'modified'  => 0,
+            'modified' => 0,
         ];
 
         // keep track of redundant files (published) for optional deletion
@@ -53,7 +56,7 @@ class DiffViewsCommand extends Command
                 continue;
             }
 
-            $packageContent   = $filesystem->get($packageFiles[$relativePath]);
+            $packageContent = $filesystem->get($packageFiles[$relativePath]);
             $publishedContent = $filesystem->get($publishedRealPath);
 
             if ($packageContent === $publishedContent) {
@@ -113,8 +116,8 @@ class DiffViewsCommand extends Command
             return [];
         }
 
-        $files  = [];
-        $finder = new Finder();
+        $files = [];
+        $finder = new Finder;
 
         $finder->files()->in($basePath)->name('*.blade.php');
 
@@ -132,8 +135,8 @@ class DiffViewsCommand extends Command
     {
         $this->newLine();
         $this->info('Summary:');
-        $this->line('  <fg=gray>Redundant (can be deleted):</> '.$counts['redundant']);
-        $this->line('  <fg=yellow>Modified (customized override):</> '.$counts['modified']);
+        $this->line('  <fg=gray>Redundant (can be deleted):</> ' . $counts['redundant']);
+        $this->line('  <fg=yellow>Modified (customized override):</> ' . $counts['modified']);
     }
 
     /**
@@ -147,11 +150,13 @@ class DiffViewsCommand extends Command
 
         if ($count === 0) {
             $this->info('No redundant views to delete.');
+
             return;
         }
 
-        if (! $this->confirm("Delete " . $count . " redundant view file(s) from your application?", false)) {
+        if (! $this->confirm('Delete ' . $count . ' redundant view file(s) from your application?', false)) {
             $this->info('No files were deleted.');
+
             return;
         }
 
@@ -159,7 +164,7 @@ class DiffViewsCommand extends Command
             try {
                 $filesystem->delete($realPath);
                 $this->line("  <fg=red>DELETED</> {$relativePath}");
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $this->line("  <fg=red>FAILED</> {$relativePath}: {$e->getMessage()}");
             }
         }

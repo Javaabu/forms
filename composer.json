@@ -1,30 +1,40 @@
 {
     "name": "javaabu/forms",
-    "description": "Laravel Blade components for form elements",
+    "description": "Laravel Blade form components for Bootstrap 6 and Onu, with model binding, old input and validation errors",
     "homepage": "https://github.com/Javaabu/forms",
     "license": "MIT",
     "authors": [
+        {
+            "name": "Javaabu Pvt. Ltd.",
+            "email": "info@javaabu.com",
+            "homepage": "https://javaabu.com"
+        },
         {
             "name": "Arushad Ahmed",
             "email": "arushad@javaabu.com"
         }
     ],
     "require": {
-        "php": "^8.1",
-        "illuminate/support": "^9.52 || ^10.0 || ^11.0.1 || ^12.0 || ^13.0",
-        "javaabu/settings": "^1.7",
-        "javaabu/helpers": "^1.70"
+        "php": "^8.4",
+        "illuminate/support": "^12.0 || ^13.0",
+        "illuminate/view": "^12.0 || ^13.0",
+        "javaabu/manifest": "^1.0@dev"
     },
     "require-dev": {
-        "orchestra/testbench-browser-kit": "^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0",
-        "phpunit/phpunit": "^9.5 || ^10.5 || ^11.5.3 || ^12.5.8 || ^13.0.3",
-        "spatie/laravel-medialibrary": "^10.3.4 || ^11.4",
-        "matanyadaev/laravel-eloquent-spatial": "^2.10 || ^4.7",
-        "composer/semver": "^3.4"
+        "javaabu/boost-javaabu-guidelines": "^1.4",
+        "laravel/boost": "^2.10",
+        "laravel/pint": "^1.25",
+        "matanyadaev/laravel-eloquent-spatial": "^4.7",
+        "orchestra/testbench": "^10.0 || ^11.0",
+        "orchestra/testbench-browser-kit": "^10.1 || ^11.0",
+        "phpunit/phpunit": "^11.5.3 || ^12.5.8",
+        "spatie/laravel-medialibrary": "^11.13"
     },
     "suggest": {
-        "spatie/laravel-medialibrary": "Required for file and image components",
-        "javaabu/geospatial": "Required for map components"
+        "spatie/laravel-medialibrary": "Required for the file and image components",
+        "matanyadaev/laravel-eloquent-spatial": "Required for the map components",
+        "javaabu/settings": "Lets the per-page, map and file components read defaults from settings (^2.0)",
+        "javaabu/helpers": "File inputs then use the mime types your app registers with AllowedMimeTypes"
     },
     "autoload": {
         "psr-4": {
@@ -34,11 +44,14 @@
     "autoload-dev": {
         "psr-4": {
             "Javaabu\\Forms\\Tests\\": "tests/"
-        }
+        },
+        "files": [
+            "tests/TestSupport/helpers.php"
+        ]
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.0-dev"
+            "dev-next-gen": "2.x-dev"
         },
         "laravel": {
             "providers": [
@@ -47,5 +60,33 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "keywords": [
+        "javaabu",
+        "laravel",
+        "blade",
+        "forms",
+        "components",
+        "bootstrap",
+        "onu",
+        "tailwind",
+        "rtl",
+        "dhivehi"
+    ],
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-clover=clover.xml",
+        "lint": "vendor/bin/pint --test",
+        "format": "vendor/bin/pint"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Javaabu/manifest",
+            "no-api": true
+        }
+    ]
 }

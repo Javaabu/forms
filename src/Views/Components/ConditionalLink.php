@@ -7,14 +7,19 @@ use Javaabu\Forms\Support\HandlesBoundValues;
 
 class ConditionalLink extends Component
 {
-    use HandlesBoundValues;
     use FormatsValues;
+    use HandlesBoundValues;
 
     protected string $view = 'conditional-link';
+
     public bool $multiline;
+
     public bool $showLink;
+
     public string $name;
+
     public string $url;
+
     public $value;
 
     /**
@@ -37,7 +42,7 @@ class ConditionalLink extends Component
         parent::__construct($framework);
 
         $this->url = $url;
-        $this->showLink = is_null($showLink) && $can ? auth()->guard($guard)->user()->can($can, $arg) : (bool) $showLink;
+        $this->showLink = is_null($showLink) && $can ? (bool) auth()->guard($guard)->user()?->can($can, $arg) : (bool) $showLink;
         $this->name = $name;
         $this->multiline = $multiline;
         $this->value = ! is_null($value) ? $value : ($name ? $this->getBoundValue($model, $name) : '');

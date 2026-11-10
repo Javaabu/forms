@@ -5,6 +5,7 @@ namespace Javaabu\Forms\Views\Components;
 class ButtonGroup extends Component
 {
     protected string $view = 'button-group';
+
     public bool $inline;
 
     /**

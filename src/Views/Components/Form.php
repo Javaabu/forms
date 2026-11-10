@@ -35,6 +35,10 @@ class Form extends Component
         string $method = 'POST',
         $model = null,
         bool $files = false,
+        public bool $summary = false,
+        public string $summaryTitle = '',
+        public bool $focusOnError = true,
+        public string $errorBag = 'default',
         string $framework = ''
     ) {
         parent::__construct($framework);

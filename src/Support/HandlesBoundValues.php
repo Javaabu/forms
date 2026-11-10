@@ -28,8 +28,6 @@ trait HandlesBoundValues
 
     /**
      * Get an instance of FormDataBinder.
-     *
-     * @return FormsDataBinder
      */
     protected function getFormsDataBinder(): FormsDataBinder
     {
@@ -39,15 +37,32 @@ trait HandlesBoundValues
     /**
      * Bind model from props
      */
+    protected bool $bound_model = false;
+
     protected function bindModel($model)
     {
         if ($model) {
             $this->getFormsDataBinder()->bind($model);
+            $this->bound_model = true;
         } else {
             $model = $this->getBoundTarget();
         }
 
         $this->model = $model;
+    }
+
+    /**
+     * Removes the model this component bound, once its content has rendered, so
+     * fields after the component don't pick it up. Called at the end of the view.
+     */
+    public function unbindModel(): string
+    {
+        if ($this->bound_model) {
+            $this->getFormsDataBinder()->pop();
+            $this->bound_model = false;
+        }
+
+        return '';
     }
 
     /**
@@ -63,8 +78,7 @@ trait HandlesBoundValues
     /**
      * Get an item from the latest bound target.
      *
-     * @param mixed $bind
-     * @param string $name
+     * @param  mixed  $bind
      * @return mixed
      */
     protected function getBoundValue($bind, string $name)
@@ -91,9 +105,6 @@ trait HandlesBoundValues
     /**
      * Formats a DateTimeInterface if the key is specified as a date or datetime in the model.
      *
-     * @param \Illuminate\Database\Eloquent\Model $model
-     * @param string $key
-     * @param DateTimeInterface $date
      * @return void
      */
     protected function formatDateTime(Model $model, string $key, DateTimeInterface $date)
@@ -134,8 +145,7 @@ trait HandlesBoundValues
     /**
      * Returns an array with the attached keys.
      *
-     * @param mixed $bind
-     * @param string $name
+     * @param  mixed  $bind
      * @return mixed
      */
     protected function getAttachedKeysFromRelation($bind, string $name)

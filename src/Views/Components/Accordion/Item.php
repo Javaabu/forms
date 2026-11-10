@@ -19,6 +19,7 @@ class Item extends Component
         public string $title = '',
         public string $content = '',
         public bool $show = false,
+        public bool $disabled = false,
         string $framework = ''
     ) {
         parent::__construct($framework);

@@ -10,10 +10,15 @@ use Javaabu\Forms\Views\Components\Component;
 class Row extends Component
 {
     use HandlesBoundValues;
+
     protected string $view = 'table.row';
+
     public string $rowId;
+
     public string $name;
+
     public string $modelId;
+
     public bool $noCheckbox;
 
     /**

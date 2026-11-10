@@ -1,0 +1,8 @@
+/*
+ * Prebuilt stylesheet for apps without a Tailwind build: Tailwind, Onu and
+ * javaabu/forms in one file (dist/onu.css). Apps that use Tailwind should
+ * import resources/css/onu.css instead, so only the classes they use are kept.
+ */
+@import "tailwindcss" source(none);
+@import "@javaabu/onu/tailwind.css";
+@import "./onu.css";

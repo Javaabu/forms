@@ -17,9 +17,9 @@ class Accordion extends Component
      * @return void
      */
     public function __construct(
-        string    $id,
+        string $id,
         array|Collection $items = [],
-        string           $framework = ''
+        string $framework = ''
     ) {
         parent::__construct($framework);
 

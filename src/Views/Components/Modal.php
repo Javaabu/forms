@@ -7,6 +7,7 @@ class Modal extends Component
     protected string $view = 'modal';
 
     public string $title;
+
     public ?string $modalSizeClass = null;
 
     /**
@@ -17,7 +18,9 @@ class Modal extends Component
     public function __construct(
         string $id = '',
         string $title = '',
-        string $modalSizeClass = null,
+        ?string $modalSizeClass = null,
+        public string $size = 'lg',
+        public string $description = '',
         string $framework = ''
     ) {
         parent::__construct($framework);

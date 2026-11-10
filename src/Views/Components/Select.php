@@ -9,32 +9,49 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Javaabu\Forms\Assets\Assets;
 use Javaabu\Forms\Support\HandlesDefaultAndOldValue;
 use Javaabu\Forms\Support\HandlesValidationErrors;
 
 class Select extends Component
 {
-    use HandlesValidationErrors;
     use HandlesDefaultAndOldValue;
+    use HandlesValidationErrors;
 
     protected string $view = 'select';
 
     public string $name;
+
     public string $label;
+
     public $options;
+
     public $selectedKey;
+
     public bool $multiple;
+
     public bool $required;
+
     public bool $inline;
+
     public bool $floating;
+
     public string $placeholder;
+
     public bool $showPlaceholder;
+
     public bool $isSelect2;
+
     public string $nameField;
+
     public string $idField;
+
     public bool $showLabel;
+
     public string $syncFieldName;
+
     public bool $isAjax;
+
     public bool $tags;
 
     /**
@@ -49,16 +66,16 @@ class Select extends Component
         $options = [],
         $model = null,
         $default = null,
-        bool   $multiple = false,
-        bool   $relation = false,
-        bool   $showErrors = true,
-        bool   $showLabel = true,
-        bool   $showPlaceholder = false,
-        bool   $required = false,
-        bool    $inline = false,
-        bool   $floating = false,
-        bool   $isSelect2 = false,
-        bool   $isAjax = false,
+        bool $multiple = false,
+        bool $relation = false,
+        bool $showErrors = true,
+        bool $showLabel = true,
+        bool $showPlaceholder = false,
+        bool $required = false,
+        bool $inline = false,
+        bool $floating = false,
+        bool $isSelect2 = false,
+        bool $isAjax = false,
         public bool $disabled = false,
         public bool $excludeSyncField = false,
         string $syncFieldName = '',
@@ -155,8 +172,8 @@ class Select extends Component
 
         if ($is_accessor || $this->isJavaabuTranslatableModel($model)) {
             return $query->get()
-                         ->pluck($name_field, $id_field)
-                         ->all();
+                ->pluck($name_field, $id_field)
+                ->all();
         }
 
         return $query->pluck($name_field, $id_field)->all();
@@ -179,6 +196,12 @@ class Select extends Component
 
     public function shouldShowSyncField(): bool
     {
-        return (!$this->excludeSyncField) && $this->multiple && (!$this->disabled);
+        return (! $this->excludeSyncField) && $this->multiple && (! $this->disabled);
+    }
+
+    /** @return array<int, string> */
+    public function assets(): array
+    {
+        return $this->isSelect2 ? [Assets::CORE, Assets::SELECT] : [Assets::CORE];
     }
 }

@@ -2,7 +2,9 @@
 
 namespace Javaabu\Forms\Tests\TestSupport\Models;
 
-class ActivityFactory extends \Illuminate\Database\Eloquent\Factories\Factory
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class ActivityFactory extends Factory
 {
     protected $model = Activity::class;
 

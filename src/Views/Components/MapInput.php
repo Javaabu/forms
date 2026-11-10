@@ -3,6 +3,7 @@
 namespace Javaabu\Forms\Views\Components;
 
 use Illuminate\Support\Str;
+use Javaabu\Forms\Support\Settings;
 use MatanYadaev\EloquentSpatial\Objects\Point;
 use MatanYadaev\EloquentSpatial\Objects\Polygon;
 
@@ -11,6 +12,7 @@ class MapInput extends Input
     protected string $view = 'map-input';
 
     public float $defaultMapCenterLat;
+
     public float $defaultMapCenterLng;
 
     /**
@@ -30,7 +32,7 @@ class MapInput extends Input
         public bool $enablePolygon = false,
         public bool $hideInputs = false,
         public int $radiusPrecision = 0,
-        public int  $maxRadius = 6371000,
+        public int $maxRadius = 6371000,
         public string $radiusUnit = 'm',
         public ?float $lat = null,
         public ?float $lng = null,
@@ -60,7 +62,7 @@ class MapInput extends Input
             model: $model,
             showErrors: $showErrors,
             showLabel: $showLabel,
-            required:$required,
+            required: $required,
             inline: $inline,
             floating: false,
             inlineLabelClass: $inlineLabelClass,
@@ -69,8 +71,8 @@ class MapInput extends Input
             framework: $framework
         );
 
-        $this->defaultMapCenterLat = is_null($defaultMapCenterLat) ? (float) get_setting('default_lat') : $defaultMapCenterLat;
-        $this->defaultMapCenterLng = is_null($defaultMapCenterLng) ? (float) get_setting('default_lng') : $defaultMapCenterLng;
+        $this->defaultMapCenterLat = is_null($defaultMapCenterLat) ? (float) Settings::get('default_lat', 4.1755) : $defaultMapCenterLat;
+        $this->defaultMapCenterLng = is_null($defaultMapCenterLng) ? (float) Settings::get('default_lng', 73.5093) : $defaultMapCenterLng;
 
         if (is_null($this->lat)) {
             $this->setLat($this->latName, $model, $this->defaultLat);

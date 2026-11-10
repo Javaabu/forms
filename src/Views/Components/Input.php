@@ -7,19 +7,29 @@ use Javaabu\Forms\Support\HandlesValidationErrors;
 
 class Input extends Component
 {
-    use HandlesValidationErrors;
     use HandlesDefaultAndOldValue;
+    use HandlesValidationErrors;
 
     protected string $view = 'input';
+
     public string $name;
+
     public string $label;
+
     public string $type;
+
     public string $placeholder;
+
     public bool $showPlaceholder;
+
     public bool $required;
+
     public bool $inline;
+
     public bool $floating;
+
     public bool $showLabel;
+
     public $value;
 
     /**
@@ -33,13 +43,13 @@ class Input extends Component
         string $type = 'text',
         $model = null,
         $default = null,
-        bool   $showErrors = true,
-        bool   $showLabel = true,
+        bool $showErrors = true,
+        bool $showLabel = true,
         string $placeholder = '',
-        bool   $showPlaceholder = false,
-        bool   $required = false,
-        bool   $inline = false,
-        bool   $floating = false,
+        bool $showPlaceholder = false,
+        bool $required = false,
+        bool $inline = false,
+        bool $floating = false,
         public string $inlineLabelClass = '',
         public string $inlineInputClass = '',
         public bool $showJsErrors = false,

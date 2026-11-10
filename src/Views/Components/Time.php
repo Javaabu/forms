@@ -14,6 +14,7 @@ class Time extends Date
         string $label = '',
         $model = null,
         $default = null,
+        string $dateFormat = '',
         string $icon = '',
         string $clearIcon = '',
         string $clearBtnClass = '',
@@ -21,7 +22,7 @@ class Time extends Date
         bool $showErrors = true,
         bool $showLabel = true,
         string $placeholder = '',
-        bool   $showPlaceholder = false,
+        bool $showPlaceholder = false,
         bool $required = false,
         bool $inline = false,
         bool $floating = false,
@@ -36,6 +37,7 @@ class Time extends Date
             type: 'time',
             model: $model,
             default: $default,
+            dateFormat: $dateFormat,
             icon: $icon,
             clearIcon: $clearIcon,
             clearBtnClass: $clearBtnClass,
@@ -44,7 +46,7 @@ class Time extends Date
             showLabel: $showLabel,
             placeholder: $placeholder,
             showPlaceholder: $showPlaceholder,
-            required:$required,
+            required: $required,
             inline: $inline,
             floating: $floating,
             inlineLabelClass: $inlineLabelClass,
@@ -54,12 +56,17 @@ class Time extends Date
         );
 
         if (! $icon) {
-            $this->icon = $this->getFrameworkIcon($this->frameworkConfig('time-icon'));
+            $this->icon = $this->getFrameworkIcon('time');
         }
     }
 
     public function datePickerClass(): string
     {
         return 'time-picker';
+    }
+
+    public function defaultDateFormat(): string
+    {
+        return 'H:i';
     }
 }

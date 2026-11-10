@@ -1,159 +1,187 @@
 ---
-title: Checkbox
-sidebar_position: 2.5
+title: Checkbox and radio
+sidebar_position: 5
 ---
 
-The `checkbox` component renders a checkbox with a label, model binding, and validation errors. It supports Bootstrap 5 and Material Admin 2.6.
+# Checkbox and radio
 
-## Basic Usage
+`<x-forms::checkbox>` and `<x-forms::radio>` render a native checkbox or radio with its label beside it, help text and validation errors. They submit with the form without JavaScript.
 
-Only the `name` attribute is required. The label is generated from the name, so `send_notifications` becomes "Send Notifications".
+## Checkbox
 
-```html
+```blade
 <x-forms::checkbox name="send_notifications" />
 
-<x-forms::checkbox name="send_notifications" label="Send me notifications" />
+<x-forms::checkbox name="accept_terms" label="ޝަރުތުތަކަށް އެއްބަސްވަން" required />
 ```
 
-When checked, the checkbox submits its `value`, which defaults to `1`. An unchecked checkbox does not submit a value. The component does not add a hidden input for the unchecked state; handle missing values in your request handling.
+The label is generated from the name when you don't give one. A checked checkbox submits its `value` (`1` by default). An unchecked checkbox submits nothing. If your controller needs a `0`, add a plain hidden input before it:
 
-## Values and Checked State
+```blade
+<input type="hidden" name="send_notifications" value="0">
+<x-forms::checkbox name="send_notifications" />
+```
 
-Use `value` to set the value submitted when checked, and `default` to set the initial checked state.
+### Starting checked
 
-```html
+`default` is the checked state when there is no old input and no model value:
+
+```blade
 <x-forms::checkbox name="newsletter" value="yes" :default="true" />
 ```
 
-This checkbox starts checked and submits `newsletter=yes`. Use Blade's `:` syntax to pass a boolean, such as `:default="false"`, rather than the string `default="false"`.
+Use `:default="true"`, not `default="true"`: the string `"false"` is truthy.
 
-The component determines its checked state in this order:
+### Label with HTML
 
-1. **Old input:** After a submission with flashed input, the checkbox is checked when its `value` appears in the old input for its name. Missing or empty old input leaves it unchecked, even if a model or default would otherwise check it.
-2. **Bound value:** Without old input, an array or an `Arrayable` value, such as a collection, checks the checkbox when it contains the checkbox's `value`. A scalar bound value determines the checked state by its boolean value.
-3. **Default:** When the bound value is `null`, `default` determines the checked state. It defaults to `false`.
+The default slot replaces the label:
 
-A scalar bound value is not compared to `value`. For a single checkbox, bind a boolean or a `0`/`1` attribute; for a group of choices, bind an array of selected values.
-
-### Model Binding
-
-Bind a model or array to a single checkbox, or inherit the model from the surrounding form:
-
-```html
-<x-forms::checkbox name="send_notifications" :model="$user" />
-
-<x-forms::form :model="$user">
-    <x-forms::checkbox name="send_notifications" />
-</x-forms::form>
-```
-
-These examples use `$user->send_notifications` to determine whether the checkbox is checked. A bound `false` value takes precedence over `:default="true"`.
-
-To ignore the surrounding model for a checkbox, pass `:model="false"`:
-
-```html
-<x-forms::checkbox name="newsletter" :model="false" :default="true" />
-```
-
-See [Model Binding and Default Values](./model-binding.md) for other binding methods. For checkboxes, `value` is always the submitted value; the checked-state rules above determine selection.
-
-### Checkbox Groups
-
-Use an array-style name and a different `value` for each choice. Give each checkbox a unique `id`, because the generated ID depends on the name and would otherwise be shared by every checkbox in the group.
-
-```html
-<x-forms::form :model="['channels' => ['email']]">
-    <x-forms::checkbox
-        name="channels[]"
-        id="channels-email"
-        label="Email"
-        value="email"
-    />
-
-    <x-forms::checkbox
-        name="channels[]"
-        id="channels-sms"
-        label="SMS"
-        value="sms"
-    />
-</x-forms::form>
-```
-
-Here, Email starts checked and SMS starts unchecked. Selecting both submits `channels` as an array containing `email` and `sms`. Old input for `channels` restores each choice after a submission.
-
-## Labels and Layout
-
-Use the default slot for a label containing HTML:
-
-```html
+```blade
 <x-forms::checkbox name="accept_terms" required>
-    I agree to the <a href="/terms">terms and conditions</a>.
+    {{ __('I agree to the') }} <a href="/terms">{{ __('terms and conditions') }}</a>
 </x-forms::checkbox>
 ```
 
-For a horizontal form layout, add `inline`. The field label appears in a separate column; the label beside the checkbox is blank unless you supply slot content.
+### Checkbox groups
 
-```html
-<x-forms::checkbox
-    name="send_notifications"
-    label="Notifications"
-    inline
-    inline-label-class="col-sm-4 col-form-label"
-    inline-input-class="col-sm-8"
->
-    Send me email notifications
+Give each checkbox the same array name, its own `value`, and its own `id` (the generated id comes from the name, so it would be the same for every checkbox in the group):
+
+```blade
+<x-forms::form :model="$user">
+    <x-forms::checkbox name="channels[]" id="channels-email" value="email" label="އީމެއިލް" />
+    <x-forms::checkbox name="channels[]" id="channels-sms" value="sms" label="އެސްއެމްއެސް" />
+</x-forms::form>
+```
+
+With `$user->channels = ['email']`, the first starts checked. A collection works too.
+
+## Radio
+
+Radio buttons in a group share a `name`. Give each one a `value`, a `label` and its own `id`:
+
+```blade
+<x-forms::radio name="status" id="status-draft" value="draft" label="ޑްރާފްޓް" />
+<x-forms::radio name="status" id="status-published" value="published" label="ޕަބްލިޝްކުރެވިފައި" />
+```
+
+After a failed validation, the radio whose `value` matches the old input is checked.
+
+To check one from the model, compare the value yourself and turn off binding for the radios:
+
+```blade
+@foreach (ArticleStatuses::cases() as $status)
+    <x-forms::radio
+        name="status"
+        :id="'status-' . $status->value"
+        :value="$status->value"
+        :label="$status->getLabel()"
+    />
+@endforeach
+```
+
+Each radio is checked when the bound value (an enum is compared by its value) equals its own `value`.
+
+## How the checked state is decided
+
+1. **Old input.** If the request has old input, the checkbox or radio is checked only when its `value` is in the old input for its name. A field missing from the old input is unchecked, even if the model or `default` would check it.
+2. **Bound value.** Without old input, an array or collection checks it when it contains the `value`. Any other value checks it when it's truthy (`true`, `1`). It isn't compared with `value`.
+3. **`default`**, when the bound value is `null` or there's no model.
+
+## Layout
+
+With `inline`, the field label goes in the label column and the label beside the checkbox is blank, unless you give a slot:
+
+```blade
+<x-forms::checkbox name="send_notifications" label="ނޯޓިފިކޭޝަން" inline>
+    {{ __('Email me when my application changes') }}
 </x-forms::checkbox>
 ```
 
-Default column classes come from the selected framework's `inline-label-class` and `inline-input-class` configuration.
+The required marker shows on the field label when `inline`, and on the label beside the checkbox otherwise.
 
-Set `:show-label="false"` to remove the wrapping form group. The label beside the checkbox is still rendered.
+`:show-label="false"` removes the field wrapper. The label beside the checkbox stays.
 
-## Help Text and Validation
+## Help text and errors
 
-Add helper text with the named `help` slot:
-
-```html
+```blade
 <x-forms::checkbox name="send_notifications">
-    <x-slot:help>
-        Receive an email when your application status changes.
-    </x-slot:help>
+    <x-slot:help>{{ __('We send at most one email a week.') }}</x-slot:help>
 </x-forms::checkbox>
 ```
 
-Validation errors are displayed below the checkbox automatically, and the input receives the `is-invalid` class. Set `:show-errors="false"` to suppress both the messages and the invalid class.
+Errors show below the checkbox, and the input gets `aria-invalid="true"`. `:show-errors="false"` turns both off.
+
+## Enabling other fields
+
+To enable, disable, show or hide other fields from a checkbox, see [Conditional wrapper](./conditional-wrapper.md#from-a-checkbox).
+
+## Rendered HTML
+
+`onu` (classes shortened to `…`):
 
 ```html
-<x-forms::checkbox name="accept_terms" required />
-
-<x-forms::checkbox name="send_notifications" :show-errors="false" />
+<div class="… mb-4" data-slot="form-field" data-label-layout="stacked">
+    <div class="gap-2 grid">
+        <div class="min-w-0 gap-1.5 grid">
+            <div class="gap-2.5 flex items-start" data-slot="checkbox-field">
+                <span class="flex shrink-0 items-center min-h-5">
+                    <input class="… forms-checkbox" data-slot="checkbox" id="agree" name="agree" type="checkbox" value="1">
+                </span>
+                <div class="min-w-0 gap-1 grid">
+                    <label class="… checkbox-label" for="agree" data-slot="label">Agree</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 ```
 
-The `required` option adds the HTML `required` attribute and the configured required indicator to the label. In an inline layout, the indicator appears on the separate field label. Add server-side validation rules in your application as well.
+`bootstrap-6`:
 
-## Available Options
+```html
+<div class="form-field mb-4">
+    <div class="form-field">
+        <input class="check" id="agree" name="agree" type="checkbox" value="1">
+        <label class="form-label check-label" for="agree">Agree</label>
+    </div>
+</div>
+```
+
+Radios use `data-slot="radio-field"`, `data-slot="radio"`, `.forms-radio` and `.radio-label` in `onu`, and `input.radio` with `.radio-label` in `bootstrap-6`.
+
+## Attributes
+
+`checkbox` and `radio` take the same attributes:
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `name` | `string` | **Required** | Input name, also used to generate the ID and look up bound values, old input, and validation errors. |
-| `label` | `string` | `''` | Label text. When empty, a translated, title-cased label is generated from `name`. |
-| `model` | `mixed` | `null` | Binding target. Uses the surrounding binding when omitted; `false` disables model binding for this checkbox. |
-| `default` | `bool` | `false` | Initial checked state when there is no old input and the bound value is `null`. |
-| `value` | `mixed` | `1` | Value submitted when checked, and the value matched against old input or a bound array. |
-| `show-errors` | `bool` | `true` | Displays validation errors and applies the invalid input class. |
-| `show-label` | `bool` | `true` | Controls the wrapping form group. The checkbox's own label remains visible. |
-| `required` | `bool` | `false` | Requires the checkbox to be checked and adds the configured required indicator. |
-| `inline` | `bool` | `false` | Places the field label and checkbox in separate columns. |
-| `floating` | `bool` | `false` | Applies the selected framework's floating form-group layout. |
-| `inline-label-class` | `string` | `''` | Overrides the inline label column classes; otherwise uses the framework configuration. |
-| `inline-input-class` | `string` | `''` | Overrides the inline input column classes; otherwise uses the framework configuration. |
-| `show-js-errors` | `bool` | `false` | Renders the `js-errors` component for client-side validation messages. |
-| `framework` | `string` | `''` | Uses `forms.framework` when omitted. Supports `bootstrap-5` and `material-admin-26`. |
+| `name` | `string` | required | Field name. Use `name[]` for a checkbox group. |
+| `label` | `string` | from `name` | Label beside the control. The slot replaces it. |
+| `value` | `mixed` | `1` | Value submitted when checked, and compared with old input and bound arrays. |
+| `model` | `mixed` | bound model | Model to read the checked state from. `false` turns binding off. |
+| `default` | `bool` | `false` | Checked state when there is no old input and no model value. |
+| `required` | `bool` | `false` | Adds `required` and the required marker. |
+| `show-label` | `bool` | `true` | `false` removes the field wrapper. |
+| `show-errors` | `bool` | `true` | Shows errors and marks the control invalid. |
+| `inline` | `bool` | `false` | Field label in a label column. |
+| `inline-label-class` | `string` | config | Classes for the label column. |
+| `inline-input-class` | `string` | config | Classes for the control column. |
+| `floating` | `bool` | `false` | Passed to the field wrapper. Has no visible effect. |
+| `show-js-errors` | `bool` | `false` | Adds an empty error list for JavaScript validation. |
+| `form-group-class` | `string` | `''` | Classes on the field wrapper. |
+| `framework` | `string` | config | `onu` or `bootstrap-6`. |
 
-The default slot supplies the checkbox label, and the named `help` slot supplies helper text. Additional HTML attributes, such as `id`, `class`, `disabled`, and `data-*`, are passed to the checkbox input.
+Other attributes (`id`, `class`, `disabled`, `data-*`) go on the `<input>`.
 
-```html
-<x-forms::checkbox name="send_notifications" id="notifications" disabled />
+Slots: default (the label), `help`.
+
+## React
+
+```jsx
+import { Checkbox, Radio } from "@javaabu/forms"
+
+<Checkbox name="accept_terms" label="ޝަރުތުތަކަށް އެއްބަސްވަން" required />
+<Radio name="status" id="status-draft" value="draft" label="ޑްރާފްޓް" />
 ```
 
-To enable or disable other fields based on a checkbox's state, see [Conditional Wrapper](./conditional-wrapper.md).
+React's checkboxes are Radix buttons from Onu; the Blade ones are native inputs with Onu's classes. See [Onu](../frameworks/onu.md#differences-from-the-react-components).

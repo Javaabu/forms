@@ -1,212 +1,198 @@
 ---
 title: Accordion
-sidebar_position: 10
+sidebar_position: 17
 ---
 
-The `accordion` component groups content into collapsible panels. It supports Bootstrap 5 and Material Admin 2.6 and can render items from an array or Collection, or from components in its default slot.
+# Accordion
 
-## Basic Usage
+`<x-forms::accordion>` groups content into panels that open and close. Each panel is a native `<details>` element, so it works without JavaScript. Panels in one accordion share a `name`, so opening one closes the others.
 
-Provide a unique `id` for the accordion and pass an array or Collection to `items`.
+## From an array
 
-```html
+Give the accordion an `id` and pass the panels to `items`:
+
+```blade
 @php
-    $items = [
-        'applicationRequirements' => [
-            'title' => 'What do I need to apply?',
-            'content' => 'Have your identification and supporting documents ready.',
+    $faq = [
+        'documents' => [
+            'title' => 'ބޭނުންވާ ލިޔެކިޔުންތައް',
+            'content' => 'ދިވެހި ރައްޔިތެއްކަން އަންގައިދޭ ކާޑު.',
             'show' => true,
         ],
-        'applicationStatus' => [
-            'title' => 'How do I check my application status?',
-            'content' => 'Sign in and open the applications page.',
+        'status' => [
+            'title' => __('How do I check my application?'),
+            'content' => __('Sign in and open Applications.'),
         ],
     ];
 @endphp
 
-<x-forms::accordion id="application-faq" :items="$items" />
+<x-forms::accordion id="application-faq" :items="$faq" />
 ```
 
-The first panel starts open because its `show` value is `true`. Panels default to closed; the component does not automatically open the first item.
-
-Opening and closing panels requires the Bootstrap collapse JavaScript used by your theme. Load it in your application layout; the component generates the markup without loading JavaScript itself.
-
-### Item Options
-
-Each entry in `items` accepts these keys:
+Each item takes:
 
 | Key | Default | Description |
 | --- | --- | --- |
-| `title` | `''` | Header text. A header slot takes precedence. No title is generated from the item key. |
-| `content` | `''` | Body text. A body slot takes precedence. HTML is escaped and line breaks are converted to `<br>` tags. |
-| `show` | `false` | Whether the panel is initially expanded. |
-| `id` | Not set | Optional ID for the item wrapper, separate from the collapsible panel's ID. |
+| `title` | `''` | Header text. |
+| `content` | `''` | Body text. It's escaped, and line breaks become `<br>`. |
+| `show` | `false` | Starts open. |
+| `id` | none | `id` of the item's `<details>` element. |
 
-### Panel IDs
+Items can be an array or a `Collection`.
 
-For named items, the array key becomes the panel ID, with spaces replaced by hyphens. In the example above, the panels have IDs `applicationRequirements` and `applicationStatus`.
+## HTML in headers and bodies
 
-For numeric keys, the panel ID is `{accordion-id}-item-{key}-collapse`. For example, key `0` inside `application-faq` produces `application-faq-item-0-collapse`.
+Use slots named after the item's key in kebab case: `{key}` for the body and `{key}-header` for the header. A slot replaces the item's `content` or `title`:
 
-Keep panel IDs unique across the page. Named keys are not prefixed with the accordion ID, so use different keys when rendering multiple accordions. Setting an item's `id` changes its wrapper ID, not its panel ID.
+```blade
+<x-forms::accordion id="application-faq" :items="$faq">
+    <x-slot:documents-header>
+        <strong>ބޭނުންވާ ލިޔެކިޔުންތައް</strong>
+    </x-slot:documents-header>
 
-## Custom Headers and Content
-
-Use named slots when headers or bodies need HTML. For a named item, use its key in kebab case for the body slot and append `-header` for the header slot. For example, `applicationRequirements` uses `application-requirements` and `application-requirements-header`.
-
-```html
-@php
-    $items = [
-        'applicationRequirements' => ['show' => true, 'id' => 'requirements-item'],
-        'applicationStatus' => [
-            'title' => 'Checking your status',
-            'content' => 'Sign in to view your application status.',
-        ],
-    ];
-@endphp
-
-<x-forms::accordion id="application-faq" :items="$items">
-    <x-slot:application-requirements-header>
-        <strong>Required documents</strong>
-    </x-slot:application-requirements-header>
-
-    <x-slot:application-requirements>
-        <p>Please prepare the following documents:</p>
+    <x-slot:documents>
         <ul>
-            <li>Identification</li>
-            <li>Proof of address</li>
+            <li>{{ __('ID card') }}</li>
+            <li>{{ __('Proof of address') }}</li>
         </ul>
-    </x-slot:application-requirements>
+    </x-slot:documents>
 </x-forms::accordion>
 ```
 
-A body slot replaces the corresponding item's `content`, and a non-empty header slot replaces its `title`.
+A key like `applicationStatus` uses `application-status` and `application-status-header`. For a list without keys, use `item-{index}` and `item-{index}-header` (`item-0`, `item-0-header`).
 
-### Numeric Item Keys
+## Writing the items yourself
 
-For a list with numeric keys, use `item-{key}` and `item-{key}-header` slots. Keys are used as supplied, rather than renumbered by position.
+Leave out `items` and put `accordion.item` components in the slot. Each needs a `name` (the panel id) and a `parent` (the accordion's `id`):
 
-```html
-@php
-    $items = [
-        ['title' => 'Required documents', 'show' => true],
-        ['title' => 'Next steps', 'content' => 'Submit your application for review.'],
-    ];
-@endphp
-
-<x-forms::accordion id="application-faq" :items="$items">
-    <x-slot:item-0-header>
-        <strong>Before you apply</strong>
-    </x-slot:item-0-header>
-
-    <x-slot:item-0>
-        <p>Have your identification ready.</p>
-    </x-slot:item-0>
-</x-forms::accordion>
-```
-
-## Creating Items Manually
-
-Omit `items` and place `accordion.item` components in the default slot. Each item requires a `name` for its panel ID and a `parent` matching the accordion ID, without a leading `#`.
-
-```html
+```blade
 <x-forms::accordion id="application-faq">
-    <x-forms::accordion.item
-        id="requirements-item"
-        name="applicationRequirements"
-        parent="application-faq"
-        show
-    >
+    <x-forms::accordion.item name="documents" parent="application-faq" show>
         <x-slot:header>
-            <strong>Required documents</strong>
+            <strong>ބޭނުންވާ ލިޔެކިޔުންތައް</strong>
         </x-slot:header>
 
-        <p>Have your identification ready.</p>
+        <p>{{ __('Have your ID card ready.') }}</p>
     </x-forms::accordion.item>
 
     <x-forms::accordion.item
-        name="applicationStatus"
+        name="status"
         parent="application-faq"
-        title="Checking your status"
-        content="Sign in to view your application status."
-        :show="false"
+        :title="__('How do I check my application?')"
+        :content="__('Sign in and open Applications.')"
     />
+
+    <x-forms::accordion.item name="payments" parent="application-faq" :title="__('Payments')" disabled>
+        …
+    </x-forms::accordion.item>
 </x-forms::accordion>
 ```
 
-The item's `header` slot takes precedence over `title`. For a manually created item, a non-empty `content` attribute takes precedence over the default body slot. Use the default slot for HTML and leave `content` empty.
+- The `header` slot replaces `title`; `content` replaces the default slot.
+- `disabled` keeps the item closed and makes it inert (it can't be opened or focused). `show` is ignored on a disabled item.
 
-The accordion's default slot is rendered after any generated items, so you can also combine an `items` array with manually created items.
+## Panel ids
 
-### Accordion Options
+The panel inside each item gets an `id`, which the header's `aria-controls` points at:
 
-| Attribute | Type | Default | Description |
-| --- | --- | --- | --- |
-| `id` | `string` | **Required** | ID of the outer accordion and the parent used by generated panels. |
-| `items` | `array` or `Collection` | `[]` | Items to render. Omit when creating items in the default slot. |
-| `framework` | `string` | `''` | Uses `forms.framework` when omitted. Supports `bootstrap-5` and `material-admin-26`. |
+- For a keyed item, the key, with spaces replaced by hyphens (`documents`).
+- For a list item, `{accordion-id}-item-{index}-collapse` (`application-faq-item-0-collapse`).
 
-### Accordion Item Options
+Keyed panels aren't prefixed with the accordion's id, so use different keys in two accordions on one page.
 
-| Attribute | Type | Default | Description |
-| --- | --- | --- | --- |
-| `name` | `string` | **Required** | ID of the collapsible panel, also used as the header's target. |
-| `parent` | `string` | **Required** | ID of the parent accordion, without `#`. |
-| `title` | `string` | `''` | Header text when no non-empty `header` slot is provided. |
-| `content` | `string` | `''` | Body text, escaped with line breaks preserved. When non-empty, overrides the default slot. |
-| `show` | `bool` | `false` | Sets the initial expanded state of both the header and panel. |
-| `framework` | `string` | `''` | Uses `forms.framework` when omitted. |
+## Custom item markup
 
-## Separate Header and Collapse Components
+`accordion.header` renders the `<summary>` and `accordion.collapse` the panel. Wrap them in your own `<details>` with the accordion's id as its `name`:
 
-For a custom item layout, use `accordion.header` and `accordion.collapse` directly. Match the header's `target` to the collapse element's `id`, and use the same `show` value on both.
-
-```html
+```blade
 <x-forms::accordion id="custom-faq">
-    <div class="accordion-item">
-        <x-forms::accordion.header target="custom-requirements" show>
-            Required documents
-        </x-forms::accordion.header>
-
-        <x-forms::accordion.collapse id="custom-requirements" parent="custom-faq" show>
-            <p>Have your identification ready.</p>
+    <details name="custom-faq" class="border-b" open>
+        <x-forms::accordion.header target="requirements">{{ __('Requirements') }}</x-forms::accordion.header>
+        <x-forms::accordion.collapse id="requirements" parent="custom-faq">
+            <p>{{ __('Have your ID card ready.') }}</p>
         </x-forms::accordion.collapse>
-    </div>
+    </details>
 </x-forms::accordion>
 ```
 
-This example uses Bootstrap 5's item wrapper class. For Material Admin 2.6, use `accordion__item` on the wrapper.
-
-### Header Options
-
-| Attribute | Type | Default | Description |
-| --- | --- | --- | --- |
-| `target` | `string` | **Required** | ID of the panel to toggle, without `#`. |
-| `title` | `string` | `''` | Header text when the default slot is empty. |
-| `show` | `bool` | `false` | Initial `aria-expanded` state. Match the panel's `show` value. |
-| `framework` | `string` | `''` | Uses `forms.framework` when omitted. |
-
-### Collapse Options
-
-| Attribute | Type | Default | Description |
-| --- | --- | --- | --- |
-| `parent` | `string` | **Required** | ID of the parent accordion, without `#`. |
-| `content` | `string` | `''` | Body text, escaped with line breaks preserved. When non-empty, overrides the default slot. |
-| `show` | `bool` | `false` | Adds the `show` class to initially expand the panel. |
-| `framework` | `string` | `''` | Uses `forms.framework` when omitted. |
-
-Set the collapse element's `id` as an HTML attribute; the collapse component does not generate one itself.
-
-## Frameworks and HTML Attributes
-
-Generated items inherit the accordion's `framework`. When creating items or separate header and collapse components manually, pass the same `framework` to each if you are overriding the configured default.
-
-Bootstrap 5 uses `data-bs-toggle`, `data-bs-target`, and `data-bs-parent` for collapse behavior. Material Admin 2.6 uses `data-toggle`, `data-target`, and `data-parent`. Load the matching theme styles and JavaScript.
-
-Additional HTML attributes are passed to the outer element of each component. Classes are merged with the component's default classes.
+## Rendered HTML
 
 ```html
-<x-forms::accordion id="application-faq" :items="$items" class="mb-4" data-section="faq" />
+<!-- onu (classes shortened) -->
+<div class="…" id="application-faq" data-slot="accordion">
+    <details class="… group/accordion-item" name="application-faq" data-slot="accordion-item" open>
+        <summary class="…" aria-controls="documents" data-slot="accordion-trigger">
+            ބޭނުންވާ ލިޔެކިޔުންތައް <svg data-slot="accordion-trigger-icon" …></svg>
+        </summary>
+        <div class="…" data-slot="accordion-content" data-accordion="application-faq" id="documents">…</div>
+    </details>
+</div>
+
+<!-- bootstrap-6 -->
+<div class="accordion" id="application-faq">
+    <details class="accordion-item" name="application-faq" open>
+        <summary class="accordion-header" aria-controls="documents">ބޭނުންވާ ލިޔެކިޔުންތައް <svg class="accordion-icon" …></svg></summary>
+        <div class="accordion-body" data-accordion="application-faq" id="documents">…</div>
+    </details>
+</div>
 ```
 
-See [Installation & Setup](../installation-and-setup.md) to configure the default framework or publish the component views.
+## Attributes
+
+### `accordion`
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `id` | `string` | required | Accordion id. Items use it as their `name`. |
+| `items` | `array` or `Collection` | `[]` | Panels. See [From an array](#from-an-array). |
+| `framework` | `string` | config | `onu` or `bootstrap-6`. |
+
+Other attributes go on the wrapper. Slots: default (items), `{key}`, `{key}-header`.
+
+### `accordion.item`
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `name` | `string` | required | Panel id. |
+| `parent` | `string` | required | The accordion's id, without `#`. |
+| `title` | `string` | `''` | Header text. The `header` slot replaces it. |
+| `content` | `string` | `''` | Body text. Replaces the default slot. |
+| `show` | `bool` | `false` | Starts open. |
+| `disabled` | `bool` | `false` | Closed and inert. |
+| `framework` | `string` | config | `onu` or `bootstrap-6`. |
+
+Slots: default (the body), `header`.
+
+### `accordion.header`
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `target` | `string` | required | Id of the panel it controls. |
+| `title` | `string` | `''` | Header text. The slot replaces it. |
+| `show` | `bool` | `false` | Not used by the markup; open state is on the `<details>`. |
+| `framework` | `string` | config | `onu` or `bootstrap-6`. |
+
+### `accordion.collapse`
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `parent` | `string` | required | The accordion's id. |
+| `content` | `string` | `''` | Body text. Replaces the slot. |
+| `show` | `bool` | `false` | Not used by the markup; open state is on the `<details>`. |
+| `framework` | `string` | config | `onu` or `bootstrap-6`. |
+
+Pass the panel's `id` as an attribute.
+
+## React
+
+```jsx
+import { Accordion, AccordionItem } from "@javaabu/forms"
+
+<Accordion id="application-faq">
+  <AccordionItem name="documents" parent="application-faq" title="ބޭނުންވާ ލިޔެކިޔުންތައް" show>
+    …
+  </AccordionItem>
+</Accordion>
+```
+
+`accordion.header` and `accordion.collapse` are Blade only. See [Parity](../parity.md).

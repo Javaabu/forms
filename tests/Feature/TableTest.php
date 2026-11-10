@@ -5,14 +5,16 @@ namespace Javaabu\Forms\Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Javaabu\Forms\Tests\TestCase;
 use Javaabu\Forms\Tests\TestSupport\Models\Activity;
+use PHPUnit\Framework\Attributes\Test;
 
 class TableTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_it_can_generate_bootstrap_5_table()
+    #[Test]
+    public function it_can_generate_bootstrap_6_table()
     {
-        $this->setFrameworkBootstrap5();
+        $this->setFrameworkBootstrap6();
         $this->registerTestRoute('table');
 
         $this->visit('table')
@@ -47,9 +49,10 @@ class TableTest extends TestCase
             });
     }
 
-    public function test_it_can_generate_bootstrap_5_striped_table()
+    #[Test]
+    public function it_can_generate_bootstrap_6_striped_table()
     {
-        $this->setFrameworkBootstrap5();
+        $this->setFrameworkBootstrap6();
         $this->registerTestRoute('table');
 
         $this->visit('table')
@@ -59,9 +62,10 @@ class TableTest extends TestCase
             });
     }
 
-    public function test_it_can_generate_material_26_table()
+    #[Test]
+    public function it_can_generate_a_table_with_row_checkboxes()
     {
-        $this->setFrameworkMaterialAdmin26();
+        $this->setFrameworkBootstrap6();
         $this->registerTestRoute('table');
 
         $this->visit('table')
@@ -91,7 +95,7 @@ class TableTest extends TestCase
                                         ->within('tr', function () use ($activity) {
                                             $this
                                                 ->seeElement('.td-checkbox')
-                                                ->seeElement('input[type="checkbox"][id="activities-'. $activity->id . '-row-check"]')
+                                                ->seeElement('input[type="checkbox"][id="activities-' . $activity->id . '-row-check"]')
                                                 ->seeInElement('td', $activity->id)
                                                 ->seeInElement('td', $activity->date_a)
                                                 ->seeInElement('td', $activity->date_b)
@@ -106,14 +110,15 @@ class TableTest extends TestCase
 
                 // Pagination check
                 $this->seeElement('div.dataTables_info');
-                //$this->seeInElement('div.dataTables_info', 'Showing 2 from total 20 entries');
+                // $this->seeInElement('div.dataTables_info', 'Showing 2 from total 20 entries');
                 $this->seeInElement('div', 'Previous');
             });
     }
 
-    public function test_it_displays_empty_table_message_when_no_matching_rows()
+    #[Test]
+    public function it_displays_empty_table_message_when_no_matching_rows()
     {
-        $this->setFrameworkMaterialAdmin26();
+        $this->setFrameworkBootstrap6();
         $this->registerTestRoute('table');
 
         $this->visit('table')
